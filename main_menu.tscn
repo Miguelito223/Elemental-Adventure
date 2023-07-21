@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq8c11xjf1nct"]
+
+[ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="1_0hhdr"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_tehlg"]
+[ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://main menu music.mp3" id="3_5epi2"]
+[ext_resource type="Texture2D" uid="uid://diyn67rcpa176" path="res://fuego.png" id="4_nvai6"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tehlg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 68.0
+scale = Vector2(28.68, 16)
+color = Color(0.137255, 0, 0.247059, 1)
+
+[node name="main menu" type="VBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 764.0
+offset_top = 385.0
+offset_right = 837.0
+offset_bottom = 497.0
+scale = Vector2(4.89407, 4.20541)
+
+[node name="play" type="Button" parent="main menu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "play
+"
+
+[node name="load" type="Button" parent="main menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Load"
+
+[node name="option" type="Button" parent="main menu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "options"
+
+[node name="exit" type="Button" parent="main menu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 170.0
+offset_right = 1596.0
+offset_bottom = 273.0
+theme_override_fonts/font = ExtResource("1_0hhdr")
+theme_override_font_sizes/font_size = 90
+text = "Elemental Adventure"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5epi2")
+autoplay = true
+bus = &"Music"
+
+[node name="settings menu" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 286.0
+offset_top = 408.0
+offset_right = 722.0
+offset_bottom = 512.0
+scale = Vector2(3, 2.52)
+
+[node name="master" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="master volume" type="HSlider" parent="settings menu"]
+layout_mode = 2
+min_value = -45.0
+max_value = 0.0
+
+[node name="fullscreen tongle" type="CheckButton" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+action_mode = 0
+text = "Full Screen"
+
+[node name="master2" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Resolution"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="resolution" type="OptionButton" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+
+[node name="back" type="Button" parent="settings menu"]
+layout_mode = 2
+text = "Back"
+
+[node name="Fuego" type="Sprite2D" parent="."]
+position = Vector2(1532, 207)
+scale = Vector2(0.233296, 0.251923)
+texture = ExtResource("4_nvai6")
+
+[connection signal="pressed" from="main menu/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="main menu/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="main menu/option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="main menu/exit" to="." method="_on_exit_pressed"]
+[connection signal="value_changed" from="settings menu/master volume" to="." method="_on_master_volume_value_changed"]
+[connection signal="toggled" from="settings menu/fullscreen tongle" to="." method="_on_fullscreen_tongle_toggled"]
+[connection signal="item_selected" from="settings menu/resolution" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="settings menu/back" to="." method="_on_back_pressed"]
