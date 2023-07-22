@@ -3,6 +3,8 @@ extends Control
 @onready var main_menu = $"main menu"
 @onready var settings_menu = $"settings menu"
 @onready var master_volume = $"settings menu/master volume"
+@onready var fx_volume = $"settings menu/Fx volume"
+@onready var music_volume = $"settings menu/music volume"
 @onready var fullscreen = $"settings menu/fullscreen tongle"
 @onready var resolutions = $"settings menu/resolution"
 
@@ -24,7 +26,9 @@ func addresolutions():
 		index += 1
 
 func _ready():
-	master_volume.value = SettingsData.settingsdata.volume
+	master_volume.value = SettingsData.settingsdata.master_volume
+	fx_volume.value = SettingsData.settingsdata.fx_volume
+	music_volume.value = SettingsData.settingsdata.music_volume
 	fullscreen.button_pressed = SettingsData.settingsdata.fullscreen
 	addresolutions()
 	
@@ -58,3 +62,11 @@ func _on_fullscreen_tongle_toggled(button_pressed):
 func _on_option_button_item_selected(index):
 	var size = resolution.get(resolutions.get_item_text(index))
 	SettingsData.load_resolution(size)
+
+
+func _on_fx_volume_value_changed(value):
+	SettingsData.load_volume(2, value)
+
+
+func _on_music_volume_value_changed(value):
+	SettingsData.load_volume(1, value)

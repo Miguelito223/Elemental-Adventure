@@ -1,7 +1,7 @@
 extends Node
 
 var save_path = "user://SettingsData.json"
-var settingsdata = {"volume" : 0, "fullscreen" : false, "resolution": "1920x1080"}
+var settingsdata = {"master_volume": 0, "fx_volume": 0, "music_volume": 0, "fullscreen": false, "resolution": "1920x1080"}
 
 func _ready():
 	load_file()
@@ -25,8 +25,17 @@ func load_volume(bus, value):
 		AudioServer.set_bus_mute(bus,true)
 	else:
 		AudioServer.set_bus_mute(bus,false)
+	
+	match bus:
+		0:
+			settingsdata.master_volume = value
+		1:
+			settingsdata.music_volume = value
+		2:
+			settingsdata.fx_volume = value
+			
 	AudioServer.set_bus_volume_db(bus,value)
-	settingsdata.volume = value
+	
 	save_file()
 	
 func load_fullscreen(value):

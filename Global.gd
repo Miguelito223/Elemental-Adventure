@@ -23,9 +23,14 @@ func load_scene(current_scene, next_scene):
 	var loader_next_scene
 	if ResourceLoader.exists(load_path):
 		loader_next_scene = ResourceLoader.load_threaded_request(load_path)
+	else:
+		print("error: attenping to load no-existent file")
+		return
+	
 	if loader_next_scene == null:
 		print("error: attenping to load no-existent file")
 		return
+	
 	await loading_screen_intance.safe_to_load
 	current_scene.queue_free()
 

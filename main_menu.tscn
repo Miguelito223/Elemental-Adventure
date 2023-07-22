@@ -22,6 +22,7 @@ scale = Vector2(28.68, 16)
 color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="main menu" type="VBoxContainer" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 2
 offset_left = 764.0
@@ -70,7 +71,6 @@ autoplay = true
 bus = &"Music"
 
 [node name="settings menu" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 2
 offset_left = 286.0
 offset_top = 408.0
@@ -78,14 +78,38 @@ offset_right = 722.0
 offset_bottom = 512.0
 scale = Vector2(3, 2.52)
 
-[node name="master" type="Label" parent="settings menu"]
+[node name="master label" type="Label" parent="settings menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
-text = "Volume"
+text = "Master Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="master volume" type="HSlider" parent="settings menu"]
+layout_mode = 2
+min_value = -45.0
+max_value = 0.0
+
+[node name="Fx label" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Fx Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fx volume" type="HSlider" parent="settings menu"]
+layout_mode = 2
+min_value = -45.0
+max_value = 0.0
+
+[node name="Music label" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Music Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="music volume" type="HSlider" parent="settings menu"]
 layout_mode = 2
 min_value = -45.0
 max_value = 0.0
@@ -96,7 +120,7 @@ theme_override_fonts/font = ExtResource("1_0hhdr")
 action_mode = 0
 text = "Full Screen"
 
-[node name="master2" type="Label" parent="settings menu"]
+[node name="Resolution laber" type="Label" parent="settings menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "Resolution"
@@ -121,6 +145,8 @@ texture = ExtResource("4_nvai6")
 [connection signal="pressed" from="main menu/option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="main menu/exit" to="." method="_on_exit_pressed"]
 [connection signal="value_changed" from="settings menu/master volume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="settings menu/Fx volume" to="." method="_on_fx_volume_value_changed"]
+[connection signal="value_changed" from="settings menu/music volume" to="." method="_on_music_volume_value_changed"]
 [connection signal="toggled" from="settings menu/fullscreen tongle" to="." method="_on_fullscreen_tongle_toggled"]
 [connection signal="item_selected" from="settings menu/resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="settings menu/back" to="." method="_on_back_pressed"]
