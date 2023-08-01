@@ -23,34 +23,34 @@ func load_scene(current_scene, next_scene):
 	var loader_next_scene
 	if ResourceLoader.exists(load_path):
 		loader_next_scene = ResourceLoader.load_threaded_request(load_path)
+		set_process(true)
 	else:
-		print("error: attenping to load no-existent file")
-		return
+		print("file no exist")
+		return 
 	
-	if loader_next_scene == null:
-		print("error: attenping to load no-existent file")
-		return
 	
 	await loading_screen_intance.safe_to_load
 	current_scene.queue_free()
-
-
+	
 	while true:
 		var load_progress = []
 		var load_status = ResourceLoader.load_threaded_get_status(load_path, load_progress)
-		
 		match load_status:
 			0:
-				print("error")
+				print("failed: canot find the resource")
+				set_process(false)
 				return
 			1:
-				loading_screen_intance.get_node("Control/ProgressBar").value = load_progress[0]
+				current_scene.queue_free()
+				loading_screen_intance.get_node("Control/ProgressBar").value = load_progress[0] * 100.0
 			2:
-				print("error, failed")
+				print("failed to load")
+				set_process(false)
 				return
 			3:
-				var next_scene_intance = ResourceLoader.load_threaded_get(load_path).instantiate()
-				get_tree().get_root().call_deferred("add_child", next_scene_intance)
+				current_scene.queue_free()
+				var new_scene = ResourceLoader.load_threaded_get(load_path).instantiate()
+				get_tree().get_root().call_deferred("add_child", new_scene)
 				
 				loading_screen_intance.fade_out_loading_screen()
-				return
+				

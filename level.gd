@@ -7,6 +7,6 @@ func _on_area_2d_body_entered(body):
 
 func _on_victory_zone_body_entered(body):
 	if body.name == "player":
-		PlayerData.playerdata.level = "level_3"
+		PlayerData.playerdata.level = PlayerData.playerdata.level + str(int(1))
 		Global.load_scene(self, PlayerData.playerdata.level)
 		PlayerData.save_file()

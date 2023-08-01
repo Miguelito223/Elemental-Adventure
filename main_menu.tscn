@@ -22,7 +22,6 @@ scale = Vector2(28.68, 16)
 color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="main menu" type="VBoxContainer" parent="."]
-visible = false
 texture_filter = 1
 layout_mode = 2
 offset_left = 764.0
@@ -71,6 +70,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="settings menu" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 286.0
 offset_top = 408.0

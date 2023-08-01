@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://d13xygqfn55ua"]
+[gd_scene load_steps=19 format=3 uid="uid://b4lqd43x0ndff"]
 
-[ext_resource type="Script" path="res://level 2.gd" id="1_l5e1r"]
+[ext_resource type="Script" path="res://level.gd" id="1_y18jc"]
 [ext_resource type="Texture2D" uid="uid://wybf7dhflfge" path="res://textures.png" id="2_n4hrj"]
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="3_rjnga"]
 [ext_resource type="Script" path="res://dnc.gd" id="5_jj5u8"]
@@ -56,7 +56,7 @@ polygon = PackedVector2Array(200, 200)
 
 [node name="level 2" type="Node2D"]
 position = Vector2(949, 855)
-script = ExtResource("1_l5e1r")
+script = ExtResource("1_y18jc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -2603.0
