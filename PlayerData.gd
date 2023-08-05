@@ -3,6 +3,9 @@ extends Node
 var save_path = "user://PlayerData.json"
 var playerdata = {"pos": {"x": -373, "y": -30}, "lifes":3, "coins": 0, "level": "level_1"}
 
+func _ready():
+	load_file()
+
 func save_file():
 	print("Creating playerdata file")
 	var datafile = FileAccess.open(save_path, FileAccess.WRITE)

@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tehlg")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="fondo" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 67.0
 offset_bottom = 68.0
@@ -31,7 +31,6 @@ offset_bottom = 497.0
 scale = Vector2(4.89407, 4.20541)
 
 [node name="play" type="Button" parent="main menu"]
-texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "play
@@ -43,18 +42,17 @@ theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "Load"
 
 [node name="option" type="Button" parent="main menu"]
-texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "options"
 
 [node name="exit" type="Button" parent="main menu"]
-texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
+theme_override_font_sizes/font_size = 14
 text = "Exit"
 
-[node name="Label" type="Label" parent="."]
+[node name="titulo" type="Label" parent="."]
 layout_mode = 0
 offset_left = 418.0
 offset_top = 170.0

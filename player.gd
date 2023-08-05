@@ -48,10 +48,10 @@ func _input(event):
 		Pause_Menu.show()
 		get_tree().paused = true
 	if event.is_action_pressed("ui_left"):
-		Market.position = -Market.position
+		Market.position *= -1
 		Market.rotation_degrees = -180
 	if event.is_action_pressed("ui_right"):
-		Market.position = Market.position
+		Market.position *= 1
 		Market.rotation_degrees = 0
 	if event.is_action_pressed("ui_shoot"):
 		shot()
@@ -89,7 +89,7 @@ func setlifes(value):
 		print("you dead")
 		PlayerData.playerdata.lifes = max_health
 		PlayerData.save_file()
-		Global.load_scene(self, "res://death_menu.tscn")
+		Global.load_scene(get_parent(), "res://death_menu.tscn")
 
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():

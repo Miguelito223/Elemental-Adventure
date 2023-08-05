@@ -58,7 +58,7 @@ cull_mode = 1
 polygon = PackedVector2Array(200, 200)
 
 [node name="level 1" type="Node2D"]
-position = Vector2(890, 794)
+position = Vector2(492, 1031)
 script = ExtResource("1_vu3go")
 
 [node name="ColorRect" type="ColorRect" parent="."]

@@ -21,10 +21,10 @@ color = Color(0.211765, 0, 0.411765, 0.509804)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 352.0
-offset_top = 159.0
-offset_right = 1522.0
-offset_bottom = 299.0
+offset_left = 331.0
+offset_top = 237.0
+offset_right = 1501.0
+offset_bottom = 377.0
 theme_override_fonts/font = ExtResource("2_oegyl")
 theme_override_font_sizes/font_size = 100
 text = "Pause"
@@ -51,5 +51,18 @@ theme_override_fonts/font = ExtResource("2_oegyl")
 theme_override_font_sizes/font_size = 90
 text = "Back"
 
+[node name="save" type="Button" parent="."]
+layout_mode = 0
+offset_left = 732.0
+offset_top = 813.0
+offset_right = 985.0
+offset_bottom = 911.0
+scale = Vector2(1.64547, 1.29648)
+theme_override_fonts/font = ExtResource("2_oegyl")
+theme_override_font_sizes/font_size = 67
+text = "Save
+"
+
 [connection signal="pressed" from="return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="save" to="." method="_on_button_pressed"]

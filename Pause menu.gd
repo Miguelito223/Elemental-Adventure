@@ -10,4 +10,8 @@ func _on_return_pressed():
 func _on_back_pressed():
 	get_tree().paused = false
 	PlayerData.load_file()
-	Global.load_scene(self, "res://main_menu.tscn")
+	Global.load_scene(get_parent().get_parent().get_parent(), "res://main_menu.tscn")
+
+
+func _on_button_pressed():
+	PlayerData.save_file()

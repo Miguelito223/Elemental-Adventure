@@ -1,7 +1,10 @@
 extends Node
 
 var save_path = "user://GameData.json"
-var gamedata = {"Time": 12}
+var gamedata = {"time": 12, "coins_map": 23}
+
+func _ready():
+	load_file()
 
 func save_file():
 	print("Creating gamedata json file")

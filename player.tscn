@@ -315,7 +315,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
 [node name="coin" type="AnimatedSprite2D" parent="CanvasLayer"]
 texture_filter = 1
 position = Vector2(41.5, 118.5)
-scale = Vector2(1.14063, 1.10938)
+scale = Vector2(1.49883, 1.44183)
 sprite_frames = SubResource("SpriteFrames_an653")
 animation = &"Coin"
 autoplay = "Coin"
@@ -357,7 +357,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(33, 0)
+position = Vector2(3, 0)
 
 [connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]

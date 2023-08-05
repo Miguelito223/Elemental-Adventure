@@ -8,7 +8,7 @@ signal time_tick(day,hour,minute)
 
 @export var gradient:GradientTexture1D
 @export var ingame_speed = 1.0
-var initial_hour = GameData.gamedata.Time
+var initial_hour = GameData.gamedata.time
 
 var time = 0.0
 

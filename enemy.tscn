@@ -171,12 +171,11 @@ libraries = {
 wait_time = 0.8
 one_shot = true
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-17, 0)
-
-[node name="Abajo" type="RayCast2D" parent="Marker2D"]
-position = Vector2(3, 0)
-target_position = Vector2(0, 23)
+[node name="Abajo" type="RayCast2D" parent="."]
+position = Vector2(-15, 1)
+rotation = 3.14159
+scale = Vector2(2.76335, -1.34614)
+target_position = Vector2(4.76837e-07, 30.4574)
 
 [connection signal="area_entered" from="Enemy_area" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Enemy_area" to="." method="_on_area_2d_body_entered"]

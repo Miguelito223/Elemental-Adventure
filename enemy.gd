@@ -31,7 +31,7 @@ func setlifes(value):
 		print("enemy dead")
 		queue_free()
 
-func _process(delta):
+func _physics_process(delta):
 	if can_move == true:
 		motion(delta)
 
@@ -41,9 +41,9 @@ func motion(delta):
 	else:
 		$AnimatedSprite2D.flip_h = false
 		
-	if is_on_wall() or not $"Marker2D/Abajo".is_colliding():
+	if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
 		direccion *= -1
-		$"Marker2D/Abajo".scale.x *= -1
+		scale.x *= -1
 		
 	if not is_on_floor():
 		velocity.y += gravity * delta

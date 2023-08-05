@@ -56,7 +56,7 @@ cull_mode = 1
 polygon = PackedVector2Array(200, 200)
 
 [node name="level 3" type="Node2D"]
-position = Vector2(890, 794)
+position = Vector2(576, 1023)
 script = ExtResource("1_dy73i")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -144,11 +144,11 @@ position = Vector2(-297, -42)
 
 [node name="Coin2" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
-position = Vector2(-215, -42)
+position = Vector2(-213, -49)
 
 [node name="Coin3" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
-position = Vector2(-22, 27)
+position = Vector2(-146, -51)
 
 [node name="Coin4" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
@@ -156,15 +156,15 @@ position = Vector2(255, -41)
 
 [node name="Coin5" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
-position = Vector2(66, -42)
+position = Vector2(95, -42)
 
 [node name="Coin6" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
-position = Vector2(-2, -44)
+position = Vector2(17, -43)
 
 [node name="Coin7" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
-position = Vector2(-59, -46)
+position = Vector2(-56, -43)
 
 [node name="Coin8" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
@@ -172,7 +172,7 @@ position = Vector2(-443, -46)
 
 [node name="Coin9" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1
-position = Vector2(159, -43)
+position = Vector2(187, -42)
 
 [node name="Coin10" parent="." instance=ExtResource("5_sx1gu")]
 texture_filter = 1

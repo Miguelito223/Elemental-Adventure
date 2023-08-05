@@ -55,7 +55,7 @@ cull_mode = 1
 polygon = PackedVector2Array(200, 200)
 
 [node name="level 2" type="Node2D"]
-position = Vector2(949, 855)
+position = Vector2(581, 1019)
 script = ExtResource("1_y18jc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
