@@ -48,11 +48,9 @@ func _input(event):
 		Pause_Menu.show()
 		get_tree().paused = true
 	if event.is_action_pressed("ui_left"):
-		Market.position *= -1
-		Market.rotation_degrees = -180
+		Market.scale.x = -1
 	if event.is_action_pressed("ui_right"):
-		Market.position *= 1
-		Market.rotation_degrees = 0
+		Market.scale.x = 1
 	if event.is_action_pressed("ui_shoot"):
 		shot()
 		

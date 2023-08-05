@@ -157,10 +157,12 @@ shape = SubResource("CapsuleShape2D_0hdx6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(7, 0)
 sprite_frames = SubResource("SpriteFrames_3q7bq")
 animation = &"walk"
 autoplay = "walk"
 frame_progress = 0.441738
+flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
