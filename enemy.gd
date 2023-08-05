@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 
-var SPEED = randi_range(1,3)
+var speed = randi_range(1,3)
 var Health = 100
+var can_move = true
+var is_moving_left = true
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
-var can_move = true
-var direccion = 1
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	setlifes(100)
@@ -36,19 +37,15 @@ func _physics_process(delta):
 		motion(delta)
 
 func motion(delta):
-	if direccion == 1:
-		$AnimatedSprite2D.flip_h = true
-	else:
-		$AnimatedSprite2D.flip_h = false
-		
-	if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
-		direccion *= -1
-		scale.x *= -1
-		
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	
+	if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
+		is_moving_left = !is_moving_left
+		scale.x = -scale.x
 
-	velocity.x += SPEED * direccion
+	velocity.x = -speed * delta if is_moving_left else speed * delta
 	
 	move_and_slide()
 
