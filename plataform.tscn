@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://r6nxo2uj0e0o"]
+[gd_scene load_steps=4 format=3 uid="uid://r6nxo2uj0e0o"]
 
 [ext_resource type="Texture2D" uid="uid://bgchyjys2xhev" path="res://plataform.png" id="1_p35ks"]
+[ext_resource type="Script" path="res://plataform.gd" id="1_yrwdv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu3t1"]
 size = Vector2(25, 19)
 
 [node name="plataform" type="StaticBody2D"]
+script = ExtResource("1_yrwdv")
+offset = Vector2(-320, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
