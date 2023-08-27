@@ -8,12 +8,11 @@ signal time_tick(day,hour,minute)
 
 @export var gradient:GradientTexture1D
 @export var ingame_speed = 1.0
-var initial_hour = GameData.gamedata.time
+var initial_hour = SettingsData.settingsdata.time
 
 var time = 0.0
 
 func _ready():
-	GameData.load_file()
 	time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
 
 func _process(delta):
