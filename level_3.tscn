@@ -131,7 +131,6 @@ shadow_filter = 1
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_r617i")
 gradient = SubResource("GradientTexture1D_jx2x6")
-ingame_speed = 0.01
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(130, -106)

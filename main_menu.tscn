@@ -22,6 +22,7 @@ scale = Vector2(28.68, 16)
 color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="main menu" type="VBoxContainer" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 2
 offset_left = 764.0
@@ -54,10 +55,10 @@ text = "Exit"
 
 [node name="titulo" type="Label" parent="."]
 layout_mode = 0
-offset_left = 418.0
-offset_top = 170.0
-offset_right = 1596.0
-offset_bottom = 273.0
+offset_left = 414.0
+offset_top = 35.0
+offset_right = 1592.0
+offset_bottom = 138.0
 theme_override_fonts/font = ExtResource("1_0hhdr")
 theme_override_font_sizes/font_size = 90
 text = "Elemental Adventure"
@@ -68,12 +69,11 @@ autoplay = true
 bus = &"Music"
 
 [node name="settings menu" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 2
-offset_left = 286.0
-offset_top = 408.0
-offset_right = 722.0
-offset_bottom = 512.0
+offset_left = 337.0
+offset_top = 152.0
+offset_right = 773.0
+offset_bottom = 498.0
 scale = Vector2(3, 2.52)
 
 [node name="master label" type="Label" parent="settings menu"]
@@ -128,6 +128,26 @@ vertical_alignment = 1
 [node name="resolution" type="OptionButton" parent="settings menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
+
+[node name="initial time" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Initial Time"
+
+[node name="initial time text" type="LineEdit" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "12"
+
+[node name="time speed" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Time speed"
+
+[node name="time speed text" type="LineEdit" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "1.0"
 
 [node name="back" type="Button" parent="settings menu"]
 layout_mode = 2

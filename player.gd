@@ -78,7 +78,10 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-		
+	up_direction = Vector2(0, -1)
+	floor_stop_on_slope = true
+	floor_constant_speed = true
+
 	move_and_slide()
 	
 func setlifes(value):

@@ -7,6 +7,8 @@ extends Control
 @onready var music_volume = $"settings menu/music volume"
 @onready var fullscreen = $"settings menu/fullscreen tongle"
 @onready var resolutions = $"settings menu/resolution"
+@onready var initial_time = $"settings menu/initial time text"
+@onready var time_speed = $"settings menu/time speed text"
 
 var resolution = {
 	"1920x1080": Vector2i(1920, 1080),
@@ -30,6 +32,8 @@ func _ready():
 	fx_volume.value = SettingsData.settingsdata.fx_volume
 	music_volume.value = SettingsData.settingsdata.music_volume
 	fullscreen.button_pressed = SettingsData.settingsdata.fullscreen
+	initial_time.text = SettingsData.settingsdata.initial_time
+	time_speed.text = SettingsData.settingsdata.time_speed
 	addresolutions()
 	
 func _on_play_pressed():
