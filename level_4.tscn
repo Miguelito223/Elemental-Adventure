@@ -17,7 +17,7 @@ sky = SubResource("Sky_tvp66")
 size = Vector2(1.49664, 9.54374)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1tpwl"]
-size = Vector2(1107, 95)
+size = Vector2(2564.94, 5080.69)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shdbn"]
 size = Vector2(44, 652.48)
@@ -73,6 +73,7 @@ position = Vector2(-116, 715)
 scale = Vector2(95.7652, 13.1505)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(45.1104, 2492.85)
 shape = SubResource("RectangleShape2D_1tpwl")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
