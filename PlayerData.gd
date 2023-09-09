@@ -20,3 +20,5 @@ func load_file():
 		print("Playerdata file doesn't exist!")
 		save_file()
 	
+func remove_file():
+	DirAccess.remove_absolute(save_path)

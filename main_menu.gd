@@ -37,6 +37,7 @@ func _ready():
 	addresolutions()
 	
 func _on_play_pressed():
+	PlayerData.remove_file()
 	Global.load_scene(self, "res://level_1.tscn")
 	
 
