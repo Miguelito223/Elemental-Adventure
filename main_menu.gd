@@ -77,8 +77,10 @@ func _on_music_volume_value_changed(value):
 
 
 func _on_time_speed_text_text_changed(new_text):
+	SettingsData.settingsdata.time_speed = new_text
 	SettingsData.save_file()
 
 
 func _on_initial_time_text_text_changed(new_text):
+	SettingsData.settingsdata.initial_time = new_text 
 	SettingsData.save_file()
