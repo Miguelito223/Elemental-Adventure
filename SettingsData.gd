@@ -1,7 +1,7 @@
 extends Node
 
 var save_path = "user://SettingsData.json"
-var settingsdata = {"master_volume": 0, "fx_volume": 0, "music_volume": 0, "fullscreen": false, "resolution": "1920x1080", "initial_time": 12, "time_speed": 1.0}
+var settingsdata = {"master_volume": 0, "fx_volume": 0, "music_volume": 0, "fullscreen": false, "resolution": "1920x1080", "initial_time": "12", "time_speed": "1.0"}
 
 func _ready():
 	load_file()

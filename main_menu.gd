@@ -74,3 +74,11 @@ func _on_fx_volume_value_changed(value):
 
 func _on_music_volume_value_changed(value):
 	SettingsData.load_volume(1, value)
+
+
+func _on_time_speed_text_text_changed(new_text):
+	save_file()
+
+
+func _on_initial_time_text_text_changed(new_text):
+	save_file()

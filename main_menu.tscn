@@ -22,13 +22,12 @@ scale = Vector2(28.68, 16)
 color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="main menu" type="VBoxContainer" parent="."]
-visible = false
 texture_filter = 1
 layout_mode = 2
-offset_left = 764.0
-offset_top = 385.0
-offset_right = 837.0
-offset_bottom = 497.0
+offset_left = 613.0
+offset_top = 266.0
+offset_right = 773.0
+offset_bottom = 427.0
 scale = Vector2(4.89407, 4.20541)
 
 [node name="play" type="Button" parent="main menu"]
@@ -56,9 +55,9 @@ text = "Exit"
 [node name="titulo" type="Label" parent="."]
 layout_mode = 0
 offset_left = 414.0
-offset_top = 35.0
+offset_top = 55.0
 offset_right = 1592.0
-offset_bottom = 138.0
+offset_bottom = 158.0
 theme_override_fonts/font = ExtResource("1_0hhdr")
 theme_override_font_sizes/font_size = 90
 text = "Elemental Adventure"
@@ -69,6 +68,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="settings menu" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 337.0
 offset_top = 152.0
@@ -154,7 +154,7 @@ layout_mode = 2
 text = "Back"
 
 [node name="Fuego" type="Sprite2D" parent="."]
-position = Vector2(1532, 207)
+position = Vector2(1546, 93)
 scale = Vector2(0.233296, 0.251923)
 texture = ExtResource("4_nvai6")
 
