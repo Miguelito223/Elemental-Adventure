@@ -19,6 +19,9 @@ func load_file():
 	else:
 		print("Settingsdata file doesn't exist!")
 		save_file()
+
+func remove_file():
+	DirAccess.remove_absolute(save_path)
 		
 func load_volume(bus, value):
 	if value >= 45:

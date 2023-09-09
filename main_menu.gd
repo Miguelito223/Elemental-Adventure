@@ -38,6 +38,7 @@ func _ready():
 	
 func _on_play_pressed():
 	PlayerData.remove_file()
+	PlayerData.save_file()
 	Global.load_scene(self, "res://level_1.tscn")
 	
 
