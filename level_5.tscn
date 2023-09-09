@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bvb6s0ph1mf2f"]
+[gd_scene load_steps=25 format=3 uid="uid://bvb6s0ph1mf2f"]
 
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="1_4rb3q"]
 [ext_resource type="Script" path="res://level.gd" id="1_nctlr"]
@@ -86,13 +86,49 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 2.5, 5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(227, -6), Vector2(477, -6), Vector2(224, -6)]
+"values": [Vector2(227, -6), Vector2(480, -8), Vector2(227, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_v46dc"]
+resource_name = "moving 2"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(225, -6.99999), Vector2(483, -8.99999), Vector2(223, -6.99999)]
+}
+
+[sub_resource type="Animation" id="Animation_37464"]
+resource_name = "moving 3"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.4, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(167, -6.00002), Vector2(510, -8.00002), Vector2(167, -6.00002)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ixc6"]
 _data = {
 "RESET": SubResource("Animation_banto"),
-"moving": SubResource("Animation_y68jd")
+"moving": SubResource("Animation_y68jd"),
+"moving 2": SubResource("Animation_v46dc"),
+"moving 3": SubResource("Animation_37464")
 }
 
 [node name="level_5" type="Node2D"]
@@ -283,7 +319,7 @@ layer_0/tile_data = PackedInt32Array(2, 65537, 0, 65538, 65537, 0, 65539, 65537,
 position = Vector2(227, -6)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="plataform"]
-autoplay = "moving"
+autoplay = "moving 3"
 libraries = {
 "": SubResource("AnimationLibrary_1ixc6")
 }
