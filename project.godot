@@ -14,8 +14,8 @@ config/name="Elemental Adventure"
 run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0.168627, 0.458824, 1, 1)
-boot_splash/image="res://fuego.png"
-config/icon="res://icon.svg"
+boot_splash/image="res://Textures/fuego.png"
+config/icon="res://Textures/icon.svg"
 boot_splash/minimum_display_time=2
 
 [autoload]

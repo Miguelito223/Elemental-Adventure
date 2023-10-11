@@ -1,13 +1,13 @@
 [gd_scene load_steps=34 format=3 uid="uid://coesxv81063hx"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_s8jqi"]
-[ext_resource type="Texture2D" uid="uid://chrndh6qoxids" path="res://fuego jump.png" id="2_5qeto"]
-[ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Fire IDle.png" id="2_lnaki"]
-[ext_resource type="Texture2D" uid="uid://dfkfd625506bu" path="res://Fire Walk.png" id="3_2dcpf"]
+[ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Textures/Fire IDle.png" id="2_l53gg"]
+[ext_resource type="Texture2D" uid="uid://chrndh6qoxids" path="res://Textures/fuego jump.png" id="3_ipn2l"]
+[ext_resource type="Texture2D" uid="uid://dfkfd625506bu" path="res://Textures/Fire Walk.png" id="4_pmh15"]
 [ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="5_ml14w"]
-[ext_resource type="Texture2D" uid="uid://df41m1kgskmh7" path="res://hearth.png" id="5_psgel"]
+[ext_resource type="Texture2D" uid="uid://df41m1kgskmh7" path="res://Textures/hearth.png" id="5_wlk5n"]
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="6_fctea"]
-[ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://coin.png" id="7_mmxnu"]
+[ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Textures/coin.png" id="7_paoq1"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://pause_menu.tscn" id="9_1ujrq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
@@ -22,27 +22,27 @@ atlas = SubResource("CompressedTexture2D_si0t5")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrhsm"]
-atlas = ExtResource("2_lnaki")
+atlas = ExtResource("2_l53gg")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqacu"]
-atlas = ExtResource("2_lnaki")
+atlas = ExtResource("2_l53gg")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5bub"]
-atlas = ExtResource("2_5qeto")
+atlas = ExtResource("3_ipn2l")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_667f8"]
-atlas = ExtResource("3_2dcpf")
+atlas = ExtResource("4_pmh15")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgd65"]
-atlas = ExtResource("3_2dcpf")
+atlas = ExtResource("4_pmh15")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1j3vo"]
-atlas = ExtResource("3_2dcpf")
+atlas = ExtResource("4_pmh15")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a1hh6"]
@@ -206,23 +206,23 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ogjv1"]
-atlas = ExtResource("7_mmxnu")
+atlas = ExtResource("7_paoq1")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dnmc3"]
-atlas = ExtResource("7_mmxnu")
+atlas = ExtResource("7_paoq1")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t6ol6"]
-atlas = ExtResource("7_mmxnu")
+atlas = ExtResource("7_paoq1")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5g7vd"]
-atlas = ExtResource("7_mmxnu")
+atlas = ExtResource("7_paoq1")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ylcma"]
-atlas = ExtResource("7_mmxnu")
+atlas = ExtResource("7_paoq1")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_an653"]
@@ -292,7 +292,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
 texture_filter = 1
 position = Vector2(41, 38)
 scale = Vector2(0.0633333, 0.0624999)
-texture = ExtResource("5_psgel")
+texture = ExtResource("5_wlk5n")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 81.0

@@ -1,21 +1,21 @@
 [gd_scene load_steps=13 format=3 uid="uid://da61af5kfk5ik"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_c7qjt"]
-[ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://enemigo1.png" id="2_8h40s"]
+[ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://Textures/enemigo1.png" id="2_vyp6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
 size = Vector2(31, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hdx6"]
-radius = 25.0
-height = 50.0
+radius = 20.0
+height = 40.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ms8oy"]
-atlas = ExtResource("2_8h40s")
+atlas = ExtResource("2_vyp6j")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3tob"]
-atlas = ExtResource("2_8h40s")
+atlas = ExtResource("2_vyp6j")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3q7bq"]
@@ -161,7 +161,7 @@ position = Vector2(7, 0)
 sprite_frames = SubResource("SpriteFrames_3q7bq")
 animation = &"walk"
 autoplay = "walk"
-frame_progress = 0.441738
+frame_progress = 0.813132
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

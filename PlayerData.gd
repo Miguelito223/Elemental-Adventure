@@ -1,7 +1,7 @@
 extends Node
 
 var save_path = "user://PlayerData.json"
-var playerdata = {"pos": {"x": -373, "y": -30}, "lifes":3, "coins": 0, "level": "level_1"}
+var playerdata = {"pos": {"x": -485, "y": -30}, "lifes":3, "coins": 0, "level": "level_1"}
 
 func _ready():
 	load_file()

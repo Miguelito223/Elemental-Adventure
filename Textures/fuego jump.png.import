@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgchyjys2xhev"
-path="res://.godot/imported/plataform.png-ad3b5f354a7582b6fc758740078b36f8.ctex"
+uid="uid://chrndh6qoxids"
+path="res://.godot/imported/fuego jump.png-b3a7a788cc8688b4f1bc6deaa8b5d90c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://plataform.png"
-dest_files=["res://.godot/imported/plataform.png-ad3b5f354a7582b6fc758740078b36f8.ctex"]
+source_file="res://Textures/fuego jump.png"
+dest_files=["res://.godot/imported/fuego jump.png-b3a7a788cc8688b4f1bc6deaa8b5d90c.ctex"]
 
 [params]
 

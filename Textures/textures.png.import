@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diyn67rcpa176"
-path="res://.godot/imported/fuego.png-23b8ebea35a3ba316d1bfc4cf291c900.ctex"
+uid="uid://wybf7dhflfge"
+path="res://.godot/imported/textures.png-3b027f2d9ffeff4d15554999e76b11ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fuego.png"
-dest_files=["res://.godot/imported/fuego.png-23b8ebea35a3ba316d1bfc4cf291c900.ctex"]
+source_file="res://Textures/textures.png"
+dest_files=["res://.godot/imported/textures.png-3b027f2d9ffeff4d15554999e76b11ce.ctex"]
 
 [params]
 

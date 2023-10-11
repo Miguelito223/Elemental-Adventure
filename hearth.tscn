@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://betdnk2m31png"]
+
+[ext_resource type="Script" path="res://Hearth.gd" id="1_sy3lb"]
+[ext_resource type="Texture2D" uid="uid://df41m1kgskmh7" path="res://Textures/hearth.png" id="2_6uyu6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_crq5x"]
+
+[node name="Hearth" type="Area2D"]
+script = ExtResource("1_sy3lb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_crq5x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.19209e-06, 1.5)
+scale = Vector2(0.015, 0.0145349)
+texture = ExtResource("2_6uyu6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iud24expoimj"
-path="res://.godot/imported/Fire IDle.png-bf26386c05472290db4cd014abe6360b.ctex"
+uid="uid://bysw70gw27g6a"
+path="res://.godot/imported/enemigo1.png-62d14b6a6416ac63732bbe7651a79212.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fire IDle.png"
-dest_files=["res://.godot/imported/Fire IDle.png-bf26386c05472290db4cd014abe6360b.ctex"]
+source_file="res://Textures/enemigo1.png"
+dest_files=["res://.godot/imported/enemigo1.png-62d14b6a6416ac63732bbe7651a79212.ctex"]
 
 [params]
 

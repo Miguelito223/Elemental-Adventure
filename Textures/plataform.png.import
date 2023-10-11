@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpyos3obfe87w"
-path="res://.godot/imported/balllava.png-9815111352f33c949d8fe0e0d08453c5.ctex"
+uid="uid://bgchyjys2xhev"
+path="res://.godot/imported/plataform.png-fa46dd3185fdd66fdd725b9e8e5a96ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://balllava.png"
-dest_files=["res://.godot/imported/balllava.png-9815111352f33c949d8fe0e0d08453c5.ctex"]
+source_file="res://Textures/plataform.png"
+dest_files=["res://.godot/imported/plataform.png-fa46dd3185fdd66fdd725b9e8e5a96ee.ctex"]
 
 [params]
 

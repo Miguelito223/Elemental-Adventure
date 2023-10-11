@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df41m1kgskmh7"
-path="res://.godot/imported/hearth.png-2e4dcbb5d5b98ced04c18029b557bf85.ctex"
+uid="uid://dfkfd625506bu"
+path="res://.godot/imported/Fire Walk.png-eeeaa71b7d9c29e558d6b30aa297a9da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hearth.png"
-dest_files=["res://.godot/imported/hearth.png-2e4dcbb5d5b98ced04c18029b557bf85.ctex"]
+source_file="res://Textures/Fire Walk.png"
+dest_files=["res://.godot/imported/Fire Walk.png-eeeaa71b7d9c29e558d6b30aa297a9da.ctex"]
 
 [params]
 

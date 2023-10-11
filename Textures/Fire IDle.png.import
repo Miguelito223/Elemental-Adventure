@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn81vpe2bcuy4"
-path="res://.godot/imported/box.png-196cb2b6d7422a4ab3b9c60b5a994fe3.ctex"
+uid="uid://iud24expoimj"
+path="res://.godot/imported/Fire IDle.png-dd2efd965ba75c9a7ddd846f7d6625a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://box.png"
-dest_files=["res://.godot/imported/box.png-196cb2b6d7422a4ab3b9c60b5a994fe3.ctex"]
+source_file="res://Textures/Fire IDle.png"
+dest_files=["res://.godot/imported/Fire IDle.png-dd2efd965ba75c9a7ddd846f7d6625a8.ctex"]
 
 [params]
 

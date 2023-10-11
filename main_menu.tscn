@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="1_0hhdr"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_tehlg"]
-[ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://main menu music.mp3" id="3_5epi2"]
-[ext_resource type="Texture2D" uid="uid://diyn67rcpa176" path="res://fuego.png" id="4_nvai6"]
+[ext_resource type="Texture2D" uid="uid://diyn67rcpa176" path="res://Textures/fuego.png" id="2_jhq61"]
+[ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/main menu music.mp3" id="4_07b38"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -21,13 +21,35 @@ offset_bottom = 68.0
 scale = Vector2(28.68, 16)
 color = Color(0.137255, 0, 0.247059, 1)
 
+[node name="Tittle" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -4.0
+offset_top = 95.0
+offset_right = 36.0
+offset_bottom = 135.0
+
+[node name="logo" type="Sprite2D" parent="Tittle"]
+position = Vector2(1546, 93)
+scale = Vector2(0.233296, 0.251923)
+texture = ExtResource("2_jhq61")
+
+[node name="Tittle" type="Label" parent="Tittle"]
+layout_mode = 0
+offset_left = 414.0
+offset_top = 55.0
+offset_right = 1592.0
+offset_bottom = 158.0
+theme_override_fonts/font = ExtResource("1_0hhdr")
+theme_override_font_sizes/font_size = 90
+text = "Elemental Adventure"
+
 [node name="main menu" type="VBoxContainer" parent="."]
 texture_filter = 1
 layout_mode = 2
-offset_left = 593.0
-offset_top = 336.0
-offset_right = 753.0
-offset_bottom = 497.0
+offset_left = 572.0
+offset_top = 355.0
+offset_right = 732.0
+offset_bottom = 516.0
 scale = Vector2(4.89407, 4.20541)
 
 [node name="play" type="Button" parent="main menu"]
@@ -51,21 +73,6 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
 theme_override_font_sizes/font_size = 14
 text = "Exit"
-
-[node name="titulo" type="Label" parent="."]
-layout_mode = 0
-offset_left = 414.0
-offset_top = 55.0
-offset_right = 1592.0
-offset_bottom = 158.0
-theme_override_fonts/font = ExtResource("1_0hhdr")
-theme_override_font_sizes/font_size = 90
-text = "Elemental Adventure"
-
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_5epi2")
-autoplay = true
-bus = &"Music"
 
 [node name="settings menu" type="VBoxContainer" parent="."]
 visible = false
@@ -153,10 +160,10 @@ text = "1.0"
 layout_mode = 2
 text = "Back"
 
-[node name="Fuego" type="Sprite2D" parent="."]
-position = Vector2(1546, 93)
-scale = Vector2(0.233296, 0.251923)
-texture = ExtResource("4_nvai6")
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_07b38")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="main menu/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="main menu/load" to="." method="_on_load_pressed"]
