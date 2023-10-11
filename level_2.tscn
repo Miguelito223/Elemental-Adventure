@@ -230,19 +230,17 @@ position = Vector2(1120, -57)
 texture_filter = 1
 position = Vector2(1017, -174)
 
-[node name="Hearth" parent="." instance=ExtResource("6_1tq1r")]
-position = Vector2(295, -39.9999)
-scale = Vector2(0.748854, 0.810352)
-
-[node name="Hearth2" parent="." instance=ExtResource("6_1tq1r")]
-position = Vector2(740, -32)
-scale = Vector2(0.748854, 0.810352)
-
 [node name="Enemy" parent="." instance=ExtResource("7_w3nqo")]
 position = Vector2(679, -50)
 
 [node name="Enemy2" parent="." instance=ExtResource("7_w3nqo")]
 position = Vector2(348, -51)
+
+[node name="Hearth" parent="." instance=ExtResource("6_1tq1r")]
+position = Vector2(737, -40)
+
+[node name="Hearth2" parent="." instance=ExtResource("6_1tq1r")]
+position = Vector2(368, -44)
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

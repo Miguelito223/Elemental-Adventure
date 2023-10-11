@@ -23,10 +23,10 @@ color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="Tittle" type="Control" parent="."]
 anchors_preset = 0
-offset_left = -4.0
-offset_top = 95.0
-offset_right = 36.0
-offset_bottom = 135.0
+offset_left = 13.0
+offset_top = -11.0
+offset_right = 53.0
+offset_bottom = 29.0
 
 [node name="logo" type="Sprite2D" parent="Tittle"]
 position = Vector2(1546, 93)
