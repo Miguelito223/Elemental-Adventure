@@ -8,26 +8,26 @@ var bullet = preload("res://lavaball.tscn")
 var can_fire = true
 
 @export var max_health = 3
-@onready var health = PlayerData.playerdata.lifes
+@onready var health = Data.data.player_data.lifes
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
 @onready var Market = $Marker2D
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
-@onready var coins = PlayerData.playerdata.coins
+@onready var coins = Data.data.player_data.coins
 
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		PlayerData.playerdata.pos.x = position.x
-		PlayerData.playerdata.pos.y = position.y
-		PlayerData.save_file()
+		Data.data.player_data.pos.x = position.x
+		Data.data.player_data.pos.y = position.y
+		Data.save_file()
 
 
 func _ready():
-	position.y = PlayerData.playerdata.pos.y
-	position.x = PlayerData.playerdata.pos.x
-	setlifes(PlayerData.playerdata.lifes)
+	position.y = Data.data.player_data.pos.y
+	position.x = Data.data.player_data.pos.x
+	setlifes(Data.data.player_data.lifes)
 	Pause_Menu.hide()
 	get_tree().paused = false
 	
@@ -85,24 +85,24 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func setlifes(value):
-	PlayerData.playerdata.lifes = clamp(value,0,max_health)
-	if PlayerData.playerdata.lifes <= 0:
+	Data.data.player_data.lifes = clamp(value,0,max_health)
+	if Data.data.player_data.lifes <= 0:
 		print("you dead")
-		PlayerData.playerdata.lifes = max_health
-		PlayerData.save_file()
+		Data.data.player_data.lifes = max_health
+		Data.save_file()
 		Global.load_scene(get_parent(), "res://death_menu.tscn")
 
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
 		InvunerabilityTime.start()
-		setlifes(PlayerData.playerdata.lifes - ammount)
+		setlifes(Data.data.player_data.lifes - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
-		PlayerData.save_file()
+		Data.save_file()
 
 func update_label():
-	$CanvasLayer/Label.text = ": " + str(PlayerData.playerdata.lifes)
-	$CanvasLayer/Label2.text = ": " + str(PlayerData.playerdata.coins)
+	$CanvasLayer/Label.text = ": " + str(Data.data.player_data.lifes)
+	$CanvasLayer/Label2.text = ": " + str(Data.data.player_data.coins)
 	
 
 func _on_exit_pressed():

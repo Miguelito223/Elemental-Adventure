@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_crq5x"]
 
 [node name="Hearth" type="Area2D"]
+scale = Vector2(1.78344, 1.72076)
 script = ExtResource("1_sy3lb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

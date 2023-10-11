@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgnbppy6meuyf"]
+[gd_scene load_steps=20 format=3 uid="uid://dgnbppy6meuyf"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_vu3go"]
 [ext_resource type="Texture2D" uid="uid://wybf7dhflfge" path="res://Textures/textures.png" id="2_vqci3"]
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="3_imggk"]
 [ext_resource type="Script" path="res://dnc.gd" id="5_lgtt2"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://coin.tscn" id="6_nl7ac"]
+[ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://hearth.tscn" id="7_ci6i8"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://enemy.tscn" id="7_kelci"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l6wbb"]
@@ -234,6 +235,13 @@ position = Vector2(477, -50)
 
 [node name="Enemigo2" parent="." instance=ExtResource("7_kelci")]
 position = Vector2(1150, -65)
+
+[node name="Hearth2" parent="." instance=ExtResource("7_ci6i8")]
+position = Vector2(678, -45)
+
+[node name="Hearth3" parent="." instance=ExtResource("7_ci6i8")]
+position = Vector2(1199, -64)
+scale = Vector2(1.76416, 1.87751)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

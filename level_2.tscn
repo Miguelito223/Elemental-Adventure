@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://b4lqd43x0ndff"]
+[gd_scene load_steps=20 format=3 uid="uid://b4lqd43x0ndff"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_y18jc"]
 [ext_resource type="Texture2D" uid="uid://wybf7dhflfge" path="res://Textures/textures.png" id="2_7ca0m"]
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="3_rjnga"]
 [ext_resource type="Script" path="res://dnc.gd" id="5_jj5u8"]
+[ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://hearth.tscn" id="6_1tq1r"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://coin.tscn" id="6_jktx3"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://enemy.tscn" id="7_w3nqo"]
 
@@ -228,6 +229,14 @@ position = Vector2(1120, -57)
 [node name="Coin23" parent="." instance=ExtResource("6_jktx3")]
 texture_filter = 1
 position = Vector2(1017, -174)
+
+[node name="Hearth" parent="." instance=ExtResource("6_1tq1r")]
+position = Vector2(295, -39.9999)
+scale = Vector2(0.748854, 0.810352)
+
+[node name="Hearth2" parent="." instance=ExtResource("6_1tq1r")]
+position = Vector2(740, -32)
+scale = Vector2(0.748854, 0.810352)
 
 [node name="Enemy" parent="." instance=ExtResource("7_w3nqo")]
 position = Vector2(679, -50)

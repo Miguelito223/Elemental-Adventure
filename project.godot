@@ -20,9 +20,8 @@ boot_splash/minimum_display_time=2
 
 [autoload]
 
-SettingsData="*res://SettingsData.gd"
-PlayerData="*res://PlayerData.gd"
 Global="*res://Global.gd"
+Data="*res://Data.gd"
 
 [display]
 
