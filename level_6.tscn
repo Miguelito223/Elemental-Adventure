@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://8ja0wgtkdkfm"]
+[gd_scene load_steps=24 format=3 uid="uid://8ja0wgtkdkfm"]
 
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="1_lwqtd"]
 [ext_resource type="Script" path="res://level.gd" id="1_wfsls"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://enemy.tscn" id="4_cbef0"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://tile_map.tscn" id="5_qiv16"]
 [ext_resource type="PackedScene" uid="uid://r6nxo2uj0e0o" path="res://plataform.tscn" id="6_m342p"]
+[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/628445__davo32__level-music-brackground.mp3" id="8_66hve"]
 
 [sub_resource type="Sky" id="Sky_yh2qd"]
 
@@ -310,6 +311,9 @@ autoplay = "moving 2"
 libraries = {
 "": SubResource("AnimationLibrary_1ixc6")
 }
+
+[node name="level music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_66hve")
 
 [connection signal="area_entered" from="Victory Zone" to="." method="_on_victory_zone_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
