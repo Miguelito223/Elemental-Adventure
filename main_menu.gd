@@ -13,7 +13,10 @@ extends Control
 var resolution = {
 	"1920x1080": Vector2i(1920, 1080),
 	"1600x1200": Vector2i(1600, 1200),
-	"1400x1050	": Vector2i(1400, 1050)
+	"1400x1050": Vector2i(1400, 1050),
+	"1300x1040": Vector2i(1300, 1040),
+	"1000x1020": Vector2i(1000, 1020),
+	"900x1009": Vector2i(1000, 1020)
 }
 	
 func addresolutions():
@@ -28,18 +31,18 @@ func addresolutions():
 		index += 1
 
 func _ready():
-	master_volume.value = Data.data.settings.master_volume
-	fx_volume.value = Data.data.settings.fx_volume
-	music_volume.value = Data.data.settings.music_volume
-	fullscreen.button_pressed = Data.data.settings.fullscreen
-	initial_time.text = Data.data.settings.initial_time
-	time_speed.text = Data.data.settings.time_speed
+	master_volume.value = Data.master_volume
+	fx_volume.value = Data.fx_volume
+	music_volume.value = Data.music_volume
+	fullscreen.button_pressed = Data.fullscreen
+	initial_time.text = Data.initial_time
+	time_speed.text = Data.time_speed
 	addresolutions()
 	
 func _on_play_pressed():
 	Data.remove_file()
 	Data.save_file()
-	Global.load_scene(self, "res://level_1.tscn")
+	LoadScene.load_scene(self, "res://level_1.tscn")
 	
 
 func _on_option_pressed():
@@ -60,7 +63,7 @@ func _on_back_pressed():
 
 func _on_load_pressed():
 	Data.load_file()
-	Global.load_scene(self, Data.data.player_data.level)
+	LoadScene.load_scene(self, Data.level)
 
 func _on_fullscreen_tongle_toggled(button_pressed):
 	Data.load_fullscreen(button_pressed)
@@ -79,10 +82,10 @@ func _on_music_volume_value_changed(value):
 
 
 func _on_time_speed_text_text_changed(new_text):
-	Data.data.settings.time_speed = new_text
+	Data.time_speed = new_text 
 	Data.save_file()
 
 
 func _on_initial_time_text_text_changed(new_text):
-	Data.data.settings.initial_time = new_text 
+	Data.initial_time = new_text 
 	Data.save_file()

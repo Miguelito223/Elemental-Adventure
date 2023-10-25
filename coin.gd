@@ -2,7 +2,7 @@ extends Area2D
 
 func _on_body_entered(body):
 	if body.name == "player":
-		Data.data.player_data.coins += 1
+		Data.coins += 1
 		Data.save_file()
 		$"coin sound".play()
 		visible = false

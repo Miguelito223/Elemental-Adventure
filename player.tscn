@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://coesxv81063hx"]
+[gd_scene load_steps=33 format=3 uid="uid://coesxv81063hx"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_s8jqi"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Textures/Fire IDle.png" id="2_l53gg"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="6_fctea"]
 [ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Textures/coin.png" id="7_paoq1"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://pause_menu.tscn" id="9_1ujrq"]
+[ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Textures/linght.png" id="10_pntne"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -248,15 +249,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_b8fk7"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jjsmu"]
-gradient = SubResource("Gradient_b8fk7")
-fill = 1
-fill_from = Vector2(0.533333, 0.488889)
-fill_to = Vector2(0.733333, 0)
-
 [node name="player" type="CharacterBody2D"]
 position = Vector2(947, 546)
 script = ExtResource("1_s8jqi")
@@ -345,12 +337,14 @@ text = "Exit"
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(4, 1.71661e-05)
-scale = Vector2(1.38302, 1)
+position = Vector2(6, 1)
+scale = Vector2(0.651042, 0.439453)
+energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
-texture = SubResource("GradientTexture2D_jjsmu")
-texture_scale = 2.74
+shadow_filter_smooth = 3.0
+texture = ExtResource("10_pntne")
+texture_scale = 0.36
 
 [node name="Invunerability" type="Timer" parent="."]
 wait_time = 0.8

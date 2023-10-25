@@ -20,8 +20,8 @@ boot_splash/minimum_display_time=2
 
 [autoload]
 
-Global="*res://Global.gd"
 Data="*res://Data.gd"
+LoadScene="*res://LoadScene.gd"
 
 [display]
 

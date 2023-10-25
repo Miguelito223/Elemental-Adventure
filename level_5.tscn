@@ -205,7 +205,6 @@ shadow_color = Color(0, 0, 0, 0.239216)
 shadow_filter = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
 script = ExtResource("2_o6hfk")
 gradient = SubResource("GradientTexture1D_i6dml")
 

@@ -16,18 +16,10 @@ var can_fire = true
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var coins = Data.data.player_data.coins
 
-
-func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		Data.data.player_data.pos.x = position.x
-		Data.data.player_data.pos.y = position.y
-		Data.save_file()
-
-
 func _ready():
-	position.y = Data.data.player_data.pos.y
-	position.x = Data.data.player_data.pos.x
-	setlifes(Data.data.player_data.lifes)
+	position.y = Data.player_y
+	position.x = Data.player_x
+	setlifes(Data.lifes)
 	Pause_Menu.hide()
 	get_tree().paused = false
 	
@@ -44,6 +36,7 @@ func _process(_delta):
 	update_label()
 	
 func _input(event):
+	
 	if event.is_action_pressed("ui_pause_menu"):
 		Pause_Menu.show()
 		get_tree().paused = true
@@ -64,6 +57,9 @@ func shot():
 		can_fire = true
 
 func _physics_process(delta):
+	Data.player_x = position.x
+	Data.player_y = position.y
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
@@ -85,24 +81,26 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func setlifes(value):
-	Data.data.player_data.lifes = clamp(value,0,max_health)
-	if Data.data.player_data.lifes <= 0:
+	Data.lifes = clamp(value,0,max_health)
+	if Data.lifes <= 0:
 		print("you dead")
-		Data.data.player_data.lifes = max_health
+		Data.lifes = max_health
+		Data.player_x = -449
+		Data.player_y = -26
 		Data.save_file()
-		Global.load_scene(get_parent(), "res://death_menu.tscn")
+		LoadScene.load_scene(get_parent(), "res://death_menu.tscn")
 
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
 		InvunerabilityTime.start()
-		setlifes(Data.data.player_data.lifes - ammount)
+		setlifes(Data.lifes - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		Data.save_file()
 
 func update_label():
-	$CanvasLayer/Label.text = ": " + str(Data.data.player_data.lifes)
-	$CanvasLayer/Label2.text = ": " + str(Data.data.player_data.coins)
+	$CanvasLayer/Label.text = ": " + str(Data.lifes)
+	$CanvasLayer/Label2.text = ": " + str(Data.coins)
 	
 
 func _on_exit_pressed():
