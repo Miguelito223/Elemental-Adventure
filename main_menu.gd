@@ -2,6 +2,7 @@ extends Control
 
 @onready var main_menu = $"main menu"
 @onready var settings_menu = $"settings menu"
+@onready var settings_menu2 = $"settings menu2"
 @onready var master_volume = $"settings menu/master volume"
 @onready var fx_volume = $"settings menu/Fx volume"
 @onready var music_volume = $"settings menu/music volume"
@@ -31,6 +32,9 @@ func addresolutions():
 		index += 1
 
 func _ready():
+	main_menu.show()
+	settings_menu.hide()
+	settings_menu2.hide()
 	master_volume.value = Data.master_volume
 	fx_volume.value = Data.fx_volume
 	music_volume.value = Data.music_volume
@@ -48,6 +52,7 @@ func _on_play_pressed():
 func _on_option_pressed():
 	main_menu.hide()
 	settings_menu.show()
+	settings_menu2.hide()
 
 
 func _on_exit_pressed():
@@ -59,6 +64,7 @@ func _on_master_volume_value_changed(value):
 func _on_back_pressed():
 	main_menu.show()
 	settings_menu.hide()
+	settings_menu2.hide()
 
 
 func _on_load_pressed():
@@ -89,3 +95,27 @@ func _on_time_speed_text_text_changed(new_text):
 func _on_initial_time_text_text_changed(new_text):
 	Data.initial_time = new_text 
 	Data.save_file()
+
+
+func _on_continue_pressed():
+	main_menu.hide()
+	settings_menu.hide()
+	settings_menu2.show()
+
+
+func _on_back_2_pressed():
+	main_menu.hide()
+	settings_menu.show()
+	settings_menu2.hide()
+
+
+func _on_autosaver_start_time_text_text_changed(new_text):
+	Data.autosaver_start_time = new_text
+
+
+func _on_autosave_length_text_text_changed(new_text):
+	Data.autosave_length = new_text
+
+
+func _on_autosave_toggled(button_pressed):
+	Data.autosave = button_pressed

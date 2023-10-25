@@ -8,18 +8,18 @@ var bullet = preload("res://lavaball.tscn")
 var can_fire = true
 
 @export var max_health = 3
-@onready var health = Data.data.player_data.lifes
+@export var health = Data.lifes
+@export var coins = Data.coins
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
 @onready var Market = $Marker2D
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
-@onready var coins = Data.data.player_data.coins
 
 func _ready():
 	position.y = Data.player_y
 	position.x = Data.player_x
-	setlifes(Data.lifes)
+	setlifes(health)
 	Pause_Menu.hide()
 	get_tree().paused = false
 	
@@ -81,26 +81,24 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func setlifes(value):
-	Data.lifes = clamp(value,0,max_health)
-	if Data.lifes <= 0:
+	health = clamp(value,0,max_health)
+	if health <= 0:
 		print("you dead")
-		Data.lifes = max_health
-		Data.player_x = -449
-		Data.player_y = -26
+		health = max_health
 		Data.save_file()
 		LoadScene.load_scene(get_parent(), "res://death_menu.tscn")
 
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
 		InvunerabilityTime.start()
-		setlifes(Data.lifes - ammount)
+		setlifes(health - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		Data.save_file()
 
 func update_label():
-	$CanvasLayer/Label.text = ": " + str(Data.lifes)
-	$CanvasLayer/Label2.text = ": " + str(Data.coins)
+	$CanvasLayer/Label.text = ": " + str(health)
+	$CanvasLayer/Label2.text = ": " + str(coins)
 	
 
 func _on_exit_pressed():

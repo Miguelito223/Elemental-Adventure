@@ -258,6 +258,7 @@ scale = Vector2(1.76416, 1.87751)
 [node name="level music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_in0lr")
 autoplay = true
+bus = &"Music"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

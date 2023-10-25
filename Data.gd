@@ -22,9 +22,6 @@ var autosave = false
 var autosave_length = 5
 var autosaver_start_time = 0
 
-func _ready():
-	load_file()
-
 func save_file():
 	print("Creating data file")
 	data = {
@@ -80,6 +77,9 @@ func load_file():
 	else:
 		print("Data file doesn't exist!")
 		save_file()
+	
+func _ready():
+	load_file()
 	
 func remove_file():
 	DirAccess.remove_absolute(save_path)

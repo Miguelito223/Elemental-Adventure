@@ -44,6 +44,7 @@ theme_override_font_sizes/font_size = 90
 text = "Elemental Adventure"
 
 [node name="main menu" type="VBoxContainer" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 2
 offset_left = 572.0
@@ -156,8 +157,53 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "1.0"
 
+[node name="Continue" type="Button" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Continue"
+
 [node name="back" type="Button" parent="settings menu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Back"
+
+[node name="settings menu2" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 337.0
+offset_top = 152.0
+offset_right = 773.0
+offset_bottom = 498.0
+scale = Vector2(3, 2.52)
+
+[node name="Autosave" type="CheckButton" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+action_mode = 0
+text = "Autosave"
+
+[node name="autosave length" type="Label" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "autosave length"
+
+[node name="autosave length text" type="LineEdit" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "5"
+
+[node name="autosaver start time" type="Label" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "Autosave start time"
+
+[node name="autosaver start time text" type="LineEdit" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
+text = "0"
+
+[node name="back2" type="Button" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "Back"
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
@@ -176,4 +222,9 @@ bus = &"Music"
 [connection signal="item_selected" from="settings menu/resolution" to="." method="_on_option_button_item_selected"]
 [connection signal="text_changed" from="settings menu/initial time text" to="." method="_on_initial_time_text_text_changed"]
 [connection signal="text_changed" from="settings menu/time speed text" to="." method="_on_time_speed_text_text_changed"]
+[connection signal="pressed" from="settings menu/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="settings menu/back" to="." method="_on_back_pressed"]
+[connection signal="toggled" from="settings menu2/Autosave" to="." method="_on_autosave_toggled"]
+[connection signal="text_changed" from="settings menu2/autosave length text" to="." method="_on_autosave_length_text_text_changed"]
+[connection signal="text_changed" from="settings menu2/autosaver start time text" to="." method="_on_autosaver_start_time_text_text_changed"]
+[connection signal="pressed" from="settings menu2/back2" to="." method="_on_back_2_pressed"]

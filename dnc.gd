@@ -7,10 +7,14 @@ var ingame_to_real_minute_duration = (2 * PI)
 signal time_tick(day,hour,minute)
 
 @export var gradient:GradientTexture1D
-var ingame_speed = int(Data.time_speed)
-var initial_hour = int(Data.initial_time)
+@export var ingame_speed = int(Data.time_speed)
+@export var initial_hour = int(Data.initial_time):
+	set(h):
+		initial_hour = h
+		time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
 
 var time = 0.0
+var past_minute = -1.0
 
 func _ready():
 	Data.load_file()
@@ -30,4 +34,7 @@ func _recalculate_time():
 	var current_day_minutes = total_minutes % minutes_per_day
 	var hours = int(current_day_minutes / minutes_per_hour)
 	var minute = int(current_day_minutes % minutes_per_hour)
-	time_tick.emit(day, hours, minute)
+	
+	if past_minute != minute:
+		past_minute = minute
+		time_tick.emit(day, hours, minute)
