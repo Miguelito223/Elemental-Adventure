@@ -1,5 +1,10 @@
 extends Node2D
 
+func _ready():
+	Data.pos_x = -449
+	Data.pos_y = -26
+	Data.save_file()
+
 func _on_area_2d_body_entered(body):
 	if body.name == "player":
 		body.damage(3)

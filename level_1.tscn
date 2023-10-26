@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://coin.tscn" id="6_nl7ac"]
 [ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://hearth.tscn" id="7_ci6i8"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://enemy.tscn" id="7_kelci"]
-[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/628445__davo32__level-music-brackground.mp3" id="8_in0lr"]
 
 [sub_resource type="Sky" id="Sky_n8u16"]
 
@@ -36,6 +35,10 @@ colors = PackedColorArray(0, 0, 0.392157, 1, 0.544118, 0.524913, 0.488178, 1, 1,
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_jx2x6"]
 gradient = SubResource("Gradient_ek5sm")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ujlwm"]
+cull_mode = 1
+polygon = PackedVector2Array(200, 200)
 
 [node name="level 1" type="Node2D"]
 position = Vector2(492, 1031)
@@ -109,6 +112,11 @@ shadow_filter = 1
 position = Vector2(51, 39)
 script = ExtResource("5_lgtt2")
 gradient = SubResource("GradientTexture1D_jx2x6")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(130, -106)
+occluder = SubResource("OccluderPolygon2D_ujlwm")
+occluder_light_mask = 1023
 
 [node name="Coin" parent="." instance=ExtResource("6_nl7ac")]
 texture_filter = 1
@@ -254,11 +262,6 @@ position = Vector2(589, -45)
 [node name="Hearth3" parent="." instance=ExtResource("7_ci6i8")]
 position = Vector2(1154, -154)
 scale = Vector2(1.76416, 1.87751)
-
-[node name="level music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_in0lr")
-autoplay = true
-bus = &"Music"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

@@ -44,9 +44,12 @@ func _ready():
 	addresolutions()
 	
 func _on_play_pressed():
+	Data.load_file()
+	LoadScene.load_scene(self, Data.level)
+	
+func _on_delete_data_pressed():
 	Data.remove_file()
 	Data.save_file()
-	LoadScene.load_scene(self, "res://level_1.tscn")
 	
 
 func _on_option_pressed():
@@ -65,11 +68,6 @@ func _on_back_pressed():
 	main_menu.show()
 	settings_menu.hide()
 	settings_menu2.hide()
-
-
-func _on_load_pressed():
-	Data.load_file()
-	LoadScene.load_scene(self, Data.level)
 
 func _on_fullscreen_tongle_toggled(button_pressed):
 	Data.load_fullscreen(button_pressed)

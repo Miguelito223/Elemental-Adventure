@@ -23,10 +23,10 @@ color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="Tittle" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 13.0
-offset_top = -11.0
-offset_right = 53.0
-offset_bottom = 29.0
+offset_left = -25.0
+offset_top = 84.0
+offset_right = 48.0
+offset_bottom = 124.0
 
 [node name="logo" type="Sprite2D" parent="Tittle"]
 position = Vector2(1546, 93)
@@ -44,7 +44,6 @@ theme_override_font_sizes/font_size = 90
 text = "Elemental Adventure"
 
 [node name="main menu" type="VBoxContainer" parent="."]
-visible = false
 texture_filter = 1
 layout_mode = 2
 offset_left = 572.0
@@ -53,16 +52,16 @@ offset_right = 732.0
 offset_bottom = 516.0
 scale = Vector2(4.89407, 4.20541)
 
-[node name="play" type="Button" parent="main menu"]
+[node name="Play" type="Button" parent="main menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
-text = "play
-"
+text = "play"
 
-[node name="load" type="Button" parent="main menu"]
+[node name="delete data" type="Button" parent="main menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0hhdr")
-text = "Load"
+text = "Delete data
+"
 
 [node name="option" type="Button" parent="main menu"]
 layout_mode = 2
@@ -168,6 +167,7 @@ theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "Back"
 
 [node name="settings menu2" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 337.0
 offset_top = 152.0
@@ -211,8 +211,8 @@ stream = ExtResource("4_07b38")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="main menu/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="main menu/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="main menu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="main menu/delete data" to="." method="_on_delete_data_pressed"]
 [connection signal="pressed" from="main menu/option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="main menu/exit" to="." method="_on_exit_pressed"]
 [connection signal="value_changed" from="settings menu/master volume" to="." method="_on_master_volume_value_changed"]

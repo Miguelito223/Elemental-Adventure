@@ -3,9 +3,13 @@ extends Node
 var save_path = "user://Data.json"
 var data = {}
 
+signal finish_remove_data
+signal finish_add_data
+signal finish_load_data
+
 #player
-var player_x = -449
-var player_y = -26
+var pos_x = -449
+var pos_y = -26
 var lifes = 3
 var coins = 0
 var level = "level_1"
@@ -26,7 +30,7 @@ func save_file():
 	print("Creating data file")
 	data = {
 		"player_data":{
-			"pos": {"x": player_x, "y": player_y}, 
+			"pos": {"x": pos_x, "y": pos_y}, 
 			"lifes": lifes , 
 			"coins": coins, 
 			"level": level
@@ -46,6 +50,8 @@ func save_file():
 	}
 	var datafile = FileAccess.open(save_path, FileAccess.WRITE)
 	datafile.store_line(JSON.stringify(data))
+	
+	finish_add_data.emit()
 
 func load_file():
 	var datafile = FileAccess.open(save_path, FileAccess.READ)
@@ -69,11 +75,12 @@ func load_file():
 		autosaver_start_time = settings["autosaver_start_time"]
 		
 		#player
-		player_x = player_data.pos.x
-		player_y = player_data.pos.y
+		pos_x = player_data.pos.x
+		pos_y = player_data.pos.y
 		lifes = player_data["lifes"]
 		coins = player_data["coins"]
 		level = player_data["level"]
+		finish_load_data.emit()
 	else:
 		print("Data file doesn't exist!")
 		save_file()
@@ -81,8 +88,14 @@ func load_file():
 func _ready():
 	load_file()
 	
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_file()
+	
 func remove_file():
-	DirAccess.remove_absolute(save_path)
+	if FileAccess.file_exists(save_path):
+		DirAccess.remove_absolute(save_path)
+	finish_remove_data.emit()
 
 func load_volume(bus, value):
 	if value >= 45:

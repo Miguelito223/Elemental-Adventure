@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2rh0nih50uto"]
+[gd_scene load_steps=17 format=3 uid="uid://b2rh0nih50uto"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_8jli0"]
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="2_bh6gd"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://coin.tscn" id="4_13dfq"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://enemy.tscn" id="5_1bioi"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://tile_map.tscn" id="6_fh34g"]
-[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/628445__davo32__level-music-brackground.mp3" id="7_5orsk"]
 
 [sub_resource type="Sky" id="Sky_tvp66"]
 
@@ -217,10 +216,6 @@ position = Vector2(392, -35)
 
 [node name="Enemy3" parent="." instance=ExtResource("5_1bioi")]
 position = Vector2(-46, -49)
-
-[node name="level music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_5orsk")
-bus = &"Music"
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

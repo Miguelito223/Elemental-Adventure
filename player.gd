@@ -15,15 +15,16 @@ var can_fire = true
 @onready var Market = $Marker2D
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
-
+		
 func _ready():
-	position.y = Data.player_y
-	position.x = Data.player_x
+	position.y = Data.pos_y
+	position.x = Data.pos_x
 	setlifes(health)
 	Pause_Menu.hide()
 	get_tree().paused = false
 	
 func _process(_delta):
+	update_label()
 	if velocity.x > 0 or velocity.x < 0:
 		AnimatedSprite.play("walk")
 	elif velocity.y < 0:
@@ -32,8 +33,6 @@ func _process(_delta):
 		AnimatedSprite.play("fall")
 	else:
 		AnimatedSprite.play("idle")
-		
-	update_label()
 	
 func _input(event):
 	
@@ -57,8 +56,8 @@ func shot():
 		can_fire = true
 
 func _physics_process(delta):
-	Data.player_x = position.x
-	Data.player_y = position.y
+	Data.pos_x = position.x
+	Data.pos_y = position.y
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -97,8 +96,8 @@ func damage(ammount):
 		Data.save_file()
 
 func update_label():
-	$CanvasLayer/Label.text = ": " + str(health)
-	$CanvasLayer/Label2.text = ": " + str(coins)
+	$CanvasLayer/Label.text = ": " + str(Data.lifes)
+	$CanvasLayer/Label2.text = ": " + str(Data.coins)
 	
 
 func _on_exit_pressed():

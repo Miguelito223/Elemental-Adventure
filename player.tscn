@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://coesxv81063hx"]
+[gd_scene load_steps=34 format=3 uid="uid://coesxv81063hx"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_s8jqi"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Textures/Fire IDle.png" id="2_l53gg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Textures/coin.png" id="7_paoq1"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://pause_menu.tscn" id="9_1ujrq"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Textures/linght.png" id="10_pntne"]
+[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/628445__davo32__level-music-brackground.mp3" id="11_vxqoc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -250,7 +251,7 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D"]
-position = Vector2(947, 546)
+position = Vector2(-3, 0)
 script = ExtResource("1_s8jqi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -352,6 +353,11 @@ one_shot = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(3, 0)
+
+[node name="level music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_vxqoc")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]

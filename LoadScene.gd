@@ -1,5 +1,7 @@
 extends Node
 
+signal finish_loading
+
 const GAME_SCENE ={
 	"level_1": "res://level_1.tscn", 
 	"level_2": "res://level_2.tscn",
@@ -33,7 +35,6 @@ func load_scene(current_scene, next_scene):
 		print("file no exist")
 		return 
 	
-	
 	await loading_screen_intance.safe_to_load
 	current_scene.queue_free()
 	
@@ -58,4 +59,4 @@ func load_scene(current_scene, next_scene):
 				get_tree().get_root().call_deferred("add_child", new_scene)
 				
 				loading_screen_intance.fade_out_loading_screen()
-				
+				finish_loading.emit()
