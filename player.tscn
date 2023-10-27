@@ -250,7 +250,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["persistent"]]
 position = Vector2(-3, 0)
 script = ExtResource("1_s8jqi")
 

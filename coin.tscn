@@ -49,7 +49,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Coin" type="Area2D"]
+[node name="Coin" type="Area2D" groups=["persistent"]]
+texture_filter = 1
 script = ExtResource("1_yeht5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

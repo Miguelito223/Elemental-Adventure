@@ -21,6 +21,9 @@ boot_splash/minimum_display_time=2
 [autoload]
 
 Data="*res://Data.gd"
+DataState="*res://DataState.gd"
+Signals="*res://Signals.gd"
+Globals="*res://Globals.gd"
 LoadScene="*res://LoadScene.gd"
 
 [display]

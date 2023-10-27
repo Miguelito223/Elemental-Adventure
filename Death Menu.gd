@@ -1,11 +1,10 @@
 extends Control
 
 func _on_return_pressed():
-	Data.load_file()
-	LoadScene.load_scene(self, Data.data.player_data.level)
+	LoadScene.load_scene(self, Globals.level)
 
 func _on_back_pressed():
-	Data.load_file()
+	DataState.save_file_state()
 	LoadScene.load_scene(self, "res://main_menu.tscn")
 
 

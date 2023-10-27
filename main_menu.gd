@@ -10,14 +10,15 @@ extends Control
 @onready var resolutions = $"settings menu/resolution"
 @onready var initial_time = $"settings menu/initial time text"
 @onready var time_speed = $"settings menu/time speed text"
+@onready var autosave = $"settings menu2/Autosave"
+@onready var autosave_length = $"settings menu2/autosave length text"
+@onready var autosaver_start_time = $"settings menu2/autosave length text"
 
 var resolution = {
 	"1920x1080": Vector2i(1920, 1080),
-	"1600x1200": Vector2i(1600, 1200),
-	"1400x1050": Vector2i(1400, 1050),
-	"1300x1040": Vector2i(1300, 1040),
-	"1000x1020": Vector2i(1000, 1020),
-	"900x1009": Vector2i(1000, 1020)
+	"1280x720": Vector2i(1280, 720),
+	"1152x648": Vector2i(1152, 648),
+	"720x480": Vector2i(720, 480)
 }
 	
 func addresolutions():
@@ -35,21 +36,23 @@ func _ready():
 	main_menu.show()
 	settings_menu.hide()
 	settings_menu2.hide()
-	master_volume.value = Data.master_volume
-	fx_volume.value = Data.fx_volume
-	music_volume.value = Data.music_volume
-	fullscreen.button_pressed = Data.fullscreen
-	initial_time.text = Data.initial_time
-	time_speed.text = Data.time_speed
+	master_volume.value =Globals.master_volume
+	fx_volume.value =Globals.fx_volume
+	music_volume.value =Globals.music_volume
+	fullscreen.button_pressed =Globals.fullscreen
 	addresolutions()
+	initial_time.text =Globals.initial_time
+	time_speed.text =Globals.time_speed
+	autosave.button_pressed =Globals.autosave
+	autosave_length.text = str(Globals.autosave_length)
+	autosaver_start_time.text = str(Globals.autosaver_start_time)
 	
 func _on_play_pressed():
-	Data.load_file()
-	LoadScene.load_scene(self, Data.level)
+	DataState.load_file_state_global_vars()
+	LoadScene.load_scene(self,Globals.level)
 	
 func _on_delete_data_pressed():
-	Data.remove_file()
-	Data.save_file()
+	DataState.remove_state_file()
 	
 
 func _on_option_pressed():

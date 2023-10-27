@@ -39,7 +39,7 @@ gradient = SubResource("Gradient_77g8x")
 cull_mode = 1
 polygon = PackedVector2Array(200, 200)
 
-[node name="level 3" type="Node2D"]
+[node name="level_3" type="Node2D"]
 position = Vector2(576, 1023)
 script = ExtResource("1_dy73i")
 
@@ -53,7 +53,7 @@ color = Color(0, 0.533333, 0.823529, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="player" parent="." instance=ExtResource("3_3s0fo")]
-position = Vector2(-478, -36)
+position = Vector2(-444, -35)
 scale = Vector2(0.419893, 0.470927)
 wall_min_slide_angle = 0.0
 
@@ -117,95 +117,72 @@ occluder = SubResource("OccluderPolygon2D_jv6kg")
 occluder_light_mask = 1023
 
 [node name="Coin" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(-297, -42)
 
 [node name="Coin2" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(-211, -41)
 
 [node name="Coin3" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(-119, -42)
 
 [node name="Coin4" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(283, -41)
 
 [node name="Coin5" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(120, -39)
 
 [node name="Coin6" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(39, -75)
 
 [node name="Coin7" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(-35, -40)
 
 [node name="Coin8" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(-376, -43)
 
 [node name="Coin9" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(187, -42)
 
 [node name="Coin10" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(450, -64)
 
 [node name="Coin11" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(378, -61)
 
 [node name="Coin12" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(526, -45)
 
 [node name="Coin13" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(599, -43)
 
 [node name="Coin14" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(662, -44)
 
 [node name="Coin15" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(717, -43)
 
 [node name="Coin16" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(787, -50)
 
 [node name="Coin17" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(855, -45)
 
 [node name="Coin18" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(907, -47)
 
 [node name="Coin19" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(1005, -95)
 
 [node name="Coin20" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(1091, -84)
 
 [node name="Coin21" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(953, -68)
 
 [node name="Coin22" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(1123, -67)
 
 [node name="Coin23" parent="." instance=ExtResource("5_sx1gu")]
-texture_filter = 1
 position = Vector2(1050, -100)
 
 [node name="Enemy" parent="." instance=ExtResource("6_4t30u")]

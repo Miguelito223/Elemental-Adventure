@@ -1,89 +1,72 @@
 extends Node
 
-var save_path = "user://Data.json"
-var data = {}
-
 signal finish_remove_data
 signal finish_add_data
 signal finish_load_data
 
-#player
-var pos_x = -449
-var pos_y = -26
-var lifes = 3
-var coins = 0
-var level = "level_1"
+var data_path = "user://Data.json"
+var data = {}
 
-#settings
-var master_volume = 0 
-var fx_volume = 0
-var music_volume = 0
-var fullscreen = false
-var resolution = "1920x1080"
-var initial_time = "12"
-var time_speed = "1.0"
-var autosave = false
-var autosave_length = 5
-var autosaver_start_time = 0
-
+#setting saver
 func save_file():
 	print("Creating data file")
 	data = {
-		"player_data":{
-			"pos": {"x": pos_x, "y": pos_y}, 
-			"lifes": lifes , 
-			"coins": coins, 
-			"level": level
-		},
 		"settings":{
-			"master_volume": master_volume, 
-			"fx_volume": fx_volume, 
-			"music_volume": music_volume, 
-			"fullscreen": fullscreen, 
-			"resolution": resolution, 
-			"initial_time": initial_time, 
-			"time_speed": time_speed,
-			"autosave": autosave,
-			"autosave_length": autosave_length,
-			"autosaver_start_time": autosaver_start_time
+			"master_volume": Globals.master_volume, 
+			"fx_volume":  Globals.fx_volume, 
+			"music_volume":  Globals.music_volume, 
+			"fullscreen":  Globals.fullscreen, 
+			"resolution":  Globals.resolution, 
+			"initial_time":  Globals.initial_time, 
+			"time_speed":  Globals.time_speed,
+			"autosave":  Globals.autosave,
+			"autosave_length":  Globals.autosave_length,
+			"autosaver_start_time":  Globals.autosaver_start_time
 		}
 	}
-	var datafile = FileAccess.open(save_path, FileAccess.WRITE)
+	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
 	datafile.store_line(JSON.stringify(data))
 	
 	finish_add_data.emit()
+	
+	print("finish")
 
 func load_file():
-	var datafile = FileAccess.open(save_path, FileAccess.READ)
-	if FileAccess.file_exists(save_path):
+	print("loading data...")
+	var datafile = FileAccess.open(data_path, FileAccess.READ)
+	if FileAccess.file_exists(data_path):
 		print("Data file found")
-		data = JSON.parse_string(datafile.get_as_text())
+		data = JSON.parse_string(datafile.get_line())
 		
 		var settings = data["settings"]
-		var player_data = data["player_data"]
 		
 		#settings
-		master_volume = settings["master_volume"]
-		fx_volume = settings["fx_volume"]
-		music_volume = settings["music_volume"]
-		fullscreen = settings["fullscreen"]
-		resolution = settings["resolution"]
-		initial_time = settings["initial_time"]
-		time_speed = settings["time_speed"]
-		autosave = settings["autosave"]
-		autosave_length = settings["autosave_length"]
-		autosaver_start_time = settings["autosaver_start_time"]
+		Globals.master_volume = settings["master_volume"]
+		Globals.fx_volume = settings["fx_volume"]
+		Globals.music_volume = settings["music_volume"]
+		Globals.fullscreen = settings["fullscreen"]
+		Globals.resolution = settings["resolution"]
+		Globals.initial_time = settings["initial_time"]
+		Globals.time_speed = settings["time_speed"]
+		Globals.autosave = settings["autosave"]
+		Globals.autosave_length = settings["autosave_length"]
+		Globals.autosaver_start_time = settings["autosaver_start_time"]
 		
-		#player
-		pos_x = player_data.pos.x
-		pos_y = player_data.pos.y
-		lifes = player_data["lifes"]
-		coins = player_data["coins"]
-		level = player_data["level"]
 		finish_load_data.emit()
+		print("finish")
 	else:
 		print("Data file doesn't exist!")
 		save_file()
+		
+		
+#Player and other save
+		
+
+	
+func remove_file():
+	if FileAccess.file_exists(data_path):
+		DirAccess.remove_absolute(data_path)
+	finish_remove_data.emit()
 	
 func _ready():
 	load_file()
@@ -91,11 +74,6 @@ func _ready():
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_file()
-	
-func remove_file():
-	if FileAccess.file_exists(save_path):
-		DirAccess.remove_absolute(save_path)
-	finish_remove_data.emit()
 
 func load_volume(bus, value):
 	if value >= 45:
@@ -105,11 +83,11 @@ func load_volume(bus, value):
 	
 	match bus:
 		0:
-			master_volume = value
+			Globals.master_volume = value
 		1:
-			music_volume = value
+			Globals.music_volume = value
 		2:
-			fx_volume = value
+			Globals.fx_volume = value
 			
 	AudioServer.set_bus_volume_db(bus,value)
 	
@@ -120,22 +98,11 @@ func load_fullscreen(value):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	fullscreen = value
+	Globals.fullscreen = value
 	save_file()
 	
 func load_resolution(value):
 	DisplayServer.window_set_size(value)
-	get_viewport().set_size(value)
-	resolution = value
+	Globals.resolution = value
 	save_file()
-	
-func _physics_process(delta):
-	if autosave:
-		autosave_logic()
-	
-func autosave_logic():
-	var time_passed = Time.get_unix_time_from_system() - autosaver_start_time
-		
-	if time_passed > (autosave_length * 60):
-		save_file()
-		autosaver_start_time = Time.get_unix_time_from_system()
+

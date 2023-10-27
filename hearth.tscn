@@ -5,7 +5,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_crq5x"]
 
-[node name="Hearth" type="Area2D"]
+[node name="Hearth" type="Area2D" groups=["persistent"]]
 scale = Vector2(1.78344, 1.72076)
 script = ExtResource("1_sy3lb")
 

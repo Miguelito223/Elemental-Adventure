@@ -7,8 +7,8 @@ var ingame_to_real_minute_duration = (2 * PI)
 signal time_tick(day,hour,minute)
 
 @export var gradient:GradientTexture1D
-@export var ingame_speed = int(Data.time_speed)
-@export var initial_hour = int(Data.initial_time):
+@export var ingame_speed = int(Globals.time_speed)
+@export var initial_hour = int(Globals.initial_time):
 	set(h):
 		initial_hour = h
 		time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour

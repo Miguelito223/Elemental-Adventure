@@ -115,7 +115,7 @@ _data = {
 "moving 3": SubResource("Animation_37464")
 }
 
-[node name="level 6" type="Node2D"]
+[node name="level_6" type="Node2D"]
 position = Vector2(549, 994)
 script = ExtResource("1_wfsls")
 
@@ -193,95 +193,72 @@ occluder = SubResource("OccluderPolygon2D_v5lbu")
 occluder_light_mask = 1023
 
 [node name="Coin" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(-270, -49)
 
 [node name="Coin2" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(-204, -45)
 
 [node name="Coin3" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(-147, -47)
 
 [node name="Coin4" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(242, -62)
 
 [node name="Coin5" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(55, -43)
 
 [node name="Coin6" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(-2, -44)
 
 [node name="Coin7" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(-83, -47)
 
 [node name="Coin8" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(-355, -45)
 
 [node name="Coin9" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(159, -43)
 
 [node name="Coin10" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(436, -75)
 
 [node name="Coin11" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(347, -75)
 
 [node name="Coin12" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(526, -45)
 
 [node name="Coin13" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(601, -49)
 
 [node name="Coin14" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(658, -56)
 
 [node name="Coin15" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(703, -54)
 
 [node name="Coin16" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(770, -54)
 
 [node name="Coin17" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(834, -54)
 
 [node name="Coin18" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(922, -54)
 
 [node name="Coin19" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(980, -83)
 
 [node name="Coin20" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(1091, -84)
 
 [node name="Coin21" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(1205, -54)
 
 [node name="Coin22" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(1153, -56)
 
 [node name="Coin23" parent="." instance=ExtResource("3_3hy2r")]
-texture_filter = 1
 position = Vector2(1040, -95)
 
 [node name="Enemy" parent="." instance=ExtResource("4_cbef0")]

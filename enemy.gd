@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 
 var SPEED = randi_range(100,300)
-var Health = 100
-var can_move = true
-var direccion = 1
+@export var Max_Hearth = 100
+@export var hearth = 100
+@export var can_move = true
+@export var direccion = 1
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var InvunerabilityTime = $Invunerability
@@ -20,15 +21,14 @@ func damage(ammount):
 		if InvunerabilityTime.is_stopped():
 			$AnimatedSprite2D.stop()
 			InvunerabilityTime.start()
-			setlifes(Health - ammount)
+			setlifes(hearth - ammount)
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
 			
 
 func setlifes(value):
-	Health = clamp(value,0,100)
-	print(Health )
-	if Health  <= 0:
+	hearth = clamp(value,0,100)
+	if hearth  <= 0:
 		print("enemy dead")
 		queue_free()
 
@@ -54,9 +54,28 @@ func _on_invunerability_timeout():
 	can_move = true
 
 func _on_area_2d_body_entered(body):
-	if body.name == "player":
+	if body.get_scene_file_path() == "res://player.tscn":
 		body.damage(1)
 
 func _on_area_2d_area_entered(area):
 	if area.name == "lavaball":
 		damage(10)
+		
+func save():
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"parent" : get_parent().get_path(),
+		"name" : name,
+		"pos_x" : position.x, # Vector2 is not supported by JSON
+		"pos_y" : position.y,
+		"size_x" : scale.x,
+		"size_y" : scale.y,
+		"enemy_hearth" : hearth,
+		"Max_Hearth" : Max_Hearth,
+	}
+	return save_dict
+	
+func load(info):
+	name = info.name
+	position = Vector2(info.pos_x, info.pos_y)
+	scale = Vector2(info.size_x, info.size_y)
