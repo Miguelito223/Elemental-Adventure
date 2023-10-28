@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://nvgainr5kvx5"]
 
-[ext_resource type="Script" path="res://Scenes/Water_Body.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/Water_Body.gd" id="2"]
 [ext_resource type="Shader" path="res://water_shader.gdshader" id="2_dau81"]
-[ext_resource type="Script" path="res://smooth_path_modified.gd" id="3"]
+[ext_resource type="Script" path="res://Scripts/smooth_path_modified.gd" id="3"]
 
 [sub_resource type="ShaderMaterial" id="4"]
 shader = ExtResource("2_dau81")

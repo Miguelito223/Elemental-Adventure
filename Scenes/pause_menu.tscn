@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://y6bboatewubh"]
+
+[ext_resource type="Script" path="res://Scripts/Pause menu.gd" id="1_77nxw"]
+[ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="2_oegyl"]
+
+[node name="Pause menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_77nxw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1913.0
+offset_bottom = 1088.0
+color = Color(0.211765, 0, 0.411765, 0.509804)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 331.0
+offset_top = 237.0
+offset_right = 1501.0
+offset_bottom = 377.0
+theme_override_fonts/font = ExtResource("2_oegyl")
+theme_override_font_sizes/font_size = 100
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="return" type="Button" parent="."]
+layout_mode = 0
+offset_left = 741.0
+offset_top = 534.0
+offset_right = 1148.0
+offset_bottom = 650.0
+theme_override_fonts/font = ExtResource("2_oegyl")
+theme_override_font_sizes/font_size = 90
+text = "Return"
+
+[node name="back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 673.0
+offset_right = 1143.0
+offset_bottom = 789.0
+theme_override_fonts/font = ExtResource("2_oegyl")
+theme_override_font_sizes/font_size = 90
+text = "Back"
+
+[node name="save" type="Button" parent="."]
+layout_mode = 0
+offset_left = 732.0
+offset_top = 813.0
+offset_right = 985.0
+offset_bottom = 911.0
+scale = Vector2(1.64547, 1.29648)
+theme_override_fonts/font = ExtResource("2_oegyl")
+theme_override_font_sizes/font_size = 67
+text = "Save
+"
+
+[connection signal="pressed" from="return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="save" to="." method="_on_button_pressed"]

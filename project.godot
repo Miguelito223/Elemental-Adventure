@@ -11,20 +11,20 @@ config_version=5
 [application]
 
 config/name="Elemental Adventure"
-run/main_scene="res://main_menu.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0.168627, 0.458824, 1, 1)
-boot_splash/image="res://Textures/fuego.png"
-config/icon="res://Textures/icon.svg"
+boot_splash/image="res://Sprites/fuego.png"
+config/icon="res://Sprites/icon.svg"
 boot_splash/minimum_display_time=2
 
 [autoload]
 
-Globals="*res://Globals.gd"
-Signals="*res://Signals.gd"
-Data="*res://Data.gd"
-DataState="*res://DataState.gd"
-LoadScene="*res://LoadScene.gd"
+Globals="*res://Scripts/Globals.gd"
+Signals="*res://Scripts/Signals.gd"
+Data="*res://Scripts/Data.gd"
+DataState="*res://Scripts/DataState.gd"
+LoadScene="*res://Scripts/LoadScene.gd"
 
 [display]
 

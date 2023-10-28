@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://v8uq1u8p3nxj"]
+
+[ext_resource type="Script" path="res://Scripts/Death Menu.gd" id="1_yxht8"]
+[ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="2_3iuf3"]
+[ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/main menu music.mp3" id="3_i6fgq"]
+
+[node name="Death Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yxht8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1913.0
+offset_bottom = 1088.0
+color = Color(0.211765, 0, 0.411765, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 159.0
+offset_right = 1522.0
+offset_bottom = 299.0
+theme_override_fonts/font = ExtResource("2_3iuf3")
+theme_override_font_sizes/font_size = 100
+text = "You Death 
+Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="return" type="Button" parent="."]
+layout_mode = 0
+offset_left = 741.0
+offset_top = 534.0
+offset_right = 1148.0
+offset_bottom = 650.0
+theme_override_fonts/font = ExtResource("2_3iuf3")
+theme_override_font_sizes/font_size = 90
+text = "Return"
+
+[node name="back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 673.0
+offset_right = 1143.0
+offset_bottom = 789.0
+theme_override_fonts/font = ExtResource("2_3iuf3")
+theme_override_font_sizes/font_size = 90
+text = "Back"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i6fgq")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

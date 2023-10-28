@@ -1,0 +1,232 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq8c11xjf1nct"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_2vk4l"]
+[ext_resource type="Texture2D" uid="uid://diyn67rcpa176" path="res://Sprites/fuego.png" id="2_44f6u"]
+[ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="3_bx21l"]
+[ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/main menu music.mp3" id="4_3w0aj"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchor_right = 1.669
+anchor_bottom = 1.682
+offset_right = -1922.69
+offset_bottom = -1089.94
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2vk4l")
+metadata/_edit_use_anchors_ = true
+
+[node name="fondo" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 68.0
+scale = Vector2(28.68, 16)
+color = Color(0.137255, 0, 0.247059, 1)
+
+[node name="Tittle" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -1.0
+offset_top = -28.0
+offset_right = -1.0
+offset_bottom = -28.0
+
+[node name="logo" type="Sprite2D" parent="Tittle"]
+position = Vector2(1546, 93)
+scale = Vector2(0.233296, 0.251923)
+texture = ExtResource("2_44f6u")
+
+[node name="Tittle" type="Label" parent="Tittle"]
+layout_mode = 0
+offset_left = 414.0
+offset_top = 55.0
+offset_right = 1592.0
+offset_bottom = 158.0
+theme_override_fonts/font = ExtResource("3_bx21l")
+theme_override_font_sizes/font_size = 90
+text = "Elemental Adventure"
+
+[node name="main menu" type="VBoxContainer" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 2
+offset_left = 572.0
+offset_top = 355.0
+offset_right = 732.0
+offset_bottom = 516.0
+scale = Vector2(4.89407, 4.20541)
+
+[node name="Play" type="Button" parent="main menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "play"
+
+[node name="delete data" type="Button" parent="main menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Delete data
+"
+
+[node name="option" type="Button" parent="main menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "options"
+
+[node name="exit" type="Button" parent="main menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+theme_override_font_sizes/font_size = 14
+text = "Exit"
+
+[node name="settings menu" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 337.0
+offset_top = 152.0
+offset_right = 773.0
+offset_bottom = 521.0
+scale = Vector2(3, 2.52)
+
+[node name="master label" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Master Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="master volume" type="HSlider" parent="settings menu"]
+layout_mode = 2
+min_value = -45.0
+max_value = 0.0
+
+[node name="Fx label" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Fx Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fx volume" type="HSlider" parent="settings menu"]
+layout_mode = 2
+min_value = -45.0
+max_value = 0.0
+
+[node name="Music label" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Music Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="music volume" type="HSlider" parent="settings menu"]
+layout_mode = 2
+min_value = -45.0
+max_value = 0.0
+
+[node name="fullscreen tongle" type="CheckButton" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+action_mode = 0
+text = "Full Screen"
+
+[node name="Resolution laber" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Resolution"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="resolution" type="OptionButton" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+
+[node name="initial time" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Initial Time"
+
+[node name="initial time text" type="LineEdit" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "12"
+
+[node name="time speed" type="Label" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Time speed"
+
+[node name="time speed text" type="LineEdit" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "1.0"
+
+[node name="Continue" type="Button" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Continue"
+
+[node name="back" type="Button" parent="settings menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Back"
+
+[node name="settings menu2" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 337.0
+offset_top = 306.0
+offset_right = 773.0
+offset_bottom = 487.0
+scale = Vector2(3, 2.52)
+
+[node name="Autosave" type="CheckButton" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+action_mode = 0
+text = "Autosave"
+
+[node name="autosave length" type="Label" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "autosave length"
+
+[node name="autosave length text" type="LineEdit" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "5"
+
+[node name="autosaver start time" type="Label" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Autosave start time"
+
+[node name="autosaver start time text" type="LineEdit" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "0"
+
+[node name="back2" type="Button" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Back"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_3w0aj")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="main menu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="main menu/delete data" to="." method="_on_delete_data_pressed"]
+[connection signal="pressed" from="main menu/option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="main menu/exit" to="." method="_on_exit_pressed"]
+[connection signal="value_changed" from="settings menu/master volume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="settings menu/Fx volume" to="." method="_on_fx_volume_value_changed"]
+[connection signal="value_changed" from="settings menu/music volume" to="." method="_on_music_volume_value_changed"]
+[connection signal="toggled" from="settings menu/fullscreen tongle" to="." method="_on_fullscreen_tongle_toggled"]
+[connection signal="item_selected" from="settings menu/resolution" to="." method="_on_option_button_item_selected"]
+[connection signal="text_changed" from="settings menu/initial time text" to="." method="_on_initial_time_text_text_changed"]
+[connection signal="text_changed" from="settings menu/time speed text" to="." method="_on_time_speed_text_text_changed"]
+[connection signal="pressed" from="settings menu/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="settings menu/back" to="." method="_on_back_pressed"]
+[connection signal="toggled" from="settings menu2/Autosave" to="." method="_on_autosave_toggled"]
+[connection signal="text_changed" from="settings menu2/autosave length text" to="." method="_on_autosave_length_text_text_changed"]
+[connection signal="text_changed" from="settings menu2/autosaver start time text" to="." method="_on_autosaver_start_time_text_text_changed"]
+[connection signal="pressed" from="settings menu2/back2" to="." method="_on_back_2_pressed"]
