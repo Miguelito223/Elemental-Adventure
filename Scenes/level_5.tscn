@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bvb6s0ph1mf2f"]
 
-[ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://Scenes/player.tscn" id="1_4rb3q"]
-[ext_resource type="Script" path="res://level.gd" id="1_nctlr"]
+[ext_resource type="PackedScene" uid="uid://dwypr7om4wpeo" path="res://Scenes/player.tscn" id="1_4rb3q"]
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_nctlr"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_fywam"]
 [ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="2_mccrh"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/coin.tscn" id="3_5xowy"]
