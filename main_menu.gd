@@ -22,7 +22,7 @@ var resolution = {
 }
 	
 func addresolutions():
-	var current_resolution = str_to_var("Vector2i" + Globals.resolution)
+	var current_resolution = Globals.resolution
 	var index = 0
 	
 	for r in resolution:
@@ -37,14 +37,13 @@ func _ready():
 	settings_menu.hide()
 	settings_menu2.hide()
 	
-	
 	addresolutions()
-	print(Globals.resolution)
-	Data.load_resolution(str_to_var("Vector2i" + Globals.resolution))
+
 	master_volume.value = Globals.master_volume
 	fx_volume.value = Globals.fx_volume
 	music_volume.value = Globals.music_volume
 	fullscreen.button_pressed = Globals.fullscreen
+	Data.load_resolution(Globals.resolution)
 	initial_time.text = Globals.initial_time
 	time_speed.text = Globals.time_speed
 	autosave.button_pressed = Globals.autosave

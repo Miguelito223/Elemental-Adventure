@@ -17,7 +17,6 @@ var time = 0.0
 var past_minute = -1.0
 
 func _ready():
-	Data.load_file()
 	time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
 
 func _process(delta):

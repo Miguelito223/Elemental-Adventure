@@ -89,6 +89,9 @@ func _on_Area2D_body_entered(body):
 	
 	if body.get_scene_file_path() == "res://player.tscn":
 		body.damage(3)
+		
+	if body.get_scene_file_path() == "res://enemy.tscn":
+		body.damage(10)
 	
 	#the body is the last thing this spring collided with
 	collided_with = body

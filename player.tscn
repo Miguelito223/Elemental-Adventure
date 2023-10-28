@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://coesxv81063hx"]
+[gd_scene load_steps=34 format=3 uid="uid://coesxv81063hx"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_s8jqi"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Textures/Fire IDle.png" id="2_l53gg"]
@@ -11,8 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://pause_menu.tscn" id="9_1ujrq"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Textures/linght.png" id="10_pntne"]
 [ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/628445__davo32__level-music-brackground.mp3" id="11_vxqoc"]
-[ext_resource type="Script" path="res://dnc.gd" id="12_xt8eo"]
-[ext_resource type="Texture2D" uid="uid://d77flmldprvu" path="res://daynightcycle-gradient-texture.tres" id="13_7o7jx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -252,12 +250,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Sky" id="Sky_n8u16"]
-
-[sub_resource type="Environment" id="Environment_3fpsp"]
-background_mode = 2
-sky = SubResource("Sky_n8u16")
-
 [node name="player" type="CharacterBody2D" groups=["persistent"]]
 position = Vector2(-3, 0)
 script = ExtResource("1_s8jqi")
@@ -385,14 +377,6 @@ position = Vector2(3, 0)
 stream = ExtResource("11_vxqoc")
 autoplay = true
 bus = &"Music"
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2(51, 39)
-script = ExtResource("12_xt8eo")
-gradient = ExtResource("13_7o7jx")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_3fpsp")
 
 [connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]

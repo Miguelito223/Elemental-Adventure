@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgnbppy6meuyf"]
+[gd_scene load_steps=14 format=3 uid="uid://dgnbppy6meuyf"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_vu3go"]
+[ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://environment.tscn" id="2_3ocum"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://tile_map.tscn" id="2_flyct"]
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="3_imggk"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://coin.tscn" id="6_nl7ac"]
@@ -28,19 +29,11 @@ polygon = PackedVector2Array(200, 200)
 position = Vector2(492, 1031)
 script = ExtResource("1_vu3go")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -1918.0
-offset_top = -2283.0
-offset_right = -1493.0
-offset_bottom = 1653.0
-scale = Vector2(13.72, 1)
-color = Color(0, 0.533333, 0.823529, 1)
-metadata/_edit_use_anchors_ = true
+[node name="environment" parent="." instance=ExtResource("2_3ocum")]
 
 [node name="Water_Body" parent="." instance=ExtResource("8_4t73w")]
-position = Vector2(1086, 100)
-rotation = -3.14159
-scale = Vector2(-127.344, -8.18498)
+position = Vector2(726, 14)
+scale = Vector2(1.84, 1)
 
 [node name="player" parent="." instance=ExtResource("3_imggk")]
 position = Vector2(-438, -41)

@@ -6,9 +6,9 @@ func _on_body_entered(body):
 	if body.get_scene_file_path() == "res://player.tscn":
 		if collected == false:
 			body.getcoin()
-			$"coin sound".play()
 			visible = false
 			collected = true
+			$"coin sound".play()
 			await $"coin sound".finished
 			queue_free()
 

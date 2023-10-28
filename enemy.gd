@@ -30,7 +30,7 @@ func damage(ammount):
 			
 
 func setlifes(value):
-	hearth = clamp(value,0,100)
+	hearth = clamp(value,0,20)
 	if hearth  <= 0:
 		print("enemy dead")
 		queue_free()
@@ -64,6 +64,11 @@ func _on_area_2d_area_entered(area):
 	if area.name == "lavaball":
 		damage(10)
 		
+func in_water():
+	damage(10)
+	gravity = gravity / 3
+	max_speed = max_speed_in_water
+		
 func save():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
@@ -86,7 +91,3 @@ func load(info):
 	scale = Vector2(info.size_x, info.size_y)
 	direccion = info.direccion
 	can_move = info.can_move
-	
-func in_water():
-	gravity = gravity / 3
-	max_speed = max_speed_in_water

@@ -7,6 +7,9 @@ signal finish_load_data
 var data_path = "user://Data.json"
 var data = {}
 
+func _ready():
+	load_file()
+
 #setting saver
 func save_file():
 	print("Creating data file")
@@ -36,24 +39,25 @@ func load_file():
 	var datafile = FileAccess.open(data_path, FileAccess.READ)
 	if FileAccess.file_exists(data_path):
 		print("Data file found")
-		data = JSON.parse_string(datafile.get_line())
-		
-		var settings = data.settings
-		
-		#settings
-		Globals.master_volume = settings.master_volume
-		Globals.fx_volume = settings.fx_volume
-		Globals.music_volume = settings.music_volume
-		Globals.fullscreen = settings.fullscreen
-		Globals.resolution = settings.resolution
-		Globals.initial_time = settings.initial_time
-		Globals.time_speed = settings.time_speed
-		Globals.autosave = settings.autosave
-		Globals.autosave_length = settings.autosave_length
-		Globals.autosaver_start_time = settings.autosaver_start_time
-		
-		finish_load_data.emit()
-		print("finish")
+		while datafile.get_position() < datafile.get_length():
+			data = JSON.parse_string(datafile.get_line())
+			
+			var settings = data.settings
+			
+			#settings
+			Globals.master_volume = settings.master_volume
+			Globals.fx_volume = settings.fx_volume
+			Globals.music_volume = settings.music_volume
+			Globals.fullscreen = settings.fullscreen
+			Globals.resolution = str_to_var("Vector2i" + settings.resolution)
+			Globals.initial_time = settings.initial_time
+			Globals.time_speed = settings.time_speed
+			Globals.autosave = settings.autosave
+			Globals.autosave_length = settings.autosave_length
+			Globals.autosaver_start_time = settings.autosaver_start_time
+			
+			finish_load_data.emit()
+			print("finish")
 	else:
 		print("Data file doesn't exist!")
 		save_file()
@@ -67,9 +71,6 @@ func remove_file():
 	if FileAccess.file_exists(data_path):
 		DirAccess.remove_absolute(data_path)
 	finish_remove_data.emit()
-	
-func _ready():
-	load_file()
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
