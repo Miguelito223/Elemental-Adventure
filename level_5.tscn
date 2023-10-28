@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="1_4rb3q"]
 [ext_resource type="Script" path="res://level.gd" id="1_nctlr"]
+[ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="2_mccrh"]
 [ext_resource type="Script" path="res://dnc.gd" id="2_o6hfk"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://coin.tscn" id="3_5xowy"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://tile_map.tscn" id="3_y66vq"]
@@ -16,9 +17,6 @@ sky = SubResource("Sky_sycjs")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcy3o"]
 size = Vector2(1.49664, 9.54374)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqmhk"]
-size = Vector2(2564.94, 4972.41)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_710r3"]
 size = Vector2(44, 652.48)
@@ -128,6 +126,10 @@ scale = Vector2(13.72, 1)
 color = Color(0, 0.533333, 0.823529, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="Water_Body" parent="." instance=ExtResource("2_mccrh")]
+position = Vector2(12, 115)
+scale = Vector2(6330.07, 9.10956)
+
 [node name="player" parent="." instance=ExtResource("1_4rb3q")]
 position = Vector2(-465, -32)
 scale = Vector2(0.419893, 0.470927)
@@ -146,14 +148,6 @@ scale = Vector2(95.7652, 13.1505)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Victory Zone"]
 position = Vector2(-0.0313263, 0)
 shape = SubResource("RectangleShape2D_xcy3o")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-116, 715)
-scale = Vector2(95.7652, 13.1505)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(15.2665, 2438.7)
-shape = SubResource("RectangleShape2D_vqmhk")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(128, -47)
@@ -280,4 +274,3 @@ libraries = {
 }
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

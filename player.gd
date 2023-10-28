@@ -23,7 +23,6 @@ func _notification(what):
 		DataState.save_file_state()
 		
 func _ready():
-	$CanvasModulate.time_tick.connect(_set_vars)
 	position.x = Globals.pos_x
 	position.y = Globals.pos_y
 	setlifes(Globals.hearth)
@@ -120,10 +119,6 @@ func damage(ammount):
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
 		
-func _set_vars(day, hour, minute):
-	Globals.day = day
-	Globals.hour = hour
-	Globals.minute = minute
 
 func update_label():
 	$CanvasLayer/Label.text = ": " + str(Globals.hearth)
@@ -136,6 +131,7 @@ func _on_exit_pressed():
 	get_tree().paused = true
 	
 func in_water():
+	damage(3)
 	gravity = gravity / 3
 	max_speed = max_speed_in_water
 

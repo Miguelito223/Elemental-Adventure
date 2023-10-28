@@ -82,12 +82,13 @@ func _on_Area2D_body_entered(body):
 	#if the body already collided with the spring, then do not collide
 	if body == collided_with:
 		return
-		
-	if body.get_class() == "TileMap":
-		return
 	
-	if body.get_class() == "StaticBody2D":
-		return
+	if body.get_class() == "KinematicCollision2D":
+		var speed = body.velocity.y * motion_factor
+		emit_signal("splash",index,speed)
+	
+	if body.get_scene_file_path() == "res://player.tscn":
+		body.damage(3)
 	
 	#the body is the last thing this spring collided with
 	collided_with = body
@@ -95,8 +96,8 @@ func _on_Area2D_body_entered(body):
 	#we multiply the motion of the body by the motion factor
 	#if we didn't the speed would be huge, depending on your game
 	
-	var speed = body.velocity.y * motion_factor
+	
 	
 	#emit the signal "splash" to call the splash function, at our water body script
-	emit_signal("splash",index,speed)
+	
 	pass # Replace with function body.

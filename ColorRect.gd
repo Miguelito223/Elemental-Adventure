@@ -1,10 +1,8 @@
-extends CanvasModulate
+extends ColorRect
 
 var minutes_per_day = 1440
 var minutes_per_hour = 60
 var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
-
-signal time_tick(day,hour,minute)
 
 @export var gradient:GradientTexture1D
 @export var ingame_speed = int(Globals.time_speed)
@@ -37,7 +35,3 @@ func _recalculate_time():
 	
 	if past_minute != minute:
 		past_minute = minute
-		time_tick.emit(day, hours, minute)
-		Globals.day = day
-		Globals.hour = hours
-		Globals.minute = minute

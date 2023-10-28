@@ -12,7 +12,7 @@ extends Control
 @onready var time_speed = $"settings menu/time speed text"
 @onready var autosave = $"settings menu2/Autosave"
 @onready var autosave_length = $"settings menu2/autosave length text"
-@onready var autosaver_start_time = $"settings menu2/autosave length text"
+@onready var autosaver_start_time = $"settings menu2/autosaver start time text"
 
 var resolution = {
 	"1920x1080": Vector2i(1920, 1080),
@@ -22,7 +22,7 @@ var resolution = {
 }
 	
 func addresolutions():
-	var current_resolution = get_viewport().get_size()
+	var current_resolution = str_to_var("Vector2i" + Globals.resolution)
 	var index = 0
 	
 	for r in resolution:
@@ -36,11 +36,15 @@ func _ready():
 	main_menu.show()
 	settings_menu.hide()
 	settings_menu2.hide()
-	master_volume.value =Globals.master_volume
-	fx_volume.value =Globals.fx_volume
-	music_volume.value =Globals.music_volume
-	fullscreen.button_pressed =Globals.fullscreen
+	
+	
 	addresolutions()
+	print(Globals.resolution)
+	Data.load_resolution(str_to_var("Vector2i" + Globals.resolution))
+	master_volume.value = Globals.master_volume
+	fx_volume.value = Globals.fx_volume
+	music_volume.value = Globals.music_volume
+	fullscreen.button_pressed = Globals.fullscreen
 	initial_time.text = Globals.initial_time
 	time_speed.text = Globals.time_speed
 	autosave.button_pressed = Globals.autosave

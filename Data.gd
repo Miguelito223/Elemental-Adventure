@@ -103,6 +103,7 @@ func load_fullscreen(value):
 	
 func load_resolution(value):
 	DisplayServer.window_set_size(value)
+	get_viewport().set_size(value)
 	Globals.resolution = value
 	save_file()
 

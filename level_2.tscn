@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b4lqd43x0ndff"]
+[gd_scene load_steps=18 format=3 uid="uid://b4lqd43x0ndff"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_y18jc"]
 [ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="2_s4tuq"]
@@ -17,9 +17,6 @@ sky = SubResource("Sky_n8u16")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua2aw"]
 size = Vector2(1.49664, 9.54374)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v4v6"]
-size = Vector2(2333.71, 7425.01)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j75a3"]
 size = Vector2(44, 652.48)
@@ -56,7 +53,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Water_Body" parent="." instance=ExtResource("2_s4tuq")]
 position = Vector2(535, 12)
-scale = Vector2(-7.29592, 6.50498)
+scale = Vector2(-91.2559, 6.50498)
 
 [node name="player" parent="." instance=ExtResource("3_rjnga")]
 position = Vector2(-462, -40)
@@ -76,14 +73,6 @@ scale = Vector2(95.7652, 13.1505)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Victory Zone"]
 position = Vector2(2.38082, -1.36876)
 shape = SubResource("RectangleShape2D_ua2aw")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-110, 647)
-scale = Vector2(95.7652, 13.1505)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-98.564, 3665.01)
-shape = SubResource("RectangleShape2D_8v4v6")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(128, -47)
@@ -204,4 +193,3 @@ position = Vector2(733, -47)
 position = Vector2(380, -42)
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
