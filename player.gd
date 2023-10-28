@@ -61,8 +61,6 @@ func shot():
 func _physics_process(delta):
 	Globals.pos_x = position.x
 	Globals.pos_y = position.y
-	
-	print(Globals.pos_x, Globals.pos_y)
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -87,7 +85,6 @@ func setlifes(value):
 	if Globals.hearth <= 0:
 		print("you dead")
 		Globals.hearth = max_hearth
-		Globals.coins = 0
 		position.x = -438
 		position.y = -41
 		DataState.save_file_state()
@@ -103,6 +100,7 @@ func getlife():
 	
 func changelevel():
 	Globals.level = "level_" + str(int(Globals.level) + 1 ) 
+	save().parent = "/root/" + Globals.level
 	DataState.save_file_state()
 	
 func setposspawn():

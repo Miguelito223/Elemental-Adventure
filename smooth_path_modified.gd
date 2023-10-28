@@ -1,10 +1,10 @@
 class_name SmoothPath
 extends Path2D
 
-export var spline_length = 8
-export(bool) var _smooth setget smooth
-export(bool) var _straighten setget straighten
-export(Color) var color = Color(1,1,1,1)
+@export var spline_length = 8
+@export var _smooth: bool: set = smooth
+@export var _straighten: bool: set = straighten
+@export var color = Color(1,1,1,1)
 var width = 8
 
 func straighten(value):

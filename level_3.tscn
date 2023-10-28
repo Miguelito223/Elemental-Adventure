@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bt7hywdmbqldj"]
+[gd_scene load_steps=18 format=3 uid="uid://bt7hywdmbqldj"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_dy73i"]
+[ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="2_8pi4k"]
 [ext_resource type="PackedScene" uid="uid://coesxv81063hx" path="res://player.tscn" id="3_3s0fo"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://tile_map.tscn" id="3_n1ag1"]
 [ext_resource type="Script" path="res://dnc.gd" id="4_r617i"]
@@ -51,6 +52,11 @@ offset_bottom = 1683.0
 scale = Vector2(13.72, 1)
 color = Color(0, 0.533333, 0.823529, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Water_Body" parent="." instance=ExtResource("2_8pi4k")]
+position = Vector2(1224, 7)
+rotation = -3.14159
+scale = Vector2(-20.0308, -8.36438)
 
 [node name="player" parent="." instance=ExtResource("3_3s0fo")]
 position = Vector2(-444, -35)

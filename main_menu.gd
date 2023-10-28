@@ -41,14 +41,13 @@ func _ready():
 	music_volume.value =Globals.music_volume
 	fullscreen.button_pressed =Globals.fullscreen
 	addresolutions()
-	initial_time.text =Globals.initial_time
-	time_speed.text =Globals.time_speed
-	autosave.button_pressed =Globals.autosave
+	initial_time.text = Globals.initial_time
+	time_speed.text = Globals.time_speed
+	autosave.button_pressed = Globals.autosave
 	autosave_length.text = str(Globals.autosave_length)
 	autosaver_start_time.text = str(Globals.autosaver_start_time)
 	
 func _on_play_pressed():
-	DataState.load_file_state_global_vars()
 	LoadScene.load_scene(self,Globals.level)
 	
 func _on_delete_data_pressed():
@@ -89,12 +88,12 @@ func _on_music_volume_value_changed(value):
 
 
 func _on_time_speed_text_text_changed(new_text):
-	Data.time_speed = new_text 
+	Globals.time_speed = new_text 
 	Data.save_file()
 
 
 func _on_initial_time_text_text_changed(new_text):
-	Data.initial_time = new_text 
+	Globals.initial_time = new_text 
 	Data.save_file()
 
 
@@ -111,12 +110,15 @@ func _on_back_2_pressed():
 
 
 func _on_autosaver_start_time_text_text_changed(new_text):
-	Data.autosaver_start_time = new_text
+	Globals.autosaver_start_time = new_text
+	Data.save_file()
 
 
 func _on_autosave_length_text_text_changed(new_text):
-	Data.autosave_length = new_text
+	Globals.autosave_length = new_text
+	Data.save_file()
 
 
 func _on_autosave_toggled(button_pressed):
-	Data.autosave = button_pressed
+	Globals.autosave = button_pressed
+	Data.save_file()

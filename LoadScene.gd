@@ -57,8 +57,6 @@ func load_scene(current_scene, next_scene):
 					current_scene.queue_free()
 				var new_scene = ResourceLoader.load_threaded_get(load_path).instantiate()
 				get_tree().get_root().add_child(new_scene)
-				
 				loading_screen_intance.fade_out_loading_screen()
 				finish_loading.emit()
-				
 				return

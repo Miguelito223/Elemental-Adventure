@@ -72,10 +72,13 @@ func save():
 		"size_y" : scale.y,
 		"enemy_hearth" : hearth,
 		"Max_Hearth" : Max_Hearth,
+		"direccion": direccion,
+		"can_move": can_move
 	}
 	return save_dict
 	
 func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
-	scale = Vector2(info.size_x, info.size_y)
+	direccion = info.direccion
+	can_move = info.can_move

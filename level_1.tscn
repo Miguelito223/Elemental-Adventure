@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgnbppy6meuyf"]
+[gd_scene load_steps=19 format=3 uid="uid://dgnbppy6meuyf"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_vu3go"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://tile_map.tscn" id="2_flyct"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://coin.tscn" id="6_nl7ac"]
 [ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://hearth.tscn" id="7_ci6i8"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://enemy.tscn" id="7_kelci"]
+[ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="8_4t73w"]
 
 [sub_resource type="Sky" id="Sky_n8u16"]
 
@@ -52,6 +53,11 @@ offset_bottom = 1653.0
 scale = Vector2(13.72, 1)
 color = Color(0, 0.533333, 0.823529, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Water_Body" parent="." instance=ExtResource("8_4t73w")]
+position = Vector2(1085, 7)
+rotation = -3.14159
+scale = Vector2(9.01592, -8.18498)
 
 [node name="player" parent="." instance=ExtResource("3_imggk")]
 position = Vector2(-438, -41)
@@ -221,7 +227,7 @@ position = Vector2(1270, -41)
 position = Vector2(477, -50)
 
 [node name="Enemigo2" parent="." instance=ExtResource("7_kelci")]
-position = Vector2(1762, -33)
+position = Vector2(1529, -49)
 
 [node name="Hearth2" parent="." instance=ExtResource("7_ci6i8")]
 position = Vector2(589, -45)
