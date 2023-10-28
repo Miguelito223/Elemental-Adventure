@@ -77,7 +77,7 @@ func set_vars():
 			var parse_result = json.parse(datafile.get_line())
 			var node_data = json.get_data()
 			
-			if node_data.filename == "res://player.tscn":
+			if node_data.filename == "res://Scenes/player.tscn":
 				Globals.level = node_data.level
 				Globals.hearth = node_data.hearth
 				Globals.coins = node_data.coins

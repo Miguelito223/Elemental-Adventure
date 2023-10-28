@@ -3,7 +3,7 @@ extends Area2D
 var collected = false
 
 func _on_body_entered(body):
-	if body.get_scene_file_path() == "res://player.tscn":
+	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		if collected == false:
 			body.getcoin()
 			visible = false

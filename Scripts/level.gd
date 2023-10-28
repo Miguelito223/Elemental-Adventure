@@ -9,7 +9,7 @@ func _physics_process(delta):
 		DataState.autosave_logic()
 
 func _on_victory_zone_body_entered(body):
-	if body.get_scene_file_path() == "res://player.tscn":
+	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		body.changelevel()
 		body.setposspawn()
 		DataState.remove_state_file()
