@@ -21,7 +21,7 @@ func save_file():
 			"time_speed":  Globals.time_speed,
 			"autosave":  Globals.autosave,
 			"autosave_length":  Globals.autosave_length,
-			"autosaver_start_time":  Globals.autosaver_start_time
+			"autosaver_start_time":  Globals.autosaver_start_time,
 		}
 	}
 	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
@@ -38,19 +38,19 @@ func load_file():
 		print("Data file found")
 		data = JSON.parse_string(datafile.get_line())
 		
-		var settings = data["settings"]
+		var settings = data.settings
 		
 		#settings
-		Globals.master_volume = settings["master_volume"]
-		Globals.fx_volume = settings["fx_volume"]
-		Globals.music_volume = settings["music_volume"]
-		Globals.fullscreen = settings["fullscreen"]
-		Globals.resolution = settings["resolution"]
-		Globals.initial_time = settings["initial_time"]
-		Globals.time_speed = settings["time_speed"]
-		Globals.autosave = settings["autosave"]
-		Globals.autosave_length = settings["autosave_length"]
-		Globals.autosaver_start_time = settings["autosaver_start_time"]
+		Globals.master_volume = settings.master_volume
+		Globals.fx_volume = settings.fx_volume
+		Globals.music_volume = settings.music_volume
+		Globals.fullscreen = settings.fullscreen
+		Globals.resolution = settings.resolution
+		Globals.initial_time = settings.initial_time
+		Globals.time_speed = settings.time_speed
+		Globals.autosave = settings.autosave
+		Globals.autosave_length = settings.autosave_length
+		Globals.autosaver_start_time = settings.autosaver_start_time
 		
 		finish_load_data.emit()
 		print("finish")

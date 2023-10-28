@@ -46,6 +46,7 @@ theme_override_font_sizes/font_size = 90
 text = "Elemental Adventure"
 
 [node name="main menu" type="VBoxContainer" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 2
 offset_left = 572.0
@@ -169,7 +170,6 @@ theme_override_fonts/font = ExtResource("1_0hhdr")
 text = "Back"
 
 [node name="settings menu2" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 2
 offset_left = 337.0
 offset_top = 306.0

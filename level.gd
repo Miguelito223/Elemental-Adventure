@@ -8,6 +8,9 @@ func _on_area_2d_body_entered(body):
 	if body.get_scene_file_path() == "res://player.tscn":
 		body.damage(3)
 
+func _physics_process(delta):
+	if Globals.autosave:
+		DataState.autosave_logic()
 
 func _on_victory_zone_body_entered(body):
 	if body.get_scene_file_path() == "res://player.tscn":

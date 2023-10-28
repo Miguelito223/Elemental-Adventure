@@ -2,14 +2,17 @@ extends CharacterBody2D
 
 
 var SPEED = randi_range(100,300)
-@export var Max_Hearth = 100
-@export var hearth = 100
+@export var Max_Hearth = 20
+@export var hearth = 20
 @export var can_move = true
 @export var direccion = 1
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
+
+var max_speed = 450
+var max_speed_in_water = 200
 
 func _ready():
 	setlifes(100)
@@ -80,5 +83,10 @@ func save():
 func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
+	scale = Vector2(info.size_x, info.size_y)
 	direccion = info.direccion
 	can_move = info.can_move
+	
+func in_water():
+	gravity = gravity / 3
+	max_speed = max_speed_in_water

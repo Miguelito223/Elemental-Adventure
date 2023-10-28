@@ -14,11 +14,16 @@ var can_fire = true
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
 
+var max_speed = 450
+var max_speed_in_water = 200
+
+
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		DataState.save_file_state()
 		
 func _ready():
+	$CanvasModulate.time_tick.connect(_set_vars)
 	position.x = Globals.pos_x
 	position.y = Globals.pos_y
 	setlifes(Globals.hearth)
@@ -114,15 +119,25 @@ func damage(ammount):
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
+		
+func _set_vars(day, hour, minute):
+	Globals.day = day
+	Globals.hour = hour
+	Globals.minute = minute
 
 func update_label():
 	$CanvasLayer/Label.text = ": " + str(Globals.hearth)
 	$CanvasLayer/Label2.text = ": " + str(Globals.coins)
+	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	
 
 func _on_exit_pressed():
 	Pause_Menu.show()
 	get_tree().paused = true
+	
+func in_water():
+	gravity = gravity / 3
+	max_speed = max_speed_in_water
 
 
 func _on_invunerability_timeout():
@@ -141,6 +156,9 @@ func save():
 		"hearth" : Globals.hearth,
 		"coins" : Globals.coins,
 		"max_health" : max_hearth,
+		"time_day" : Globals.day,
+		"time_hour" : Globals.day,
+		"time_minute" : Globals.minute,
 	}
 	return save_dict
 	
@@ -148,3 +166,6 @@ func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
+	Globals.day = info.time_day
+	Globals.hour = info.time_hour
+	Globals.minute = info.time_minute

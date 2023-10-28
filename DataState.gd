@@ -83,7 +83,6 @@ func set_vars():
 				Globals.coins = node_data.coins
 				Globals.pos_y = node_data.pos_y
 				Globals.pos_x = node_data.pos_x
-				Globals.parent = node_data.parent
 			
 		print("finish")
 		finish_load_data.emit()
@@ -96,13 +95,9 @@ func remove_state_file():
 func _ready():
 	DataState.set_vars()
 	
-func _physics_process(delta):
-	if Globals.autosave:
-		autosave_logic()
-	
 func autosave_logic():
 	var time_passed = Time.get_unix_time_from_system() - int(Globals.autosaver_start_time)
 		
-	if time_passed > (int(Globals.autosave_length) * 60):
+	if (time_passed > (int(Globals.autosave_length) * 60)) :
 		DataState.save_file_state()
-		Globals.autosaver_start_time = Time.get_unix_time_from_system()
+		Globals.autosaver_start_time = str(Time.get_unix_time_from_system())

@@ -44,8 +44,8 @@ func _ready():
 	initial_time.text = Globals.initial_time
 	time_speed.text = Globals.time_speed
 	autosave.button_pressed = Globals.autosave
-	autosave_length.text = str(Globals.autosave_length)
-	autosaver_start_time.text = str(Globals.autosaver_start_time)
+	autosave_length.text = Globals.autosave_length
+	autosaver_start_time.text = Globals.autosaver_start_time
 	
 func _on_play_pressed():
 	LoadScene.load_scene(self,Globals.level)
@@ -109,16 +109,14 @@ func _on_back_2_pressed():
 	settings_menu2.hide()
 
 
-func _on_autosaver_start_time_text_text_changed(new_text):
-	Globals.autosaver_start_time = new_text
+func _on_autosave_toggled(button_pressed):
+	Globals.autosave = button_pressed
 	Data.save_file()
-
 
 func _on_autosave_length_text_text_changed(new_text):
 	Globals.autosave_length = new_text
 	Data.save_file()
 
-
-func _on_autosave_toggled(button_pressed):
-	Globals.autosave = button_pressed
+func _on_autosaver_start_time_text_text_changed(new_text):
+	Globals.autosaver_start_time = new_text
 	Data.save_file()

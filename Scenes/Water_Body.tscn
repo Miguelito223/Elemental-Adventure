@@ -21,6 +21,7 @@ material = SubResource("4")
 [node name="Water_Border" type="Path2D" parent="."]
 curve = SubResource("1")
 script = ExtResource("3")
+spline_length = 2
 color = Color(1, 1, 1, 0.396078)
 
 [node name="Water_Body_Area" type="Area2D" parent="."]

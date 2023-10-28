@@ -2,7 +2,7 @@ extends CanvasModulate
 
 var minutes_per_day = 1440
 var minutes_per_hour = 60
-var ingame_to_real_minute_duration = (2 * PI)
+var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
 
 signal time_tick(day,hour,minute)
 
