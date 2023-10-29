@@ -30,12 +30,15 @@ func load_file_state():
 	var datafile = FileAccess.open(data_state_path, FileAccess.READ)
 	if FileAccess.file_exists(data_state_path):
 		print("data state file found")
-		var save_nodes = get_tree().get_nodes_in_group("persistent")
+		if datafile.get_length() <= 0:
+			print("State Data empty!")
+			save_file_state()
+		else:
+			var save_nodes = get_tree().get_nodes_in_group("persistent")
 		
-		for i in save_nodes:
-			i.queue_free()
+			for i in save_nodes:
+				i.queue_free()
 			
-		while datafile.get_position() < datafile.get_length():
 			var json = JSON.new()
 
 			var parse_result = json.parse(datafile.get_line())
@@ -61,6 +64,7 @@ func load_file_state():
 						return
 			
 			new_object.load(node_data)
+
 			
 		print("finish")
 		finish_load_data.emit()

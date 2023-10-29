@@ -9,8 +9,8 @@
 layout_mode = 3
 anchor_right = 1.669
 anchor_bottom = 1.682
-offset_right = -1922.69
-offset_bottom = -1089.94
+offset_right = -3204.48
+offset_bottom = -1816.56
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2vk4l")
@@ -25,10 +25,6 @@ color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="Tittle" type="Control" parent="."]
 anchors_preset = 0
-offset_left = -1.0
-offset_top = -28.0
-offset_right = -1.0
-offset_bottom = -28.0
 
 [node name="logo" type="Sprite2D" parent="Tittle"]
 position = Vector2(1546, 93)

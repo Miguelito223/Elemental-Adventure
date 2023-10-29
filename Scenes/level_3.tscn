@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bt7hywdmbqldj"]
+[gd_scene load_steps=15 format=3 uid="uid://bt7hywdmbqldj"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_4anp0"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ftqhb"]
-[ext_resource type="PackedScene" uid="uid://dwypr7om4wpeo" path="res://Scenes/player.tscn" id="3_iix27"]
 [ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="4_rgbwf"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="5_bc2uf"]
 [ext_resource type="Script" path="res://Scripts/dnc.gd" id="6_rgq1m"]
@@ -37,11 +36,6 @@ position = Vector2(576, 1023)
 script = ExtResource("1_4anp0")
 
 [node name="environment" parent="." instance=ExtResource("2_ftqhb")]
-
-[node name="player" parent="." instance=ExtResource("3_iix27")]
-position = Vector2(-444, -35)
-scale = Vector2(0.419893, 0.470927)
-wall_min_slide_angle = 0.0
 
 [node name="Water_Body" parent="." instance=ExtResource("4_rgbwf")]
 position = Vector2(332, 27)

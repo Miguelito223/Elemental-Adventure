@@ -7,6 +7,8 @@ var hearth = 3
 var coins = 0
 var pos_x = -438
 var pos_y = -41
+var size_x = 0.4
+var size_y = 0.4
 
 #settings
 var master_volume = 0 

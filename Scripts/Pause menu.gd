@@ -10,7 +10,7 @@ func _on_return_pressed():
 func _on_back_pressed():
 	get_tree().paused = false
 	DataState.save_file_state()
-	LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://main_menu.tscn")
+	LoadScene.load_scene(get_parent().get_parent().get_parent().get_parent(), "res://main_menu.tscn")
 
 
 func _on_button_pressed():

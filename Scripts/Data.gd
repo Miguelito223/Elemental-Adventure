@@ -25,6 +25,11 @@ func save_file():
 			"autosave":  Globals.autosave,
 			"autosave_length":  Globals.autosave_length,
 			"autosaver_start_time":  Globals.autosaver_start_time,
+		},
+		"time":{
+			"day": Globals.day,
+			"hour": Globals.hour,
+			"minute":Globals.minute
 		}
 	}
 	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
@@ -38,8 +43,11 @@ func load_file():
 	print("loading data...")
 	var datafile = FileAccess.open(data_path, FileAccess.READ)
 	if FileAccess.file_exists(data_path):
-		print("Data file found")
-		while datafile.get_position() < datafile.get_length():
+		if datafile.get_length() <= 0:
+			print("State Data empty!")
+			save_file()
+		else:
+			print("Data file found")
 			data = JSON.parse_string(datafile.get_line())
 			
 			var settings = data.settings
@@ -55,9 +63,16 @@ func load_file():
 			Globals.autosave = settings.autosave
 			Globals.autosave_length = settings.autosave_length
 			Globals.autosaver_start_time = settings.autosaver_start_time
+
+			var time = data.time
+
+			Globals.day = time.day
+			Globals.hour = time.hour
+			Globals.minute = time.minute
 			
 			finish_load_data.emit()
 			print("finish")
+
 	else:
 		print("Data file doesn't exist!")
 		save_file()

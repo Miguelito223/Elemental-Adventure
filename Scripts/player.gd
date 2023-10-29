@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var DEBUGGING
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var bullet = preload("res://Scenes/lavaball.tscn")
@@ -14,24 +13,66 @@ var can_fire = true
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
 
-var max_speed = 450
+var max_speed = 300
 var max_speed_in_water = 200
+var jump_speed = -400.0
+var speed = 1500
+var friction = 1200
+var axis = Vector2.ZERO
 
+var color = Color("White", 1) # color, alpha
+
+var player_name = "player_name"
+var device_num = 0 # default to device 0
+var is_moving = false
+
+func _on_disconnected(name):
+	if player_name == name:
+		print("disconnected player: '%s'" % name)
+		queue_free()
+
+func _on_connected(name):
+	if player_name == name:
+		print("connected player: '%s'" % name)
+		
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		DataState.save_file_state()
 		
 func _ready():
-	position.x = Globals.pos_x
-	position.y = Globals.pos_y
+	var parent_node = get_parent()
+	if parent_node.name != "root":
+		DEBUGGING = parent_node.DEBUGGING
+	else:
+		DEBUGGING = true
+
+	parent_node.connect("connected", _on_connected)
+	parent_node.connect("disconnected", _on_disconnected)
+
+	if DEBUGGING:
+		print("Running Player.gd: {n}._ready()... {pn}".format({
+			"n": name,
+			"pn": player_name,
+			}))
+		# Report scene hierarchy.
+		print("Parent of '{n}' is '{p}'".format({
+			"n":name,
+			"p":get_parent().name,
+			}))
+			
+	AnimatedSprite.modulate = color
+	
+	position.x = -450
+	position.y = -57
 	setlifes(Globals.hearth)
 	Pause_Menu.hide()
 	get_tree().paused = false
 	
 	
-func _process(_delta):
+func _process(delta):	
 	update_label()
+
 	if velocity.x > 0 or velocity.x < 0:
 		AnimatedSprite.play("walk")
 	elif velocity.y < 0:
@@ -40,17 +81,66 @@ func _process(_delta):
 		AnimatedSprite.play("fall")
 	else:
 		AnimatedSprite.play("idle")
+		
 	
+var ui_inputs = {
+	"ui_right": Vector2.RIGHT,
+	"ui_left":  Vector2.LEFT,
+	"ui_jump": null,
+	"ui_shot": null,
+}
+
+func _physics_process(delta):
+	
+	Globals.pos_x = position.x
+	Globals.pos_y = position.y
+
+	move(delta)
+
+func get_input_axis():
+	axis.x = int(Input.is_action_pressed(ui_inputs.keys()[0])) - int(Input.is_action_pressed(ui_inputs.keys()[1]))
+	return axis.normalized()
+	
+func move(delta):
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		
+	var axis = get_input_axis()
+
+	if axis == Vector2.ZERO:
+		apply_fricction(friction * delta)
+	else:
+		apply_movement(axis * speed * delta)
+
+	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
+		velocity.y = jump_speed
+		
+	AnimatedSprite.flip_h = get_input_axis() < Vector2.ZERO
+
+	move_and_slide()
+
+func apply_fricction(amount):
+	if velocity.length() > amount:
+		velocity.x -= velocity.normalized().x * amount
+	else:
+		velocity.x = 0
+
+func apply_movement(accel):
+	velocity.x += accel.x
+	if velocity.x > max_speed:
+		velocity.x = max_speed
+
+
 func _input(event):
 	
 	if event.is_action_pressed("ui_pause_menu"):
 		Pause_Menu.show()
 		get_tree().paused = true
-	if event.is_action_pressed("ui_left"):
+	if event.is_action_pressed(ui_inputs.keys()[1]):
 		Market.scale.x = -1
-	if event.is_action_pressed("ui_right"):
+	if event.is_action_pressed(ui_inputs.keys()[0]):
 		Market.scale.x = 1
-	if event.is_action_pressed("ui_shoot"):
+	if event.is_action_pressed(ui_inputs.keys()[3]):
 		shot()
 		
 func shot():
@@ -61,28 +151,6 @@ func shot():
 		can_fire = false
 		await get_tree().create_timer(0.8).timeout
 		can_fire = true
-
-func _physics_process(delta):
-	Globals.pos_x = position.x
-	Globals.pos_y = position.y
-
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	
-	if Input.is_action_just_pressed("ui_jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var direction = Input.get_axis("ui_left", "ui_right")
-	
-	if direction:
-		velocity.x = direction * SPEED
-		AnimatedSprite.flip_h = direction < 0
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
-	up_direction = Vector2(0, -1)
-
-	move_and_slide()
 	
 func setlifes(value):
 	Globals.hearth = clamp(value,0,max_hearth)
@@ -92,7 +160,7 @@ func setlifes(value):
 		position.x = -438
 		position.y = -41
 		DataState.save_file_state()
-		LoadScene.load_scene(get_parent(), "res://death_menu.tscn")
+		LoadScene.load_scene(self, "res://Scenes/death_menu.tscn")
 		
 func getcoin():
 	Globals.coins += 1
