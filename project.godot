@@ -66,6 +66,18 @@ ui_down={
 "deadzone": 0.5,
 "events": []
 }
+ui_pause={
+"deadzone": 0.5,
+"events": []
+}
+ui_jump={
+"deadzone": 0.5,
+"events": []
+}
+ui_shoot={
+"deadzone": 0.5,
+"events": []
+}
 
 [rendering]
 

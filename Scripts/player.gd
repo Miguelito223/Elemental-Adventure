@@ -89,7 +89,7 @@ var ui_inputs = {
 	"ui_left":  Vector2.LEFT,
 	"ui_jump": null,
 	"ui_shoot": null,
-	"ui_pause_menu": null,
+	"ui_pause": null,
 }
 
 func _physics_process(delta):
@@ -135,7 +135,7 @@ func apply_movement(accel):
 
 func _input(event):
 	
-	if event.is_action_pressed("ui_pause_menu"):
+	if event.is_action_pressed(ui_inputs.keys()[4]):
 		Pause_Menu.show()
 		get_tree().paused = true
 	if event.is_action_pressed(ui_inputs.keys()[1]):

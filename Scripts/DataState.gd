@@ -41,27 +41,34 @@ func load_file_state():
 
 			var parse_result = json.parse(datafile.get_line())
 			var node_data = json.get_data()
-
+			
+			if Globals.num_players > 0:
+				return
+			
 			var new_object = load(node_data.filename).instantiate()
-
-			if get_node(node_data.parent) != null:
-				get_node(node_data.parent).add_child(new_object)
+			if node_data.filename == "res://Scenes/player.tscn":
+				var level = get_tree().get_root().get_node(Globals.level)
+				var num_players = level.num_players
+				level.add_player(num_players)
 			else:
-				print("fixing the parent...")
-				node_data.parent = "/root/" + Globals.level
-				save_file_state()
-				
 				if get_node(node_data.parent) != null:
 					get_node(node_data.parent).add_child(new_object)
 				else:
-					print("fixing the parent again...")
-					node_data.parent = "/root/level_" + str(int(Globals.level) - 1)
+					print("fixing the parent...")
+					node_data.parent = "/root/" + Globals.level
 					save_file_state()
+					
 					if get_node(node_data.parent) != null:
 						get_node(node_data.parent).add_child(new_object)
 					else:
-						print("null parent of object '%s'" % new_object.name)
-						return
+						print("fixing the parent again...")
+						node_data.parent = "/root/level_" + str(int(Globals.level) - 1)
+						save_file_state()
+						if get_node(node_data.parent) != null:
+							get_node(node_data.parent).add_child(new_object)
+						else:
+							print("null parent of object '%s'" % new_object.name)
+							return
 			
 			new_object.load(node_data)
 			print("finish")
@@ -87,6 +94,7 @@ func set_vars():
 				Globals.coins = node_data.coins
 				Globals.pos_y = node_data.pos_y
 				Globals.pos_x = node_data.pos_x
+				Globals.num_players = node_data.num_players
 			
 		print("finish")
 		finish_load_data.emit()
