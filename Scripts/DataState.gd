@@ -30,14 +30,12 @@ func load_file_state():
 	var datafile = FileAccess.open(data_state_path, FileAccess.READ)
 	if FileAccess.file_exists(data_state_path):
 		print("data state file found")
-		if datafile.get_length() <= 0:
-			print("State Data empty!")
-			save_file_state()
-		else:
-			var save_nodes = get_tree().get_nodes_in_group("persistent")
-		
-			for i in save_nodes:
-				i.queue_free()
+		var save_nodes = get_tree().get_nodes_in_group("persistent")
+	
+		for i in save_nodes:
+			i.queue_free()
+			
+		while datafile.get_position() < datafile.get_length():
 			
 			var json = JSON.new()
 
@@ -45,12 +43,14 @@ func load_file_state():
 			var node_data = json.get_data()
 
 			var new_object = load(node_data.filename).instantiate()
+
 			if get_node(node_data.parent) != null:
 				get_node(node_data.parent).add_child(new_object)
 			else:
 				print("fixing the parent...")
 				node_data.parent = "/root/" + Globals.level
 				save_file_state()
+				
 				if get_node(node_data.parent) != null:
 					get_node(node_data.parent).add_child(new_object)
 				else:
@@ -64,12 +64,10 @@ func load_file_state():
 						return
 			
 			new_object.load(node_data)
-
-			
-		print("finish")
-		finish_load_data.emit()
+			print("finish")
+			finish_load_data.emit()	
 	else:
-		print("State Data file doesn't exist!")
+		print("Data file doesn't exist!")
 		save_file_state()
 			
 func set_vars():
@@ -77,6 +75,8 @@ func set_vars():
 	var datafile = FileAccess.open(data_state_path, FileAccess.READ)
 	if FileAccess.file_exists(data_state_path):
 		while datafile.get_position() < datafile.get_length():
+			print("State Data empty!")
+
 			var json = JSON.new()
 			var parse_result = json.parse(datafile.get_line())
 			var node_data = json.get_data()

@@ -1,14 +1,11 @@
 extends Area2D
 
-var collected = false
 
 func _on_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
-		if collected == false:
 			if Globals.hearth < 3:
 				body.getlife()
 				visible = false
-				collected = true
 				queue_free()
 
 func save():
@@ -21,7 +18,6 @@ func save():
 		"pos_x" : position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
 		"visible": visible,
-		"collected": collected
 	}
 	return save_dict
 
@@ -29,4 +25,4 @@ func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
-	collected = info.collected
+	visible = info.visible

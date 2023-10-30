@@ -20,20 +20,21 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
-var color = Color("White", 1) # color, alpha
+var color: Color = Color("White", 1) # color, alpha
 
-var player_name = "player_name"
-var device_num = 0 # default to device 0
-var is_moving = false
+var player_name: String = "player_name"
+var device_num: int = 0 # default to device 0
+var is_moving: bool = false
 
 func _on_disconnected(name):
 	if player_name == name:
 		print("disconnected player: '%s'" % name)
-		queue_free()
+		modulate.a = 0.3
 
 func _on_connected(name):
 	if player_name == name:
 		print("connected player: '%s'" % name)
+		modulate.a = 1.0
 		
 
 func _notification(what):
@@ -47,8 +48,8 @@ func _ready():
 	else:
 		DEBUGGING = true
 
-	parent_node.connect("connected", _on_connected)
-	parent_node.connect("disconnected", _on_disconnected)
+	parent_node.connected.connect(_on_connected)
+	parent_node.disconnected.connect(_on_disconnected) 
 
 	if DEBUGGING:
 		print("Running Player.gd: {n}._ready()... {pn}".format({
@@ -70,7 +71,7 @@ func _ready():
 	get_tree().paused = false
 	
 	
-func _process(delta):	
+func _process(_delta):	
 	update_label()
 
 	if velocity.x > 0 or velocity.x < 0:
@@ -87,7 +88,8 @@ var ui_inputs = {
 	"ui_right": Vector2.RIGHT,
 	"ui_left":  Vector2.LEFT,
 	"ui_jump": null,
-	"ui_shot": null,
+	"ui_shoot": null,
+	"ui_pause_menu": null,
 }
 
 func _physics_process(delta):
@@ -105,7 +107,7 @@ func move(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-	var axis = get_input_axis()
+	axis = get_input_axis()
 
 	if axis == Vector2.ZERO:
 		apply_fricction(friction * delta)
@@ -115,7 +117,7 @@ func move(delta):
 	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
 		velocity.y = jump_speed
 		
-	AnimatedSprite.flip_h = get_input_axis() < Vector2.ZERO
+	AnimatedSprite.flip_h = axis < Vector2.ZERO
 
 	move_and_slide()
 
@@ -211,18 +213,17 @@ func save():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
+		"num_players" : get_parent().num_players,
 		"name" : name,
 		"level" : Globals.level,
 		"pos_x" :  position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
 		"size_x" : scale.x,
 		"size_y" : scale.y,
+		"color" : modulate,
 		"hearth" : Globals.hearth,
 		"coins" : Globals.coins,
 		"max_health" : max_hearth,
-		"time_day" : Globals.day,
-		"time_hour" : Globals.day,
-		"time_minute" : Globals.minute,
 	}
 	return save_dict
 	
@@ -230,6 +231,3 @@ func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
-	Globals.day = info.time_day
-	Globals.hour = info.time_hour
-	Globals.minute = info.time_minute

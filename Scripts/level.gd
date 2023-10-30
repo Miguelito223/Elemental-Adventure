@@ -5,11 +5,11 @@ var DEBUGGING = true
 signal disconnected
 signal connected
 
-var num_players = 0
-var use_keyboard = false
+var num_players: int = 0
+var use_keyboard: bool = false
 
-var players = []
-var input_maps = []
+var players: Array = []
+var input_maps: Array = []
 
 var rng = RandomNumberGenerator.new()
 
@@ -26,22 +26,21 @@ func _ready():
 	for player_index in range(num_players):
 		add_player(player_index)
 
-	if num_players == 0:
+	if num_players <= 0:
 		use_keyboard = true
-		# for player_index in range(1):
 		for player_index in range(1):
 			add_player(player_index)
-		
 	
-	
+	DataState.load_file_state()
 	Signals.level_loaded.emit()
 
 
 func add_player(player_index):
 
 	if player_index < players.size():
-		emit_signal("connected", players[player_index].player_name)
-		return
+		if players[player_index] != null:
+			connected.emit(players[player_index].player_name)
+			return
 
 	players.append(player_scene.instantiate())
 
@@ -80,8 +79,10 @@ func add_player(player_index):
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
 		"ui_left{n}".format({"n":player_index}): Vector2.LEFT,
 		"ui_jump{n}".format({"n":player_index}): null,
-		"ui_shot{n}".format({"n":player_index}): null,
+		"ui_shoot{n}".format({"n":player_index}): null,
+		"ui_pause{n}".format({"n":player_index}): null,
 	})
+	print(input_maps[player_index])
 	# DEBUGGING
 	
 	player.ui_inputs = input_maps[player_index]
@@ -89,17 +90,20 @@ func add_player(player_index):
 	if not use_keyboard:
 		player.device_num = player_index
 		
-		var right_action
-		var right_action_event
+		var right_action: String
+		var right_action_event: InputEventJoypadMotion
 
-		var left_action
-		var left_action_event
+		var left_action: String
+		var left_action_event: InputEventJoypadMotion
 		
-		var jump_action
-		var jump_action_event
+		var jump_action: String
+		var jump_action_event: InputEventJoypadButton
 		
-		var shot_action
-		var shot_action_event
+		var shot_action: String
+		var shot_action_event: InputEventJoypadButton
+		
+		var pause_action: String
+		var pause_action_event: InputEventJoypadButton
 	
 		right_action = "ui_right{n}".format({"n":player_index})
 		InputMap.add_action(right_action)
@@ -127,13 +131,21 @@ func add_player(player_index):
 		jump_action_event.button_index = JOY_BUTTON_X
 		InputMap.action_add_event(jump_action, jump_action_event)
 		
-		shot_action = "ui_shot{n}".format({"n":player_index})
+		shot_action = "ui_shoot{n}".format({"n":player_index})
 		InputMap.add_action(shot_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		shot_action_event = InputEventJoypadButton.new()
 		shot_action_event.device = player_index
 		shot_action_event.button_index = JOY_BUTTON_A
 		InputMap.action_add_event(shot_action, shot_action_event)
+		
+		pause_action = "ui_pause{n}".format({"n":player_index})
+		InputMap.add_action(shot_action)
+		# Creat a new InputEvent instance to assign to the InputMap.
+		pause_action_event = InputEventJoypadButton.new()
+		pause_action_event.device = player_index
+		pause_action_event.button_index = JOY_BUTTON_START
+		InputMap.action_add_event(pause_action, pause_action_event)
 		
 		
 		
@@ -142,25 +154,29 @@ func add_player(player_index):
 			"key_right": KEY_RIGHT,
 			"key_left":  KEY_LEFT,
 			"key_jump":  KEY_UP,
-			"key_shot":  KEY_DOWN,
+			"key_shoot":  KEY_DOWN,
+			"key_pause_menu": KEY_ESCAPE
 			}
 		var wasd: Dictionary = {
 			"key_right": KEY_D,
 			"key_left":  KEY_A,
 			"key_jump":  KEY_W,
-			"key_shot":  KEY_S,
+			"key_shoot":  KEY_S,
+			"key_pause_menu": KEY_ESCAPE
 			}
 		var hjkl: Dictionary = {
 			"key_right": KEY_L,
 			"key_left":  KEY_H,
 			"key_jump":  KEY_K,
-			"key_shot":  KEY_J,
+			"key_shoot":  KEY_J,
+			"key_pause_menu": KEY_ESCAPE
 			}
 		var uiop: Dictionary = {
 			"key_right": KEY_P,
 			"key_left":  KEY_U,
 			"key_jump":  KEY_O,
-			"key_shot":  KEY_I,
+			"key_shoot":  KEY_I,
+			"key_pause_menu": KEY_ESCAPE
 			}
 		var keymaps: Dictionary = {
 			0: arrows,
@@ -169,56 +185,66 @@ func add_player(player_index):
 			3: uiop,
 			}
 
-		var right_action
-		var right_action_event
+		var right_action: String
+		var right_action_event: InputEventKey
 
-		var left_action
-		var left_action_event
+		var left_action: String
+		var left_action_event: InputEventKey
 		
-		var jump_action
-		var jump_action_event
+		var jump_action: String
+		var jump_action_event: InputEventKey
 		
-		var shot_action
-		var shot_action_event
+		var shot_action: String
+		var shot_action_event: InputEventKey
+
+		var pause_action: String
+		var pause_action_event: InputEventKey
 		
 
 		right_action = "ui_right{n}".format({"n":player_index})
 		InputMap.add_action(right_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		right_action_event = InputEventKey.new()
-		right_action_event.physical_keycode = keymaps[player_index]["key_right"]
+		right_action_event.keycode = keymaps[player_index]["key_right"]
 		InputMap.action_add_event(right_action, right_action_event)
 
 		left_action = "ui_left{n}".format({"n":player_index})
 		InputMap.add_action(left_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		left_action_event = InputEventKey.new()
-		left_action_event.physical_keycode = keymaps[player_index]["key_left"]
+		left_action_event.keycode = keymaps[player_index]["key_left"]
 		InputMap.action_add_event(left_action, left_action_event)
 		
 		jump_action = "ui_jump{n}".format({"n":player_index})
 		InputMap.add_action(jump_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		jump_action_event = InputEventKey.new()
-		jump_action_event.physical_keycode = keymaps[player_index]["key_jump"]
+		jump_action_event.keycode = keymaps[player_index]["key_jump"]
 		InputMap.action_add_event(jump_action, jump_action_event)
 		
-		shot_action = "ui_shot{n}".format({"n":player_index})
+		shot_action = "ui_shoot{n}".format({"n":player_index})
 		InputMap.add_action(shot_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		shot_action_event = InputEventKey.new()
-		shot_action_event.physical_keycode = keymaps[player_index]["key_shot"]
+		shot_action_event.keycode = keymaps[player_index]["key_shoot"]
 		InputMap.action_add_event(shot_action, shot_action_event)
+
+		pause_action = "ui_pause_menu{n}".format({"n":player_index})
+		InputMap.add_action(pause_action)
+		# Creat a new InputEvent instance to assign to the InputMap.
+		pause_action_event = InputEventKey.new()
+		pause_action_event.keycode = keymaps[player_index]["key_pause_menu"]
+		InputMap.action_add_event(pause_action, pause_action_event)
 		
 	add_child(player)
 	
 	
 
 func remove_player(player_index):
-	emit_signal("disconnected", players[player_index].player_name)
-	DataState.save_file_state()
+	if players[player_index] != null:
+		disconnected.emit(players[player_index].player_name)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Globals.autosave:
 		DataState.autosave_logic()
 

@@ -43,11 +43,9 @@ func load_file():
 	print("loading data...")
 	var datafile = FileAccess.open(data_path, FileAccess.READ)
 	if FileAccess.file_exists(data_path):
-		if datafile.get_length() <= 0:
-			print("State Data empty!")
-			save_file()
-		else:
-			print("Data file found")
+		print("Data file found")
+		while datafile.get_position() < datafile.get_length():
+			
 			data = JSON.parse_string(datafile.get_line())
 			
 			var settings = data.settings
@@ -83,9 +81,11 @@ func load_file():
 
 	
 func remove_file():
+	print("Removing file...")
 	if FileAccess.file_exists(data_path):
 		DirAccess.remove_absolute(data_path)
 	finish_remove_data.emit()
+	print("finish")
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
