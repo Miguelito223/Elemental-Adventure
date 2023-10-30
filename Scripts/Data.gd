@@ -30,6 +30,9 @@ func save_file():
 			"day": Globals.day,
 			"hour": Globals.hour,
 			"minute":Globals.minute
+		},
+		"others":{
+			"num_players": Globals.num_players,
 		}
 	}
 	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
@@ -67,6 +70,10 @@ func load_file():
 			Globals.day = time.day
 			Globals.hour = time.hour
 			Globals.minute = time.minute
+
+			var others = data.others
+
+			Globals.num_players = others.num_players
 			
 			finish_load_data.emit()
 			print("finish")

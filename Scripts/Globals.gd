@@ -9,7 +9,6 @@ var pos_x = -438
 var pos_y = -41
 var size_x = 0.4
 var size_y = 0.4
-var num_players = 0
 
 #settings
 var master_volume = 0 
@@ -27,3 +26,6 @@ var autosaver_start_time = "0"
 var minute = "00"
 var day = "1"
 var hour = "12"
+
+#others
+var num_players = 0

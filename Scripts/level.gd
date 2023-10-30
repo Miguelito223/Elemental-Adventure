@@ -31,6 +31,7 @@ func _ready():
 		for player_index in range(1):
 			add_player(player_index)
 	
+	Globals.num_players = num_players
 	DataState.load_file_state()
 	Signals.level_loaded.emit()
 
@@ -38,7 +39,7 @@ func _ready():
 func add_player(player_index):
 
 	if player_index < players.size():
-		if players[player_index] != null:
+		if not players.is_empty():
 			connected.emit(players[player_index].player_name)
 			return
 
@@ -236,7 +237,7 @@ func add_player(player_index):
 	
 
 func remove_player(player_index):
-	if players[player_index] != null:
+	if not players.is_empty():
 		disconnected.emit(players[player_index].player_name)
 
 func _physics_process(_delta):

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://by3i352dtjpjc"
+path="res://.godot/imported/pasos cesped.wav-87875c1c18403db61850a6644b61a6cf.sample"
+
+[deps]
+
+source_file="res://sounds/pasos cesped.wav"
+dest_files=["res://.godot/imported/pasos cesped.wav-87875c1c18403db61850a6644b61a6cf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

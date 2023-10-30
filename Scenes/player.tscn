@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dwypr7om4wpeo"]
+[gd_scene load_steps=35 format=3 uid="uid://dwypr7om4wpeo"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
@@ -10,7 +10,8 @@
 [ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="8_tblnr"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="10_6u4n5"]
-[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/628445__davo32__level-music-brackground.mp3" id="11_dgdgk"]
+[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="11_7hmlv"]
+[ext_resource type="AudioStream" uid="uid://by3i352dtjpjc" path="res://sounds/pasos cesped.wav" id="12_xumad"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -373,10 +374,15 @@ one_shot = true
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(3, 0)
 
-[node name="level music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_dgdgk")
+[node name="Player Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_7hmlv")
 autoplay = true
 bus = &"Music"
+
+[node name="Pasos" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_xumad")
+max_distance = 100.0
+bus = &"FX"
 
 [connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]

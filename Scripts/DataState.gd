@@ -36,20 +36,21 @@ func load_file_state():
 			i.queue_free()
 			
 		while datafile.get_position() < datafile.get_length():
+			var json_string = datafile.get_line()
 			
 			var json = JSON.new()
 
 			var parse_result = json.parse(datafile.get_line())
+			if not parse_result == OK:
+				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+				continue
+				
 			var node_data = json.get_data()
-			
-			if Globals.num_players > 0:
-				return
 			
 			var new_object = load(node_data.filename).instantiate()
 			if node_data.filename == "res://Scenes/player.tscn":
 				var level = get_tree().get_root().get_node(Globals.level)
-				var num_players = level.num_players
-				level.add_player(num_players)
+				level.add_player(Globals.num_players)
 			else:
 				if get_node(node_data.parent) != null:
 					get_node(node_data.parent).add_child(new_object)
@@ -82,10 +83,14 @@ func set_vars():
 	var datafile = FileAccess.open(data_state_path, FileAccess.READ)
 	if FileAccess.file_exists(data_state_path):
 		while datafile.get_position() < datafile.get_length():
-			print("State Data empty!")
+			var json_string = datafile.get_line()
 
 			var json = JSON.new()
 			var parse_result = json.parse(datafile.get_line())
+			if not parse_result == OK:
+				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+				continue
+
 			var node_data = json.get_data()
 			
 			if node_data.filename == "res://Scenes/player.tscn":
@@ -94,7 +99,6 @@ func set_vars():
 				Globals.coins = node_data.coins
 				Globals.pos_y = node_data.pos_y
 				Globals.pos_x = node_data.pos_x
-				Globals.num_players = node_data.num_players
 			
 		print("finish")
 		finish_load_data.emit()

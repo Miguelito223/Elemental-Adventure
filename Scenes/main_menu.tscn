@@ -204,7 +204,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bx21l")
 text = "Back"
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Main menu music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3w0aj")
 autoplay = true
 bus = &"Music"

@@ -111,8 +111,10 @@ func move(delta):
 
 	if axis == Vector2.ZERO:
 		apply_fricction(friction * delta)
+		$Pasos.stop()
 	else:
 		apply_movement(axis * speed * delta)
+		$Pasos.play()
 
 	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
 		velocity.y = jump_speed
@@ -131,6 +133,7 @@ func apply_movement(accel):
 	velocity.x += accel.x
 	if velocity.x > max_speed:
 		velocity.x = max_speed
+
 
 
 func _input(event):
@@ -213,7 +216,6 @@ func save():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
-		"num_players" : get_parent().num_players,
 		"name" : name,
 		"level" : Globals.level,
 		"pos_x" :  position.x, # Vector2 is not supported by JSON
@@ -231,3 +233,4 @@ func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
+	modulate = str_to_var("Color" + info.color)

@@ -54,7 +54,7 @@ theme_override_fonts/font = ExtResource("2_3iuf3")
 theme_override_font_sizes/font_size = 90
 text = "Back"
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Death music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_i6fgq")
 autoplay = true
 bus = &"Music"
