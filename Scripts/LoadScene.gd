@@ -1,7 +1,5 @@
 extends Node
 
-signal finish_loading
-
 const GAME_SCENE ={
 	"level_1": "res://Scenes/level_1.tscn", 
 	"level_2": "res://Scenes/level_2.tscn",
@@ -57,5 +55,5 @@ func load_scene(current_scene, next_scene):
 				var new_scene = ResourceLoader.load_threaded_get(load_path).instantiate()
 				get_tree().get_root().add_child(new_scene)
 				loading_screen_intance.fade_out_loading_screen()
-				finish_loading.emit()
+				Signals.finish_loading.emit()
 				return

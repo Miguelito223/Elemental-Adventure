@@ -1,9 +1,5 @@
 extends Node
 
-signal finish_remove_data
-signal finish_add_data
-signal finish_load_data
-
 var data_path = "user://Data.json"
 var data = {}
 
@@ -29,7 +25,7 @@ func save_file():
 		"time":{
 			"day": Globals.day,
 			"hour": Globals.hour,
-			"minute":Globals.minute
+			"minute":Globals.minute,
 		},
 		"others":{
 			"num_players": Globals.num_players,
@@ -38,49 +34,57 @@ func save_file():
 	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
 	datafile.store_line(JSON.stringify(data))
 	
-	finish_add_data.emit()
+	Signals.finish_add_data.emit()
 	
 	print("finish")
 
 func load_file():
 	print("loading data...")
 	var datafile = FileAccess.open(data_path, FileAccess.READ)
-	if FileAccess.file_exists(data_path):
-		print("Data file found")
-		while datafile.get_position() < datafile.get_length():
-			
-			data = JSON.parse_string(datafile.get_line())
-			
-			var settings = data.settings
-			
-			#settings
-			Globals.master_volume = settings.master_volume
-			Globals.fx_volume = settings.fx_volume
-			Globals.music_volume = settings.music_volume
-			Globals.fullscreen = settings.fullscreen
-			Globals.resolution = str_to_var("Vector2i" + settings.resolution)
-			Globals.initial_time = settings.initial_time
-			Globals.time_speed = settings.time_speed
-			Globals.autosave = settings.autosave
-			Globals.autosave_length = settings.autosave_length
-			Globals.autosaver_start_time = settings.autosaver_start_time
-
-			var time = data.time
-
-			Globals.day = time.day
-			Globals.hour = time.hour
-			Globals.minute = time.minute
-
-			var others = data.others
-
-			Globals.num_players = others.num_players
-			
-			finish_load_data.emit()
-			print("finish")
-
-	else:
+	if not FileAccess.file_exists(data_path):
 		print("Data file doesn't exist!")
 		save_file()
+		return
+
+	if datafile.get_length() <= 0:
+		print("Data file is empy")
+		save_file()
+		return
+		
+	print("Data file found")
+	while datafile.get_position() < datafile.get_length():
+		
+		data = JSON.parse_string(datafile.get_line())
+		
+		var settings = data.settings
+		
+		#settings
+		Globals.master_volume = settings.master_volume
+		Globals.fx_volume = settings.fx_volume
+		Globals.music_volume = settings.music_volume
+		Globals.fullscreen = settings.fullscreen
+		Globals.resolution = str_to_var("Vector2i" + settings.resolution)
+		Globals.initial_time = settings.initial_time
+		Globals.time_speed = settings.time_speed
+		Globals.autosave = settings.autosave
+		Globals.autosave_length = settings.autosave_length
+		Globals.autosaver_start_time = settings.autosaver_start_time
+
+		var time = data.time
+
+		Globals.day = time.day
+		Globals.hour = time.hour
+		Globals.minute = time.minute
+
+		var others = data.others
+
+		Globals.num_players = others.num_players
+		
+		Signals.finish_load_data.emit()
+		return data
+	
+	print("finish")
+
 		
 		
 #Player and other save
@@ -91,7 +95,7 @@ func remove_file():
 	print("Removing file...")
 	if FileAccess.file_exists(data_path):
 		DirAccess.remove_absolute(data_path)
-	finish_remove_data.emit()
+	Signals.finish_remove_data.emit()
 	print("finish")
 	
 func _notification(what):

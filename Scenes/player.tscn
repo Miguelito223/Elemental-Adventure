@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="10_6u4n5"]
 [ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="11_7hmlv"]
-[ext_resource type="AudioStream" uid="uid://by3i352dtjpjc" path="res://sounds/pasos cesped.wav" id="12_xumad"]
+[ext_resource type="AudioStream" uid="uid://b2u1w3elsfyj1" path="res://sounds/pasos-cesped.mp3" id="12_tqaf4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -380,7 +380,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Pasos" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_xumad")
+stream = ExtResource("12_tqaf4")
 max_distance = 100.0
 bus = &"FX"
 

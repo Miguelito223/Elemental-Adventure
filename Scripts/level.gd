@@ -2,14 +2,12 @@ extends Node2D
 
 var DEBUGGING = true
 
-signal disconnected
-signal connected
-
 var num_players: int = 0
 var use_keyboard: bool = false
 
 var players: Array = []
 var input_maps: Array = []
+var node_data
 
 var rng = RandomNumberGenerator.new()
 
@@ -29,10 +27,9 @@ func _ready():
 	if num_players <= 0:
 		use_keyboard = true
 		for player_index in range(1):
-			add_player(player_index)
+			add_player(player_index)	
 	
 	Globals.num_players = num_players
-	DataState.load_file_state()
 	Signals.level_loaded.emit()
 
 
@@ -40,12 +37,13 @@ func add_player(player_index):
 
 	if player_index < players.size():
 		if not players.is_empty():
-			connected.emit(players[player_index].player_name)
+			Signals.connected.emit(players[player_index].player_name)
 			return
 
 	players.append(player_scene.instantiate())
 
 	var player = players[-1]
+	print(players[-1])
 
 	var colornames: Array = [
 		"white",
@@ -71,9 +69,6 @@ func add_player(player_index):
 
 	player.color = color_dict[player_index]
 	player.player_name = names[player_index]
-	player.name = names[player_index]
-	player.scale = Vector2(Globals.size_x, Globals.size_y)
-	player.position = Vector2(Globals.pos_x, Globals.pos_y)
 	
 
 	input_maps.append({
@@ -110,6 +105,7 @@ func add_player(player_index):
 		InputMap.add_action(right_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		right_action_event = InputEventJoypadMotion.new()
+		right_action_event.device = player_index
 		right_action_event.axis = JOY_AXIS_LEFT_X # <---- horizontal axis
 		right_action_event.axis_value =  1.0 # <---- right
 		InputMap.action_add_event(right_action, right_action_event)
@@ -118,6 +114,7 @@ func add_player(player_index):
 		InputMap.add_action(left_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		left_action_event = InputEventJoypadMotion.new()
+		left_action_event.device = player_index
 		left_action_event.axis = JOY_AXIS_LEFT_X # <---- horizontal axis
 		left_action_event.axis_value =  -1.0 # <---- right
 		InputMap.action_add_event(left_action, left_action_event)
@@ -126,6 +123,7 @@ func add_player(player_index):
 		InputMap.add_action(jump_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		jump_action_event = InputEventJoypadButton.new()
+		jump_action_event.device = player_index
 		jump_action_event.button_index = JOY_BUTTON_X
 		InputMap.action_add_event(jump_action, jump_action_event)
 		
@@ -133,6 +131,7 @@ func add_player(player_index):
 		InputMap.add_action(shot_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		shot_action_event = InputEventJoypadButton.new()
+		shot_action_event.device = player_index
 		shot_action_event.button_index = JOY_BUTTON_A
 		InputMap.action_add_event(shot_action, shot_action_event)
 		
@@ -140,9 +139,9 @@ func add_player(player_index):
 		InputMap.add_action(shot_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		pause_action_event = InputEventJoypadButton.new()
+		pause_action_event.device = player_index
 		pause_action_event.button_index = JOY_BUTTON_START
 		InputMap.action_add_event(pause_action, pause_action_event)
-		
 		
 		
 	else:
@@ -231,14 +230,12 @@ func add_player(player_index):
 		pause_action_event = InputEventKey.new()
 		pause_action_event.keycode = keymaps[player_index]["key_pause"]
 		InputMap.action_add_event(pause_action, pause_action_event)
-		
+	
 	add_child(player)
-	
-	
 
 func remove_player(player_index):
 	if not players.is_empty():
-		disconnected.emit(players[player_index].player_name)
+		Signals.disconnected.emit(players[player_index].player_name)
 
 func _physics_process(_delta):
 	if Globals.autosave:

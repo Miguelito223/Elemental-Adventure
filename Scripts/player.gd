@@ -48,8 +48,8 @@ func _ready():
 	else:
 		DEBUGGING = true
 
-	parent_node.connected.connect(_on_connected)
-	parent_node.disconnected.connect(_on_disconnected) 
+	Signals.connected.connect(_on_connected)
+	Signals.disconnected.connect(_on_disconnected) 
 
 	if DEBUGGING:
 		print("Running Player.gd: {n}._ready()... {pn}".format({
@@ -69,6 +69,11 @@ func _ready():
 	setlifes(Globals.hearth)
 	Pause_Menu.hide()
 	get_tree().paused = false
+
+	DataState.load_file_state()	
+	Signals.player_ready.emit()
+
+
 	
 	
 func _process(_delta):	
@@ -114,7 +119,7 @@ func move(delta):
 		$Pasos.stop()
 	else:
 		apply_movement(axis * speed * delta)
-		$Pasos.play()
+		$Pasos.stop()
 
 	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
 		velocity.y = jump_speed
@@ -216,13 +221,13 @@ func save():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
-		"name" : name,
+		"name" : player_name,
 		"level" : Globals.level,
 		"pos_x" :  position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
 		"size_x" : scale.x,
 		"size_y" : scale.y,
-		"color" : modulate,
+		"color" : color,
 		"hearth" : Globals.hearth,
 		"coins" : Globals.coins,
 		"max_health" : max_hearth,
@@ -230,7 +235,15 @@ func save():
 	return save_dict
 	
 func load(info):
+	Globals.level = info.level
+	Globals.hearth = info.hearth
+	Globals.coins = info.coins
+	Globals.pos_y = info.pos_y
+	Globals.pos_x = info.pos_x
+	Globals.size_y = info.size_y
+	Globals.size_x = info.size_x
 	name = info.name
-	position = Vector2(info.pos_x, info.pos_y)
+	player_name = info.name
+	position = Vector2(info.pos_x,info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
 	modulate = str_to_var("Color" + info.color)
