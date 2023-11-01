@@ -135,8 +135,7 @@ func apply_fricction(amount):
 
 func apply_movement(accel):
 	velocity.x += accel.x
-	if velocity.x > max_speed:
-		velocity.x = max_speed
+	velocity.x = velocity.limit_length(max_speed).x
 
 
 
@@ -175,6 +174,7 @@ func setlifes(value):
 			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
+			Globals.hearths = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
@@ -211,8 +211,8 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Label.text = ": " + str(Globals.hearths)
-	$CanvasLayer/Label2.text = ": " + str(Globals.coins)
+	$CanvasLayer/Label.text = ":" + str(Globals.hearths)
+	$CanvasLayer/Label2.text = ":" + str(Globals.coins)
 	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	
 
