@@ -51,6 +51,7 @@ func _ready():
 	autosaver_start_time.text = Globals.autosaver_start_time
 	
 func _on_play_pressed():
+	print(Globals.level)
 	LoadScene.load_scene(self,Globals.level)
 	
 func _on_delete_data_pressed():

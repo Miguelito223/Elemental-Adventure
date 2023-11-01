@@ -80,13 +80,13 @@ occluder = SubResource("OccluderPolygon2D_ujlwm")
 occluder_light_mask = 1023
 
 [node name="Coin" parent="." instance=ExtResource("6_ypqjp")]
-position = Vector2(-297, -42)
+position = Vector2(-399, -45)
 
 [node name="Coin2" parent="." instance=ExtResource("6_ypqjp")]
-position = Vector2(-215, -42)
+position = Vector2(-340, -43)
 
 [node name="Coin3" parent="." instance=ExtResource("6_ypqjp")]
-position = Vector2(-149, -41)
+position = Vector2(-280, -45)
 
 [node name="Coin4" parent="." instance=ExtResource("6_ypqjp")]
 position = Vector2(265, -112)
@@ -104,7 +104,7 @@ position = Vector2(-2, -44)
 position = Vector2(-70, -42)
 
 [node name="Coin8" parent="." instance=ExtResource("6_ypqjp")]
-position = Vector2(-373, -43)
+position = Vector2(-460, -45)
 
 [node name="Coin9" parent="." instance=ExtResource("6_ypqjp")]
 position = Vector2(153, -55)

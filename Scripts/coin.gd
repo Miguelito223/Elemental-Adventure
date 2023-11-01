@@ -1,6 +1,12 @@
-extends Area2D
+extends RigidBody2D
 
-func _on_body_entered(body):
+var rng = RandomNumberGenerator.new()
+
+func _ready():
+	rng.randomize()
+	var impulse = Vector2(rng.randi_range(-10,10), rng.randi_range(-10,10))
+
+func _on_area_2d_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		body.getcoin()
 		visible = false
@@ -26,3 +32,6 @@ func load(info):
 	position = Vector2(info.pos_x, info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
 	visible = info.visible
+
+
+

@@ -170,10 +170,11 @@ func splash(index, speed):
 	pass
 
 func _on_Water_Body_Area_body_entered(body):
-	body.in_water()
+	if body.has_method("in_water"):
+		body.in_water()
 	
 	#creates a instace of the particle system
-	var s = splash_particle.instance()
+	var s = splash_particle.instantiate()
 	
 	#adds the particle to the scene
 	get_tree().current_scene.add_child(s)

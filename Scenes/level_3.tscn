@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bt7hywdmbqldj"]
+[gd_scene load_steps=17 format=3 uid="uid://bt7hywdmbqldj"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_4anp0"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ftqhb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/coin.tscn" id="7_xtuig"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="8_23fhp"]
 [ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="8_a8mk6"]
+[ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://Scenes/hearth.tscn" id="9_3252p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua2aw"]
 size = Vector2(1.49664, 9.54374)
@@ -37,6 +38,7 @@ position = Vector2(576, 1023)
 script = ExtResource("1_4anp0")
 
 [node name="environment" parent="." instance=ExtResource("2_ftqhb")]
+position = Vector2(115, -43)
 
 [node name="Water_Body" parent="." instance=ExtResource("4_rgbwf")]
 position = Vector2(332, 27)
@@ -173,5 +175,11 @@ position = Vector2(307, -44)
 stream = ExtResource("8_a8mk6")
 autoplay = true
 bus = &"Music"
+
+[node name="Hearth" parent="." instance=ExtResource("9_3252p")]
+position = Vector2(238, -41)
+
+[node name="Hearth2" parent="." instance=ExtResource("9_3252p")]
+position = Vector2(753, -44)
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

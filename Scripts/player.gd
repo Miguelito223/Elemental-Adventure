@@ -20,6 +20,8 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
+var start_position: Vector2 = Vector2(100.0, 100.0)
+
 var color: Color = Color("White", 1) # color, alpha
 
 var player_name: String = "player_name"
@@ -56,8 +58,9 @@ func _ready():
 			"p":get_parent().name,
 			}))
 			
-	AnimatedSprite.modulate = color
-	setlifes(Globals.hearth)
+	modulate = color
+	position = start_position
+	setlifes(Globals.hearths)
 	Pause_Menu.hide()
 	get_tree().paused = false
 	Signals.player_ready.emit()
@@ -76,6 +79,7 @@ func _process(_delta):
 		AnimatedSprite.play("fall")
 	else:
 		AnimatedSprite.play("idle")
+		$Pasos.playing = false
 		
 	
 var ui_inputs = {
@@ -102,20 +106,23 @@ func move(delta):
 		velocity.y += gravity * delta
 		
 	axis = get_input_axis()
-
+	
 	if axis == Vector2.ZERO:
 		apply_fricction(friction * delta)
 		is_moving = false
-		$Pasos.stop()
+		if $Pasos.playing:
+			$Pasos.stop()
 	else:
 		apply_movement(axis * speed * delta)
 		is_moving = true
-		$Pasos.play()
+		if is_on_floor():
+			if !$Pasos.playing:
+				$Pasos.play()
+		
+		
 
 	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
 		velocity.y = jump_speed
-		
-	AnimatedSprite.flip_h = axis < Vector2.ZERO
 
 	move_and_slide()
 
@@ -139,8 +146,10 @@ func _input(event):
 		get_tree().paused = true
 	if event.is_action_pressed(ui_inputs.keys()[1]):
 		Market.scale.x = -1
+		AnimatedSprite.scale.x = -1
 	if event.is_action_pressed(ui_inputs.keys()[0]):
 		Market.scale.x = 1
+		AnimatedSprite.scale.x = 1
 	if event.is_action_pressed(ui_inputs.keys()[3]):
 		shot()
 		
@@ -154,15 +163,20 @@ func shot():
 		can_fire = true
 	
 func setlifes(value):
-	Globals.hearth = clamp(value,0,max_hearth)
-	if Globals.hearth <= 0:
-		print("you dead")
-		Globals.hearth = max_hearth
-		position.x = -438
-		position.y = -41
-		DataState.save_file_state()
-		Data.save_file()
-		LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
+	Globals.hearths = clamp(value,0,max_hearth)
+	if Globals.hearths <= 0:
+		if device_num == 0:
+			print("you dead")
+			Globals.hearths = max_hearth
+			position = start_position
+			DataState.save_file_state()
+			Data.save_file()
+			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
+		else:
+			print("player number: '%s'" % device_num)
+			position = start_position
+			DataState.save_file_state()
+			Data.save_file()
 		
 func getcoin():
 	Globals.coins += 1
@@ -170,7 +184,7 @@ func getcoin():
 	Data.save_file()
 	
 func getlife():
-	Globals.hearth += 1
+	Globals.hearths += 1
 	DataState.save_file_state()
 	Data.save_file()
 	
@@ -188,7 +202,7 @@ func setposspawn():
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
 		InvunerabilityTime.start()
-		setlifes(Globals.hearth - ammount)
+		setlifes(Globals.hearths - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
@@ -196,7 +210,7 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Label.text = ": " + str(Globals.hearth)
+	$CanvasLayer/Label.text = ": " + str(Globals.hearths)
 	$CanvasLayer/Label2.text = ": " + str(Globals.coins)
 	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	
@@ -213,6 +227,7 @@ func in_water():
 
 func _on_invunerability_timeout():
 	Animation_Effects.play("rest")
+
 	
 func save():
 	var save_dict = {
@@ -225,7 +240,7 @@ func save():
 		"size_x" : scale.x,
 		"size_y" : scale.y,
 		"color" : color,
-		"hearth" : Globals.hearth,
+		"hearths" : Globals.hearths,
 		"coins" : Globals.coins,
 		"max_health" : max_hearth,
 	}
@@ -233,7 +248,7 @@ func save():
 	
 func load(info):
 	Globals.level = info.level
-	Globals.hearth = info.hearth
+	Globals.hearths = info.hearths
 	Globals.coins = info.coins
 	Globals.pos_y = info.pos_y
 	Globals.pos_x = info.pos_x
@@ -245,3 +260,7 @@ func load(info):
 	scale = Vector2(info.size_x, info.size_y)
 	print(info.color)
 	modulate = str_to_var("Color" + str(info.color))
+
+
+func _on_animation_player_animation_finished(anim_name):
+	modulate = color

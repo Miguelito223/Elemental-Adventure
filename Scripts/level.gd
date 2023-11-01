@@ -59,13 +59,32 @@ func add_player(player_index):
 		return
 
 	players.append(player_scene.instantiate())
+	
 	var player = players[-1]
+	
+	if DEBUGGING: # TESTING
+		# Random positions are annoying while testing.
+		# Hardcode positions for player_index 0 and 1
+		if player_index == 0:
+			player.start_position = Vector2(-460,-45)
+		elif player_index == 1:
+			player.start_position = Vector2(-399,-45)
+		elif player_index == 2:
+			player.start_position = Vector2(-340,-45)
+		elif player_index == 3:
+			player.start_position = Vector2(-280,-45)
+		else:
+			player.start_position = Vector2(-460,-45)
+
+	else:
+		player.start_position = Vector2(-460,-45)
+	
 	print(players[-1])
 
 	var colornames: Array = [
 		"white",
 		"blue",
-		"yellow",
+		"gray",
 		"green",
 	]
 	var names: Array = [
@@ -88,11 +107,7 @@ func add_player(player_index):
 	player.player_name = names[player_index]
 	if DataState.node_data.filename == "res://Scenes/player.tscn":
 		player.load(DataState.node_data)
-	else:
-		player.position.x = Globals.pos_x
-		player.position.y = Globals.pos_y
-		player.scale.x = Globals.size_x
-		player.scale.y = Globals.size_y
+
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
@@ -264,10 +279,12 @@ func _physics_process(_delta):
 
 func _on_victory_zone_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
-		body.changelevel()
-		body.setposspawn()
-		body.position.x = -438
-		body.position.y = -41
-		DataState.remove_state_file()
-		LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
+		if Globals.level == "level_10":
+			LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
+		else:
+			body.changelevel()
+			body.setposspawn()
+			body.position = body.start_position
+			DataState.remove_state_file()
+			LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 

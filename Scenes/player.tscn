@@ -10,7 +10,7 @@
 [ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="8_tblnr"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="10_6u4n5"]
-[ext_resource type="AudioStream" uid="uid://b2u1w3elsfyj1" path="res://sounds/pasos-cesped.mp3" id="12_tqaf4"]
+[ext_resource type="AudioStream" uid="uid://1dqe1autfygr" path="res://sounds/pasos cesped.mp3" id="11_m2wrv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -374,9 +374,9 @@ one_shot = true
 position = Vector2(3, 0)
 
 [node name="Pasos" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_tqaf4")
-max_distance = 100.0
+stream = ExtResource("11_m2wrv")
 bus = &"FX"
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]

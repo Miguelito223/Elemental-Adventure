@@ -11,6 +11,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
 
+var rng = RandomNumberGenerator.new()
+
+var hearths = preload("res://Scenes/hearth.tscn")
+var coins = preload("res://Scenes/coin.tscn")
+
 var max_speed = 450
 var max_speed_in_water = 200
 
@@ -27,12 +32,32 @@ func damage(ammount):
 			setlifes(hearth - ammount)
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
+
+func drop_items():
+	rng.randomize()
+	var random_number = rng.randi_range(1,  6)
+	for i in range(random_number):
+		var new_hearth = hearths.instantiate()
+		get_parent().add_child(new_hearth)
+		new_hearth.position = position
+		new_hearth.freeze = false
+		new_hearth.apply_impulse(new_hearth.position, new_hearth.impulse)
+
+	for i in range(random_number):
+		var new_coin = coins.instantiate()
+		get_parent().add_child(new_coin)
+		new_coin.position = position
+		new_coin.freeze = false
+		new_coin.apply_impulse(new_coin.position, new_coin.impulse)
 			
 
 func setlifes(value):
 	hearth = clamp(value,0,20)
 	if hearth  <= 0:
 		print("enemy dead")
+		var random_number = rng.randf_range(0,  50)
+		if random_number == 50:
+			drop_items()
 		queue_free()
 
 func _physics_process(delta):

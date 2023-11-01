@@ -1,9 +1,12 @@
-extends Area2D
+extends RigidBody2D
 
+var rng = RandomNumberGenerator.new()
 
-func _on_body_entered(body):
+var impulse = Vector2(rng.randi_range(-10,10), rng.randi_range(-10,10))
+
+func _on_area_2d_body_entered(body:Node2D):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
-			if Globals.hearth < 3:
+			if Globals.hearths < 3:
 				body.getlife()
 				visible = false
 				queue_free()
@@ -26,3 +29,4 @@ func load(info):
 	position = Vector2(info.pos_x, info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
 	visible = info.visible
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvb6s0ph1mf2f"]
+[gd_scene load_steps=20 format=3 uid="uid://bvb6s0ph1mf2f"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_nctlr"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_fywam"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="4_8560e"]
 [ext_resource type="PackedScene" uid="uid://r6nxo2uj0e0o" path="res://Scenes/plataform.tscn" id="7_683s3"]
 [ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="8_hk825"]
+[ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://Scenes/hearth.tscn" id="9_bl3ik"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcy3o"]
 size = Vector2(1.49664, 9.54374)
@@ -202,13 +203,13 @@ position = Vector2(580, -42)
 position = Vector2(625, -45)
 
 [node name="Coin15" parent="." instance=ExtResource("3_5xowy")]
-position = Vector2(673, -42)
+position = Vector2(663, -43)
 
 [node name="Coin16" parent="." instance=ExtResource("3_5xowy")]
-position = Vector2(721, -40)
+position = Vector2(733, -41)
 
 [node name="Coin17" parent="." instance=ExtResource("3_5xowy")]
-position = Vector2(772, -36)
+position = Vector2(787, -41)
 
 [node name="Coin18" parent="." instance=ExtResource("3_5xowy")]
 position = Vector2(894, -85)
@@ -250,5 +251,8 @@ libraries = {
 stream = ExtResource("8_hk825")
 autoplay = true
 bus = &"Music"
+
+[node name="Hearth" parent="." instance=ExtResource("9_bl3ik")]
+position = Vector2(698, -40)
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_skb27"]
 [ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://Sprites/enemigo1.png" id="2_evuxq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
-size = Vector2(31, 20)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hdx6"]
 radius = 20.0
 height = 40.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
+size = Vector2(31, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ms8oy"]
 atlas = ExtResource("2_evuxq")
@@ -145,15 +145,16 @@ _data = {
 [node name="enemy" type="CharacterBody2D" groups=["persistent"]]
 script = ExtResource("1_skb27")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.5, 3)
-shape = SubResource("RectangleShape2D_r0gqy")
-
 [node name="Enemy_area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_area"]
 position = Vector2(4, 2)
 shape = SubResource("CapsuleShape2D_0hdx6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 3)
+shape = SubResource("RectangleShape2D_r0gqy")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
