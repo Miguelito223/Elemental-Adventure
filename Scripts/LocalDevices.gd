@@ -19,7 +19,6 @@ func _ready():
 	await Signals.level_loaded
 	level = get_tree().get_root().get_node(Globals.level)
 	level.num_players = Input.get_connected_joypads().size()
-	Globals.num_players = level.num_players
 
 	var _ret
 	_ret = Input.connect("joy_connection_changed", _on_joy_connection_changed)
@@ -36,7 +35,6 @@ func _on_joy_connection_changed(device_id, connected):
 	if connected:
 		level.num_players = Input.get_connected_joypads().size()
 		level.add_player(device_id)
-		Globals.num_players = level.num_players
 		print("Added player index {d} to the world.".format({"d":device_id}))
 	else:
 		level.remove_player(device_id)

@@ -25,7 +25,7 @@ Signals="*res://Scripts/Signals.gd"
 Data="*res://Scripts/Data.gd"
 DataState="*res://Scripts/DataState.gd"
 LoadScene="*res://Scripts/LoadScene.gd"
-Main="*res://Scripts/Main.gd"
+LocalDevices="*res://Scripts/LocalDevices.gd"
 
 [display]
 

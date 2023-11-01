@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bt7hywdmbqldj"]
+[gd_scene load_steps=16 format=3 uid="uid://bt7hywdmbqldj"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_4anp0"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ftqhb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/dnc.gd" id="6_rgq1m"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/coin.tscn" id="7_xtuig"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="8_23fhp"]
+[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="8_a8mk6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua2aw"]
 size = Vector2(1.49664, 9.54374)
@@ -167,5 +168,10 @@ position = Vector2(711, -122)
 
 [node name="Enemy2" parent="." instance=ExtResource("8_23fhp")]
 position = Vector2(307, -44)
+
+[node name="Level Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_a8mk6")
+autoplay = true
+bus = &"Music"
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

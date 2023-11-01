@@ -3,11 +3,13 @@ extends Node2D
 var DEBUGGING = true
 
 var num_players: int = 0
+
 var use_keyboard: bool = false
+
+var load_data
 
 var players: Array = []
 var input_maps: Array = []
-var node_data
 
 var rng = RandomNumberGenerator.new()
 
@@ -19,29 +21,32 @@ func _ready():
 		print("Parent of '{n}' is '{p}'".format({
 			"n":name,
 			"p":get_parent().name,
-			}))
+		}))
+		
+		load_data = DataState.load_file_state()
 
-	for player_index in range(num_players):
-		add_player(player_index)
+		if load_data == null:
+			for player_index in range(num_players):
+				add_player(player_index)
 
-	if num_players <= 0:
-		use_keyboard = true
-		for player_index in range(1):
-			add_player(player_index)	
-	
-	Globals.num_players = num_players
+			if num_players <= 0:
+				use_keyboard = true
+				for player_index in range(1):
+					add_player(player_index)
+		else:
+			load_data
+			
+
 	Signals.level_loaded.emit()
 
 
 func add_player(player_index):
 
 	if player_index < players.size():
-		if not players.is_empty():
-			Signals.connected.emit(players[player_index].player_name)
-			return
+		Signals.connected.emit()
+		return
 
 	players.append(player_scene.instantiate())
-
 	var player = players[-1]
 	print(players[-1])
 
@@ -69,7 +74,8 @@ func add_player(player_index):
 
 	player.color = color_dict[player_index]
 	player.player_name = names[player_index]
-	
+	if DataState.node_data.filename == "res://Scenes/player.tscn":
+		player.load(DataState.node_data)
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
@@ -83,7 +89,7 @@ func add_player(player_index):
 	
 	player.ui_inputs = input_maps[player_index]
 		
-	if not use_keyboard:
+	if use_keyboard == false:
 		player.device_num = player_index
 		
 		var right_action: String
@@ -124,7 +130,7 @@ func add_player(player_index):
 		# Creat a new InputEvent instance to assign to the InputMap.
 		jump_action_event = InputEventJoypadButton.new()
 		jump_action_event.device = player_index
-		jump_action_event.button_index = JOY_BUTTON_X
+		jump_action_event.button_index = JOY_BUTTON_A
 		InputMap.action_add_event(jump_action, jump_action_event)
 		
 		shot_action = "ui_shoot{n}".format({"n":player_index})
@@ -132,11 +138,11 @@ func add_player(player_index):
 		# Creat a new InputEvent instance to assign to the InputMap.
 		shot_action_event = InputEventJoypadButton.new()
 		shot_action_event.device = player_index
-		shot_action_event.button_index = JOY_BUTTON_A
+		shot_action_event.button_index = JOY_BUTTON_X
 		InputMap.action_add_event(shot_action, shot_action_event)
 		
 		pause_action = "ui_pause{n}".format({"n":player_index})
-		InputMap.add_action(shot_action)
+		InputMap.add_action(pause_action)
 		# Creat a new InputEvent instance to assign to the InputMap.
 		pause_action_event = InputEventJoypadButton.new()
 		pause_action_event.device = player_index
@@ -150,28 +156,28 @@ func add_player(player_index):
 			"key_left":  KEY_LEFT,
 			"key_jump":  KEY_UP,
 			"key_shoot":  KEY_DOWN,
-			"key_pause": KEY_ESCAPE
+			"key_pause": KEY_ESCAPE,
 			}
 		var wasd: Dictionary = {
 			"key_right": KEY_D,
 			"key_left":  KEY_A,
 			"key_jump":  KEY_W,
 			"key_shoot":  KEY_S,
-			"key_pause": KEY_ESCAPE
+			"key_pause": KEY_ESCAPE,
 			}
 		var hjkl: Dictionary = {
 			"key_right": KEY_L,
 			"key_left":  KEY_H,
 			"key_jump":  KEY_K,
 			"key_shoot":  KEY_J,
-			"key_pause": KEY_ESCAPE
+			"key_pause": KEY_ESCAPE,
 			}
 		var uiop: Dictionary = {
 			"key_right": KEY_P,
 			"key_left":  KEY_U,
 			"key_jump":  KEY_O,
 			"key_shoot":  KEY_I,
-			"key_pause": KEY_ESCAPE
+			"key_pause": KEY_ESCAPE,
 			}
 		var keymaps: Dictionary = {
 			0: arrows,
@@ -232,10 +238,10 @@ func add_player(player_index):
 		InputMap.action_add_event(pause_action, pause_action_event)
 	
 	add_child(player)
+	
 
 func remove_player(player_index):
-	if not players.is_empty():
-		Signals.disconnected.emit(players[player_index].player_name)
+	Signals.disconnected.emit()
 
 func _physics_process(_delta):
 	if Globals.autosave:

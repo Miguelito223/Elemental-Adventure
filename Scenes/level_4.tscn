@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2rh0nih50uto"]
+[gd_scene load_steps=13 format=3 uid="uid://b2rh0nih50uto"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_wkmp5"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_c6qx4"]
 [ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="3_t802u"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="5_d66de"]
+[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="7_6e8md"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/coin.tscn" id="7_rp6qq"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="8_150vr"]
 
@@ -154,5 +155,10 @@ position = Vector2(299, -69)
 
 [node name="Enemy3" parent="." instance=ExtResource("8_150vr")]
 position = Vector2(-46, -49)
+
+[node name="Level Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6e8md")
+autoplay = true
+bus = &"Music"
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

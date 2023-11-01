@@ -29,6 +29,7 @@ func save_file():
 		},
 		"others":{
 			"num_players": Globals.num_players,
+			"use_keyboard": Globals.use_keyboard,
 		}
 	}
 	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
@@ -44,18 +45,32 @@ func load_file():
 	if not FileAccess.file_exists(data_path):
 		print("Data file doesn't exist!")
 		save_file()
-		return
-
+		return null
+	
 	if datafile.get_length() <= 0:
-		print("Data file is empy")
+		print("State data file empty!")
 		save_file()
-		return
+		return null
 		
 	print("Data file found")
+	var json_string
+
+	var json
+	
+	var parse_result
+
 	while datafile.get_position() < datafile.get_length():
-		
-		data = JSON.parse_string(datafile.get_line())
-		
+		json_string = datafile.get_line()
+
+		json = JSON.new()
+
+		parse_result = json.parse(json_string)
+
+		data = json.get_data()
+
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
 		var settings = data.settings
 		
 		#settings
@@ -79,17 +94,12 @@ func load_file():
 		var others = data.others
 
 		Globals.num_players = others.num_players
+		Globals.use_keyboard = others.use_keyboard
 		
 		Signals.finish_load_data.emit()
-		return data
 	
 	print("finish")
-
-		
-		
-#Player and other save
-		
-
+	return data
 	
 func remove_file():
 	print("Removing file...")

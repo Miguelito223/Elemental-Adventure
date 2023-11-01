@@ -26,20 +26,14 @@ var player_name: String = "player_name"
 var device_num: int = 0 # default to device 0
 var is_moving: bool = false
 
-func _on_disconnected(name):
-	if player_name == name:
-		print("disconnected player: '%s'" % name)
-		modulate.a = 0.3
+func _on_disconnected():
+	print("disconnected player: '%s'" % name)
+	modulate.a = 0.3
 
-func _on_connected(name):
-	if player_name == name:
-		print("connected player: '%s'" % name)
-		modulate.a = 1.0
-		
+func _on_connected():
 
-func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		DataState.save_file_state()
+	print("connected player: '%s'" % name)
+	modulate.a = 1.0
 		
 func _ready():
 	var parent_node = get_parent()
@@ -63,14 +57,11 @@ func _ready():
 			}))
 			
 	AnimatedSprite.modulate = color
-	
 	position.x = -450
 	position.y = -57
 	setlifes(Globals.hearth)
 	Pause_Menu.hide()
 	get_tree().paused = false
-
-	DataState.load_file_state()	
 	Signals.player_ready.emit()
 
 
@@ -116,10 +107,12 @@ func move(delta):
 
 	if axis == Vector2.ZERO:
 		apply_fricction(friction * delta)
+		is_moving = false
 		$Pasos.stop()
 	else:
 		apply_movement(axis * speed * delta)
-		$Pasos.stop()
+		is_moving = true
+		$Pasos.play()
 
 	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
 		velocity.y = jump_speed
@@ -170,7 +163,7 @@ func setlifes(value):
 		position.x = -438
 		position.y = -41
 		DataState.save_file_state()
-		LoadScene.load_scene(self, "res://Scenes/death_menu.tscn")
+		LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		
 func getcoin():
 	Globals.coins += 1
@@ -246,4 +239,5 @@ func load(info):
 	player_name = info.name
 	position = Vector2(info.pos_x,info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
-	modulate = str_to_var("Color" + info.color)
+	print(info.color)
+	modulate = str_to_var("Color" + str(info.color))

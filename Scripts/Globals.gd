@@ -29,3 +29,4 @@ var hour = "12"
 
 #others
 var num_players = 0
+var use_keyboard = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4lqd43x0ndff"]
+[gd_scene load_steps=14 format=3 uid="uid://b4lqd43x0ndff"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_qgu7p"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_yvtgd"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="5_ihx6p"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/coin.tscn" id="7_w1o5k"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="8_3knyr"]
+[ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="8_en3uy"]
 [ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://Scenes/hearth.tscn" id="9_gnp82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua2aw"]
@@ -163,5 +164,10 @@ position = Vector2(733, -47)
 
 [node name="Hearth2" parent="." instance=ExtResource("9_gnp82")]
 position = Vector2(380, -42)
+
+[node name="Level Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_en3uy")
+autoplay = true
+bus = &"Music"
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
