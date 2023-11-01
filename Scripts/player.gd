@@ -26,13 +26,13 @@ var player_name: String = "player_name"
 var device_num: int = 0 # default to device 0
 var is_moving: bool = false
 
-func _on_disconnected():
-	print("disconnected player: '%s'" % name)
+func _on_disconnected(player_index):
+	print("disconnected player: {s}, player number: {t}".format({"t":player_index, "s": name}) )
 	modulate.a = 0.3
 
-func _on_connected():
+func _on_connected(player_index):
 
-	print("connected player: '%s'" % name)
+	print("connected player: {s}, player number: {t}".format({"t":player_index, "s": name}) )
 	modulate.a = 1.0
 		
 func _ready():
@@ -57,8 +57,6 @@ func _ready():
 			}))
 			
 	AnimatedSprite.modulate = color
-	position.x = -450
-	position.y = -57
 	setlifes(Globals.hearth)
 	Pause_Menu.hide()
 	get_tree().paused = false
@@ -163,24 +161,29 @@ func setlifes(value):
 		position.x = -438
 		position.y = -41
 		DataState.save_file_state()
+		Data.save_file()
 		LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		
 func getcoin():
 	Globals.coins += 1
 	DataState.save_file_state()
+	Data.save_file()
 	
 func getlife():
 	Globals.hearth += 1
 	DataState.save_file_state()
+	Data.save_file()
 	
 func changelevel():
 	Globals.level = "level_" + str(int(Globals.level) + 1 ) 
 	save().parent = "/root/" + Globals.level
 	DataState.save_file_state()
+	Data.save_file()
 	
 func setposspawn():
 	set_position(Vector2(-449, -26))
 	DataState.save_file_state()
+	Data.save_file()
 
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
@@ -189,6 +192,7 @@ func damage(ammount):
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
+		Data.save_file()
 		
 
 func update_label():

@@ -10,7 +10,7 @@ const GAME_SCENE ={
 	"level_7": "res://Scenes/level_7.tscn",
 	"level_8": "res://Scenes/level_8.tscn",
 	"level_9": "res://Scenes/level_9.tscn",
-	"level_10": "res://Scenes/level_10.tscn"
+	"level_10": "res://Scenes/level_10.tscn",
 }
 
 var loading_screen = preload("res://Scenes/loading_screen.tscn")

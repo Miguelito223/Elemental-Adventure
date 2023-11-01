@@ -26,24 +26,38 @@ func _ready():
 		load_data = DataState.load_file_state()
 
 		if load_data == null:
-			for player_index in range(num_players):
-				add_player(player_index)
 
-			if num_players <= 0:
-				use_keyboard = true
+			if Globals.num_players == 0:
+				Globals.use_keyboard = true
 				for player_index in range(1):
 					add_player(player_index)
+			else:
+				Globals.use_keyboard = false
+				for player_index in range(Globals.num_players):
+					add_player(player_index)
+				
 		else:
 			load_data
 			
-
 	Signals.level_loaded.emit()
 
+func _process(delta):
+	if Globals.num_players <= 0:
+		Globals.use_keyboard = true
+	else:
+		Globals.use_keyboard = false
+	
+	print(Globals.num_players)
+
+func remove_player(player_index):
+	Signals.disconnected.emit(player_index)
 
 func add_player(player_index):
 
+	print(player_index)
+
 	if player_index < players.size():
-		Signals.connected.emit()
+		Signals.connected.emit(player_index)
 		return
 
 	players.append(player_scene.instantiate())
@@ -76,6 +90,11 @@ func add_player(player_index):
 	player.player_name = names[player_index]
 	if DataState.node_data.filename == "res://Scenes/player.tscn":
 		player.load(DataState.node_data)
+	else:
+		player.position.x = Globals.pos_x
+		player.position.y = Globals.pos_y
+		player.scale.x = Globals.size_x
+		player.scale.y = Globals.size_y
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
@@ -88,8 +107,10 @@ func add_player(player_index):
 	# DEBUGGING
 	
 	player.ui_inputs = input_maps[player_index]
+	
+	print(use_keyboard)
 		
-	if use_keyboard == false:
+	if Globals.use_keyboard == false:
 		player.device_num = player_index
 		
 		var right_action: String
@@ -238,10 +259,6 @@ func add_player(player_index):
 		InputMap.action_add_event(pause_action, pause_action_event)
 	
 	add_child(player)
-	
-
-func remove_player(player_index):
-	Signals.disconnected.emit()
 
 func _physics_process(_delta):
 	if Globals.autosave:
@@ -251,6 +268,8 @@ func _on_victory_zone_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		body.changelevel()
 		body.setposspawn()
+		body.position.x = -438
+		body.position.y = -41
 		DataState.remove_state_file()
 		LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 

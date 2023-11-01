@@ -5,6 +5,7 @@ func _on_return_pressed():
 
 func _on_back_pressed():
 	DataState.save_file_state()
+	Data.save_file()
 	LoadScene.load_scene(self, "res://main_menu.tscn")
 
 

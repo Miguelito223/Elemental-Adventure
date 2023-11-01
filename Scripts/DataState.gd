@@ -71,13 +71,17 @@ func load_file_state():
 		if node_data.filename == "res://Scenes/player.tscn":
 			print("loading player, name: '%s'..." % node_data.name)
 			var level = get_tree().get_root().get_node(Globals.level)
-			for player_index in range(level.num_players):
-				level.add_player(player_index)
-
-			if level.num_players <= 0:
-				level.use_keyboard = true
+			
+			if Globals.num_players == 0:
+				Globals.use_keyboard = true
 				for player_index in range(1):
 					level.add_player(player_index)
+			else:
+				Globals.use_keyboard = false
+				for player_index in range(Globals.num_players):
+					level.add_player(player_index)
+			
+			
 			print("loading finish...")
 		else:
 			print("creating node '%s'" % new_object.name)
@@ -120,4 +124,5 @@ func autosave_logic():
 		
 	if (time_passed > (int(Globals.autosave_length) * 60)) :
 		save_file_state()
+		Data.save_file()
 		Globals.autosaver_start_time = str(Time.get_unix_time_from_system())
