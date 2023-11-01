@@ -48,14 +48,14 @@ func _process(delta):
 		Globals.use_keyboard = false
 
 func remove_player(player_index):
-	Signals.disconnected.emit(player_index)
+	Signals.disconnected.emit(players[player_index].player_name)
 
 func add_player(player_index):
 
 	print(player_index)
 
 	if player_index < players.size():
-		Signals.connected.emit(player_index)
+		Signals.connected.emit(players[player_index].player_name)
 		return
 
 	players.append(player_scene.instantiate())

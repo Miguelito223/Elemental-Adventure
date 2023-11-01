@@ -28,14 +28,15 @@ var player_name: String = "player_name"
 var device_num: int = 0 # default to device 0
 var is_moving: bool = false
 
-func _on_disconnected(player_index):
-	print("disconnected player: {s}, player number: {t}".format({"t":player_index, "s": name}) )
-	modulate.a = 0.3
+func _on_disconnected(name):
+	if player_name == name:
+		print("disconnected player: {s}, player number: {t}".format({"t":device_num, "s": name}) )
+		modulate.a = 0.3
 
-func _on_connected(player_index):
-
-	print("connected player: {s}, player number: {t}".format({"t":player_index, "s": name}) )
-	modulate.a = 1.0
+func _on_connected(name):
+	if player_name == name:
+		print("connected player: {s}, player number: {t}".format({"t":device_num, "s": name}) )
+		modulate.a = 1.0
 		
 func _ready():
 	var parent_node = get_parent()
