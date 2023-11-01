@@ -177,4 +177,4 @@ stream = ExtResource("10_f35ke")
 autoplay = true
 bus = &"Music"
 
-[connection signal="area_entered" from="Victory Zone" to="." method="_on_victory_zone_area_entered"]
+[connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

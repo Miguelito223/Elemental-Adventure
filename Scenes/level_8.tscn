@@ -249,4 +249,4 @@ libraries = {
 "": SubResource("AnimationLibrary_6pe47")
 }
 
-[connection signal="area_entered" from="Victory Zone" to="." method="_on_victory_zone_area_entered"]
+[connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
