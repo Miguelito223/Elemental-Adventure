@@ -20,7 +20,7 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
-var start_position: Vector2 = Vector2(100.0, 100.0)
+var start_position = Vector2(100.0, 100.0)
 
 var color: Color = Color("White", 1) # color, alpha
 
@@ -28,13 +28,13 @@ var player_name: String = "player_name"
 var device_num: int = 0 # default to device 0
 var is_moving: bool = false
 
-func _on_disconnected(name):
-	if player_name == name:
+func _on_disconnected(lol_name):
+	if player_name == lol_name:
 		print("disconnected player: {s}, player number: {t}".format({"t":device_num, "s": name}) )
 		modulate.a = 0.3
 
-func _on_connected(name):
-	if player_name == name:
+func _on_connected(lol_name):
+	if player_name == lol_name:
 		print("connected player: {s}, player number: {t}".format({"t":device_num, "s": name}) )
 		modulate.a = 1.0
 		
@@ -255,8 +255,6 @@ func load(info):
 	Globals.pos_x = info.pos_x
 	Globals.size_y = info.size_y
 	Globals.size_x = info.size_x
-	name = info.name
-	player_name = info.name
 	position = Vector2(info.pos_x,info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
 	print(info.color)

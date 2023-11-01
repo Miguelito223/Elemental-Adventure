@@ -71,6 +71,9 @@ func load_file_state():
 		if node_data.filename == "res://Scenes/player.tscn":
 			print("loading player, name: %s..." % node_data.name)
 			var level = get_tree().get_root().get_node(Globals.level)
+
+			for player_index in range(Globals.num_players):
+				level.add_player(player_index)
 			
 			if Globals.num_players == 0:
 				Globals.use_keyboard = true
@@ -78,8 +81,6 @@ func load_file_state():
 					level.add_player(player_index)
 			else:
 				Globals.use_keyboard = false
-				for player_index in range(Globals.num_players):
-					level.add_player(player_index)
 			
 			
 			print("loading finish...")

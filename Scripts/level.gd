@@ -27,17 +27,17 @@ func _ready():
 
 		if load_data == null:
 
+			for player_index in range(Globals.num_players):
+				add_player(player_index)
+
 			if Globals.num_players == 0:
 				Globals.use_keyboard = true
 				for player_index in range(1):
 					add_player(player_index)
 			else:
 				Globals.use_keyboard = false
-				for player_index in range(Globals.num_players):
-					add_player(player_index)
+
 			
-		else:
-			load_data
 			
 	Signals.level_loaded.emit()
 
@@ -55,6 +55,7 @@ func add_player(player_index):
 	print(player_index)
 
 	if player_index < players.size():
+		print(players[player_index].player_name)
 		Signals.connected.emit(players[player_index].player_name)
 		return
 
@@ -105,6 +106,7 @@ func add_player(player_index):
 
 	player.color = color_dict[player_index]
 	player.player_name = names[player_index]
+	player.name = names[player_index]
 	if DataState.node_data.filename == "res://Scenes/player.tscn":
 		player.load(DataState.node_data)
 
