@@ -35,19 +35,17 @@ func _ready():
 				Globals.use_keyboard = false
 				for player_index in range(Globals.num_players):
 					add_player(player_index)
-				
+			
 		else:
 			load_data
 			
 	Signals.level_loaded.emit()
 
 func _process(delta):
-	if Globals.num_players <= 0:
+	if Globals.num_players == 0:
 		Globals.use_keyboard = true
 	else:
 		Globals.use_keyboard = false
-	
-	print(Globals.num_players)
 
 func remove_player(player_index):
 	Signals.disconnected.emit(player_index)
