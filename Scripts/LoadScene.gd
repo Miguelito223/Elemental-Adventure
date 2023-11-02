@@ -16,7 +16,7 @@ const GAME_SCENE ={
 var loading_screen = preload("res://Scenes/loading_screen.tscn")
 func load_scene(current_scene, next_scene):
 	var loading_screen_intance = loading_screen.instantiate()
-	get_tree().get_root().add_child(loading_screen_intance)
+	get_tree().get_root().get_node("Game").add_child(loading_screen_intance)
 	
 	var load_path
 	if GAME_SCENE.has(next_scene):
@@ -53,7 +53,11 @@ func load_scene(current_scene, next_scene):
 				if current_scene != null:
 					current_scene.queue_free()
 				var new_scene = ResourceLoader.load_threaded_get(load_path).instantiate()
-				get_tree().get_root().add_child(new_scene)
+				get_tree().get_root().get_node("Game").add_child(new_scene)
 				loading_screen_intance.fade_out_loading_screen()
 				Signals.finish_loading.emit()
 				return
+
+
+func _ready():
+	load_scene(null, "res://Scenes/main_menu.tscn")

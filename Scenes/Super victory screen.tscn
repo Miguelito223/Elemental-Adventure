@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dj5hoawm4c8hc"]
 
-[ext_resource type="Script" path="res://Scenes/Super victory screen.gd" id="1_x1h5b"]
+[ext_resource type="Script" path="res://Scripts/Super victory screen.gd" id="1_x1h5b"]
 [ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="2_6pc16"]
 [ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/main menu music.mp3" id="3_qq3xn"]
 
