@@ -55,7 +55,8 @@ func setlifes(value):
 	hearth = clamp(value,0,20)
 	if hearth  <= 0:
 		print("enemy dead")
-		var random_number = rng.randf_range(0,  50)
+		rng.randomize()
+		var random_number = rng.randi_range(0,  50)
 		if random_number == 50:
 			drop_items()
 		queue_free()

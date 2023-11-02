@@ -7,14 +7,12 @@
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
-anchor_right = 1.669
-anchor_bottom = 1.682
-offset_right = -3204.48
-offset_bottom = -1816.56
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2vk4l")
-metadata/_edit_use_anchors_ = true
 
 [node name="fondo" type="ColorRect" parent="."]
 layout_mode = 0

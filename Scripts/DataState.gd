@@ -19,7 +19,7 @@ func save_file_state():
 			continue
 
 		node_data = node.save()
-		datafile.store_line(JSON.stringify(node_data))
+		datafile.store_line(JSON.stringify(var_to_str(node_data)))
 	
 	Signals.finish_add_data.emit()
 	print("finish")
@@ -60,7 +60,7 @@ func load_file_state():
 		
 		parse_result = json.parse(json_string)
 		
-		node_data = json.get_data()
+		node_data = str_to_var(json.get_data())
 
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
@@ -70,7 +70,7 @@ func load_file_state():
 
 		if node_data.filename == "res://Scenes/player.tscn":
 			print("loading player, name: %s..." % node_data.name)
-			var level = get_tree().get_root().get_node(Globals.level)
+			var level = get_tree().get_root().get_node("Game/" + Globals.level)
 
 			for player_index in range(Globals.num_players):
 				level.add_player(player_index)

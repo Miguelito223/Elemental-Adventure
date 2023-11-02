@@ -39,10 +39,11 @@ func save_file():
 		"others":{
 			"num_players": Globals.num_players,
 			"use_keyboard": Globals.use_keyboard,
+			"player_index": Globals.player_index,
 		}
 	}
 	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
-	datafile.store_line(JSON.stringify(data))
+	datafile.store_line(JSON.stringify(var_to_str(data)))
 	
 	Signals.finish_add_data.emit()
 	
@@ -75,7 +76,7 @@ func load_file():
 
 		parse_result = json.parse(json_string)
 
-		data = json.get_data()
+		data = str_to_var(json.get_data())
 
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
@@ -103,7 +104,7 @@ func load_file():
 		var players = data.players
 
 		Globals.level = players.level
-		Globals.hearths = players.hearths
+		Globals.hearths = str_to_var(players.hearths)
 		Globals.coins = players.coins
 		Globals.pos_y = players.pos_y
 		Globals.pos_x = players.pos_x
@@ -114,6 +115,7 @@ func load_file():
 
 		Globals.num_players = others.num_players
 		Globals.use_keyboard = others.use_keyboard
+		Globals.player_index = others.player_index
 		
 		Signals.finish_load_data.emit()
 	
