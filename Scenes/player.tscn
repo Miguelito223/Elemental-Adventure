@@ -253,7 +253,6 @@ animations = [{
 [node name="player" type="CharacterBody2D" groups=["persistent"]]
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_peqvs")
-max_hearth = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 0)

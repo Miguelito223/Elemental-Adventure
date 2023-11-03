@@ -3,7 +3,7 @@ extends Node
 #player
 var level = "level_1"
 var level_int = 1
-var hearths = { 0: 3, 1:3, 2:3, 3:3, 4:3}
+var hearths = {}
 var coins = 0
 var pos_x = -438
 var pos_y = -41

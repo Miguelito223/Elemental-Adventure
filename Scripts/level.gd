@@ -145,9 +145,17 @@ func add_player(player_index):
 		3: Color(colornames[3], alpha), # color, alpha
 	}
 
+	var hearths: Dictionary = {
+		0: 3, # color, alpha
+		1: 3, # color, alpha
+		2: 3, # color, alpha
+		3: 3, # color, alpha
+	}
+
 	player.color = color_dict[player_index]
 	player.name = names[player_index]
 	Globals.player_name = names[player_index]
+	Globals.hearths = hearths
 
 	if DataState.node_data.filename == "res://Scenes/player.tscn":
 		player.load(DataState.node_data)
