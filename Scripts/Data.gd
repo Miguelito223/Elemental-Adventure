@@ -96,7 +96,7 @@ func load_file():
 		Globals.autosave = settings.autosave
 		Globals.autosave_length = settings.autosave_length
 		Globals.autosaver_start_time = settings.autosaver_start_time
-		Globals.inputs = settings.set_inputs
+		Globals.inputs = bool(settings.set_inputs)
 
 		var time = data.time
 

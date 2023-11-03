@@ -39,7 +39,7 @@ func addresolutions():
 		index += 1
 
 func addinputs():
-	var current_input = Globals.use_keyboard
+	var current_input = Globals.inputs
 	var index = 0
 	
 	for r in inputs:
@@ -145,5 +145,5 @@ func _on_autosaver_start_time_text_text_changed(new_text):
 	Data.save_file()
 
 
-func _on_input_set_item_selected(index:int):
-	pass # Replace with function body.
+func _on_input_set_item_selected(index):
+	Data.load_inputs(index)

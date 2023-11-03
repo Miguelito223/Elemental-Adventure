@@ -49,7 +49,6 @@ func _ready():
 	position = start_position
 	print(Globals.hearths)
 	print(Globals.player_index)
-	Globals.hearths[Globals.player_index] = 3
 	setlifes(Globals.hearths[Globals.player_index])
 	Pause_Menu.hide()
 	get_tree().paused = false

@@ -202,6 +202,15 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bx21l")
 text = "Back"
 
+[node name="Input_set label" type="Label" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+text = "Input type"
+
+[node name="Input_set" type="OptionButton" parent="settings menu2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bx21l")
+
 [node name="Main menu music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3w0aj")
 autoplay = true
@@ -224,3 +233,4 @@ bus = &"Music"
 [connection signal="text_changed" from="settings menu2/autosave length text" to="." method="_on_autosave_length_text_text_changed"]
 [connection signal="text_changed" from="settings menu2/autosaver start time text" to="." method="_on_autosaver_start_time_text_text_changed"]
 [connection signal="pressed" from="settings menu2/back2" to="." method="_on_back_2_pressed"]
+[connection signal="item_selected" from="settings menu2/Input_set" to="." method="_on_input_set_item_selected"]
