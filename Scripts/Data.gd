@@ -21,6 +21,7 @@ func save_file():
 			"autosave":  Globals.autosave,
 			"autosave_length":  Globals.autosave_length,
 			"autosaver_start_time":  Globals.autosaver_start_time,
+			"set_inputs": Globals.inputs,
 		},
 		"time":{
 			"day": Globals.day,
@@ -95,6 +96,7 @@ func load_file():
 		Globals.autosave = settings.autosave
 		Globals.autosave_length = settings.autosave_length
 		Globals.autosaver_start_time = settings.autosaver_start_time
+		Globals.inputs = settings.set_inputs
 
 		var time = data.time
 
@@ -106,7 +108,6 @@ func load_file():
 		var players = data.players
 
 		Globals.level = players.level
-		Globals.hearths = players.hearths
 		Globals.coins = players.coins
 		Globals.pos_y = players.pos_y
 		Globals.pos_x = players.pos_x
@@ -165,5 +166,10 @@ func load_resolution(value):
 	DisplayServer.window_set_size(value)
 	get_viewport().set_size(value)
 	Globals.resolution = value
+	save_file()
+
+func load_inputs(value):
+	Globals.use_keyboard = value
+	Globals.inputs = value
 	save_file()
 

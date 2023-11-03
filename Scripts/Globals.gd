@@ -1,5 +1,17 @@
 extends Node
 
+#time
+var minute = "00"
+var day = "1"
+var hour = "12"
+var time = 0.0
+
+#others
+var num_players = 0
+var player_index = 0
+var use_keyboard = false
+var player_name = "player_name"
+
 #player
 var level = "level_1"
 var level_int = 1
@@ -21,15 +33,4 @@ var time_speed = "1.0"
 var autosave = false
 var autosave_length = "5"
 var autosaver_start_time = "0"
-
-#time
-var minute = "00"
-var day = "1"
-var hour = "12"
-var time = 0.0
-
-#others
-var num_players = 0
-var player_index = 0
-var use_keyboard = false
-var player_name = "player_name"
+var inputs = false

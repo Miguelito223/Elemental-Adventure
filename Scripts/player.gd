@@ -47,6 +47,9 @@ func _ready():
 			
 	modulate = color
 	position = start_position
+	print(Globals.hearths)
+	print(Globals.player_index)
+	Globals.hearths[Globals.player_index] = 3
 	setlifes(Globals.hearths[Globals.player_index])
 	Pause_Menu.hide()
 	get_tree().paused = false
@@ -150,18 +153,18 @@ func shot():
 		can_fire = true
 	
 func setlifes(value):
-	Globals.hearths = clamp(value,0,max_hearth)
-	if Globals.hearths <= 0:
+	Globals.hearths[Globals.player_index] = clamp(value,0,max_hearth)
+	if Globals.hearths[Globals.player_index] <= 0:
 		if Globals.player_index == 0:
 			print("you dead")
-			Globals.hearths = max_hearth
+			Globals.hearths[0] = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
 			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
-			Globals.hearths = max_hearth
+			Globals.hearths[0] = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
@@ -172,7 +175,7 @@ func getcoin():
 	Data.save_file()
 	
 func getlife():
-	Globals.hearths += 1
+	Globals.hearths[Globals.player_index] += 1
 	DataState.save_file_state()
 	Data.save_file()
 	
@@ -190,7 +193,7 @@ func setposspawn():
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
 		InvunerabilityTime.start()
-		setlifes(Globals.hearths - ammount)
+		setlifes(Globals.hearths[Globals.player_index] - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
@@ -198,7 +201,7 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Label.text = ":" + str(Globals.hearths)
+	$CanvasLayer/Label.text = ":" + str(Globals.hearths[0])
 	$CanvasLayer/Label2.text = ":" + str(Globals.coins)
 	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	
@@ -228,7 +231,7 @@ func save():
 		"size_x" : scale.x,
 		"size_y" : scale.y,
 		"color" : color,
-		"hearths" : Globals.hearths,
+		"hearths" : Globals.hearths[0],
 		"coins" : Globals.coins,
 		"max_health" : max_hearth,
 	}
@@ -236,7 +239,6 @@ func save():
 	
 func load(info):
 	Globals.level = info.level
-	Globals.hearths = info.hearths
 	Globals.coins = info.coins
 	Globals.pos_y = info.pos_y
 	Globals.pos_x = info.pos_x

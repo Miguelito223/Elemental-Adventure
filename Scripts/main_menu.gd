@@ -13,12 +13,18 @@ extends Control
 @onready var autosave = $"settings menu2/Autosave"
 @onready var autosave_length = $"settings menu2/autosave length text"
 @onready var autosaver_start_time = $"settings menu2/autosaver start time text"
+@onready var set_input = $"settings menu2/Input_set"
 
 var resolution = {
 	"1920x1080": Vector2i(1920, 1080),
 	"1280x720": Vector2i(1280, 720),
 	"1152x648": Vector2i(1152, 648),
 	"720x480": Vector2i(720, 480)
+}
+
+var inputs = {
+	"Keyboard": true,
+	"Gamepad": false,
 }
 	
 func addresolutions():
@@ -32,12 +38,24 @@ func addresolutions():
 			resolutions._select_int(index)
 		index += 1
 
+func addinputs():
+	var current_input = Globals.use_keyboard
+	var index = 0
+	
+	for r in inputs:
+		set_input.add_item(r,index)
+		
+		if inputs[r] == current_input:
+			set_input._select_int(index)
+		index += 1
+
 func _ready():
 	main_menu.show()
 	settings_menu.hide()
 	settings_menu2.hide()
 	
 	addresolutions()
+	addinputs()
 
 	master_volume.value = Globals.master_volume
 	fx_volume.value = Globals.fx_volume
@@ -49,6 +67,7 @@ func _ready():
 	autosave.button_pressed = Globals.autosave
 	autosave_length.text = Globals.autosave_length
 	autosaver_start_time.text = Globals.autosaver_start_time
+	Data.load_inputs(Globals.inputs)
 	
 func _on_play_pressed():
 	print(Globals.level)
@@ -124,3 +143,7 @@ func _on_autosave_length_text_text_changed(new_text):
 func _on_autosaver_start_time_text_text_changed(new_text):
 	Globals.autosaver_start_time = new_text
 	Data.save_file()
+
+
+func _on_input_set_item_selected(index:int):
+	pass # Replace with function body.

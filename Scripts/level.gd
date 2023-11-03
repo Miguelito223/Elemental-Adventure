@@ -2,9 +2,9 @@ extends Node2D
 
 var DEBUGGING = true
 
-var num_players: int = 0
+var num_players: int = Globals.num_players
 
-var use_keyboard: bool = false
+var use_keyboard: bool = Globals.use_keyboard
 
 var load_data
 
@@ -44,19 +44,12 @@ func _ready():
 				Globals.use_keyboard = true
 				for player_index in range(1):
 					add_player(player_index)
-			else:
-				Globals.use_keyboard = false
 
 			
 			
 	Signals.level_loaded.emit()
 
 func _process(delta):
-
-	if Globals.num_players == 0:
-		Globals.use_keyboard = true
-	else:
-		Globals.use_keyboard = false
 
 	if !players:
 		return
@@ -145,18 +138,9 @@ func add_player(player_index):
 		3: Color(colornames[3], alpha), # color, alpha
 	}
 
-	var hearths: Dictionary = {
-		0: 3, # color, alpha
-		1: 3, # color, alpha
-		2: 3, # color, alpha
-		3: 3, # color, alpha
-	}
-
 	player.color = color_dict[player_index]
 	player.name = names[player_index]
 	Globals.player_name = names[player_index]
-	Globals.hearths = hearths
-
 	if DataState.node_data.filename == "res://Scenes/player.tscn":
 		player.load(DataState.node_data)
 
