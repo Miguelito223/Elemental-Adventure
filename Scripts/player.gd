@@ -24,7 +24,6 @@ var start_position = Vector2(100.0, 100.0)
 
 var color: Color = Color("White", 1) # color, alpha
 
-var player_name: String = "player_name"
 var device_num: int = 0 # default to device 0
 var is_moving: bool = false
 		
@@ -38,7 +37,7 @@ func _ready():
 	if DEBUGGING:
 		print("Running Player.gd: {n}._ready()... {pn}".format({
 			"n": name,
-			"pn": player_name,
+			"pn": Globals.player_name,
 			}))
 		# Report scene hierarchy.
 		print("Parent of '{n}' is '{p}'".format({
@@ -48,7 +47,6 @@ func _ready():
 			
 	modulate = color
 	position = start_position
-	print(Globals.hearths[0])
 	setlifes(Globals.hearths[Globals.player_index])
 	Pause_Menu.hide()
 	get_tree().paused = false
@@ -145,6 +143,7 @@ func shot():
 	if can_fire:
 		var buller_ins = bullet.instantiate()
 		add_child(buller_ins)
+		buller_ins.position = Market.position
 		buller_ins.transform = Market.transform
 		can_fire = false
 		await get_tree().create_timer(0.8).timeout
@@ -152,17 +151,17 @@ func shot():
 	
 func setlifes(value):
 	Globals.hearths = clamp(value,0,max_hearth)
-	if Globals.hearths[Globals.player_index] <= 0:
+	if Globals.hearths <= 0:
 		if Globals.player_index == 0:
 			print("you dead")
-			Globals.hearths[Globals.player_index] = max_hearth
+			Globals.hearths = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
 			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
-			Globals.hearths[Globals.player_index] = max_hearth
+			Globals.hearths = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
@@ -173,7 +172,7 @@ func getcoin():
 	Data.save_file()
 	
 func getlife():
-	Globals.hearths[Globals.player_index] += 1
+	Globals.hearths += 1
 	DataState.save_file_state()
 	Data.save_file()
 	
@@ -189,15 +188,9 @@ func setposspawn():
 	Data.save_file()
 
 func damage(ammount):
-	if Globals.player_index == 0:
-		if InvunerabilityTime.is_stopped():
-			InvunerabilityTime.start()
-			setlifes(Globals.hearths[Globals.player_index] - ammount)
-			Animation_Effects.play("damage")
-			Animation_Effects.queue("flash")
-			DataState.save_file_state()
-			Data.save_file()
-	else:
+	if InvunerabilityTime.is_stopped():
+		InvunerabilityTime.start()
+		setlifes(Globals.hearths - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
@@ -205,7 +198,7 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Label.text = ":" + str(Globals.hearths[0])
+	$CanvasLayer/Label.text = ":" + str(Globals.hearths)
 	$CanvasLayer/Label2.text = ":" + str(Globals.coins)
 	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	
@@ -228,7 +221,7 @@ func save():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
-		"name" : player_name,
+		"name" : Globals.player_name,
 		"level" : Globals.level,
 		"pos_x" :  position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
@@ -243,7 +236,7 @@ func save():
 	
 func load(info):
 	Globals.level = info.level
-	Globals.hearths = str_to_var(info.hearths)
+	Globals.hearths = info.hearths
 	Globals.coins = info.coins
 	Globals.pos_y = info.pos_y
 	Globals.pos_x = info.pos_x

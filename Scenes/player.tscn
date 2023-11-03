@@ -253,6 +253,7 @@ animations = [{
 [node name="player" type="CharacterBody2D" groups=["persistent"]]
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_peqvs")
+max_hearth = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 0)
@@ -269,9 +270,6 @@ autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_fjqwq")
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -294,7 +292,7 @@ offset_right = 153.0
 offset_bottom = 30.0
 scale = Vector2(2.55157, 2.73754)
 theme_override_fonts/font = ExtResource("6_nj16g")
-text = ":
+text = ":3
 "
 vertical_alignment = 1
 
@@ -320,7 +318,7 @@ offset_right = 152.0
 offset_bottom = 107.0
 scale = Vector2(2.55157, 2.73754)
 theme_override_fonts/font = ExtResource("6_nj16g")
-text = ":
+text = ":0
 "
 vertical_alignment = 1
 

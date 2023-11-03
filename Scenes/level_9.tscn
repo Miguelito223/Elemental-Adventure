@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4n8vf46ncqro"]
+[gd_scene load_steps=18 format=3 uid="uid://b4n8vf46ncqro"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_htipo"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ave4t"]
@@ -63,6 +63,9 @@ _data = {
 "RESET": SubResource("Animation_gmhlk"),
 "movement 1": SubResource("Animation_t22yu")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3d2"]
+size = Vector2(32.6387, 20)
 
 [node name="level_9" type="Node2D"]
 position = Vector2(549, 994)
@@ -225,5 +228,17 @@ autoplay = "movement 1"
 libraries = {
 "": SubResource("AnimationLibrary_jr87o")
 }
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(780, -482)
+zoom = Vector2(4, 4)
+
+[node name="Death Zone" type="Area2D" parent="."]
+position = Vector2(1766, -17)
+scale = Vector2(95.7652, 13.1505)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Zone"]
+position = Vector2(-10.6719, 21.5201)
+shape = SubResource("RectangleShape2D_4c3d2")
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

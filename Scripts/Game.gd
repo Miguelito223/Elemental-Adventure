@@ -16,7 +16,6 @@ func _ready():
 			"p":get_parent().name,
 			}))
 			
-	await Signals.level_loaded
 	level = get_node(Globals.level)
 	Globals.num_players = Input.get_connected_joypads().size()
 

@@ -11,6 +11,17 @@ var load_data
 var players: Array = []
 var input_maps: Array = []
 
+
+@export var move_speed =  0.5
+@export var zoom_speed =  0.05
+@export var min_zoom = 2
+@export var max_zoom = 4
+@export var margin = Vector2(100, 25)
+
+
+@onready var camera = $Camera
+@onready var screen_size = get_viewport_rect().size
+
 var rng = RandomNumberGenerator.new()
 
 const player_scene = preload("res://Scenes/player.tscn")
@@ -26,7 +37,6 @@ func _ready():
 		load_data = DataState.load_file_state()
 
 		if load_data == null:
-
 			for player_index in range(Globals.num_players):
 				add_player(player_index)
 
@@ -42,10 +52,43 @@ func _ready():
 	Signals.level_loaded.emit()
 
 func _process(delta):
+
 	if Globals.num_players == 0:
 		Globals.use_keyboard = true
 	else:
 		Globals.use_keyboard = false
+
+	if !players:
+		return
+	
+	var pos = Vector2.ZERO
+
+	for player in players:
+		pos += player.position
+
+	pos /= players.size()
+
+	camera.position = lerp(camera.position, pos, move_speed)
+	
+	var rect = Rect2(camera.position, Vector2.ONE)
+
+	for player in players:
+		rect = rect.expand(player.position)
+
+	rect = rect.grow_individual(margin.x, margin.y, margin.x, margin.y)
+
+	var _distance = max(rect.size.x, rect.size.y)
+
+	var zoom_range 
+
+	if rect.size.x > rect.size.y * screen_size.aspect():
+		zoom_range = clamp(rect.size.x / screen_size.x, min_zoom, max_zoom)
+	else:
+		zoom_range = clamp(rect.size.y / screen_size.y, min_zoom, max_zoom)
+
+	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
+
+
 
 func remove_player(player_index):
 	players.erase(player_index)
@@ -103,8 +146,9 @@ func add_player(player_index):
 	}
 
 	player.color = color_dict[player_index]
-	player.player_name = names[player_index]
 	player.name = names[player_index]
+	Globals.player_name = names[player_index]
+
 	if DataState.node_data.filename == "res://Scenes/player.tscn":
 		player.load(DataState.node_data)
 
@@ -288,3 +332,8 @@ func _on_victory_zone_body_entered(body):
 			DataState.remove_state_file()
 			LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 
+
+
+func _on_death_zone_body_entered(body):
+	if body.get_scene_file_path() == "res://Scenes/player.tscn":
+		body.damage(3)

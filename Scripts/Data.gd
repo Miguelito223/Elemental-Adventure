@@ -26,6 +26,7 @@ func save_file():
 			"day": Globals.day,
 			"hour": Globals.hour,
 			"minute":Globals.minute,
+			"time": Globals.time,
 		},
 		"players":{
 			"level": Globals.level,
@@ -43,7 +44,7 @@ func save_file():
 		}
 	}
 	var datafile = FileAccess.open(data_path, FileAccess.WRITE)
-	datafile.store_line(JSON.stringify(var_to_str(data)))
+	datafile.store_line(JSON.stringify(data))
 	
 	Signals.finish_add_data.emit()
 	
@@ -76,7 +77,7 @@ func load_file():
 
 		parse_result = json.parse(json_string)
 
-		data = str_to_var(json.get_data())
+		data = json.get_data()
 
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
@@ -100,11 +101,12 @@ func load_file():
 		Globals.day = time.day
 		Globals.hour = time.hour
 		Globals.minute = time.minute
+		Globals.time = time.time
 
 		var players = data.players
 
 		Globals.level = players.level
-		Globals.hearths = str_to_var(players.hearths)
+		Globals.hearths = players.hearths
 		Globals.coins = players.coins
 		Globals.pos_y = players.pos_y
 		Globals.pos_x = players.pos_x

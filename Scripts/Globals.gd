@@ -3,7 +3,7 @@ extends Node
 #player
 var level = "level_1"
 var level_int = 1
-var hearths = {}
+var hearths = { 0: 3, 1:3, 2:3, 3:3, 4:3}
 var coins = 0
 var pos_x = -438
 var pos_y = -41
@@ -26,10 +26,10 @@ var autosaver_start_time = "0"
 var minute = "00"
 var day = "1"
 var hour = "12"
+var time = 0.0
 
 #others
 var num_players = 0
 var player_index = 0
 var use_keyboard = false
-
-_re
+var player_name = "player_name"

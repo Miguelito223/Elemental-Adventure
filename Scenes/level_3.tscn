@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bt7hywdmbqldj"]
+[gd_scene load_steps=18 format=3 uid="uid://bt7hywdmbqldj"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_4anp0"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ftqhb"]
@@ -32,6 +32,9 @@ gradient = SubResource("Gradient_77g8x")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jv6kg"]
 cull_mode = 1
 polygon = PackedVector2Array(200, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhh84"]
+size = Vector2(32.6387, 20)
 
 [node name="level_3" type="Node2D"]
 position = Vector2(576, 1023)
@@ -182,4 +185,17 @@ position = Vector2(238, -41)
 [node name="Hearth2" parent="." instance=ExtResource("9_3252p")]
 position = Vector2(753, -44)
 
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(780, -482)
+zoom = Vector2(4, 4)
+
+[node name="Death Zone" type="Area2D" parent="."]
+position = Vector2(1869, -48)
+scale = Vector2(95.7652, 13.1505)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Zone"]
+position = Vector2(-10.6719, 21.5201)
+shape = SubResource("RectangleShape2D_uhh84")
+
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
+[connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]

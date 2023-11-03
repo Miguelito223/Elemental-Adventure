@@ -19,7 +19,7 @@ func save_file_state():
 			continue
 
 		node_data = node.save()
-		datafile.store_line(JSON.stringify(var_to_str(node_data)))
+		datafile.store_line(JSON.stringify(node_data))
 	
 	Signals.finish_add_data.emit()
 	print("finish")
@@ -60,7 +60,7 @@ func load_file_state():
 		
 		parse_result = json.parse(json_string)
 		
-		node_data = str_to_var(json.get_data())
+		node_data = json.get_data()
 
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())

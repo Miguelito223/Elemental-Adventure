@@ -9,35 +9,31 @@ var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
 @export var initial_hour = int(Globals.initial_time):
 	set(h):
 		initial_hour = h
-		time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
+		Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
 
-var time = 0.0
 var past_minute = -1.0
-var time_data = {}
 
 func _ready():
-	
-	time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
+	Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
+	Data.load_file()
 
 func _process(delta):
-	time += delta * ingame_to_real_minute_duration * ingame_speed  
-	var value = (sin(time - PI / 2) + 1.0 / 2.0)
+	Globals.time += delta * ingame_to_real_minute_duration * ingame_speed  
+	var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)
 	self.color = gradient.gradient.sample(value)
 	
 	_recalculate_time()
 
 
 func _recalculate_time():
-	var total_minutes = int(time / ingame_to_real_minute_duration)
-	var day = int(total_minutes / minutes_per_day)
+	var total_minutes = int(Globals.time / ingame_to_real_minute_duration)
+	Globals.day = int(total_minutes / minutes_per_day)
 
 	var current_day_minutes = total_minutes % minutes_per_day
-	var hours = int(current_day_minutes / minutes_per_hour)
-	var minute = int(current_day_minutes % minutes_per_hour)
+	Globals.hour = int(current_day_minutes / minutes_per_hour)
+	Globals.minute = int(current_day_minutes % minutes_per_hour)
 
-	if past_minute != minute:
-		past_minute = minute
-		Signals.time_tick.emit(day, hours, minute)
-		Globals.day = day
-		Globals.hour = hours
-		Globals.minute = minute
+	if past_minute != Globals.minute:
+		past_minute = Globals.minute
+		Signals.time_tick.emit(Globals.day, Globals.hour, Globals.minute)
+		Data.save_file()
