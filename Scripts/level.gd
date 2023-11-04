@@ -152,6 +152,11 @@ func add_player(player_index):
 		DataState.save_file_state()	
 		Data.save_file()
 
+	if not Globals.hearths.has(str(Globals.player_index)):
+		Globals.hearths[str(Globals.player_index)] = 3
+		DataState.save_file_state()	
+		Data.save_file()
+
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
 		"ui_left{n}".format({"n":player_index}): Vector2.LEFT,
@@ -330,7 +335,7 @@ func _on_victory_zone_body_entered(body):
 			body.setposspawn()
 			body.position = body.start_position
 			DataState.remove_state_file()
-			
+			DataState.node_data.clear()
 			LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 
 

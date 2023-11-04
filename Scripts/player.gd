@@ -152,6 +152,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		get_parent().add_child(bullet_lol)
 		bullet_lol.set_rotation(bullet_direction)
 		bullet_lol.set_global_position(bullet_pos)
+		bullet_lol.modulate = modulate
 		if !Globals.use_keyboard:
 			if AnimatedSprite.scale.x == 1:
 				bullet_lol.velocity = Vector2(bullet_speed, 0)

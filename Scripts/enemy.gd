@@ -114,6 +114,5 @@ func save():
 func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
-	scale = Vector2(info.size_x, info.size_y)
 	direccion = info.direccion
 	can_move = info.can_move
