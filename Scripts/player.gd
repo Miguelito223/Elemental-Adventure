@@ -14,6 +14,7 @@ var can_fire = true
 @onready var AnimatedSprite = $AnimatedSprite2D
 
 var max_speed = 300
+var max_speed_in_air = 500
 var max_speed_in_water = 200
 var jump_speed = -400.0
 var speed = 1500
@@ -126,6 +127,8 @@ func apply_movement(accel):
 	velocity.x += accel.x
 	if is_on_floor():
 		velocity.x = velocity.limit_length(max_speed).x
+	else:
+		velocity.x = velocity.limit_length(max_speed_in_air).x
 
 
 
