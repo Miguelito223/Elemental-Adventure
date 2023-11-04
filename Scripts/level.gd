@@ -36,17 +36,15 @@ func _ready():
 		
 		load_data = DataState.load_file_state()
 
-		if load_data == null:
-			for player_index in range(Globals.num_players):
+	if load_data == null:
+		for player_index in range(Globals.num_players):
+			add_player(player_index)
+
+		if Globals.num_players == 0:
+			Globals.use_keyboard = true
+			for player_index in range(1):
 				add_player(player_index)
-
-			if Globals.num_players == 0:
-				Globals.use_keyboard = true
-				for player_index in range(1):
-					add_player(player_index)
-
-			
-			
+	
 	Signals.level_loaded.emit()
 
 func _process(delta):

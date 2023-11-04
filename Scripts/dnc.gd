@@ -36,4 +36,3 @@ func _recalculate_time():
 	if past_minute != Globals.minute:
 		past_minute = Globals.minute
 		Signals.time_tick.emit(Globals.day, Globals.hour, Globals.minute)
-		Data.save_file()

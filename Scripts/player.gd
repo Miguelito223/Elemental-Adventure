@@ -9,7 +9,7 @@ var can_fire = true
 @export var max_hearth = 3
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
-@onready var Market = $Marker2D
+@onready var Marker = $Marker2D
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
 
@@ -47,9 +47,8 @@ func _ready():
 			
 	modulate = color
 	position = start_position
-	print(Globals.hearths)
-	print(Globals.player_index)
-	setlifes(Globals.hearths[Globals.player_index])
+	Globals.hearths[str(Globals.player_index)] = 3
+	setlifes(Globals.hearths[str(Globals.player_index)])
 	Pause_Menu.hide()
 	get_tree().paused = false
 	Signals.player_ready.emit()
@@ -59,6 +58,8 @@ func _ready():
 	
 func _process(_delta):	
 	update_label()
+
+	Marker.look_at(get_global_mouse_position())
 
 	if velocity.x > 0 or velocity.x < 0:
 		AnimatedSprite.play("walk")
@@ -123,7 +124,8 @@ func apply_fricction(amount):
 
 func apply_movement(accel):
 	velocity.x += accel.x
-	velocity.x = velocity.limit_length(max_speed).x
+	if is_on_floor():
+		velocity.x = velocity.limit_length(max_speed).x
 
 
 
@@ -133,27 +135,29 @@ func _input(event):
 		Pause_Menu.show()
 		get_tree().paused = true
 	if event.is_action_pressed(ui_inputs.keys()[1]):
-		Market.scale.x = -1
 		AnimatedSprite.scale.x = -1
 	if event.is_action_pressed(ui_inputs.keys()[0]):
-		Market.scale.x = 1
 		AnimatedSprite.scale.x = 1
 	if event.is_action_pressed(ui_inputs.keys()[3]):
-		shot()
+		shoot(Marker.get_rotation(), Marker.get_global_position(), 500)
 		
-func shot():
+func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
-		var buller_ins = bullet.instantiate()
-		add_child(buller_ins)
-		buller_ins.position = Market.position
-		buller_ins.transform = Market.transform
+		var bullet_lol = bullet.instantiate()
+		get_parent().add_child(bullet_lol)
+		bullet_lol.set_rotation(bullet_direction)
+		bullet_lol.set_global_position(bullet_pos)
+		bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)
+
+
 		can_fire = false
 		await get_tree().create_timer(0.8).timeout
 		can_fire = true
+
 	
 func setlifes(value):
-	Globals.hearths[Globals.player_index] = clamp(value,0,max_hearth)
-	if Globals.hearths[Globals.player_index] <= 0:
+	Globals.hearths[str(Globals.player_index)] = clamp(value,0,max_hearth)
+	if Globals.hearths[str(Globals.player_index)] <= 0:
 		if Globals.player_index == 0:
 			print("you dead")
 			Globals.hearths[0] = max_hearth
@@ -163,7 +167,7 @@ func setlifes(value):
 			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
-			Globals.hearths[0] = max_hearth
+			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
@@ -174,7 +178,7 @@ func getcoin():
 	Data.save_file()
 	
 func getlife():
-	Globals.hearths[Globals.player_index] += 1
+	Globals.hearths[str(Globals.player_index)] += 1
 	DataState.save_file_state()
 	Data.save_file()
 	
@@ -192,7 +196,7 @@ func setposspawn():
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
 		InvunerabilityTime.start()
-		setlifes(Globals.hearths[Globals.player_index] - ammount)
+		setlifes(Globals.hearths[str(Globals.player_index)] - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
@@ -200,7 +204,7 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Label.text = ":" + str(Globals.hearths[0])
+	$CanvasLayer/Label.text = ":" + str(Globals.hearths[str(0)])
 	$CanvasLayer/Label2.text = ":" + str(Globals.coins)
 	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	
@@ -230,7 +234,7 @@ func save():
 		"size_x" : scale.x,
 		"size_y" : scale.y,
 		"color" : color,
-		"hearths" : Globals.hearths[0],
+		"hearths" : Globals.hearths,
 		"coins" : Globals.coins,
 		"max_health" : max_hearth,
 	}
@@ -238,6 +242,7 @@ func save():
 	
 func load(info):
 	Globals.level = info.level
+	Globals.hearths = info.hearths
 	Globals.coins = info.coins
 	Globals.pos_y = info.pos_y
 	Globals.pos_x = info.pos_x

@@ -59,12 +59,11 @@ func load_file_state():
 		json = JSON.new()
 		
 		parse_result = json.parse(json_string)
-		
-		node_data = json.get_data()
-
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
+		
+		node_data = json.get_data()
 			
 		var new_object = load(node_data.filename).instantiate()
 

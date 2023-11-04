@@ -1,9 +1,10 @@
 extends Area2D
 
 var speed = 300
+var velocity = Vector2.ZERO
 
 func _physics_process(delta): 
-	position += transform.x * speed * delta 
+	position += velocity * delta 
 
 
 func _on_body_entered(body):

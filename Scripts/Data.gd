@@ -77,12 +77,12 @@ func load_file():
 		json = JSON.new()
 
 		parse_result = json.parse(json_string)
-
-		data = json.get_data()
-
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
+
+		data = json.get_data()
+
 		var settings = data.settings
 		
 		#settings
@@ -108,6 +108,7 @@ func load_file():
 		var players = data.players
 
 		Globals.level = players.level
+		Globals.hearths = players.hearths
 		Globals.coins = players.coins
 		Globals.pos_y = players.pos_y
 		Globals.pos_x = players.pos_x
