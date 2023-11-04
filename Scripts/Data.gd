@@ -56,10 +56,12 @@ func load_file():
 	var datafile = FileAccess.open(data_path, FileAccess.READ)
 	if not FileAccess.file_exists(data_path):
 		print("Data file doesn't exist!")
+		save_file()
 		return
 	
 	if datafile.get_length() <= 0:
 		print("State data file empty!")
+		save_file()
 		return
 		
 	print("Data file found")

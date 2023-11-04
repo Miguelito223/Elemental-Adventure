@@ -32,8 +32,6 @@ func _ready():
 			"p":get_parent().name,
 		}))
 
-	DataState.load_file_state()	
-
 	if DataState.node_data.is_empty():
 		print("node_data is empy")
 		for player_index in range(Globals.num_players):
@@ -42,15 +40,21 @@ func _ready():
 		if Globals.num_players == 0:
 			Globals.use_keyboard = true
 			for player_index in range(1):
-				add_player(player_index)		
+				add_player(player_index)
+
+		DataState.save_file_state()
+		Data.save_file()
+	else:
+		DataState.load_file_state()	
+		Data.load_file()
+
+
 
 	Signals.level_loaded.emit()
 
 func _process(_delta):
 	if !players:
 		return
-
-	await Signals.player_ready
 	
 	var pos = Vector2.ZERO
 
@@ -139,13 +143,14 @@ func add_player(player_index):
 	player.color = color_dict[player_index]
 	player.name = names[player_index]
 	Globals.player_name = names[player_index]
-
-	if not DataState.node_data == {}:
+	if not DataState.node_data.is_empty():
 		if DataState.node_data.filename == "res://Scenes/player.tscn":
 			player.load(DataState.node_data)
 	else:
 		print("node_data is empy")
-
+		Globals.hearths[str(Globals.player_index)] = 3
+		DataState.save_file_state()	
+		Data.save_file()
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
@@ -325,6 +330,7 @@ func _on_victory_zone_body_entered(body):
 			body.setposspawn()
 			body.position = body.start_position
 			DataState.remove_state_file()
+			
 			LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 
 

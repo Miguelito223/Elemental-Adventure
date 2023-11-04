@@ -31,10 +31,12 @@ func load_file_state():
 	
 	if not FileAccess.file_exists(data_state_path):
 		print("State data file doesn't exist!")
+		save_file_state()	
 		return
 
 	if datafile.get_length() <= 0:
 		print("State data file empty!")
+		save_file_state()
 		return
 	
 	print("data state file found")

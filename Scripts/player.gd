@@ -48,18 +48,14 @@ func _ready():
 			
 	modulate = color
 	position = start_position
-
-	if DataState.node_data.is_empty():
-		print("node_data is empy")
-		Globals.hearths[str(Globals.player_index)] = 3
-	
-	setlifes(Globals.hearths[str(Globals.player_index)])
-	
 	Pause_Menu.hide()
 	get_tree().paused = false
-	
-	
+	setlifes(Globals.hearths[str(Globals.player_index)])
 	Signals.player_ready.emit()
+
+
+	
+
 
 
 	
@@ -175,7 +171,7 @@ func setlifes(value):
 	if Globals.hearths[str(Globals.player_index)] <= 0:
 		if Globals.player_index == 0:
 			print("you dead")
-			Globals.hearths[0] = max_hearth
+			Globals.hearths[str(0)] = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
