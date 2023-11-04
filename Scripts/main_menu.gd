@@ -146,4 +146,5 @@ func _on_autosaver_start_time_text_text_changed(new_text):
 
 
 func _on_input_set_item_selected(index):
-	Data.load_inputs(index)
+	var size = inputs.get(set_input.get_item_text(index))
+	Data.load_inputs(size)

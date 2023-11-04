@@ -60,7 +60,13 @@ func _ready():
 func _process(_delta):	
 	update_label()
 
-	Marker.look_at(get_global_mouse_position())
+	if Globals.use_keyboard:
+		Marker.look_at(get_global_mouse_position())
+	else:
+		if Input.is_action_pressed(ui_inputs.keys()[1]):
+			Marker.scale.x = -1
+		if Input.is_action_pressed(ui_inputs.keys()[0]):
+			Marker.scale.x = 1
 
 	if velocity.x > 0 or velocity.x < 0:
 		AnimatedSprite.play("walk")
