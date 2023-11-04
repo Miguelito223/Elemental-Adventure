@@ -31,6 +31,9 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 		}))
+		
+	DataState.load_file_state()	
+	Data.load_file()
 
 	if DataState.node_data.is_empty():
 		print("node_data is empy")
@@ -42,23 +45,22 @@ func _ready():
 			for player_index in range(1):
 				add_player(player_index)
 
-		DataState.save_file_state()
+		DataState.save_file_state()	
 		Data.save_file()
-	else:
-		DataState.load_file_state()	
-		Data.load_file()
 
 
 
 	Signals.level_loaded.emit()
 
 func _process(_delta):
-	if !players:
+	if !players or players.is_empty() or players == null: 
 		return
 	
 	var pos = Vector2.ZERO
 
 	for player in players:
+		if not is_instance_valid(player):
+			return
 		pos += player.position
 
 	pos /= players.size()
@@ -149,13 +151,10 @@ func add_player(player_index):
 	else:
 		print("node_data is empy")
 		Globals.hearths[str(Globals.player_index)] = 3
-		DataState.save_file_state()	
-		Data.save_file()
+
 
 	if not Globals.hearths.has(str(Globals.player_index)):
 		Globals.hearths[str(Globals.player_index)] = 3
-		DataState.save_file_state()	
-		Data.save_file()
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,

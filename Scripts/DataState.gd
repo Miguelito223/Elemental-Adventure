@@ -31,12 +31,10 @@ func load_file_state():
 	
 	if not FileAccess.file_exists(data_state_path):
 		print("State data file doesn't exist!")
-		save_file_state()	
 		return
 
 	if datafile.get_length() <= 0:
 		print("State data file empty!")
-		save_file_state()
 		return
 	
 	print("data state file found")
@@ -60,7 +58,7 @@ func load_file_state():
 			
 		var new_object = load(node_data.filename).instantiate()
 
-		if node_data.filename == "res://Scenes/player.tscn":
+		if node_data.filename.has("res://Scenes/player.tscn") or not node_data.filename.has("res://Scenes/player.tscn"):
 			print("loading player, name: %s..." % node_data.name)
 			var level = get_tree().get_root().get_node("Game/" + Globals.level)
 
