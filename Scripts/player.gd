@@ -21,6 +21,8 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
+var load_data
+
 var start_position = Vector2(100.0, 100.0)
 
 var color: Color = Color("White", 1) # color, alpha
@@ -48,8 +50,16 @@ func _ready():
 			
 	modulate = color
 	position = start_position
-	Globals.hearths[str(Globals.player_index)] = 3
+	
+	load_data = DataState.load_file_state()
+
+	if load_data == null or Globals.hearths == {}:
+		Globals.hearths[str(Globals.player_index)] = 3
+	else:
+		Globals.hearths[str(Globals.player_index)] = load_data.hearths
+		
 	setlifes(Globals.hearths[str(Globals.player_index)])
+
 	Pause_Menu.hide()
 	get_tree().paused = false
 	Signals.player_ready.emit()
@@ -62,11 +72,6 @@ func _process(_delta):
 
 	if Globals.use_keyboard:
 		Marker.look_at(get_global_mouse_position())
-	else:
-		if Input.is_action_pressed(ui_inputs.keys()[1]):
-			Marker.scale.x = -1
-		if Input.is_action_pressed(ui_inputs.keys()[0]):
-			Marker.scale.x = 1
 
 	if velocity.x > 0 or velocity.x < 0:
 		AnimatedSprite.play("walk")
@@ -114,9 +119,7 @@ func move(delta):
 		is_moving = true
 		if is_on_floor():
 			if !$Pasos.playing:
-				$Pasos.play()
-		
-		
+				$Pasos.play()	
 
 	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
 		velocity.y = jump_speed
@@ -148,7 +151,7 @@ func _input(event):
 	if event.is_action_pressed(ui_inputs.keys()[0]):
 		AnimatedSprite.scale.x = 1
 	if event.is_action_pressed(ui_inputs.keys()[3]):
-		shoot(Marker.get_rotation(), Marker.get_global_position(), 500)
+		shoot(Marker.get_rotation(), Marker.get_global_position(),  500)
 		
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
@@ -156,7 +159,13 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		get_parent().add_child(bullet_lol)
 		bullet_lol.set_rotation(bullet_direction)
 		bullet_lol.set_global_position(bullet_pos)
-		bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)
+		if !Globals.use_keyboard:
+			if AnimatedSprite.scale.x == 1:
+				bullet_lol.velocity = Vector2(bullet_speed, 0)
+			elif AnimatedSprite.scale.x == -1:
+				bullet_lol.velocity = Vector2(-bullet_speed, 0)
+		else:
+			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
 
 
 		can_fire = false

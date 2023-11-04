@@ -34,7 +34,7 @@ func _ready():
 			"p":get_parent().name,
 		}))
 		
-		load_data = DataState.load_file_state()
+	load_data = DataState.load_file_state()
 
 	if load_data == null:
 		for player_index in range(Globals.num_players):
@@ -51,6 +51,8 @@ func _process(delta):
 
 	if !players:
 		return
+
+	await Signals.player_ready
 	
 	var pos = Vector2.ZERO
 

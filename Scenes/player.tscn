@@ -367,7 +367,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
+scale = Vector2(-1, -1)
 
 [node name="Pasos" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_m2wrv")
