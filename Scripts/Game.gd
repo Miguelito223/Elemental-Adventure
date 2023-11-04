@@ -15,6 +15,8 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 			}))
+
+	await Signals.level_loaded
 			
 	level = get_node(Globals.level)
 	Globals.num_players = Input.get_connected_joypads().size()
@@ -23,6 +25,7 @@ func _ready():
 	_ret = Input.connect("joy_connection_changed", _on_joy_connection_changed)
 	if _ret != 0:
 		print("Error {e} connecting `Input` signal `joy_connection_changed`.".format({"e": _ret}))
+
 
 
 func _on_joy_connection_changed(device_id, connected):

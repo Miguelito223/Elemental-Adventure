@@ -31,13 +31,11 @@ func load_file_state():
 	
 	if not FileAccess.file_exists(data_state_path):
 		print("State data file doesn't exist!")
-		save_file_state()
-		return null
+		return
 
 	if datafile.get_length() <= 0:
 		print("State data file empty!")
-		save_file_state()
-		return null
+		return
 	
 	print("data state file found")
 	
@@ -46,19 +44,12 @@ func load_file_state():
 	for i in save_nodes:
 		i.queue_free()
 
-	
-	var json_string
-	
-	var json
-
-	var parse_result
-
 	while datafile.get_position() < datafile.get_length():
-		json_string = datafile.get_line()
+		var json_string = datafile.get_line()
 		
-		json = JSON.new()
+		var json = JSON.new()
 		
-		parse_result = json.parse(json_string)
+		var parse_result = json.parse(json_string)
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
@@ -73,15 +64,12 @@ func load_file_state():
 
 			for player_index in range(Globals.num_players):
 				level.add_player(player_index)
-			
+
 			if Globals.num_players == 0:
 				Globals.use_keyboard = true
 				for player_index in range(1):
-					level.add_player(player_index)
-			else:
-				Globals.use_keyboard = false
-			
-			
+					level.add_player(player_index)	
+
 			print("loading finish...")
 		else:
 			print("creating node '%s'" % new_object.name)
@@ -106,7 +94,6 @@ func load_file_state():
 	
 	print("finish")
 	Signals.finish_load_data.emit()
-	return node_data
 
 
 func _notification(what):

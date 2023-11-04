@@ -208,7 +208,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(820, -322)
+position = Vector2(-229, -58)
 zoom = Vector2(4, 4)
 
 [connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]

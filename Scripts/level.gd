@@ -6,8 +6,6 @@ var num_players: int = Globals.num_players
 
 var use_keyboard: bool = Globals.use_keyboard
 
-var load_data
-
 var players: Array = []
 var input_maps: Array = []
 
@@ -33,22 +31,22 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 		}))
-		
-	load_data = DataState.load_file_state()
 
-	if load_data == null:
+	DataState.load_file_state()	
+
+	if DataState.node_data.is_empty():
+		print("node_data is empy")
 		for player_index in range(Globals.num_players):
 			add_player(player_index)
 
 		if Globals.num_players == 0:
 			Globals.use_keyboard = true
 			for player_index in range(1):
-				add_player(player_index)
-	
+				add_player(player_index)		
+
 	Signals.level_loaded.emit()
 
-func _process(delta):
-
+func _process(_delta):
 	if !players:
 		return
 
@@ -141,8 +139,12 @@ func add_player(player_index):
 	player.color = color_dict[player_index]
 	player.name = names[player_index]
 	Globals.player_name = names[player_index]
-	if DataState.node_data.filename == "res://Scenes/player.tscn":
-		player.load(DataState.node_data)
+
+	if not DataState.node_data == {}:
+		if DataState.node_data.filename == "res://Scenes/player.tscn":
+			player.load(DataState.node_data)
+	else:
+		print("node_data is empy")
 
 
 	input_maps.append({
@@ -308,6 +310,7 @@ func add_player(player_index):
 		InputMap.action_add_event(pause_action, pause_action_event)
 	
 	add_child(player)
+
 
 func _physics_process(_delta):
 	if Globals.autosave:

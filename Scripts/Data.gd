@@ -56,27 +56,19 @@ func load_file():
 	var datafile = FileAccess.open(data_path, FileAccess.READ)
 	if not FileAccess.file_exists(data_path):
 		print("Data file doesn't exist!")
-		save_file()
-		return null
+		return
 	
 	if datafile.get_length() <= 0:
 		print("State data file empty!")
-		save_file()
-		return null
+		return
 		
 	print("Data file found")
-	var json_string
-
-	var json
-	
-	var parse_result
-
 	while datafile.get_position() < datafile.get_length():
-		json_string = datafile.get_line()
+		var json_string = datafile.get_line()
 
-		json = JSON.new()
+		var json = JSON.new()
 
-		parse_result = json.parse(json_string)
+		var parse_result = json.parse(json_string)
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
@@ -124,7 +116,6 @@ func load_file():
 		Signals.finish_load_data.emit()
 	
 	print("finish")
-	return data
 	
 func remove_file():
 	print("Removing file...")

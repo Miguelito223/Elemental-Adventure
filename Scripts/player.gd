@@ -21,8 +21,6 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
-var load_data
-
 var start_position = Vector2(100.0, 100.0)
 
 var color: Color = Color("White", 1) # color, alpha
@@ -50,18 +48,17 @@ func _ready():
 			
 	modulate = color
 	position = start_position
-	
-	load_data = DataState.load_file_state()
 
-	if load_data == null or Globals.hearths == {}:
+	if DataState.node_data.is_empty():
+		print("node_data is empy")
 		Globals.hearths[str(Globals.player_index)] = 3
-	else:
-		Globals.hearths[str(Globals.player_index)] = load_data.hearths
-		
+	
 	setlifes(Globals.hearths[str(Globals.player_index)])
-
+	
 	Pause_Menu.hide()
 	get_tree().paused = false
+	
+	
 	Signals.player_ready.emit()
 
 
