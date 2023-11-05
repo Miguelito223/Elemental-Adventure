@@ -172,7 +172,7 @@ func setlifes(value):
 	if Globals.hearths[str(Globals.player_index)] <= 0:
 		if Globals.player_index == 0:
 			print("you dead")
-			Globals.hearths[str(0)] = max_hearth
+			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
