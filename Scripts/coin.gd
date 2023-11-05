@@ -2,23 +2,27 @@ extends RigidBody2D
 
 var rng = RandomNumberGenerator.new()
 
+var collected = false
+
 func _ready():
 	rng.randomize()
-	var impulse = Vector2(rng.randi_range(-10,10), rng.randi_range(-10,10))
 
 func _on_area_2d_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
-		body.getcoin()
-		visible = false
-		$"coin sound".play()
-		await $"coin sound".finished
-		queue_free()
+		if collected == false:
+			collected = true
+			body.getcoin()
+			visible = false
+			$"coin sound".play()
+			await $"coin sound".finished
+			queue_free()
 
 func save():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
 		"name" : name,
+		"collected" : collected,
 		"size_x" : scale.x,
 		"size_y" : scale.y,
 		"pos_x" : position.x, # Vector2 is not supported by JSON
@@ -32,6 +36,7 @@ func load(info):
 	position = Vector2(info.pos_x, info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
 	visible = info.visible
+	collected = info.collected
 
 
 
