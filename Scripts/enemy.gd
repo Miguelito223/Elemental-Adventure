@@ -33,7 +33,7 @@ func damage(ammount):
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
 
-func drop_items():
+func drop_hearths():
 	rng.randomize()
 	var random_number = rng.randi_range(1,  6)
 	for i in range(random_number):
@@ -41,14 +41,18 @@ func drop_items():
 		get_parent().add_child(new_hearth)
 		new_hearth.position = position
 		new_hearth.freeze = false
-		new_hearth.apply_impulse(new_hearth.position, new_hearth.impulse)
+
+	
+func drop_coins():
+	rng.randomize()
+	var random_number = rng.randi_range(1,  6)
+
 
 	for i in range(random_number):
 		var new_coin = coins.instantiate()
 		get_parent().add_child(new_coin)
 		new_coin.position = position
 		new_coin.freeze = false
-		new_coin.apply_impulse(new_coin.position, new_coin.impulse)
 			
 
 func setlifes(value):
@@ -56,9 +60,12 @@ func setlifes(value):
 	if hearth  <= 0:
 		print("enemy dead")
 		rng.randomize()
-		var random_number = rng.randi_range(0,  50)
-		if random_number == 50:
-			drop_items()
+		var random_number = rng.randi_range(0,  5)
+		var random_number2 = rng.randi_range(0,  10)
+		if random_number == 5:
+			drop_coins()
+		if random_number2 == 10:
+			drop_hearths()
 		queue_free()
 
 func _physics_process(delta):
