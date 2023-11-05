@@ -58,7 +58,7 @@ func load_file_state():
 			
 		var new_object = load(node_data.filename).instantiate()
 
-		if node_data.filename.has("res://Scenes/player.tscn") or not node_data.filename.has("res://Scenes/player.tscn"):
+		if node_data.filename == "res://Scenes/player.tscn":
 			print("loading player, name: %s..." % node_data.name)
 			var level = get_tree().get_root().get_node("Game/" + Globals.level)
 

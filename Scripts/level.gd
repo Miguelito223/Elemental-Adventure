@@ -44,8 +44,8 @@ func _ready():
 			Globals.use_keyboard = true
 			for player_index in range(1):
 				add_player(player_index)
-
-		DataState.save_file_state()	
+		
+		DataState.save_file_state()
 		Data.save_file()
 
 
@@ -88,7 +88,11 @@ func _process(_delta):
 
 
 func remove_player(player_index):
-	players.erase(player_index)
+	var player = players[-1]
+	players.remove_at(player_index)
+	if is_instance_valid(player):
+		player.queue_free()
+	print(players)
 
 func add_player(player_index):
 
@@ -145,16 +149,21 @@ func add_player(player_index):
 	player.color = color_dict[player_index]
 	player.name = names[player_index]
 	Globals.player_name = names[player_index]
+
 	if not DataState.node_data.is_empty():
 		if DataState.node_data.filename == "res://Scenes/player.tscn":
 			player.load(DataState.node_data)
 	else:
 		print("node_data is empy")
 		Globals.hearths[str(Globals.player_index)] = 3
+		DataState.save_file_state()
+		Data.save_file()
 
 
 	if not Globals.hearths.has(str(Globals.player_index)):
 		Globals.hearths[str(Globals.player_index)] = 3
+		DataState.save_file_state()
+		Data.save_file()
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,

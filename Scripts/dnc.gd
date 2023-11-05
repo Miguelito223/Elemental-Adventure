@@ -15,7 +15,6 @@ var past_minute = -1.0
 
 func _ready():
 	Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
-	Data.load_file()
 
 func _process(delta):
 	Globals.time += delta * ingame_to_real_minute_duration * ingame_speed  

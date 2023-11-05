@@ -255,6 +255,7 @@ func save():
 func load(info):
 	Globals.level = info.level
 	Globals.hearths = info.hearths
+	Globals.name = info.name
 	Globals.coins = info.coins
 	Globals.pos_y = info.pos_y
 	Globals.pos_x = info.pos_x
