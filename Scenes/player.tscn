@@ -1,11 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://dwypr7om4wpeo"]
+[gd_scene load_steps=44 format=3 uid="uid://dwypr7om4wpeo"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
 [ext_resource type="Texture2D" uid="uid://chrndh6qoxids" path="res://Sprites/fuego jump.png" id="3_je3ue"]
 [ext_resource type="Texture2D" uid="uid://dfkfd625506bu" path="res://Sprites/Fire Walk.png" id="4_ixnqo"]
+[ext_resource type="Texture2D" uid="uid://blxbivlipgn6n" path="res://Sprites/water jump.png" id="5_be2hm"]
 [ext_resource type="Texture2D" uid="uid://df41m1kgskmh7" path="res://Sprites/hearth.png" id="5_uo812"]
+[ext_resource type="Texture2D" uid="uid://dq1243rj3k12n" path="res://Sprites/water idle.png" id="6_jjcc7"]
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="6_nj16g"]
+[ext_resource type="Texture2D" uid="uid://b0qovs57e4hqf" path="res://Sprites/water walk.png" id="7_mtq2t"]
 [ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/coin.png" id="7_s7rtk"]
 [ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="8_tblnr"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
@@ -47,6 +50,34 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("4_ixnqo")
 region = Rect2(192, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4aspr"]
+atlas = ExtResource("5_be2hm")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usl16"]
+atlas = ExtResource("6_jjcc7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wj0t"]
+atlas = ExtResource("6_jjcc7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsp4o"]
+atlas = ExtResource("5_be2hm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmnck"]
+atlas = ExtResource("7_mtq2t")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uospm"]
+atlas = ExtResource("7_mtq2t")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u0iv"]
+atlas = ExtResource("7_mtq2t")
+region = Rect2(192, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_a1hh6"]
 animations = [{
 "frames": [{
@@ -54,7 +85,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_4y8ye")
 }],
 "loop": true,
-"name": &"fall",
+"name": &"fire fall",
 "speed": 5.0
 }, {
 "frames": [{
@@ -65,7 +96,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_vqacu")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"fire idle",
 "speed": 2.0
 }, {
 "frames": [{
@@ -73,7 +104,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_u5bub")
 }],
 "loop": true,
-"name": &"jump",
+"name": &"fire jump",
 "speed": 5.0
 }, {
 "frames": [{
@@ -87,7 +118,48 @@ animations = [{
 "texture": SubResource("AtlasTexture_1j3vo")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"fire walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4aspr")
+}],
+"loop": true,
+"name": &"water fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usl16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wj0t")
+}],
+"loop": true,
+"name": &"water idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsp4o")
+}],
+"loop": true,
+"name": &"water jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmnck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uospm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u0iv")
+}],
+"loop": true,
+"name": &"water walk",
 "speed": 5.0
 }]
 
@@ -261,8 +333,9 @@ shape = SubResource("CapsuleShape2D_dy66o")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_a1hh6")
-animation = &"idle"
-autoplay = "idle"
+animation = &"fire idle"
+autoplay = "fire idle"
+frame_progress = 0.506288
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -10,7 +10,7 @@ var time = 0.0
 var num_players = 0
 var player_index = 0
 var use_keyboard = false
-var player_name = "player_name"
+var player_name = "Fire"
 
 #player
 var level = "level_1"

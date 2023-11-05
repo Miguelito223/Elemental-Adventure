@@ -265,3 +265,4 @@ position = Vector2(-10.6719, 21.5201)
 shape = SubResource("RectangleShape2D_x8dgj")
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
+[connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]

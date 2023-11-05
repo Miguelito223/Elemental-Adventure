@@ -148,8 +148,8 @@ func add_player(player_index):
 
 	player.color = color_dict[player_index]
 	player.name = names[player_index]
+	player.player_name = names[player_index]
 	Globals.player_name = names[player_index]
-
 	if not DataState.node_data.is_empty():
 		if DataState.node_data.filename == "res://Scenes/player.tscn":
 			player.load(DataState.node_data)

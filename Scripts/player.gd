@@ -21,9 +21,11 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
+var player_name = "Fire"
+
 var start_position = Vector2(100.0, 100.0)
 
-var color: Color = Color("White", 1) # color, alpha
+var color = Color("White", 1) # color, alpha
 
 var device_num: int = 0 # default to device 0
 var is_moving: bool = false
@@ -38,7 +40,7 @@ func _ready():
 	if DEBUGGING:
 		print("Running Player.gd: {n}._ready()... {pn}".format({
 			"n": name,
-			"pn": Globals.player_name,
+			"pn": player_name,
 			}))
 		# Report scene hierarchy.
 		print("Parent of '{n}' is '{p}'".format({
@@ -46,7 +48,6 @@ func _ready():
 			"p":get_parent().name,
 			}))
 			
-	modulate = color
 	position = start_position
 	Pause_Menu.hide()
 	get_tree().paused = false
@@ -66,15 +67,43 @@ func _process(_delta):
 	if Globals.use_keyboard:
 		Marker.look_at(get_global_mouse_position())
 
-	if velocity.x > 0 or velocity.x < 0:
-		AnimatedSprite.play("walk")
-	elif velocity.y < 0:
-		AnimatedSprite.play("jump")
-	elif velocity.y > 0:
-		AnimatedSprite.play("fall")
-	else:
-		AnimatedSprite.play("idle")
-		$Pasos.playing = false
+	if player_name == "Fire":
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("fire walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("fire jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("fire fall")
+		else:
+			AnimatedSprite.play("fire idle")
+	if player_name == "Water":
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("water walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("water jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("water fall")
+		else:
+			AnimatedSprite.play("water idle")
+	elif player_name == "Air":
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("air walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("air jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("air fall")
+		else:
+			AnimatedSprite.play("air idle")
+	elif player_name == "Earth":
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("earth walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("earth jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("earth  fall")
+		else:
+			AnimatedSprite.play("earth idle")
+
 		
 	
 var ui_inputs = {
@@ -152,7 +181,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		get_parent().add_child(bullet_lol)
 		bullet_lol.set_rotation(bullet_direction)
 		bullet_lol.set_global_position(bullet_pos)
-		bullet_lol.modulate = modulate
+		bullet_lol.modulate = str_to_var("Color" + str(color))
 		if !Globals.use_keyboard:
 			if AnimatedSprite.scale.x == 1:
 				bullet_lol.velocity = Vector2(bullet_speed, 0)
@@ -170,7 +199,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 func setlifes(value):
 	Globals.hearths[str(Globals.player_index)] = clamp(value,0,max_hearth)
 	if Globals.hearths[str(Globals.player_index)] <= 0:
-		if Globals.player_index == 0:
+		if Globals.num_players == 0:
 			print("you dead")
 			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position
@@ -239,7 +268,7 @@ func save():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
-		"name" : Globals.player_name,
+		"name" : player_name,
 		"level" : Globals.level,
 		"pos_x" :  position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
@@ -264,8 +293,7 @@ func load(info):
 	position = Vector2(info.pos_x,info.pos_y)
 	scale = Vector2(info.size_x, info.size_y)
 	print(info.color)
-	modulate = str_to_var("Color" + str(info.color))
 
 
 func _on_animation_player_animation_finished(anim_name):
-	modulate = color
+	pass
