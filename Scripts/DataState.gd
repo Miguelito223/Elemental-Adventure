@@ -111,5 +111,4 @@ func autosave_logic():
 		
 	if (time_passed > (int(Globals.autosave_length) * 60)) :
 		save_file_state()
-		Data.save_file()
 		Globals.autosaver_start_time = str(Time.get_unix_time_from_system())

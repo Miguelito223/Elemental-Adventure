@@ -214,35 +214,29 @@ func setlifes(value):
 			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position
 			DataState.save_file_state()
-			Data.save_file()
 			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
 			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position
 			DataState.save_file_state()
-			Data.save_file()
 		
 func getcoin():
 	Globals.coins += 1
 	DataState.save_file_state()
-	Data.save_file()
 	
 func getlife():
 	Globals.hearths[str(Globals.player_index)] += 1
 	DataState.save_file_state()
-	Data.save_file()
 	
 func changelevel():
 	Globals.level = "level_" + str(int(Globals.level) + 1 ) 
 	save().parent = "/root/" + Globals.level
 	DataState.save_file_state()
-	Data.save_file()
 	
 func setposspawn():
 	set_position(Vector2(-449, -26))
 	DataState.save_file_state()
-	Data.save_file()
 
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
@@ -251,7 +245,6 @@ func damage(ammount):
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		DataState.save_file_state()
-		Data.save_file()
 		
 
 func update_label():

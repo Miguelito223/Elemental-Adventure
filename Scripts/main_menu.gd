@@ -75,7 +75,6 @@ func _on_play_pressed():
 	
 func _on_delete_data_pressed():
 	DataState.remove_state_file()
-	Data.remove_file()
 	
 
 func _on_option_pressed():
