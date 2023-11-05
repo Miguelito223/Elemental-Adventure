@@ -332,6 +332,7 @@ func _on_victory_zone_body_entered(body):
 			DataState.save_file_state()
 			Data.save_file()
 			DataState.remove_state_file()
+			Data.remove_file()
 			DataState.node_data_load.clear()
 			DataState.node_data_save.clear()
 			LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")

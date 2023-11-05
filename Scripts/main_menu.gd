@@ -74,6 +74,10 @@ func _on_play_pressed():
 	
 func _on_delete_data_pressed():
 	DataState.remove_state_file()
+	Data.remove_file()
+	DataState.node_data_load.clear()
+	DataState.node_data_save.clear()
+
 	
 
 func _on_option_pressed():

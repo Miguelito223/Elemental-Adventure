@@ -67,6 +67,7 @@ func load_file_state():
 			if level == null:
 				print("level null")
 				return
+			
 			print("loading player, name: %s..." % node_data_load.name)
 
 			for player_index in range(Globals.num_players):

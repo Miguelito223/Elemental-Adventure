@@ -1,9 +1,9 @@
 extends Control
 
 func _process(delta):
-	$Label.text = "You won level" + str(Globals.level) + "!"
+	$Label.text = "You won level: \n level_" + str(int(Globals.level) - 1) + "!"
 	$coins.text = ":" + str(Globals.coins)
-	$score.text = ":" + str(Globals.score)
+	$score.text = "Score:" + str(Globals.score)
 
 
 func _on_next_pressed():
