@@ -182,7 +182,6 @@ bus = &"Music"
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(780, -482)
-zoom = Vector2(4, 4)
 
 [node name="Death Zone" type="Area2D" parent="."]
 position = Vector2(1869, -48)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2oeebmpp07gk"]
 
 [ext_resource type="Script" path="res://Scripts/loading_screen.gd" id="1_vy314"]
-[ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="2_c7jia"]
+[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_qyxjy"]
 
 [sub_resource type="Animation" id="Animation_fabrc"]
 length = 0.001
@@ -88,5 +88,5 @@ offset_left = 427.0
 offset_top = 422.0
 offset_right = 1542.0
 offset_bottom = 611.0
-theme_override_fonts/font = ExtResource("2_c7jia")
+theme_override_fonts/font = ExtResource("2_qyxjy")
 theme_override_font_sizes/font_size = 100

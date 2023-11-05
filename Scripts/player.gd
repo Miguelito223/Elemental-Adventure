@@ -103,6 +103,16 @@ func _process(_delta):
 			AnimatedSprite.play("earth  fall")
 		else:
 			AnimatedSprite.play("earth idle")
+	else:
+		modulate = str_to_var("Color" + str(color))
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("fire walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("fire jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("fire fall")
+		else:
+			AnimatedSprite.play("fire idle")		
 
 		
 	
@@ -199,7 +209,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 func setlifes(value):
 	Globals.hearths[str(Globals.player_index)] = clamp(value,0,max_hearth)
 	if Globals.hearths[str(Globals.player_index)] <= 0:
-		if Globals.num_players == 0:
+		if player_name == "Fire":
 			print("you dead")
 			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position

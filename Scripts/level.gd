@@ -41,7 +41,6 @@ func _ready():
 			add_player(player_index)
 
 		if Globals.num_players == 0:
-			Globals.use_keyboard = true
 			for player_index in range(1):
 				add_player(player_index)
 		

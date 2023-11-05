@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://y6bboatewubh"]
 
 [ext_resource type="Script" path="res://Scripts/Pause menu.gd" id="1_77nxw"]
-[ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="2_oegyl"]
+[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_8qk3t"]
 
 [node name="Pause menu" type="Control"]
 process_mode = 3
@@ -21,11 +21,11 @@ color = Color(0.211765, 0, 0.411765, 0.509804)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 331.0
-offset_top = 237.0
-offset_right = 1501.0
-offset_bottom = 377.0
-theme_override_fonts/font = ExtResource("2_oegyl")
+offset_left = 364.0
+offset_top = 33.0
+offset_right = 1534.0
+offset_bottom = 173.0
+theme_override_fonts/font = ExtResource("2_8qk3t")
 theme_override_font_sizes/font_size = 100
 text = "Pause"
 horizontal_alignment = 1
@@ -33,35 +33,44 @@ vertical_alignment = 1
 
 [node name="return" type="Button" parent="."]
 layout_mode = 0
-offset_left = 741.0
-offset_top = 534.0
-offset_right = 1148.0
-offset_bottom = 650.0
-theme_override_fonts/font = ExtResource("2_oegyl")
+offset_left = 608.0
+offset_top = 278.0
+offset_right = 1292.0
+offset_bottom = 471.0
+theme_override_fonts/font = ExtResource("2_8qk3t")
 theme_override_font_sizes/font_size = 90
 text = "Return"
 
 [node name="back" type="Button" parent="."]
 layout_mode = 0
-offset_left = 736.0
-offset_top = 673.0
-offset_right = 1143.0
-offset_bottom = 789.0
-theme_override_fonts/font = ExtResource("2_oegyl")
+offset_left = 607.0
+offset_top = 494.0
+offset_right = 1286.0
+offset_bottom = 663.0
+theme_override_fonts/font = ExtResource("2_8qk3t")
 theme_override_font_sizes/font_size = 90
 text = "Back"
 
 [node name="save" type="Button" parent="."]
 layout_mode = 0
-offset_left = 732.0
-offset_top = 813.0
-offset_right = 985.0
-offset_bottom = 911.0
+offset_left = 609.0
+offset_top = 697.0
+offset_right = 1014.0
+offset_bottom = 850.0
 scale = Vector2(1.64547, 1.29648)
-theme_override_fonts/font = ExtResource("2_oegyl")
+theme_override_fonts/font = ExtResource("2_8qk3t")
 theme_override_font_sizes/font_size = 67
 text = "Save
 "
+
+[node name="Credits" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 1057.0
+offset_right = 416.0
+offset_bottom = 1084.0
+theme_override_fonts/font = ExtResource("2_8qk3t")
+theme_override_font_sizes/font_size = 24
+text = "make by Miguelito"
 
 [connection signal="pressed" from="return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

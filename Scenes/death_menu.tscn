@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://v8uq1u8p3nxj"]
 
 [ext_resource type="Script" path="res://Scripts/Death Menu.gd" id="1_yxht8"]
-[ext_resource type="FontFile" uid="uid://0q8ws3bg86ey" path="res://GAME_glm.ttf" id="2_3iuf3"]
+[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_3iuf3"]
 [ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/main menu music.mp3" id="3_i6fgq"]
 
 [node name="Death Menu" type="Control"]
@@ -36,20 +36,20 @@ vertical_alignment = 1
 
 [node name="return" type="Button" parent="."]
 layout_mode = 0
-offset_left = 741.0
-offset_top = 534.0
-offset_right = 1148.0
-offset_bottom = 650.0
+offset_left = 593.0
+offset_top = 476.0
+offset_right = 1233.0
+offset_bottom = 654.0
 theme_override_fonts/font = ExtResource("2_3iuf3")
 theme_override_font_sizes/font_size = 90
 text = "Return"
 
 [node name="back" type="Button" parent="."]
 layout_mode = 0
-offset_left = 736.0
-offset_top = 673.0
-offset_right = 1143.0
-offset_bottom = 789.0
+offset_left = 660.0
+offset_top = 679.0
+offset_right = 1193.0
+offset_bottom = 859.0
 theme_override_fonts/font = ExtResource("2_3iuf3")
 theme_override_font_sizes/font_size = 90
 text = "Back"
@@ -58,6 +58,15 @@ text = "Back"
 stream = ExtResource("3_i6fgq")
 autoplay = true
 bus = &"Music"
+
+[node name="Credits" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 1057.0
+offset_right = 416.0
+offset_bottom = 1084.0
+theme_override_fonts/font = ExtResource("2_3iuf3")
+theme_override_font_sizes/font_size = 24
+text = "make by Miguelito"
 
 [connection signal="pressed" from="return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
