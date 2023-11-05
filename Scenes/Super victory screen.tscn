@@ -50,6 +50,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Credits" type="Label" parent="."]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 1057.0
 offset_right = 416.0
