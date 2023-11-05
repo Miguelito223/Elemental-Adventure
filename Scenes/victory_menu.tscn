@@ -1,8 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpwro3crqbft3"]
+[gd_scene load_steps=11 format=3 uid="uid://dpwro3crqbft3"]
 
 [ext_resource type="Script" path="res://Scripts/Victory menu.gd" id="1_hcj18"]
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_lqoqo"]
+[ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/coin.png" id="3_ffky8"]
 [ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/main menu music.mp3" id="3_hvq5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogjv1"]
+atlas = ExtResource("3_ffky8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnmc3"]
+atlas = ExtResource("3_ffky8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6ol6"]
+atlas = ExtResource("3_ffky8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g7vd"]
+atlas = ExtResource("3_ffky8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylcma"]
+atlas = ExtResource("3_ffky8")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kwrlb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogjv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnmc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6ol6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g7vd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylcma")
+}],
+"loop": true,
+"name": &"Coin",
+"speed": 5.0
+}]
 
 [node name="Victory menu" type="Control"]
 layout_mode = 3
@@ -23,22 +67,54 @@ color = Color(0.211765, 0, 0.411765, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 352.0
-offset_top = 159.0
-offset_right = 1522.0
-offset_bottom = 299.0
+offset_left = 174.0
+offset_top = 52.0
+offset_right = 1774.0
+offset_bottom = 192.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
-text = "Victory!"
+text = "You won level: !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="coins" type="Label" parent="."]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 368.0
+offset_right = 1163.0
+offset_bottom = 508.0
+theme_override_fonts/font = ExtResource("2_lqoqo")
+theme_override_font_sizes/font_size = 100
+text = ":"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 375.0
+offset_right = 1852.0
+offset_bottom = 515.0
+theme_override_fonts/font = ExtResource("2_lqoqo")
+theme_override_font_sizes/font_size = 100
+text = "Score:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="coin" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(444, 424)
+scale = Vector2(4.47463, 4.49251)
+sprite_frames = SubResource("SpriteFrames_kwrlb")
+animation = &"Coin"
+autoplay = "Coin"
+
 [node name="next" type="Button" parent="."]
 layout_mode = 0
-offset_left = 672.0
-offset_top = 450.0
-offset_right = 1148.0
-offset_bottom = 650.0
+offset_left = 670.0
+offset_top = 677.0
+offset_right = 1146.0
+offset_bottom = 877.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
 text = "next
@@ -47,9 +123,9 @@ text = "next
 [node name="back" type="Button" parent="."]
 layout_mode = 0
 offset_left = 667.0
-offset_top = 673.0
+offset_top = 885.0
 offset_right = 1143.0
-offset_bottom = 858.0
+offset_bottom = 1070.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
 text = "Back"

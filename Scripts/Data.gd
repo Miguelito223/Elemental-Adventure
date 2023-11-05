@@ -28,7 +28,17 @@ func save_file():
 			"hour": Globals.hour,
 			"minute":Globals.minute,
 			"time": Globals.time,
-		},	
+		},
+		"players":{
+			"level": Globals.level,
+			"hearths": Globals.hearths,
+			"coins": Globals.coins,
+			"score": Globals.score,
+			"pos_x": Globals.pos_x,
+			"pos_y": Globals.pos_y,
+			"size_x": Globals.size_x,
+			"size_y": Globals.size_y,
+		},
 		"others":{
 			"num_players": Globals.num_players,
 			"use_keyboard": Globals.use_keyboard,
@@ -89,6 +99,17 @@ func load_file():
 		Globals.hour = time.hour
 		Globals.minute = time.minute
 		Globals.time = time.time
+		
+		var players = data.players
+
+		Globals.level = players.level
+		Globals.hearths = players.hearths
+		Globals.coins = players.coins
+		Globals.score = players.score
+		Globals.pos_y = players.pos_y
+		Globals.pos_x = players.pos_x
+		Globals.size_y = players.size_y
+		Globals.size_x = players.size_x
 
 		var others = data.others
 

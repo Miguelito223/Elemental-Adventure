@@ -66,6 +66,7 @@ func setlifes(value):
 			drop_coins()
 		if random_number2 == 10:
 			drop_hearths()
+		Globals.score += 3
 		queue_free()
 
 func _physics_process(delta):

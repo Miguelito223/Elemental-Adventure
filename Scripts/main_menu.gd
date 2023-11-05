@@ -67,7 +67,6 @@ func _ready():
 	autosave.button_pressed = Globals.autosave
 	autosave_length.text = Globals.autosave_length
 	autosaver_start_time.text = Globals.autosaver_start_time
-	Data.load_inputs(Globals.inputs)
 	
 func _on_play_pressed():
 	print(Globals.level)

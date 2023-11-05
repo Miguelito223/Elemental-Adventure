@@ -54,12 +54,6 @@ func _ready():
 	setlifes(Globals.hearths[str(Globals.player_index)])
 	Signals.player_ready.emit()
 
-
-	
-
-
-
-	
 	
 func _process(_delta):	
 	update_label()
@@ -214,29 +208,36 @@ func setlifes(value):
 			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position
 			DataState.save_file_state()
+			Data.save_file()
 			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
 			Globals.hearths[str(Globals.player_index)] = max_hearth
 			position = start_position
 			DataState.save_file_state()
+			Data.save_file()
 		
 func getcoin():
 	Globals.coins += 1
+	Globals.score += 3
 	DataState.save_file_state()
+	Data.save_file()
 	
 func getlife():
 	Globals.hearths[str(Globals.player_index)] += 1
 	DataState.save_file_state()
+	Data.save_file()
 	
 func changelevel():
 	Globals.level = "level_" + str(int(Globals.level) + 1 ) 
 	save().parent = "/root/" + Globals.level
 	DataState.save_file_state()
+	Data.save_file()
 	
 func setposspawn():
 	set_position(Vector2(-449, -26))
 	DataState.save_file_state()
+	Data.save_file()
 
 func damage(ammount):
 	if InvunerabilityTime.is_stopped():
@@ -244,13 +245,16 @@ func damage(ammount):
 		setlifes(Globals.hearths[str(Globals.player_index)] - ammount)
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
+		Globals.score -= 3
 		DataState.save_file_state()
+		Data.save_file()
 		
 
 func update_label():
 	$CanvasLayer/Label.text = ":" + str(Globals.hearths[str(0)])
 	$CanvasLayer/Label2.text = ":" + str(Globals.coins)
 	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
+	$CanvasLayer/Label4.text =   "Score:" + str(Globals.score)
 	
 
 func _on_exit_pressed():
@@ -280,6 +284,7 @@ func save():
 		"color" : color,
 		"hearths" : Globals.hearths,
 		"coins" : Globals.coins,
+		"score" : Globals.score,
 		"max_health" : max_hearth,
 	}
 	return save_dict
@@ -289,6 +294,7 @@ func load(info):
 	Globals.hearths = info.hearths
 	Globals.name = info.name
 	Globals.coins = info.coins
+	Globals.score = info.score
 	Globals.pos_y = info.pos_y
 	Globals.pos_x = info.pos_x
 	Globals.size_y = info.size_y

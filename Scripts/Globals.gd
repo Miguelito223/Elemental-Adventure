@@ -17,6 +17,7 @@ var level = "level_1"
 var level_int = 1
 var hearths = {}
 var coins = 0
+var score = 0
 var pos_x = -438
 var pos_y = -41
 var size_x = 0.4

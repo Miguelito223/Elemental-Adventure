@@ -199,8 +199,7 @@ position = Vector2(1529, -49)
 position = Vector2(589, -45)
 
 [node name="Hearth3" parent="." instance=ExtResource("8_mpvrg")]
-position = Vector2(1154, -154)
-scale = Vector2(1.76416, 1.87751)
+position = Vector2(1151, -148)
 
 [node name="Level Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_qpj2w")
