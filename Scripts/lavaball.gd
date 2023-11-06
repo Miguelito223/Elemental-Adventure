@@ -28,5 +28,7 @@ func _on_body_entered(body):
 	else: 
 		if body.get_scene_file_path() == "res://Scenes/player.tscn":
 			return
+
+			
 		queue_free()
 		

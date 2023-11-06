@@ -255,8 +255,8 @@ func add_player(player_index):
 			"key_pause": KEY_ESCAPE,
 			}
 		var keymaps: Dictionary = {
-			0: arrows,
-			1: wasd,
+			0: wasd,
+			1: arrows,
 			2: hjkl,
 			3: uiop,
 			}
