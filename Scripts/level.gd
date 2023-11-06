@@ -237,7 +237,7 @@ func add_player(player_index):
 			"key_right": KEY_D,
 			"key_left":  KEY_A,
 			"key_jump":  KEY_W,
-			"key_shoot":  KEY_S,
+			"key_shoot":  KEY_SPACE,
 			"key_pause": KEY_ESCAPE,
 			}
 		var hjkl: Dictionary = {
