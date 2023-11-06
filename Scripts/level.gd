@@ -97,9 +97,7 @@ func add_player(player_index):
 	
 	var player = players[-1]
 	
-	if DEBUGGING: # TESTING
-		# Random positions are annoying while testing.
-		# Hardcode positions for player_index 0 and 1
+	if DEBUGGING:
 		if player_index == 0:
 			player.start_position = Vector2(-460,-45)
 		elif player_index == 1:
