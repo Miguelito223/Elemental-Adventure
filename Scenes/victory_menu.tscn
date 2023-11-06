@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Victory menu.gd" id="1_hcj18"]
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_lqoqo"]
 [ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/coin.png" id="3_ffky8"]
-[ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/main menu music.mp3" id="3_hvq5w"]
+[ext_resource type="AudioStream" uid="uid://ciykj3og6wxmg" path="res://sounds/Victory Sound.wav" id="4_r03k4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ogjv1"]
 atlas = ExtResource("3_ffky8")
@@ -73,19 +73,20 @@ offset_right = 1774.0
 offset_bottom = 192.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
-text = "You won level: !"
+text = "You won level: 
+level_1 !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="coins" type="Label" parent="."]
 layout_mode = 0
-offset_left = 325.0
-offset_top = 438.0
-offset_right = 1495.0
-offset_bottom = 578.0
+offset_left = 358.0
+offset_top = 539.0
+offset_right = 1528.0
+offset_bottom = 679.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
-text = ":"
+text = ":0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -99,22 +100,22 @@ autoplay = "Coin"
 
 [node name="score" type="Label" parent="."]
 layout_mode = 0
-offset_left = 307.0
-offset_top = 239.0
-offset_right = 1477.0
-offset_bottom = 379.0
+offset_left = 320.0
+offset_top = 349.0
+offset_right = 1490.0
+offset_bottom = 489.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
-text = "Score:"
+text = "Score:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="next" type="Button" parent="."]
 layout_mode = 0
-offset_left = 670.0
-offset_top = 677.0
-offset_right = 1146.0
-offset_bottom = 877.0
+offset_left = 704.0
+offset_top = 768.0
+offset_right = 1094.0
+offset_bottom = 895.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
 text = "next
@@ -122,18 +123,13 @@ text = "next
 
 [node name="back" type="Button" parent="."]
 layout_mode = 0
-offset_left = 667.0
-offset_top = 885.0
-offset_right = 1143.0
-offset_bottom = 1070.0
+offset_left = 697.0
+offset_top = 910.0
+offset_right = 1112.0
+offset_bottom = 1039.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
 text = "Back"
-
-[node name="Victory music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_hvq5w")
-autoplay = true
-bus = &"Music"
 
 [node name="Credits" type="Label" parent="."]
 layout_mode = 0
@@ -144,6 +140,11 @@ offset_bottom = 1084.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 24
 text = "make by Miguelito"
+
+[node name="Victory music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r03k4")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

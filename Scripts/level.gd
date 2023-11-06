@@ -35,7 +35,7 @@ func _ready():
 	DataState.load_file_state()
 	Data.load_file()
 	
-	if DataState.node_data_load.is_empty():
+	if DataState.node_data.is_empty():
 		print("node_data is empty")
 		for player_index in range(Globals.num_players):
 			add_player(player_index)
@@ -145,7 +145,7 @@ func add_player(player_index):
 	player.player_name = names[player_index]
 	Globals.player_name = names[player_index]
 	
-	if DataState.node_data_load.is_empty():
+	if DataState.node_data.is_empty():
 		print("node data is empy")
 		Globals.hearths[str(Globals.player_index)] = 3
 

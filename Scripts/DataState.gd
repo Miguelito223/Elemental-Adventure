@@ -3,8 +3,7 @@ extends Node
 
 
 var data_state_path = "user://Data_State.json"
-var node_data_load = {}
-var node_data_save = {}
+var node_data = {}
 
 func save_file_state():
 	print("Creating state data file")
@@ -19,8 +18,8 @@ func save_file_state():
 			print("persistent node '%s' is missing a save() function, skipped" % node.name)
 			continue
 
-		node_data_save = node.save()
-		datafile.store_line(JSON.stringify(node_data_save))
+		node_data = node.save()
+		datafile.store_line(JSON.stringify(node_data))
 	
 	Signals.finish_add_data.emit()
 	print("finish")
@@ -32,12 +31,10 @@ func load_file_state():
 	
 	if not FileAccess.file_exists(data_state_path):
 		print("State data file doesn't exist!")
-		save_file_state()
 		return
 
 	if datafile.get_length() <= 0:
 		print("State data file empty!")
-		save_file_state()
 		return
 	
 	print("data state file found")
@@ -57,18 +54,18 @@ func load_file_state():
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 		
-		node_data_load = json.get_data()
+		node_data = json.get_data()
 			
-		var new_object = load(node_data_load.filename).instantiate()
+		var new_object = load(node_data.filename).instantiate()
 		
 
-		if node_data_load.filename == "res://Scenes/player.tscn":
+		if node_data.filename == "res://Scenes/player.tscn":
 			var level = get_tree().get_root().get_node("Game/" + Globals.level)
 			if level == null:
 				print("level null")
 				return
 			
-			print("loading player, name: %s..." % node_data_load.name)
+			print("loading player, name: %s..." % node_data.name)
 
 			for player_index in range(Globals.num_players):
 				level.add_player(player_index)
@@ -81,24 +78,24 @@ func load_file_state():
 			print("loading finish...")
 		else:
 			print("creating node '%s'" % new_object.name)
-			if get_node(node_data_load.parent) != null:
-				get_node(node_data_load.parent).add_child(new_object)
+			if get_node(node_data.parent) != null:
+				get_node(node_data.parent).add_child(new_object)
 			else:
 				print("fixing the parent...")
-				node_data_load.parent = "/root/" + Globals.level
+				node_data.parent = "/root/" + Globals.level
 				
-				if get_node(node_data_load.parent) != null:
-					get_node(node_data_load.parent).add_child(new_object)
+				if get_node(node_data.parent) != null:
+					get_node(node_data.parent).add_child(new_object)
 				else:
 					print("fixing the parent again...")
-					node_data_load.parent = "/root/level_" + str(int(Globals.level) - 1)
-					if get_node(node_data_load.parent) != null:
-						get_node(node_data_load.parent).add_child(new_object)
+					node_data.parent = "/root/level_" + str(int(Globals.level) - 1)
+					if get_node(node_data.parent) != null:
+						get_node(node_data.parent).add_child(new_object)
 					else:
 						print("null parent of object '%s'" % new_object.name)
 
 						
-		new_object.load(node_data_load)
+		new_object.load(node_data)
 	
 	print("finish")
 	Signals.finish_load_data.emit()
