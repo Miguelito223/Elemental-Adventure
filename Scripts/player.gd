@@ -209,7 +209,7 @@ func setlifes(value):
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
-			LoadScene.load_scene(get_parent(), "res://Scenes/death_menu.tscn")
+			LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
 			Globals.hearths[str(Globals.player_index)] = max_hearth

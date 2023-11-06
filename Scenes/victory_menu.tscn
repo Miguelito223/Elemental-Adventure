@@ -79,10 +79,10 @@ vertical_alignment = 1
 
 [node name="coins" type="Label" parent="."]
 layout_mode = 0
-offset_left = 309.0
-offset_top = 429.0
-offset_right = 1479.0
-offset_bottom = 569.0
+offset_left = 325.0
+offset_top = 438.0
+offset_right = 1495.0
+offset_bottom = 578.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
 text = ":"
@@ -99,10 +99,10 @@ autoplay = "Coin"
 
 [node name="score" type="Label" parent="."]
 layout_mode = 0
-offset_left = 309.0
-offset_top = 282.0
-offset_right = 1479.0
-offset_bottom = 422.0
+offset_left = 307.0
+offset_top = 239.0
+offset_right = 1477.0
+offset_bottom = 379.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
 text = "Score:"
