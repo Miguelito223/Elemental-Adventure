@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://u6equn2extll"]
+[gd_scene load_steps=5 format=3 uid="uid://u6equn2extll"]
 
 [ext_resource type="Script" path="res://Scripts/lavaball.gd" id="1_a2ond"]
 [ext_resource type="Texture2D" uid="uid://bpyos3obfe87w" path="res://Sprites/balllava.png" id="2_tu1vn"]
+[ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="3_e3bgb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8u2e6"]
 radius = 15.0
@@ -18,6 +19,15 @@ texture_filter = 1
 texture = ExtResource("2_tu1vn")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.258, 0.2)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = ExtResource("3_e3bgb")
+texture_scale = 0.36
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

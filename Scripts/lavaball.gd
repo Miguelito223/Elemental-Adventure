@@ -8,9 +8,7 @@ func _physics_process(delta):
 		
 
 
-func _on_body_entered(body):
-	if body.name == "enemy":
-		body.damage(10)
+
 	
 
 
@@ -21,7 +19,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 func _on_area_entered(area):
 	if area.get_scene_file_path() == "res://Scenes/enemy.tscn":
 		area.get_parent().damage(10)
-		queue_free()
-	else:
+
+func _on_body_entered(body):
+	if body.get_scene_file_path() == "res://Scenes/enemy.tscn":
+		body.damage(10)
+	else: 
 		queue_free()
 		
