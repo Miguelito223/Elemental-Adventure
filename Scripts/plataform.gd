@@ -27,7 +27,7 @@ func save():
 		"speed_scale": speed_scale,
 		"speed": speed,
 		"path_progress": path.progress,
-		"path_progress_ratio": path.progress.ratio,
+		"path_progress_ratio": path.progress_ratio,
 		"loop": loop,
 
 	}
@@ -39,7 +39,7 @@ func load(info):
 	scale = Vector2(info.size_x, info.size_y)
 	loop = info.loop
 	path.progress = info.path_progress
-	path.progress.ratio = info.path_progress_ratio
-	path.speed = info.speed
-	path.speed_scale = info.speed_scale
+	path.progress_ratio = info.path_progress_ratio
+	speed = info.speed
+	speed_scale = info.speed_scale
 
