@@ -78,9 +78,8 @@ func load_file_state():
 						get_node(node_data.parent).add_child(new_object)
 					else:
 						print("null parent of object '%s'" % new_object.name)
-
-						
-		new_object.load(node_data)
+			
+			new_object.load(node_data)
 	
 	print("finish")
 	Signals.finish_load_data.emit()

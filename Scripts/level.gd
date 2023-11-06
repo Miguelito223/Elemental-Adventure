@@ -148,7 +148,8 @@ func add_player(player_index):
 		Globals.hearths[str(Globals.player_index)] = 3
 		player.position = player.start_position
 	else:
-		player.load(DataState.node_data)
+		if DataState.node_data.filename == "res://Scenes/player.tscn":
+			player.load(DataState.node_data)
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
