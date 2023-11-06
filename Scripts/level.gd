@@ -226,18 +226,18 @@ func add_player(player_index):
 		
 		
 	else:
-		var arrows: Dictionary = {
-			"key_right": KEY_RIGHT,
-			"key_left":  KEY_LEFT,
-			"key_jump":  KEY_UP,
-			"key_shoot":  KEY_DOWN,
-			"key_pause": KEY_ESCAPE,
-			}
 		var wasd: Dictionary = {
 			"key_right": KEY_D,
 			"key_left":  KEY_A,
 			"key_jump":  KEY_W,
 			"key_shoot":  KEY_SPACE,
+			"key_pause": KEY_ESCAPE,
+			}
+		var arrows: Dictionary = {
+			"key_right": KEY_RIGHT,
+			"key_left":  KEY_LEFT,
+			"key_jump":  KEY_UP,
+			"key_shoot":  KEY_DOWN,
 			"key_pause": KEY_ESCAPE,
 			}
 		var hjkl: Dictionary = {
