@@ -79,35 +79,35 @@ vertical_alignment = 1
 
 [node name="coins" type="Label" parent="."]
 layout_mode = 0
-offset_left = -7.0
-offset_top = 368.0
-offset_right = 1163.0
-offset_bottom = 508.0
+offset_left = 309.0
+offset_top = 429.0
+offset_right = 1479.0
+offset_bottom = 569.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
 text = ":"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="coin" type="AnimatedSprite2D" parent="coins"]
+texture_filter = 1
+position = Vector2(357, 63)
+scale = Vector2(4.47463, 4.49251)
+sprite_frames = SubResource("SpriteFrames_kwrlb")
+animation = &"Coin"
+autoplay = "Coin"
+
 [node name="score" type="Label" parent="."]
 layout_mode = 0
-offset_left = 682.0
-offset_top = 375.0
-offset_right = 1852.0
-offset_bottom = 515.0
+offset_left = 309.0
+offset_top = 282.0
+offset_right = 1479.0
+offset_bottom = 422.0
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
 text = "Score:"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="coin" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-position = Vector2(444, 424)
-scale = Vector2(4.47463, 4.49251)
-sprite_frames = SubResource("SpriteFrames_kwrlb")
-animation = &"Coin"
-autoplay = "Coin"
 
 [node name="next" type="Button" parent="."]
 layout_mode = 0

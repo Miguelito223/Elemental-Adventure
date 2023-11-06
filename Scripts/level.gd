@@ -149,9 +149,6 @@ func add_player(player_index):
 		print("node data is empy")
 		Globals.hearths[str(Globals.player_index)] = 3
 
-	if not Globals.hearths.has(str(Globals.player_index)):
-		Globals.hearths[str(Globals.player_index)] = 3
-
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
 		"ui_left{n}".format({"n":player_index}): Vector2.LEFT,
@@ -324,6 +321,9 @@ func _physics_process(_delta):
 func _on_victory_zone_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		if Globals.level == "level_10":
+			Globals.level = "level_1"
+			DataState.save_file_state()
+			Data.save_file()
 			LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 		else:
 			body.changelevel()
@@ -332,9 +332,6 @@ func _on_victory_zone_body_entered(body):
 			DataState.save_file_state()
 			Data.save_file()
 			DataState.remove_state_file()
-			Data.remove_file()
-			DataState.node_data_load.clear()
-			DataState.node_data_save.clear()
 			LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 
 

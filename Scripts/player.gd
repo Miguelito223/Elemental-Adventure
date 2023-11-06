@@ -251,10 +251,10 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Label.text = ":" + str(Globals.hearths[str(0)])
-	$CanvasLayer/Label2.text = ":" + str(Globals.coins)
-	$CanvasLayer/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
-	$CanvasLayer/Label4.text =   "Score:" + str(Globals.score)
+	$CanvasLayer/Panel/Label.text = ":" + str(Globals.hearths[str(0)])
+	$CanvasLayer/Panel2/Label2.text = ":" + str(Globals.coins)
+	$CanvasLayer/Panel3/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
+	$CanvasLayer/Panel4/Label4.text =   "Score:" + str(Globals.score)
 	
 
 func _on_exit_pressed():
