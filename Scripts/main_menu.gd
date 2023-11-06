@@ -76,7 +76,7 @@ func _on_delete_data_pressed():
 	DataState.remove_state_file()
 	Data.remove_file()
 	DataState.node_data.clear()
-	DataState.node_data.clear()
+	Data.data.clear()
 
 	
 

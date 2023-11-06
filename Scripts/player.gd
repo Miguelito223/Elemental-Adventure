@@ -47,8 +47,7 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 			}))
-			
-	position = start_position
+	
 	Pause_Menu.hide()
 	get_tree().paused = false
 	setlifes(Globals.hearths[str(Globals.player_index)])

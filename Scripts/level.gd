@@ -35,14 +35,12 @@ func _ready():
 	DataState.load_file_state()
 	Data.load_file()
 	
-	if DataState.node_data.is_empty():
-		print("node_data is empty")
-		for player_index in range(Globals.num_players):
-			add_player(player_index)
+	for player_index in range(Globals.num_players):
+		add_player(player_index)
 
-		if Globals.num_players == 0:
-			for player_index in range(1):
-				add_player(player_index)
+	if Globals.num_players == 0:
+		for player_index in range(1):
+			add_player(player_index)
 
 	Signals.level_loaded.emit()
 
@@ -148,6 +146,9 @@ func add_player(player_index):
 	if DataState.node_data.is_empty():
 		print("node data is empy")
 		Globals.hearths[str(Globals.player_index)] = 3
+		player.position = player.start_position
+	else:
+		player.load(DataState.node_data)
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,

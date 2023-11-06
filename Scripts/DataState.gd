@@ -60,22 +60,7 @@ func load_file_state():
 		
 
 		if node_data.filename == "res://Scenes/player.tscn":
-			var level = get_tree().get_root().get_node("Game/" + Globals.level)
-			if level == null:
-				print("level null")
-				return
-			
-			print("loading player, name: %s..." % node_data.name)
-
-			for player_index in range(Globals.num_players):
-				level.add_player(player_index)
-
-			if Globals.num_players == 0:
-				Globals.use_keyboard = true
-				for player_index in range(1):
-					level.add_player(player_index)	
-
-			print("loading finish...")
+			pass
 		else:
 			print("creating node '%s'" % new_object.name)
 			if get_node(node_data.parent) != null:
