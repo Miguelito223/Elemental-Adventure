@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://uiyd8u2smj1p"]
+[gd_scene load_steps=17 format=3 uid="uid://uiyd8u2smj1p"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_y2aw8"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_25ve4"]
@@ -25,61 +25,17 @@ size = Vector2(10.3734, 10.2091)
 cull_mode = 1
 polygon = PackedVector2Array(200, 200)
 
-[sub_resource type="Animation" id="Animation_rgfxu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-79.8, -4.8)]
-}
-
-[sub_resource type="Animation" id="Animation_ovkb6"]
-resource_name = "movement 1"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.4, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-79.8, -4.8), Vector2(449.2, 9.2), Vector2(-79.8, -4.8)]
-}
-
-[sub_resource type="Animation" id="Animation_c5vmr"]
-resource_name = "movement 2"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.3, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(576.2, 11.2), Vector2(896.2, -22.8), Vector2(576.2, 11.2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6pe47"]
+[sub_resource type="Curve2D" id="Curve2D_k4qm2"]
 _data = {
-"RESET": SubResource("Animation_rgfxu"),
-"movement 1": SubResource("Animation_ovkb6"),
-"movement 2": SubResource("Animation_c5vmr")
+"points": PackedVector2Array(0, 0, 0, 0, -9, -9, 0, 0, 0, 0, 540, 8)
 }
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_3mnk5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 648, 9, 0, 0, 0, 0, 990, -24)
+}
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8dgj"]
 size = Vector2(32.6387, 20)
@@ -236,21 +192,11 @@ bus = &"Music"
 
 [node name="plataform" parent="." instance=ExtResource("8_5y225")]
 position = Vector2(-79.8, -4.8)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="plataform"]
-autoplay = "movement 1"
-libraries = {
-"": SubResource("AnimationLibrary_6pe47")
-}
+curve = SubResource("Curve2D_k4qm2")
 
 [node name="plataform2" parent="." instance=ExtResource("8_5y225")]
-position = Vector2(-79.8, -4.8)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="plataform2"]
-autoplay = "movement 2"
-libraries = {
-"": SubResource("AnimationLibrary_6pe47")
-}
+position = Vector2(-80.8, -4.8)
+curve = SubResource("Curve2D_3mnk5")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(780, -482)

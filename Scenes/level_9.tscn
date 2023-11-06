@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b4n8vf46ncqro"]
+[gd_scene load_steps=16 format=3 uid="uid://b4n8vf46ncqro"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_htipo"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ave4t"]
@@ -25,44 +25,11 @@ size = Vector2(10.3734, 10.2091)
 cull_mode = 1
 polygon = PackedVector2Array(200, 200)
 
-[sub_resource type="Animation" id="Animation_gmhlk"]
-length = 0.001
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(142, 11)]
-}
-
-[sub_resource type="Animation" id="Animation_t22yu"]
-resource_name = "movement 1"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.5, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(142, 11), Vector2(546, -7), Vector2(142, 11)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jr87o"]
+[sub_resource type="Curve2D" id="Curve2D_stbqy"]
 _data = {
-"RESET": SubResource("Animation_gmhlk"),
-"movement 1": SubResource("Animation_t22yu")
+"points": PackedVector2Array(0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 410, -23)
 }
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3d2"]
 size = Vector2(32.6387, 20)
@@ -222,12 +189,7 @@ bus = &"Music"
 
 [node name="plataform" parent="." instance=ExtResource("8_1r11l")]
 position = Vector2(142, 11)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="plataform"]
-autoplay = "movement 1"
-libraries = {
-"": SubResource("AnimationLibrary_jr87o")
-}
+curve = SubResource("Curve2D_stbqy")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(780, -482)

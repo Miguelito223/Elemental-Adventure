@@ -3,7 +3,7 @@ extends CharacterBody2D
 var DEBUGGING
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var bullet = preload("res://Scenes/lavaball.tscn")
+var bullet = preload("res://Scenes/fireball.tscn")
 var can_fire = true
 
 @export var max_hearth = 3
@@ -184,10 +184,17 @@ func _input(event):
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
 		var bullet_lol = bullet.instantiate()
+		var fire = bullet_lol.get_node("Fire")
 		get_parent().add_child(bullet_lol)
 		bullet_lol.set_rotation(bullet_direction)
 		bullet_lol.set_global_position(bullet_pos)
 		bullet_lol.modulate = str_to_var("Color" + str(color))
+		
+		if player_name == "Fire":
+			fire.emitting = true
+		else:
+			fire.emitting = false
+
 		if !Globals.use_keyboard:
 			if AnimatedSprite.scale.x == 1:
 				bullet_lol.velocity = Vector2(bullet_speed, 0)

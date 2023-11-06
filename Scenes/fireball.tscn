@@ -54,7 +54,7 @@ shadow_filter_smooth = 3.0
 texture = ExtResource("3_v3vlo")
 texture_scale = 0.36
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="Fire" type="GPUParticles2D" parent="."]
 amount = 500
 process_material = SubResource("ParticleProcessMaterial_68iho")
 
