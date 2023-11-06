@@ -14,7 +14,8 @@ texture = ExtResource("1_dgwbu")
 0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_cvxbe")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -5, -8, -5)
+0:0/0/physics_layer_0/polygon_0/one_way = true
 1:0/0 = 0
 1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_jdgkb")
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -24,6 +25,7 @@ texture = ExtResource("1_dgwbu")
 [sub_resource type="TileSet" id="TileSet_ao7y3"]
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_r7utw")
 
 [node name="TileMap" type="TileMap"]

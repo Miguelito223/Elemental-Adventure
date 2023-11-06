@@ -115,6 +115,7 @@ var ui_inputs = {
 	"ui_jump": null,
 	"ui_shoot": null,
 	"ui_pause": null,
+	"ui_down": null,
 }
 
 func _physics_process(delta):
@@ -171,6 +172,8 @@ func _input(event):
 	if event.is_action_pressed(ui_inputs.keys()[4]):
 		Pause_Menu.show()
 		get_tree().paused = true
+	if event.is_action_pressed(ui_inputs.keys()[5]):
+		position.y += 1
 	if event.is_action_pressed(ui_inputs.keys()[1]):
 		AnimatedSprite.scale.x = -1
 	if event.is_action_pressed(ui_inputs.keys()[0]):

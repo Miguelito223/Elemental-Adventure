@@ -157,6 +157,7 @@ func add_player(player_index):
 		"ui_jump{n}".format({"n":player_index}): null,
 		"ui_shoot{n}".format({"n":player_index}): null,
 		"ui_pause{n}".format({"n":player_index}): null,
+		"ui_down{n}".format({"n":player_index}): null,
 	})
 	print(input_maps[player_index])
 	# DEBUGGING
@@ -182,6 +183,9 @@ func add_player(player_index):
 		
 		var pause_action: String
 		var pause_action_event: InputEventJoypadButton
+
+		var down_action: String
+		var down_action_event: InputEventJoypadMotion
 	
 		right_action = "ui_right{n}".format({"n":player_index})
 		InputMap.add_action(right_action)
@@ -224,35 +228,48 @@ func add_player(player_index):
 		pause_action_event.device = player_index
 		pause_action_event.button_index = JOY_BUTTON_START
 		InputMap.action_add_event(pause_action, pause_action_event)
+
+		down_action = "ui_down{n}".format({"n":player_index})
+		InputMap.add_action(down_action)
+		# Creat a new InputEvent instance to assign to the InputMap.
+		down_action_event = InputEventJoypadMotion.new()
+		down_action_event.device = player_index
+		down_action_event.axis = JOY_AXIS_LEFT_Y # <---- vertical axis
+		down_action_event.axis_value = 1.0 # <---- down
+		InputMap.action_add_event(down_action, down_action_event)
 		
 		
 	else:
 		var wasd: Dictionary = {
 			"key_right": KEY_D,
 			"key_left":  KEY_A,
-			"key_jump":  KEY_W,
-			"key_shoot":  KEY_SPACE,
+			"key_jump":  KEY_SPACE,
+			"key_down":  KEY_S,
+			"key_shoot":  KEY_W,
 			"key_pause": KEY_ESCAPE,
 			}
 		var arrows: Dictionary = {
 			"key_right": KEY_RIGHT,
 			"key_left":  KEY_LEFT,
-			"key_jump":  KEY_UP,
-			"key_shoot":  KEY_DOWN,
+			"key_jump":  KEY_SPACE,
+			"key_down":  KEY_DOWN,
+			"key_shoot":  KEY_UP,
 			"key_pause": KEY_ESCAPE,
 			}
 		var hjkl: Dictionary = {
 			"key_right": KEY_L,
 			"key_left":  KEY_H,
-			"key_jump":  KEY_K,
-			"key_shoot":  KEY_J,
+			"key_jump":  KEY_SPACE,
+			"key_down":  KEY_J,
+			"key_shoot":  KEY_K,
 			"key_pause": KEY_ESCAPE,
 			}
 		var uiop: Dictionary = {
 			"key_right": KEY_P,
 			"key_left":  KEY_U,
-			"key_jump":  KEY_O,
-			"key_shoot":  KEY_I,
+			"key_jump":  KEY_SPACE,
+			"key_down":  KEY_I,
+			"key_shoot":  KEY_O,
 			"key_pause": KEY_ESCAPE,
 			}
 		var keymaps: Dictionary = {
@@ -276,6 +293,9 @@ func add_player(player_index):
 
 		var pause_action: String
 		var pause_action_event: InputEventKey
+
+		var down_action: String
+		var down_action_event: InputEventKey
 		
 
 		right_action = "ui_right{n}".format({"n":player_index})
@@ -312,6 +332,20 @@ func add_player(player_index):
 		pause_action_event = InputEventKey.new()
 		pause_action_event.keycode = keymaps[player_index]["key_pause"]
 		InputMap.action_add_event(pause_action, pause_action_event)
+
+		jump_action = "ui_jump{n}".format({"n":player_index})
+		InputMap.add_action(jump_action)
+		# Creat a new InputEvent instance to assign to the InputMap.
+		jump_action_event = InputEventKey.new()
+		jump_action_event.keycode = keymaps[player_index]["key_jump"]
+		InputMap.action_add_event(jump_action, jump_action_event)
+
+		down_action = "ui_down{n}".format({"n":player_index})
+		InputMap.add_action(down_action)
+		# Creat a new InputEvent instance to assign to the InputMap.
+		down_action_event = InputEventKey.new()
+		down_action_event.keycode = keymaps[player_index]["key_down"]
+		InputMap.action_add_event(down_action, down_action_event)
 	
 	add_child(player)
 
