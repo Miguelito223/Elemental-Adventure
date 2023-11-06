@@ -95,7 +95,7 @@ func _on_area_2d_body_entered(body):
 		body.damage(1)
 
 func _on_area_2d_area_entered(area):
-	if area.name == "lavaball":
+	if area.get_scene_file_path() == "res://Scenes/lavaball.tscn":
 		damage(10)
 		
 func in_water():
