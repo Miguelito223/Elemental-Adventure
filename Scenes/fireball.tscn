@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://u6equn2extll"]
 
-[ext_resource type="Script" path="res://Scripts/lavaball.gd" id="1_u27tw"]
+[ext_resource type="Script" path="res://Scripts/fireball.gd" id="1_y16lp"]
 [ext_resource type="Texture2D" uid="uid://bpyos3obfe87w" path="res://Sprites/fireball.png" id="2_t1plx"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="3_v3vlo"]
 
@@ -34,7 +34,7 @@ turbulence_noise_scale = 5.87
 
 [node name="fireball" type="Area2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_u27tw")
+script = ExtResource("1_y16lp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8u2e6")
