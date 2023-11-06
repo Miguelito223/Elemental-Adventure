@@ -322,9 +322,6 @@ func _physics_process(_delta):
 func _on_victory_zone_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		if Globals.level == "level_10":
-			Globals.level = "level_1"
-			DataState.save_file_state()
-			Data.save_file()
 			LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 		else:
 			body.changelevel()

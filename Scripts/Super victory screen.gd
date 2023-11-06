@@ -11,4 +11,4 @@ func _on_back_pressed():
 	Data.remove_file()
 	DataState.node_data.clear()
 	Data.data.clear()
-	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
+	get_tree().quit()

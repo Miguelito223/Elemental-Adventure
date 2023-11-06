@@ -34,25 +34,17 @@ func damage(ammount):
 			Animation_Effects.queue("flash")
 
 func drop_hearths():
-	rng.randomize()
-	var random_number = rng.randi_range(1,  6)
-	for i in range(random_number):
-		var new_hearth = hearths.instantiate()
-		get_parent().add_child(new_hearth)
-		new_hearth.position = position
-		new_hearth.freeze = false
+	var new_hearth = hearths.instantiate()
+	get_parent().add_child(new_hearth)
+	new_hearth.position = position
+	new_hearth.freeze = false
 
 	
 func drop_coins():
-	rng.randomize()
-	var random_number = rng.randi_range(1,  6)
-
-
-	for i in range(random_number):
-		var new_coin = coins.instantiate()
-		get_parent().add_child(new_coin)
-		new_coin.position = position
-		new_coin.freeze = false
+	var new_coin = coins.instantiate()
+	get_parent().add_child(new_coin)
+	new_coin.position = position
+	new_coin.freeze = false
 			
 
 func setlifes(value):

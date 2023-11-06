@@ -116,7 +116,7 @@ offset_right = 1178.0
 offset_bottom = 1072.0
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 90
-text = "Back"
+text = "Exit"
 
 [node name="Credits" type="Label" parent="."]
 layout_mode = 0
