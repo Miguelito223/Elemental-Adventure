@@ -126,12 +126,16 @@ func _on_input_set_item_selected(index):
 	Data.load_inputs(size)
 
 func _on_return_pressed():
-	hide()
+	pause_menu.hide()
+	settings_menu.hide()
+	settings_menu2.hide()
 	get_tree().paused = false
 
 
 func _on_back_pressed():
-	hide()
+	pause_menu.hide()
+	settings_menu.hide()
+	settings_menu2.hide()
 	get_tree().paused = false
 	DataState.save_file_state()
 	Data.save_file()
