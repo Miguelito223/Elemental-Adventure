@@ -131,6 +131,7 @@ func _on_return_pressed():
 
 
 func _on_back_pressed():
+	hide()
 	get_tree().paused = false
 	DataState.save_file_state()
 	Data.save_file()
