@@ -158,3 +158,10 @@ func _on_back_3_pressed():
 	pause_menu.hide()
 	settings_menu.show()
 	settings_menu2.hide()
+
+
+func _on_reset_player_pressed():
+	hide()
+	get_tree().paused = false
+	get_parent().get_parent().position = get_parent().get_parent().start_position
+
