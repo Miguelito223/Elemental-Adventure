@@ -1,52 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dj5hoawm4c8hc"]
+[gd_scene load_steps=4 format=3 uid="uid://dj5hoawm4c8hc"]
 
 [ext_resource type="Script" path="res://Scripts/Super victory screen.gd" id="1_x1h5b"]
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_6pc16"]
-[ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/coin.png" id="3_bayei"]
 [ext_resource type="AudioStream" uid="uid://ciykj3og6wxmg" path="res://sounds/Victory Sound.wav" id="4_dqktq"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ogjv1"]
-atlas = ExtResource("3_bayei")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dnmc3"]
-atlas = ExtResource("3_bayei")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t6ol6"]
-atlas = ExtResource("3_bayei")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5g7vd"]
-atlas = ExtResource("3_bayei")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ylcma"]
-atlas = ExtResource("3_bayei")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jtjqi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ogjv1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dnmc3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t6ol6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5g7vd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ylcma")
-}],
-"loop": true,
-"name": &"Coin",
-"speed": 5.0
-}]
 
 [node name="Super Victory menu" type="Control"]
 layout_mode = 3
@@ -66,11 +22,9 @@ offset_bottom = 1088.0
 color = Color(0.211765, 0, 0.411765, 1)
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 99.0
-offset_right = 2012.0
-offset_bottom = 305.0
+layout_mode = 2
+offset_right = 1820.0
+offset_bottom = 188.0
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 91
 text = "you won!!
@@ -78,42 +32,38 @@ Thank to play this!!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="coins" type="Label" parent="."]
-offset_left = 409.0
-offset_top = 606.0
-offset_right = 1579.0
-offset_bottom = 746.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 410.0
+offset_right = 1265.0
+offset_bottom = 620.0
+
+[node name="coins" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 100
-text = ":0"
+text = "Coins:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="coin" type="AnimatedSprite2D" parent="coins"]
-texture_filter = 1
-position = Vector2(357, 63)
-scale = Vector2(4.47463, 4.49251)
-sprite_frames = SubResource("SpriteFrames_jtjqi")
-animation = &"Coin"
-autoplay = "Coin"
-
-[node name="score" type="Label" parent="."]
-offset_left = 371.0
-offset_top = 416.0
-offset_right = 1541.0
-offset_bottom = 556.0
+[node name="score" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 100
 text = "Score:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="back" type="Button" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 695.0
-offset_top = 877.0
-offset_right = 1178.0
-offset_bottom = 1072.0
+offset_left = 725.0
+offset_top = 780.0
+offset_right = 1093.0
+offset_bottom = 878.0
+
+[node name="back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 90
 text = "Exit"
@@ -133,4 +83,4 @@ stream = ExtResource("4_dqktq")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

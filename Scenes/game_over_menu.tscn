@@ -34,25 +34,24 @@ Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="return" type="Button" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 593.0
-offset_top = 476.0
-offset_right = 1233.0
-offset_bottom = 654.0
-theme_override_fonts/font = ExtResource("2_xqlid")
-theme_override_font_sizes/font_size = 90
-text = "Return"
+offset_left = 665.0
+offset_top = 520.0
+offset_right = 1213.0
+offset_bottom = 720.0
 
-[node name="back" type="Button" parent="."]
-layout_mode = 0
-offset_left = 660.0
-offset_top = 679.0
-offset_right = 1193.0
-offset_bottom = 859.0
+[node name="back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_xqlid")
 theme_override_font_sizes/font_size = 90
 text = "Back"
+
+[node name="return" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xqlid")
+theme_override_font_sizes/font_size = 90
+text = "Return"
 
 [node name="Credits" type="Label" parent="."]
 layout_mode = 0
@@ -69,5 +68,5 @@ stream = ExtResource("3_lxwha")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="return" to="." method="_on_return_pressed"]
-[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/return" to="." method="_on_return_pressed"]
