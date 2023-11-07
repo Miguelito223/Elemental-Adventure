@@ -22,6 +22,7 @@ func save_file():
 			"autosave_length":  Globals.autosave_length,
 			"autosaver_start_time":  Globals.autosaver_start_time,
 			"set_inputs": Globals.inputs,
+			"use_mobile_buttons": Globals.use_mobile_buttons,
 		},
 		"time":{
 			"day": Globals.day,
@@ -89,7 +90,8 @@ func load_file():
 		Globals.autosave = settings.autosave
 		Globals.autosave_length = settings.autosave_length
 		Globals.autosaver_start_time = settings.autosaver_start_time
-		Globals.inputs = bool(settings.set_inputs)
+		Globals.inputs = settings.set_inputs
+		Globals.use_mobile_buttons = settings.use_mobile_buttons
 
 		var time = data.time
 

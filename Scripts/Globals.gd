@@ -10,6 +10,7 @@ var time = 0.0
 var num_players = 0
 var player_index = 0
 var use_keyboard = false
+var use_mobile_buttons = false
 var player_name = "Fire"
 
 #player

@@ -151,3 +151,8 @@ func _on_autosaver_start_time_text_text_changed(new_text):
 func _on_input_set_item_selected(index):
 	var size = inputs.get(set_input.get_item_text(index))
 	Data.load_inputs(size)
+
+
+func _on_mobile_buttons_toggled(button_pressed:bool):
+	Globals.use_mobile_buttons = button_pressed
+	Data.save_file()
