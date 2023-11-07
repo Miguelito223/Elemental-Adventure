@@ -44,12 +44,11 @@ _data = {
 "move": SubResource("Animation_e2dlq")
 }
 
-[node name="plataform" type="Path2D" groups=["persistent"]]
+[node name="plataform" type="Path2D"]
 script = ExtResource("1_a0my1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotation = -0.0153049
-scale = Vector2(1, 1)
 progress = 50.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
@@ -57,7 +56,6 @@ remote_path = NodePath("../../AnimatableBody2D")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 rotation = -0.0153049
-scale = Vector2(1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 texture_filter = 1
@@ -65,7 +63,6 @@ texture = ExtResource("1_sge3r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(-0.270602, -6.22636)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ylvgc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
