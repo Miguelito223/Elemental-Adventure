@@ -195,7 +195,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		else:
 			fire.emitting = false
 
-		if !Globals.use_keyboard:
+		if not Globals.use_keyboard or Globals.use_mobile_buttons :
 			if AnimatedSprite.scale.x == 1:
 				bullet_lol.velocity = Vector2(bullet_speed, 0)
 			elif AnimatedSprite.scale.x == -1:

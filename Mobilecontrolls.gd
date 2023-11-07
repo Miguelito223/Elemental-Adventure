@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var right = $right
 @onready var jump = $jump
 @onready var shoot = $shoot
-@onready var inputs = get_parent().get_parent().inputs
+@onready var ui_inputs = get_parent().ui_inputs
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,6 +13,9 @@ func _ready():
 		hide()
 	else:
 		show()
+		jump.action = ui_inputs.keys()[2]
+		shoot.action = ui_inputs.keys()[3]
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

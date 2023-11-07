@@ -1,25 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://ywyhxmenkfw"]
+[gd_scene load_steps=5 format=3 uid="uid://ywyhxmenkfw"]
 
 [ext_resource type="Script" path="res://Mobilecontrolls.gd" id="1_35pij"]
-[ext_resource type="Texture2D" uid="uid://ciqswikr8lgkb" path="res://Sprites/left.png" id="2_k0elv"]
-[ext_resource type="Texture2D" uid="uid://kddaxul8qk8i" path="res://Sprites/right.png" id="3_xyara"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="3_ifnkr"]
 [ext_resource type="Texture2D" uid="uid://kj8ifcn7mn3m" path="res://Sprites/up.png" id="4_yjhh4"]
 [ext_resource type="Texture2D" uid="uid://dr8824cpi75tl" path="res://Sprites/shoot.png" id="5_t4wdv"]
 
 [node name="Mobilecontrolls" type="CanvasLayer"]
 script = ExtResource("1_35pij")
 
-[node name="left" type="TouchScreenButton" parent="."]
-position = Vector2(11, 870)
-texture_normal = ExtResource("2_k0elv")
-
-[node name="right" type="TouchScreenButton" parent="."]
-position = Vector2(328, 809)
-scale = Vector2(1.50207, 1.45419)
-texture_normal = ExtResource("3_xyara")
-
 [node name="jump" type="TouchScreenButton" parent="."]
-position = Vector2(125, 612)
+position = Vector2(1358, 801)
 scale = Vector2(1.53329, 1.55248)
 texture_normal = ExtResource("4_yjhh4")
 
@@ -27,3 +17,9 @@ texture_normal = ExtResource("4_yjhh4")
 position = Vector2(1682, 852)
 scale = Vector2(0.696835, 0.624578)
 texture_normal = ExtResource("5_t4wdv")
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("3_ifnkr")]
+action_left = "ui_left0"
+action_right = "ui_right0"
+action_up = "ui_up0"
+action_down = "ui_down0"

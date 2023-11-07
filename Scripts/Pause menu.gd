@@ -165,3 +165,8 @@ func _on_reset_player_pressed():
 	get_tree().paused = false
 	get_parent().get_parent().position = get_parent().get_parent().start_position
 
+
+
+func _on_mobile_buttons_toggled(button_pressed:bool):
+	Globals.use_mobile_buttons = button_pressed
+	Data.save_file()
