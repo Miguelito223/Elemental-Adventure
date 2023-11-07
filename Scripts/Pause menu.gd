@@ -126,20 +126,20 @@ func _on_input_set_item_selected(index):
 	Data.load_inputs(size)
 
 func _on_return_pressed():
-	pause_menu.hide()
+	hide()
 	settings_menu.hide()
 	settings_menu2.hide()
 	get_tree().paused = false
 
 
 func _on_back_pressed():
-	pause_menu.hide()
+	hide()
 	settings_menu.hide()
 	settings_menu2.hide()
 	get_tree().paused = false
 	DataState.save_file_state()
 	Data.save_file()
-	LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/pause_menu.tscn")
+	LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
 
 
 func _on_button_pressed():
