@@ -127,15 +127,11 @@ func _on_input_set_item_selected(index):
 
 func _on_return_pressed():
 	hide()
-	settings_menu.hide()
-	settings_menu2.hide()
 	get_tree().paused = false
 
 
 func _on_back_pressed():
 	hide()
-	settings_menu.hide()
-	settings_menu2.hide()
 	get_tree().paused = false
 	DataState.save_file_state()
 	Data.save_file()
