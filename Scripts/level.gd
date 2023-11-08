@@ -317,7 +317,9 @@ func add_player(player_index):
 
 	player.color = color_dict[player_index]
 	player.name = names[player_index]
+	player.player_name = names[player_index]
 	Globals.player_name = names[player_index]
+
 	
 	if DataState.node_data.is_empty():
 		print("node data is empy")
@@ -327,7 +329,7 @@ func add_player(player_index):
 		if DataState.node_data.filename == "res://Scenes/player.tscn":
 			player.load(DataState.node_data)
 
-	if Globals.hearths[str(player_index)].is_empty() or Globals.hearths[str(player_index)] == null:
+	if not Globals.hearths.has(str(Globals.player_index)):
 		print("hearths is empty")
 		Globals.hearths[str(player_index)] = 3
 

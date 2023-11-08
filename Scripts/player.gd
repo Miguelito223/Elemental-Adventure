@@ -21,7 +21,7 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
-var player_name = Globals.player_name
+var player_name = "fire"
 
 var start_position = Vector2(100.0, 100.0)
 
@@ -50,8 +50,6 @@ func _ready():
 	
 	Pause_Menu.hide()
 	get_tree().paused = false
-	if Globals.hearths[str(Globals.player_index)] == null:
-		Globals.hearths[str(Globals.player_index)] = 
 	setlifes(Globals.hearths[str(Globals.player_index)])
 	Signals.player_ready.emit()
 
