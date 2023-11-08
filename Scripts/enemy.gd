@@ -88,7 +88,7 @@ func flip():
 func simelball():
 	await get_tree().create_timer(3)
 	var slime_ball = slimeballs.instantiate()
-	slime_ball.get_node("PointLight2D")
+	slime_ball.get_node("PointLight2D").emitting = false
 	slime_ball.modulate = Color("green")
 	slime_ball.set_global_position(global_position)
 	slime_ball.look_at(player.position)
