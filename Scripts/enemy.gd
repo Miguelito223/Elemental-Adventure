@@ -86,7 +86,7 @@ func flip():
 		speed = abs(speed) * -1
 
 func simelball():
-	await get_tree().create_timer(3)
+	await get_tree().create_timer(5)
 	var slime_ball = slimeballs.instantiate()
 	slime_ball.get_node("PointLight2D").emitting = false
 	slime_ball.modulate = Color("green")
