@@ -9,9 +9,6 @@ var use_keyboard: bool = Globals.use_keyboard
 var players: Array = []
 var input_maps: Array = []
 
-var player_index = int(Globals.player_index)
-var player
-
 @export var move_speed =  0.5
 @export var zoom_speed =  0.05
 @export var min_zoom = 2
@@ -36,12 +33,12 @@ func _ready():
 	DataState.load_file_state()
 	Data.load_file()
 	
-	for playere in range(num_players):
-		add_player()
+	for player in range(Globals.num_players):
+		add_player(player)
 
-	if num_players == 0:
-		for playere in range(1):
-			add_player()
+	if Globals.num_players == 0:
+		for player in range(1):
+			add_player(player)
 
 	Signals.level_loaded.emit()
 
@@ -79,7 +76,9 @@ func _process(_delta):
 
 	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
 
-func put_inputs():
+func put_inputs(player_index):
+
+	var player = players[-1]
 		
 	if use_keyboard == false:
 		player.device_num = player_index
@@ -264,19 +263,19 @@ func put_inputs():
 	
 
 
-func remove_player():
-	player = players[-1]
+func remove_player(player_index):
+	var player = players[-1]
 	players.remove_at(player_index)
 	if is_instance_valid(player):
 		player.queue_free()
 
-func add_player():
+func add_player(player_index):
 
 	if player_index < players.size():
 		return
 
 	players.append(player_scene.instantiate())
-	player = players[-1]	
+	var player = players[-1]	
 	
 	if DEBUGGING:
 		if player_index == 0:
@@ -328,6 +327,10 @@ func add_player():
 		if DataState.node_data.filename == "res://Scenes/player.tscn":
 			player.load(DataState.node_data)
 
+	if Globals.hearths[str(player_index)].is_empty() or Globals.hearths[str(player_index)] == null:
+		print("hearths is empty")
+		Globals.hearths[str(player_index)] = 3
+
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
 		"ui_left{n}".format({"n":player_index}): Vector2.LEFT,
@@ -339,7 +342,7 @@ func add_player():
 	
 	player.ui_inputs = input_maps[player_index]
 
-	put_inputs()
+	put_inputs(player_index)
 	
 	add_child(player)
 

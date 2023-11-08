@@ -41,12 +41,12 @@ func _on_joy_connection_changed(device_id, connected):
 		if level == null: 
 			print("level is null")
 			return
-		level.add_player()
+		level.add_player(Globals.player_index)
 		print("Added player index {d} to the world.".format({"d":Globals.player_index}))
 	else:
 		Globals.player_index = device_id
 		if level == null: 
 			print("level is null")
 			return
-		level.remove_player()
+		level.remove_player(Globals.player_index)
 		print("Removed player index {d} from the world.".format({"d": Globals.player_index}))
