@@ -343,6 +343,8 @@ func add_player():
 	})
 	
 	player.ui_inputs = input_maps[player_index]
+
+	put_inputs()
 	
 	add_child(player)
 
