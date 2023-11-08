@@ -72,12 +72,12 @@ func _physics_process(delta):
 func motion(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
-	if not player_chase:
-		if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
-			direccion *= -1
-			scale.x = -scale.x
 
+	if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
+		direccion *= -1
+		scale.x = -scale.x
+	
+	if not player_chase:
 		velocity.x = direccion * speed
 	else:
 		position += (player.position - position)/speed
