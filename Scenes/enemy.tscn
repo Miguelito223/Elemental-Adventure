@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://Sprites/enemigo1.png" id="2_evuxq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hdx6"]
-radius = 20.0
-height = 40.0
+radius = 79.0
+height = 158.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
 size = Vector2(31, 20)
@@ -145,9 +145,9 @@ _data = {
 [node name="enemy" type="CharacterBody2D" groups=["persistent"]]
 script = ExtResource("1_skb27")
 
-[node name="Enemy_area" type="Area2D" parent="."]
+[node name="detection_area" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
 position = Vector2(4, 2)
 shape = SubResource("CapsuleShape2D_0hdx6")
 
@@ -179,6 +179,6 @@ rotation = 3.14159
 scale = Vector2(2.76335, -1.34614)
 target_position = Vector2(5.05447e-05, 41.6004)
 
-[connection signal="area_entered" from="Enemy_area" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Enemy_area" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="detection_area" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]
