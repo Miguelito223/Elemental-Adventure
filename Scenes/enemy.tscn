@@ -1,14 +1,43 @@
-[gd_scene load_steps=13 format=3 uid="uid://da61af5kfk5ik"]
+[gd_scene load_steps=22 format=3 uid="uid://da61af5kfk5ik"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_skb27"]
 [ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://Sprites/enemigo1.png" id="2_evuxq"]
+[ext_resource type="Texture2D" uid="uid://cla5phqruofno" path="res://Sprites/enemigo1_attack.png" id="2_sttes"]
+[ext_resource type="Texture2D" uid="uid://dihgomfh35els" path="res://Sprites/enemigo1_idle.png" id="3_atkjq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0cx1"]
+radius = 35.2278
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hdx6"]
-radius = 159.0
-height = 318.0
+radius = 149.0
+height = 298.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
 size = Vector2(31, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy6xw"]
+atlas = ExtResource("2_sttes")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdgrx"]
+atlas = ExtResource("2_sttes")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmo81"]
+atlas = ExtResource("2_sttes")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa188"]
+atlas = ExtResource("2_sttes")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml3um"]
+atlas = ExtResource("3_atkjq")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llxf8"]
+atlas = ExtResource("3_atkjq")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ms8oy"]
 atlas = ExtResource("2_evuxq")
@@ -20,6 +49,34 @@ region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3q7bq"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy6xw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdgrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmo81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa188")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml3um")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llxf8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ms8oy")
@@ -146,6 +203,12 @@ _data = {
 scale = Vector2(-1, 1)
 script = ExtResource("1_skb27")
 
+[node name="detection_area2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area2"]
+position = Vector2(4, 2)
+shape = SubResource("CircleShape2D_u0cx1")
+
 [node name="detection_area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
@@ -160,9 +223,9 @@ shape = SubResource("RectangleShape2D_r0gqy")
 texture_filter = 1
 position = Vector2(7, 0)
 sprite_frames = SubResource("SpriteFrames_3q7bq")
-animation = &"walk"
-autoplay = "walk"
-frame_progress = 0.813132
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.308419
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -174,12 +237,13 @@ libraries = {
 wait_time = 0.8
 one_shot = true
 
-[node name="Abajo" type="RayCast2D" parent="."]
+[node name="Abajo_detector" type="RayCast2D" parent="."]
 position = Vector2(21, -7)
 rotation = 3.14159
 scale = Vector2(2.76335, -1.34614)
 target_position = Vector2(5.05447e-05, 41.6004)
 
-[connection signal="body_entered" from="detection_area" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="detection_area2" to="." method="_on_detection_area_2_body_entered"]
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]

@@ -1,30 +1,41 @@
 extends CharacterBody2D
 
+enum {
+	walk,
+	idle,
+	attack
+}
 
-var speed = 100
 @export var Max_Hearth = 20
 @export var hearth = 20
 @export var can_move = true
-@export var direccion = 1
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
 
-var player_chase = false
-var player = null
+var state = walk
+
+var player
+
+var fancing_right = false
+
+var slimeballs = preload("res://Scenes/fireball.tscn")
 
 var rng = RandomNumberGenerator.new()
 
 var hearths = preload("res://Scenes/hearth.tscn")
 var coins = preload("res://Scenes/coin.tscn")
 
+var speed = -100
 var max_speed = 70
 var max_speed_in_air = 60
 var max_speed_in_water = 20
 
 func _ready():
 	setlifes(hearth)
+
 	$AnimatedSprite2D.play("walk")
 
 func damage(ammount):
@@ -53,7 +64,7 @@ func drop_coins():
 
 func setlifes(value):
 	hearth = clamp(value,0,20)
-	if hearth  <= 0:
+	if hearth <= 0:
 		print("enemy dead")
 		rng.randomize()
 		var random_number = rng.randi_range(0,  5)
@@ -65,51 +76,69 @@ func setlifes(value):
 		Globals.score += 3
 		queue_free()
 
+func flip():
+	fancing_right = !fancing_right
+
+	scale.x = abs(scale.x) * -1
+	if fancing_right:
+		speed = abs(speed)
+	else:
+		speed = abs(speed) * -1
+
+func simelball():
+	await get_tree().create_timer(3)
+	var slime_ball = slimeballs.instantiate()
+	slime_ball.get_node("PointLight2D")
+	slime_ball.modulate = Color("green")
+	slime_ball.set_global_position(global_position)
+	slime_ball.look_at(player.position)
+	get_parent().add_child(slime_ball)
+
 func _physics_process(delta):
 	if can_move == true:
-		motion(delta)
+		if not is_on_floor():
+			velocity.y += gravity * delta
+		
 
-func motion(delta):
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
-		direccion *= -1
-		scale.x *= -1
-	
-	if not player_chase:
-		velocity.x = speed * direccion  
-	else:
-		position += (player.position - position)/speed
-
-		if (player.position.x - position.x) < 0 :
-			scale.x = -scale.x
-		else:
-			scale.x = scale.x
-
-
-	if is_on_floor():
-		velocity.x = velocity.limit_length(max_speed).x
-	else:
-		velocity.x = velocity.limit_length(max_speed_in_air).x
+		match state:
+			idle:
+				$AnimatedSprite2D.animation = "idle"
+				velocity.x = 0
+			walk:
+				
+				if is_on_wall() or not $Abajo_detector.is_colliding() and is_on_floor():
+					flip()
+				
+				$AnimatedSprite2D.animation = "walk"
+				velocity.x = speed
+			attack:
+				simelball()
+				$AnimatedSprite2D.animation = "attack"
+				velocity.x = 0		
+		
+		move_and_slide()
 
 
-	move_and_slide()
 
 func _on_invunerability_timeout():
 	Animation_Effects.play("rest")
 	$AnimatedSprite2D.play("walk")
 	can_move = true
 
-func _on_area_2d_body_entered(body):
+func _on_detection_area_2_body_entered(body:Node2D):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
-		player = body
-		player_chase = true
+		body.damage(1)
 
-func _on_detection_area_body_exited(body:Node2D):
+func _on_detection_area_body_entered(body:Node2D):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
+		state = attack
+		player = body
+
+
+func _on_detection_area_body_exited(body):
+	if body.get_scene_file_path() == "res://Scenes/player.tscn":
+		state = walk
 		player = null
-		player_chase = false
 		
 func in_water():
 	damage(10)
@@ -133,6 +162,4 @@ func save():
 func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
-
-
-
+	hearth = info.enemy_hearth
