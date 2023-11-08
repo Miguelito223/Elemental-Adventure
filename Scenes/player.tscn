@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dwypr7om4wpeo"]
+[gd_scene load_steps=65 format=3 uid="uid://dwypr7om4wpeo"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
@@ -8,10 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://mil2oi5o8x10" path="res://Sprites/air walk.png" id="4_0wtjx"]
 [ext_resource type="Texture2D" uid="uid://dfkfd625506bu" path="res://Sprites/Fire Walk.png" id="4_ixnqo"]
 [ext_resource type="Texture2D" uid="uid://blxbivlipgn6n" path="res://Sprites/water jump.png" id="5_be2hm"]
+[ext_resource type="Texture2D" uid="uid://dcy3c3g66uxh1" path="res://Sprites/earth jump.png" id="5_dfufg"]
 [ext_resource type="Texture2D" uid="uid://df41m1kgskmh7" path="res://Sprites/hearth.png" id="5_uo812"]
+[ext_resource type="Texture2D" uid="uid://kir8d0incjwt" path="res://Sprites/earth idle.png" id="6_7p2a1"]
 [ext_resource type="Texture2D" uid="uid://dq1243rj3k12n" path="res://Sprites/water idle.png" id="6_jjcc7"]
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="6_nj16g"]
 [ext_resource type="Texture2D" uid="uid://b0qovs57e4hqf" path="res://Sprites/water walk.png" id="7_mtq2t"]
+[ext_resource type="Texture2D" uid="uid://b6it1ygasjm8a" path="res://Sprites/earth walk.png" id="7_mwys2"]
 [ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/coin.png" id="7_s7rtk"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="10_6u4n5"]
@@ -52,6 +55,34 @@ region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cqo02"]
 atlas = ExtResource("4_0wtjx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lvi0"]
+atlas = ExtResource("5_dfufg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwfbq"]
+atlas = ExtResource("6_7p2a1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqssg"]
+atlas = ExtResource("6_7p2a1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4taly"]
+atlas = ExtResource("5_dfufg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbbex"]
+atlas = ExtResource("7_mwys2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l4pu"]
+atlas = ExtResource("7_mwys2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apxx5"]
+atlas = ExtResource("7_mwys2")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_si0t5"]
@@ -157,6 +188,47 @@ animations = [{
 }],
 "loop": true,
 "name": &"air walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lvi0")
+}],
+"loop": true,
+"name": &"earth fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwfbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqssg")
+}],
+"loop": true,
+"name": &"earth idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4taly")
+}],
+"loop": true,
+"name": &"earth jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbbex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l4pu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apxx5")
+}],
+"loop": true,
+"name": &"earth walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -413,9 +485,9 @@ shape = SubResource("CapsuleShape2D_dy66o")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_a1hh6")
-animation = &"air walk"
+animation = &"earth idle"
 autoplay = "fire idle"
-frame_progress = 0.82294
+frame_progress = 0.152958
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

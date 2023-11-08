@@ -12,6 +12,7 @@ var can_fire = true
 @onready var Marker = $Marker2D
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
+@onready var light = $PointLight2D
 
 var max_speed = 300
 var max_speed_in_air = 500
@@ -66,6 +67,7 @@ func _process(_delta):
 		AnimatedSprite.scale.x = 1
 
 	if player_name == "Fire":
+		light.enabled = true
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("fire walk")
 		elif velocity.y < 0:
@@ -75,6 +77,7 @@ func _process(_delta):
 		else:
 			AnimatedSprite.play("fire idle")
 	if player_name == "Water":
+		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("water walk")
 		elif velocity.y < 0:
@@ -84,6 +87,7 @@ func _process(_delta):
 		else:
 			AnimatedSprite.play("water idle")
 	elif player_name == "Air":
+		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("air walk")
 		elif velocity.y < 0:
@@ -93,15 +97,17 @@ func _process(_delta):
 		else:
 			AnimatedSprite.play("air idle")
 	elif player_name == "Earth":
+		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("earth walk")
 		elif velocity.y < 0:
 			AnimatedSprite.play("earth jump")
 		elif velocity.y > 0:
-			AnimatedSprite.play("earth  fall")
+			AnimatedSprite.play("earth fall")
 		else:
 			AnimatedSprite.play("earth idle")
 	else:
+		light.enabled = true
 		modulate = str_to_var("Color" + str(color))
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("fire walk")
