@@ -78,7 +78,7 @@ func motion(delta):
 		scale.x = -scale.x
 	
 	if not player_chase:
-		velocity.x = speed * direccion * delta
+		velocity.x = direccion * speed * delta
 		
 	else:
 		position.x += ((player.position-position)/speed).x
