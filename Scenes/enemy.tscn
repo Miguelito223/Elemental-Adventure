@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://Sprites/enemigo1.png" id="2_evuxq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hdx6"]
-radius = 79.0
-height = 158.0
+radius = 159.0
+height = 318.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
 size = Vector2(31, 20)

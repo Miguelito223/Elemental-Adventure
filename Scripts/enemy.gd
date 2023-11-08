@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 1500
+var speed = 100
 @export var Max_Hearth = 20
 @export var hearth = 20
 @export var can_move = true
@@ -19,9 +19,9 @@ var rng = RandomNumberGenerator.new()
 var hearths = preload("res://Scenes/hearth.tscn")
 var coins = preload("res://Scenes/coin.tscn")
 
-var max_speed = 300
-var max_speed_in_air = 500
-var max_speed_in_water = 200
+var max_speed = 40
+var max_speed_in_air = 60
+var max_speed_in_water = 20
 
 func _ready():
 	setlifes(100)
@@ -73,15 +73,22 @@ func motion(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-	if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
-		direccion *= -1
-		scale.x = -scale.x
+
 	
 	if not player_chase:
-		velocity.x = direccion * speed * delta
-		
+		if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
+			direccion *= -1
+			scale.x = -scale.x
+
+		velocity.x = direccion * speed
 	else:
-		position.x += ((player.position-position)/speed).x
+		position += (player.position-position)/speed
+
+		if(player.position.x - position.x) < 0 :
+			scale.x = -scale.x
+		else:
+			scale.x = scale.x
+
 
 	if is_on_floor():
 		velocity.x = velocity.limit_length(max_speed).x
