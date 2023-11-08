@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var SPEED = randi_range(100,300)
+var speed = 1500
 @export var Max_Hearth = 20
 @export var hearth = 20
 @export var can_move = true
@@ -11,12 +11,16 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
 
+var player_chase = false
+var player = null
+
 var rng = RandomNumberGenerator.new()
 
 var hearths = preload("res://Scenes/hearth.tscn")
 var coins = preload("res://Scenes/coin.tscn")
 
-var max_speed = 450
+var max_speed = 300
+var max_speed_in_air = 500
 var max_speed_in_water = 200
 
 func _ready():
@@ -73,8 +77,18 @@ func motion(delta):
 		direccion *= -1
 		scale.x = -scale.x
 	
-	velocity.x = SPEED * direccion
-	
+	if not player_chase:
+		velocity.x = speed * direccion * delta
+		
+	else:
+		position.x += ((player.position-position)/speed).x
+
+	if is_on_floor():
+		velocity.x = velocity.limit_length(max_speed).x
+	else:
+		velocity.x = velocity.limit_length(max_speed_in_air).x
+
+
 	move_and_slide()
 
 func _on_invunerability_timeout():
@@ -84,11 +98,13 @@ func _on_invunerability_timeout():
 
 func _on_area_2d_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
-		body.damage(1)
+		player = body
+		player_chase = true
 
-func _on_area_2d_area_entered(area):
-	if area.get_scene_file_path() == "res://Scenes/fireball.tscn":
-		damage(10)
+func _on_detection_area_body_exited(body:Node2D):
+	if body.get_scene_file_path() == "res://Scenes/player.tscn":
+		player = null
+		player_chase = false
 		
 func in_water():
 	damage(10)
@@ -116,3 +132,6 @@ func load(info):
 	position = Vector2(info.pos_x, info.pos_y)
 	direccion = info.direccion
 	can_move = info.can_move
+
+
+

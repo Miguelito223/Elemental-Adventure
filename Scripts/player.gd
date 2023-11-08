@@ -60,6 +60,11 @@ func _process(_delta):
 	if Globals.use_keyboard:
 		Marker.look_at(get_global_mouse_position())
 
+	if velocity.x < 0:
+		AnimatedSprite.scale.x = -1
+	if velocity.x > 0:
+		AnimatedSprite.scale.x = 1
+
 	if player_name == "Fire":
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("fire walk")
@@ -174,10 +179,6 @@ func _input(event):
 		get_tree().paused = true
 	if event.is_action_pressed(ui_inputs.keys()[5]):
 		position.y += 1
-	if event.is_action_pressed(ui_inputs.keys()[1]):
-		AnimatedSprite.scale.x = -1
-	if event.is_action_pressed(ui_inputs.keys()[0]):
-		AnimatedSprite.scale.x = 1
 	if event.is_action_pressed(ui_inputs.keys()[3]):
 		shoot(Marker.get_rotation(), Marker.get_global_position(),  500)
 		

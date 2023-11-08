@@ -83,8 +83,8 @@ func _on_Area2D_body_entered(body):
 	if body == collided_with:
 		return
 	
-	if body.get_class() == "KinematicCollision2D":
-		var speed = body.velocity.y * motion_factor
+	if body.get_class() == "CharacterBody2D":
+		var speed = body.motion.y * motion_factor
 		emit_signal("splash",index,speed)
 	
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":

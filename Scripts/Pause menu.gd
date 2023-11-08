@@ -18,6 +18,7 @@ extends Control
 var resolution = {
 	"1920x1080": Vector2i(1920, 1080),
 	"1080x1920": Vector2i(1080, 1920),
+	"2400x1080 ": Vector2i(2400, 1080 ),
 	"1280x720": Vector2i(1280, 720),
 	"1152x648": Vector2i(1152, 648),
 	"720x480": Vector2i(720, 480)
