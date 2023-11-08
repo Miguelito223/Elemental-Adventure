@@ -36,11 +36,11 @@ func _ready():
 	DataState.load_file_state()
 	Data.load_file()
 	
-	for player_index in range(num_players):
+	for playere in range(num_players):
 		add_player()
 
 	if num_players == 0:
-		for player_index in range(1):
+		for playere in range(1):
 			add_player()
 
 	Signals.level_loaded.emit()
