@@ -47,16 +47,41 @@ func _ready():
 
 func _process(_delta):
 
-	input_maps.append({
-		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
-		"ui_left{n}".format({"n":player_index}): Vector2.LEFT,
-		"ui_jump{n}".format({"n":player_index}): null,
-		"ui_shoot{n}".format({"n":player_index}): null,
-		"ui_pause{n}".format({"n":player_index}): null,
-		"ui_down{n}".format({"n":player_index}): null,
-	})
+	if !players or players.is_empty() or players == null: 
+		return
 	
-	player.ui_inputs = input_maps[player_index]
+	var pos = Vector2.ZERO
+
+	for player in players:
+		if not is_instance_valid(player):
+			return
+		pos += player.position
+
+	pos /= players.size()
+
+	camera.position = lerp(camera.position, pos, move_speed)
+	
+	var rect = Rect2(camera.position, Vector2.ONE)
+
+	for player in players:
+		rect = rect.expand(player.position)
+
+	rect = rect.grow_individual(margin.x, margin.y, margin.x, margin.y)
+
+	var _distance = max(rect.size.x, rect.size.y)
+
+	var zoom_range 
+
+	if rect.size.x > rect.size.y * screen_size.aspect():
+		zoom_range = clamp(rect.size.x / screen_size.x, min_zoom, max_zoom)
+	else:
+		zoom_range = clamp(rect.size.y / screen_size.y, min_zoom, max_zoom)
+
+	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
+
+	put_inputs()
+
+func put_inputs():
 		
 	if use_keyboard == false:
 		player.device_num = player_index
@@ -241,40 +266,6 @@ func _process(_delta):
 	
 
 
-	if !players or players.is_empty() or players == null: 
-		return
-	
-	var pos = Vector2.ZERO
-
-	for player in players:
-		if not is_instance_valid(player):
-			return
-		pos += player.position
-
-	pos /= players.size()
-
-	camera.position = lerp(camera.position, pos, move_speed)
-	
-	var rect = Rect2(camera.position, Vector2.ONE)
-
-	for player in players:
-		rect = rect.expand(player.position)
-
-	rect = rect.grow_individual(margin.x, margin.y, margin.x, margin.y)
-
-	var _distance = max(rect.size.x, rect.size.y)
-
-	var zoom_range 
-
-	if rect.size.x > rect.size.y * screen_size.aspect():
-		zoom_range = clamp(rect.size.x / screen_size.x, min_zoom, max_zoom)
-	else:
-		zoom_range = clamp(rect.size.y / screen_size.y, min_zoom, max_zoom)
-
-	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
-
-
-
 func remove_player():
 	player = players[-1]
 	players.remove_at(player_index)
@@ -341,6 +332,17 @@ func add_player():
 	else:
 		if DataState.node_data.filename == "res://Scenes/player.tscn":
 			player.load(DataState.node_data)
+
+	input_maps.append({
+		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
+		"ui_left{n}".format({"n":player_index}): Vector2.LEFT,
+		"ui_jump{n}".format({"n":player_index}): null,
+		"ui_shoot{n}".format({"n":player_index}): null,
+		"ui_pause{n}".format({"n":player_index}): null,
+		"ui_down{n}".format({"n":player_index}): null,
+	})
+	
+	player.ui_inputs = input_maps[player_index]
 	
 	add_child(player)
 
