@@ -75,10 +75,10 @@ func motion(delta):
 
 	if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
 		direccion *= -1
-		scale.x = -scale.x
+		scale.x *= -1
 	
 	if not player_chase:
-		velocity.x = direccion * speed
+		velocity.x = speed * direccion  
 	else:
 		position += (player.position - position)/speed
 
@@ -127,16 +127,12 @@ func save():
 		"size_y" : scale.y,
 		"enemy_hearth" : hearth,
 		"Max_Hearth" : Max_Hearth,
-		"direccion": direccion,
-		"can_move": can_move
 	}
 	return save_dict
 	
 func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
-	direccion = info.direccion
-	can_move = info.can_move
 
 
 
