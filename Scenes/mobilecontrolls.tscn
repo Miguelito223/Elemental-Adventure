@@ -12,11 +12,13 @@ script = ExtResource("1_35pij")
 position = Vector2(1358, 801)
 scale = Vector2(1.53329, 1.55248)
 texture_normal = ExtResource("4_yjhh4")
+action = "ui_jump0"
 
 [node name="shoot" type="TouchScreenButton" parent="."]
 position = Vector2(1682, 852)
 scale = Vector2(0.696835, 0.624578)
 texture_normal = ExtResource("5_t4wdv")
+action = "ui_shoot0"
 
 [node name="Virtual Joystick" parent="." instance=ExtResource("3_ifnkr")]
 action_left = "ui_left0"

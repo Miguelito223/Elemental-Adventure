@@ -13,8 +13,6 @@ func _ready():
 		hide()
 	else:
 		show()
-		jump.action = ui_inputs.keys()[2]
-		shoot.action = ui_inputs.keys()[3]
 		
 
 
