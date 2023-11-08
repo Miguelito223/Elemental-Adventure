@@ -24,7 +24,7 @@ var max_speed_in_air = 60
 var max_speed_in_water = 20
 
 func _ready():
-	setlifes(100)
+	setlifes(hearth)
 	$AnimatedSprite2D.play("walk")
 
 func damage(ammount):
@@ -73,8 +73,6 @@ func motion(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-
-	
 	if not player_chase:
 		if is_on_wall() or not $Abajo.is_colliding() and is_on_floor():
 			direccion *= -1

@@ -10,7 +10,7 @@ var time = 0.0
 var num_players = 0
 var player_index = 0
 var use_keyboard = false
-var use_mobile_buttons = false
+var use_mobile_buttons = true
 var player_name = "Fire"
 
 #player
@@ -32,7 +32,7 @@ var fullscreen = false
 var resolution = Vector2i(1920, 1080)
 var initial_time = "12"
 var time_speed = "1.0"
-var autosave = false
+var autosave = true
 var autosave_length = "5"
 var autosaver_start_time = "0"
 var inputs = false
