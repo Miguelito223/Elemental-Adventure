@@ -79,8 +79,6 @@ func _process(_delta):
 
 	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
 
-	put_inputs()
-
 func put_inputs():
 		
 	if use_keyboard == false:
@@ -271,11 +269,8 @@ func remove_player():
 	players.remove_at(player_index)
 	if is_instance_valid(player):
 		player.queue_free()
-	print(players)
 
 func add_player():
-
-	print(player_index)
 
 	if player_index < players.size():
 		return
