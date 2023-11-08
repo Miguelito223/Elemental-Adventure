@@ -9,6 +9,8 @@ var use_keyboard: bool = Globals.use_keyboard
 var players: Array = []
 var input_maps: Array = []
 
+var player_index = int(Globals.player_index)
+var player
 
 @export var move_speed =  0.5
 @export var zoom_speed =  0.05
@@ -25,7 +27,6 @@ var rng = RandomNumberGenerator.new()
 const player_scene = preload("res://Scenes/player.tscn")
 
 func _ready():
-
 	if DEBUGGING:
 		print("Parent of '{n}' is '{p}'".format({
 			"n":name,
@@ -35,119 +36,16 @@ func _ready():
 	DataState.load_file_state()
 	Data.load_file()
 	
-	for player_index in range(Globals.num_players):
-		add_player(player_index)
+	for player_index in range(num_players):
+		add_player()
 
-	if Globals.num_players == 0:
+	if num_players == 0:
 		for player_index in range(1):
-			add_player(player_index)
+			add_player()
 
 	Signals.level_loaded.emit()
 
 func _process(_delta):
-	if !players or players.is_empty() or players == null: 
-		return
-	
-	var pos = Vector2.ZERO
-
-	for player in players:
-		if not is_instance_valid(player):
-			return
-		pos += player.position
-
-	pos /= players.size()
-
-	camera.position = lerp(camera.position, pos, move_speed)
-	
-	var rect = Rect2(camera.position, Vector2.ONE)
-
-	for player in players:
-		rect = rect.expand(player.position)
-
-	rect = rect.grow_individual(margin.x, margin.y, margin.x, margin.y)
-
-	var _distance = max(rect.size.x, rect.size.y)
-
-	var zoom_range 
-
-	if rect.size.x > rect.size.y * screen_size.aspect():
-		zoom_range = clamp(rect.size.x / screen_size.x, min_zoom, max_zoom)
-	else:
-		zoom_range = clamp(rect.size.y / screen_size.y, min_zoom, max_zoom)
-
-	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
-
-
-
-func remove_player(player_index):
-	var player = players[-1]
-	players.remove_at(player_index)
-	if is_instance_valid(player):
-		player.queue_free()
-	print(players)
-
-func add_player(player_index):
-
-	print(player_index)
-
-	if player_index < players.size():
-		return
-
-	players.append(player_scene.instantiate())
-	
-	var player = players[-1]
-	
-	if DEBUGGING:
-		if player_index == 0:
-			player.start_position = Vector2(-460,-45)
-		elif player_index == 1:
-			player.start_position = Vector2(-399,-45)
-		elif player_index == 2:
-			player.start_position = Vector2(-340,-45)
-		elif player_index == 3:
-			player.start_position = Vector2(-280,-45)
-		else:
-			player.start_position = Vector2(-460,-45)
-
-	else:
-		player.start_position = Vector2(-460,-45)
-	
-	print(players[-1])
-
-	var colornames: Array = [
-		"white",
-		"blue",
-		"gray",
-		"green",
-	]
-	var names: Array = [
-		"Fire",
-		"Water",
-		"Air",
-		"Earth",
-	]
-	
-	var alpha = 1.0 # build
-	
-	var color_dict: Dictionary = {
-		0: Color(colornames[0], alpha), # color, alpha
-		1: Color(colornames[1], alpha), # color, alpha
-		2: Color(colornames[2], alpha), # color, alpha
-		3: Color(colornames[3], alpha), # color, alpha
-	}
-
-	player.color = color_dict[player_index]
-	player.name = names[player_index]
-	player.player_name = names[player_index]
-	Globals.player_name = names[player_index]
-	
-	if DataState.node_data.is_empty():
-		print("node data is empy")
-		Globals.hearths[str(Globals.player_index)] = 3
-		player.position = player.start_position
-	else:
-		if DataState.node_data.filename == "res://Scenes/player.tscn":
-			player.load(DataState.node_data)
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
@@ -157,14 +55,10 @@ func add_player(player_index):
 		"ui_pause{n}".format({"n":player_index}): null,
 		"ui_down{n}".format({"n":player_index}): null,
 	})
-	print(input_maps[player_index])
-	# DEBUGGING
 	
 	player.ui_inputs = input_maps[player_index]
-	
-	print(use_keyboard)
 		
-	if Globals.use_keyboard == false:
+	if use_keyboard == false:
 		player.device_num = player_index
 		
 		var right_action: String
@@ -344,6 +238,109 @@ func add_player(player_index):
 		down_action_event = InputEventKey.new()
 		down_action_event.keycode = keymaps[player_index]["key_down"]
 		InputMap.action_add_event(down_action, down_action_event)
+	
+
+
+	if !players or players.is_empty() or players == null: 
+		return
+	
+	var pos = Vector2.ZERO
+
+	for player in players:
+		if not is_instance_valid(player):
+			return
+		pos += player.position
+
+	pos /= players.size()
+
+	camera.position = lerp(camera.position, pos, move_speed)
+	
+	var rect = Rect2(camera.position, Vector2.ONE)
+
+	for player in players:
+		rect = rect.expand(player.position)
+
+	rect = rect.grow_individual(margin.x, margin.y, margin.x, margin.y)
+
+	var _distance = max(rect.size.x, rect.size.y)
+
+	var zoom_range 
+
+	if rect.size.x > rect.size.y * screen_size.aspect():
+		zoom_range = clamp(rect.size.x / screen_size.x, min_zoom, max_zoom)
+	else:
+		zoom_range = clamp(rect.size.y / screen_size.y, min_zoom, max_zoom)
+
+	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
+
+
+
+func remove_player():
+	player = players[-1]
+	players.remove_at(player_index)
+	if is_instance_valid(player):
+		player.queue_free()
+	print(players)
+
+func add_player():
+
+	print(player_index)
+
+	if player_index < players.size():
+		return
+
+	players.append(player_scene.instantiate())
+	player = players[-1]	
+	
+	if DEBUGGING:
+		if player_index == 0:
+			player.start_position = Vector2(-460,-45)
+		elif player_index == 1:
+			player.start_position = Vector2(-399,-45)
+		elif player_index == 2:
+			player.start_position = Vector2(-340,-45)
+		elif player_index == 3:
+			player.start_position = Vector2(-280,-45)
+		else:
+			player.start_position = Vector2(-460,-45)
+
+	else:
+		player.start_position = Vector2(-460,-45)
+
+
+	var colornames: Array = [
+		"white",
+		"blue",
+		"gray",
+		"green",
+	]
+	var names: Array = [
+		"Fire",
+		"Water",
+		"Air",
+		"Earth",
+	]
+	
+	var alpha = 1.0 # build
+	
+	var color_dict: Dictionary = {
+		0: Color(colornames[0], alpha), # color, alpha
+		1: Color(colornames[1], alpha), # color, alpha
+		2: Color(colornames[2], alpha), # color, alpha
+		3: Color(colornames[3], alpha), # color, alpha
+	}
+
+	player.color = color_dict[player_index]
+	player.name = names[player_index]
+	Globals.player_name = names[player_index]
+	
+	if DataState.node_data.is_empty():
+		print("node data is empy")
+		Globals.hearths[str(player_index)] = 3
+		player.position = player.start_position
+	else:
+		if DataState.node_data.filename == "res://Scenes/player.tscn":
+			player.load(DataState.node_data)
 	
 	add_child(player)
 

@@ -21,7 +21,7 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
-var player_name = "Fire"
+var player_name = Globals.player_name
 
 var start_position = Vector2(100.0, 100.0)
 

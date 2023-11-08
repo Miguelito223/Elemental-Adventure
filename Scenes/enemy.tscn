@@ -143,6 +143,7 @@ _data = {
 }
 
 [node name="enemy" type="CharacterBody2D" groups=["persistent"]]
+scale = Vector2(-1, 1)
 script = ExtResource("1_skb27")
 
 [node name="detection_area" type="Area2D" parent="."]

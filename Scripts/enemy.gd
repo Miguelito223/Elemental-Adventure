@@ -19,7 +19,7 @@ var rng = RandomNumberGenerator.new()
 var hearths = preload("res://Scenes/hearth.tscn")
 var coins = preload("res://Scenes/coin.tscn")
 
-var max_speed = 40
+var max_speed = 70
 var max_speed_in_air = 60
 var max_speed_in_water = 20
 
@@ -82,9 +82,9 @@ func motion(delta):
 
 		velocity.x = direccion * speed
 	else:
-		position += (player.position-position)/speed
+		position += (player.position - position)/speed
 
-		if(player.position.x - position.x) < 0 :
+		if (player.position.x - position.x) < 0 :
 			scale.x = -scale.x
 		else:
 			scale.x = scale.x
