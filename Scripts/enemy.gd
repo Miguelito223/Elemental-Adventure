@@ -14,8 +14,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
+@onready var marker_node = $Node2D/Marker2D
+@onready var marker_node_parent = $Node2D
 
 var state = walk
+
+var can_fire = true
 
 var player
 
@@ -85,19 +89,27 @@ func flip():
 	else:
 		speed = abs(speed) * -1
 
-func simelball():
-	await get_tree().create_timer(10).timeout
-	var slime_ball = slimeballs.instantiate()
-	get_parent().add_child(slime_ball)
-	slime_ball.get_node("PointLight2D").enabled = false
-	slime_ball.get_node("Fire").emitting = false
-	slime_ball.set_global_position(get_global_position())
-	slime_ball.look_at(player.position)
+func simelball(bullet_direction, bullet_pos, bullet_speed):
+	if can_fire:
+		var slime_ball = slimeballs.instantiate()
+		slime_ball.get_node("PointLight2D").enabled = false
+		slime_ball.get_node("Fire").emitting = false
+		get_parent().add_child(slime_ball)
+		slime_ball.set_rotation(bullet_direction)
+		slime_ball.set_global_position(bullet_pos)
+		slime_ball.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)
+
+		can_fire = false
+		await get_tree().create_timer(0.8).timeout
+		can_fire = true
 
 func _physics_process(delta):
 	if can_move == true:
 		if not is_on_floor():
 			velocity.y += gravity * delta
+
+		if player:
+			marker_node_parent.look_at(player.position)
 		
 
 		match state:
@@ -112,7 +124,7 @@ func _physics_process(delta):
 				$AnimatedSprite2D.animation = "walk"
 				velocity.x = speed
 			attack:
-				simelball()
+				simelball(marker_node_parent.get_rotation(), marker_node.get_global_position(), 300)
 				$AnimatedSprite2D.animation = "attack"
 				velocity.x = 0		
 		

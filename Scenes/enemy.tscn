@@ -243,6 +243,13 @@ rotation = 3.14159
 scale = Vector2(2.76335, -1.34614)
 target_position = Vector2(5.05447e-05, 41.6004)
 
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(8, 1)
+rotation = 0.846485
+
+[node name="Marker2D" type="Marker2D" parent="Node2D"]
+position = Vector2(-30, 0)
+
 [connection signal="body_entered" from="detection_area2" to="." method="_on_detection_area_2_body_entered"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
