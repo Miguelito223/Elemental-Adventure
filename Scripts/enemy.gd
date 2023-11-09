@@ -127,7 +127,7 @@ func _physics_process(delta):
 			attack:
 				$AnimatedSprite2D.animation = "attack"
 				velocity.x = 0		
-				simelball(marker_node_parent.get_rotation(), marker_node.get_global_position(), 300)
+				simelball(marker_node_parent.get_rotation(), marker_node.get_global_position(), 500)
 		
 		move_and_slide()
 
