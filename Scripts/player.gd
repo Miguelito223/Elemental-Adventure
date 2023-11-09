@@ -23,7 +23,7 @@ var speed = 1500
 var friction = 1200
 var axis = Vector2.ZERO
 
-var player_name = "fire"
+var player_name = "Fire"
 
 var start_position = Vector2(100.0, 100.0)
 
@@ -68,8 +68,6 @@ func _process(_delta):
 	elif velocity.x > 0:
 		AnimatedSprite.scale.x = 1
 		Marker_Parent.scale.x = 1
-	
-	print(Marker.transform)
 
 	if player_name == "Fire":
 		light.enabled = true

@@ -21,7 +21,7 @@ var state = walk
 
 var can_fire = true
 
-var player
+@onready var player = get_parent().get_node(str(Globals.player_name))
 
 var fancing_right = false
 
@@ -98,7 +98,7 @@ func simelball(bullet_direction, bullet_pos, bullet_speed):
 		get_parent().add_child(slime_ball)
 		slime_ball.set_rotation(bullet_direction)
 		slime_ball.set_global_position(bullet_pos)
-		slime_ball.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)
+		slime_ball.velocity = get_global_position().direction_to(player.position) * bullet_speed
 
 		can_fire = false
 		await get_tree().create_timer(0.8).timeout
@@ -109,17 +109,13 @@ func _physics_process(delta):
 		if not is_on_floor():
 			velocity.y += gravity * delta
 
-		if player:
-			marker_node_parent.look_at(player.position)
-		
-
 		match state:
 			idle:
 				$AnimatedSprite2D.animation = "idle"
 				velocity.x = 0
 			walk:
 				
-				if is_on_wall() or not $Abajo_detector_izquierda.is_colliding() and is_on_floor():
+				if is_on_wall() or not $Abajo_detector.is_colliding() and is_on_floor():
 					flip()
 				
 				$AnimatedSprite2D.animation = "walk"
@@ -145,13 +141,11 @@ func _on_detection_area_2_body_entered(body:Node2D):
 func _on_detection_area_body_entered(body:Node2D):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		state = attack
-		player = body
 
 
 func _on_detection_area_body_exited(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
 		state = walk
-		player = null
 		
 func in_water():
 	damage(10)

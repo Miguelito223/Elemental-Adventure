@@ -237,19 +237,14 @@ libraries = {
 wait_time = 0.8
 one_shot = true
 
-[node name="Abajo_detector_derecha" type="RayCast2D" parent="."]
-position = Vector2(21, -7)
-rotation = 3.14159
-scale = Vector2(2.76335, -1.34614)
-target_position = Vector2(5.05447e-05, 41.6004)
-
-[node name="Abajo_detector_izquierda" type="RayCast2D" parent="."]
-position = Vector2(-11, -7)
+[node name="Abajo_detector" type="RayCast2D" parent="."]
+position = Vector2(26, -11.0004)
 rotation = 3.14159
 scale = Vector2(2.76335, -1.34614)
 target_position = Vector2(5.05447e-05, 41.6004)
 
 [node name="Node2D" type="Node2D" parent="."]
+position = Vector2(8, 1)
 
 [node name="Marker2D" type="Marker2D" parent="Node2D"]
 position = Vector2(30, 0)
