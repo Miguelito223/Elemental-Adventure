@@ -9,7 +9,8 @@ var can_fire = true
 @export var max_hearth = 3
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
-@onready var Marker = $Marker2D
+@onready var Marker = $Node2D/Marker2D
+@onready var Marker_Parent = $Node2D
 @onready var Pause_Menu = $"CanvasLayer/Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var light = $PointLight2D
@@ -59,14 +60,16 @@ func _process(_delta):
 	update_label()
 
 	if Globals.use_keyboard:
-		Marker.look_at(get_global_mouse_position())
-	else:
-		if velocity.x < 0:
-			Marker.scale.x = -1
-			AnimatedSprite.scale.x = -1
-		if velocity.x > 0:
-			Marker.scale.x = 1
-			AnimatedSprite.scale.x = 1
+		Marker_Parent.look_at(get_global_mouse_position())
+
+	if velocity.x < 0:
+		AnimatedSprite.scale.x = -1
+		Marker_Parent.scale.x = -1
+	elif velocity.x > 0:
+		AnimatedSprite.scale.x = 1
+		Marker_Parent.scale.x = 1
+	
+	print(Marker.transform)
 
 	if player_name == "Fire":
 		light.enabled = true
@@ -188,12 +191,13 @@ func _input(event):
 	if event.is_action_pressed(ui_inputs.keys()[5]):
 		position.y += 1
 	if event.is_action_pressed(ui_inputs.keys()[3]):
-		shoot(Marker.get_rotation(), Marker.get_global_position())
+		shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
 		
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
 		var bullet_lol = bullet.instantiate()
 		var fire = bullet_lol.get_node("Fire")
+		var PointLight = bullet_lol.get_node("PointLight2D")
 		get_parent().add_child(bullet_lol)
 		bullet_lol.set_rotation(bullet_direction)
 		bullet_lol.set_global_position(bullet_pos)
@@ -201,13 +205,15 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		
 		if player_name == "Fire":
 			fire.emitting = true
+			PointLight.enabled = true
 		else:
 			fire.emitting = false
+			PointLight.enabled = false
 
 		if not Globals.use_keyboard or Globals.use_mobile_buttons :
-			if Marker.scale.x > 0:
+			if Marker_Parent.scale.x == 1:
 				bullet_lol.velocity = Vector2(bullet_speed, 0)
-			elif Marker.scale.x < 0 :
+			elif Marker_Parent.scale.x == -1 :
 				bullet_lol.velocity = Vector2(-bullet_speed, 0)
 		else:
 			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	

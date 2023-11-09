@@ -477,7 +477,6 @@ animations = [{
 scale = Vector2(0.4, 0.4)
 collision_mask = 3
 script = ExtResource("1_peqvs")
-max_hearth = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.537445, 0.540188)
@@ -625,8 +624,12 @@ texture_scale = 0.36
 wait_time = 0.8
 one_shot = true
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(60, 0)
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="Marker2D" type="Marker2D" parent="Node2D"]
+position = Vector2(30, 0)
+scale = Vector2(1, 1)
 
 [node name="Pasos" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_m2wrv")
