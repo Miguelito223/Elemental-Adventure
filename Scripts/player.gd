@@ -60,13 +60,13 @@ func _process(_delta):
 
 	if Globals.use_keyboard:
 		Marker.look_at(get_global_mouse_position())
-
-	if velocity.x < 0:
-		Marker.scale.x = -1
-		AnimatedSprite.scale.x = -1
-	if velocity.x > 0:
-		Marker.scale.x = 1
-		AnimatedSprite.scale.x = 1
+	else:
+		if velocity.x < 0:
+			Marker.scale.x = -1
+			AnimatedSprite.scale.x = -1
+		if velocity.x > 0:
+			Marker.scale.x = 1
+			AnimatedSprite.scale.x = 1
 
 	if player_name == "Fire":
 		light.enabled = true
@@ -188,23 +188,29 @@ func _input(event):
 	if event.is_action_pressed(ui_inputs.keys()[5]):
 		position.y += 1
 	if event.is_action_pressed(ui_inputs.keys()[3]):
-		shoot(Marker.get_rotation(), Marker.get_global_position(),  500)
+		shoot(Marker.get_rotation(), Marker.get_global_position())
 		
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
 		var bullet_lol = bullet.instantiate()
 		var fire = bullet_lol.get_node("Fire")
-		var light = bullet_lol.get_node("PointLight2D")
 		get_parent().add_child(bullet_lol)
-		bullet_lol.transform = Marker.transform
+		bullet_lol.set_rotation(bullet_direction)
+		bullet_lol.set_global_position(bullet_pos)
 		bullet_lol.modulate = str_to_var("Color" + str(color))
 		
 		if player_name == "Fire":
 			fire.emitting = true
-			light.enabled = true
 		else:
 			fire.emitting = false
-			light.enabled = false
+
+		if not Globals.use_keyboard or Globals.use_mobile_buttons :
+			if Marker.scale.x > 0:
+				bullet_lol.velocity = Vector2(bullet_speed, 0)
+			elif Marker.scale.x < 0 :
+				bullet_lol.velocity = Vector2(-bullet_speed, 0)
+		else:
+			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
 
 
 		can_fire = false
