@@ -62,8 +62,10 @@ func _process(_delta):
 		Marker.look_at(get_global_mouse_position())
 
 	if velocity.x < 0:
+		Marker.scale.x = -1
 		AnimatedSprite.scale.x = -1
 	if velocity.x > 0:
+		Marker.scale.x = 1
 		AnimatedSprite.scale.x = 1
 
 	if player_name == "Fire":
