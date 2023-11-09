@@ -86,13 +86,13 @@ func flip():
 		speed = abs(speed) * -1
 
 func simelball():
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(10).timeout
 	var slime_ball = slimeballs.instantiate()
+	get_parent().add_child(slime_ball)
 	slime_ball.get_node("PointLight2D").enabled = false
 	slime_ball.get_node("Fire").emitting = false
 	slime_ball.set_global_position(get_global_position())
 	slime_ball.look_at(player.position)
-	get_parent().add_child(slime_ball)
 
 func _physics_process(delta):
 	if can_move == true:
