@@ -194,23 +194,17 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
 		var bullet_lol = bullet.instantiate()
 		var fire = bullet_lol.get_node("Fire")
+		var light = bullet_lol.get_node("PointLight2D")
 		get_parent().add_child(bullet_lol)
-		bullet_lol.set_rotation(bullet_direction)
-		bullet_lol.set_global_position(bullet_pos)
+		bullet_lol.transform = Marker.transform
 		bullet_lol.modulate = str_to_var("Color" + str(color))
 		
 		if player_name == "Fire":
 			fire.emitting = true
+			light.enabled = true
 		else:
 			fire.emitting = false
-
-		if not Globals.use_keyboard or Globals.use_mobile_buttons :
-			if AnimatedSprite.scale.x == 1:
-				bullet_lol.velocity = Vector2(bullet_speed, 0)
-			elif AnimatedSprite.scale.x == -1:
-				bullet_lol.velocity = Vector2(-bullet_speed, 0)
-		else:
-			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
+			light.enabled = false
 
 
 		can_fire = false
