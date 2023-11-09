@@ -13,7 +13,7 @@ radius = 149.0
 height = 298.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
-size = Vector2(31, 20)
+size = Vector2(38, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wy6xw"]
 atlas = ExtResource("2_sttes")
@@ -206,7 +206,7 @@ script = ExtResource("1_skb27")
 [node name="detection_area2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area2"]
-position = Vector2(4, 2)
+position = Vector2(7, 3)
 shape = SubResource("CircleShape2D_u0cx1")
 
 [node name="detection_area" type="Area2D" parent="."]
@@ -216,7 +216,7 @@ position = Vector2(4, 2)
 shape = SubResource("CapsuleShape2D_0hdx6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.5, 3)
+position = Vector2(7, -0.5)
 shape = SubResource("RectangleShape2D_r0gqy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -237,18 +237,22 @@ libraries = {
 wait_time = 0.8
 one_shot = true
 
-[node name="Abajo_detector" type="RayCast2D" parent="."]
+[node name="Abajo_detector_derecha" type="RayCast2D" parent="."]
 position = Vector2(21, -7)
 rotation = 3.14159
 scale = Vector2(2.76335, -1.34614)
 target_position = Vector2(5.05447e-05, 41.6004)
 
+[node name="Abajo_detector_izquierda" type="RayCast2D" parent="."]
+position = Vector2(-11, -7)
+rotation = 3.14159
+scale = Vector2(2.76335, -1.34614)
+target_position = Vector2(5.05447e-05, 41.6004)
+
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(8, 1)
-rotation = 0.846485
 
 [node name="Marker2D" type="Marker2D" parent="Node2D"]
-position = Vector2(-30, 0)
+position = Vector2(30, 0)
 
 [connection signal="body_entered" from="detection_area2" to="." method="_on_detection_area_2_body_entered"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]

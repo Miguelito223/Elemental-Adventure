@@ -94,6 +94,7 @@ func simelball(bullet_direction, bullet_pos, bullet_speed):
 		var slime_ball = slimeballs.instantiate()
 		slime_ball.get_node("PointLight2D").enabled = false
 		slime_ball.get_node("Fire").emitting = false
+		slime_ball.modulate = Color("Green")
 		get_parent().add_child(slime_ball)
 		slime_ball.set_rotation(bullet_direction)
 		slime_ball.set_global_position(bullet_pos)
@@ -118,15 +119,15 @@ func _physics_process(delta):
 				velocity.x = 0
 			walk:
 				
-				if is_on_wall() or not $Abajo_detector.is_colliding() and is_on_floor():
+				if is_on_wall() or not $Abajo_detector_izquierda.is_colliding() and is_on_floor():
 					flip()
 				
 				$AnimatedSprite2D.animation = "walk"
 				velocity.x = speed
 			attack:
-				simelball(marker_node_parent.get_rotation(), marker_node.get_global_position(), 300)
 				$AnimatedSprite2D.animation = "attack"
 				velocity.x = 0		
+				simelball(marker_node_parent.get_rotation(), marker_node.get_global_position(), 300)
 		
 		move_and_slide()
 
