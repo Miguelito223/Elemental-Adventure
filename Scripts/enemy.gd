@@ -84,7 +84,7 @@ func setlifes(value):
 func flip():
 	fancing_left = !fancing_left
 
-	Animation_sprite.scale.x = abs(Animation_sprite.scale.x) * -1
+	Animation_sprite.scale.x = Animation_sprite.scale.x * -1
 	if fancing_left:
 		speed = abs(speed) * -1
 	else:
