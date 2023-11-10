@@ -61,13 +61,17 @@ func _process(_delta):
 
 	if Globals.use_keyboard:
 		Marker_Parent.look_at(get_global_mouse_position())
+	else:
+		if velocity.x < 0:
+			Marker_Parent.scale.x = -1
+		elif velocity.x > 0:
+			Marker_Parent.scale.x = 1
 
 	if velocity.x < 0:
 		AnimatedSprite.scale.x = -1
-		Marker_Parent.scale.x = -1
 	elif velocity.x > 0:
 		AnimatedSprite.scale.x = 1
-		Marker_Parent.scale.x = 1
+		
 
 	if player_name == "Fire":
 		light.enabled = true
