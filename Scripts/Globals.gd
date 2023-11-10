@@ -10,7 +10,6 @@ var time = 0.0
 var num_players = 0
 var player_index = 0
 var use_keyboard = false
-var use_mobile_buttons = true
 var player_name = "Fire"
 
 #player
@@ -35,4 +34,5 @@ var time_speed = "1.0"
 var autosave = true
 var autosave_length = "5"
 var autosaver_start_time = "0"
+var use_mobile_buttons = OS.get_name() == "Android"
 var inputs = false
