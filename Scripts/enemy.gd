@@ -14,6 +14,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
+@onready var Animation_sprite = $AnimatedSprite2D
 @onready var marker_node = $Node2D/Marker2D
 @onready var marker_node_parent = $Node2D
 
@@ -83,7 +84,7 @@ func setlifes(value):
 func flip():
 	fancing_left = !fancing_left
 
-	scale.x =  abs(scale.x) * -1
+	Animation_sprite.scale.x =  abs(Animation_sprite.scale.x) * -1
 	if fancing_left:
 		speed = abs(speed) * -1
 	else:
