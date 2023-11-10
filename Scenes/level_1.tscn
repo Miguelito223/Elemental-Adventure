@@ -33,6 +33,8 @@ position = Vector2(492, 1031)
 script = ExtResource("1_7jleq")
 
 [node name="environment" parent="." instance=ExtResource("2_4quoi")]
+position = Vector2(-89, -239)
+scale = Vector2(0.950302, 0.342247)
 
 [node name="Water_Body" parent="." instance=ExtResource("3_c8n7v")]
 position = Vector2(726, 14)

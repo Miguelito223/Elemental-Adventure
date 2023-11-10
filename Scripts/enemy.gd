@@ -41,13 +41,13 @@ var max_speed_in_water = 20
 func _ready():
 	setlifes(hearth)
 
-	$AnimatedSprite2D.play("walk")
+	Animation_sprite.play("walk")
 
 func damage(ammount):
 	if can_move == true:
 		can_move = false
 		if InvunerabilityTime.is_stopped():
-			$AnimatedSprite2D.stop()
+			Animation_sprite.stop()
 			InvunerabilityTime.start()
 			setlifes(hearth - ammount)
 			Animation_Effects.play("damage")
@@ -84,7 +84,7 @@ func setlifes(value):
 func flip():
 	fancing_left = !fancing_left
 
-	Animation_sprite.scale.x =  abs(Animation_sprite.scale.x) * -1
+	Animation_sprite.scale.x = abs(Animation_sprite.scale.x) * -1
 	if fancing_left:
 		speed = abs(speed) * -1
 	else:
@@ -117,17 +117,17 @@ func _physics_process(delta):
 
 		match state:
 			idle:
-				$AnimatedSprite2D.animation = "idle"
+				Animation_sprite.animation = "idle"
 				velocity.x = 0
 			walk:
 				
-				if is_on_wall() or not $Abajo_detector.is_colliding() and is_on_floor():
+				if is_on_wall() or not $Abajo_detector_derecha.is_colliding() or not $Abajo_detector_izquierda.is_colliding() and is_on_floor():
 					flip()
 				
-				$AnimatedSprite2D.animation = "walk"
+				Animation_sprite.animation = "walk"
 				velocity.x = speed
 			attack:
-				$AnimatedSprite2D.animation = "attack"
+				Animation_sprite.animation = "attack"
 				velocity.x = 0		
 				simelball(marker_node_parent.get_rotation(), marker_node.get_global_position(), 500)
 		
@@ -137,7 +137,7 @@ func _physics_process(delta):
 
 func _on_invunerability_timeout():
 	Animation_Effects.play("rest")
-	$AnimatedSprite2D.play("walk")
+	Animation_sprite.play("walk")
 	can_move = true
 
 func _on_detection_area_2_body_entered(body:Node2D):
