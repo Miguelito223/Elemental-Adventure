@@ -23,7 +23,7 @@ var can_fire = true
 
 var player
 
-var fancing_right = false
+var fancing_left = false
 
 var slimeballs = preload("res://Scenes/fireball.tscn")
 
@@ -32,7 +32,7 @@ var rng = RandomNumberGenerator.new()
 var hearths = preload("res://Scenes/hearth.tscn")
 var coins = preload("res://Scenes/coin.tscn")
 
-var speed = -100
+var speed = 100
 var max_speed = 70
 var max_speed_in_air = 60
 var max_speed_in_water = 20
@@ -81,13 +81,13 @@ func setlifes(value):
 		queue_free()
 
 func flip():
-	fancing_right = !fancing_right
+	fancing_left = !fancing_left
 
-	scale.x = abs(scale.x) * -1
-	if fancing_right:
-		speed = abs(speed)
+	scale.x = scale.x * -1
+	if fancing_left:
+		speed = speed * -1
 	else:
-		speed = abs(speed) * -1
+		speed = speed
 
 func simelball(bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
@@ -101,10 +101,9 @@ func simelball(bullet_direction, bullet_pos, bullet_speed):
 		slime_ball.set_rotation(bullet_direction)
 		slime_ball.set_global_position(bullet_pos)
 		slime_ball.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)
-		print(marker_node_parent.get_rotation_degrees())
 		
 		can_fire = false
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(0.8).timeout
 		can_fire = true
 
 func _physics_process(delta):
@@ -113,7 +112,7 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 		
 		if player:
-			marker_node_parent.rotation = (player.global_position - global_position).normalized().angle()
+			marker_node_parent.look_at(player.global_position)
 
 		match state:
 			idle:
