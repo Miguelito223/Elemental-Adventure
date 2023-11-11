@@ -35,7 +35,7 @@ script = ExtResource("1_wkmp5")
 [node name="environment" parent="." instance=ExtResource("2_c6qx4")]
 
 [node name="Water_Body" parent="." instance=ExtResource("3_t802u")]
-position = Vector2(-262, 36)
+position = Vector2(-265, 18)
 scale = Vector2(5.56, 1)
 
 [node name="Water_Body2" parent="." instance=ExtResource("3_t802u")]

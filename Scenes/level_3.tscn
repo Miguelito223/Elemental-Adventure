@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bt7hywdmbqldj"]
+[gd_scene load_steps=15 format=3 uid="uid://bt7hywdmbqldj"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_4anp0"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ftqhb"]
 [ext_resource type="PackedScene" uid="uid://nvgainr5kvx5" path="res://Scenes/Water_Body.tscn" id="4_rgbwf"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="5_bc2uf"]
-[ext_resource type="Script" path="res://Scripts/dnc.gd" id="6_rgq1m"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/coin.tscn" id="7_xtuig"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="8_23fhp"]
 [ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="8_a8mk6"]
@@ -22,13 +21,6 @@ size = Vector2(1861, 57)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gxe8"]
 size = Vector2(10.3734, 10.2091)
 
-[sub_resource type="Gradient" id="Gradient_77g8x"]
-offsets = PackedFloat32Array(0, 0.255172, 0.468966, 0.710345, 1)
-colors = PackedColorArray(0, 0, 0.392157, 1, 0.544118, 0.524913, 0.488178, 1, 1, 0.964706, 0.568627, 1, 1, 0.980749, 0.764706, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_jx2x6"]
-gradient = SubResource("Gradient_77g8x")
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jv6kg"]
 cull_mode = 1
 polygon = PackedVector2Array(200, 200)
@@ -44,8 +36,8 @@ script = ExtResource("1_4anp0")
 position = Vector2(115, -43)
 
 [node name="Water_Body" parent="." instance=ExtResource("4_rgbwf")]
-position = Vector2(332, 27)
-scale = Vector2(-6.81358, 0.764733)
+position = Vector2(327, 17)
+scale = Vector2(100, 1)
 
 [node name="Water_Body2" parent="." instance=ExtResource("4_rgbwf")]
 position = Vector2(900, 23)
@@ -89,10 +81,6 @@ energy = 0.5
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.239216)
 shadow_filter = 1
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-script = ExtResource("6_rgq1m")
-gradient = SubResource("GradientTexture1D_jx2x6")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(130, -106)

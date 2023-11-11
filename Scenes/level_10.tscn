@@ -184,6 +184,8 @@ bus = &"Music"
 [node name="plataform" parent="." instance=ExtResource("8_8sru2")]
 position = Vector2(-208, -6)
 curve = SubResource("Curve2D_rm37k")
+speed = 1.0
+speed_scale = 0.5
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(780, -482)
