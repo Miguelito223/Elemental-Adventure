@@ -38,6 +38,7 @@ func _on_joy_connection_changed(device_id, connected):
 	if connected:
 		Globals.num_players = Input.get_connected_joypads().size()
 		Globals.player_index = device_id
+		Globals.use_keyboard = false
 		if level == null: 
 			print("level is null")
 			return
@@ -45,6 +46,7 @@ func _on_joy_connection_changed(device_id, connected):
 		print("Added player index {d} to the world.".format({"d":Globals.player_index}))
 	else:
 		Globals.player_index = device_id
+		Globals.use_keyboard = true
 		if level == null: 
 			print("level is null")
 			return
