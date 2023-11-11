@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ywyhxmenkfw"]
+[gd_scene load_steps=5 format=3 uid="uid://ywyhxmenkfw"]
 
+[ext_resource type="Texture2D" uid="uid://kj8ifcn7mn3m" path="res://Sprites/up.png" id="2_rg3jk"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="3_ifnkr"]
 [ext_resource type="Texture2D" uid="uid://dr8824cpi75tl" path="res://Sprites/shoot.png" id="5_t4wdv"]
 
@@ -18,13 +19,27 @@ func _process(delta):
 script = SubResource("GDScript_qkajy")
 
 [node name="shoot" type="TouchScreenButton" parent="."]
-position = Vector2(1615, 814)
-scale = Vector2(0.696835, 0.624578)
+position = Vector2(1318, 797)
+scale = Vector2(0.696835, 0.710785)
 texture_normal = ExtResource("5_t4wdv")
 action = "ui_shoot0"
 
+[node name="shoot2" type="TouchScreenButton" parent="."]
+position = Vector2(1597, 743)
+scale = Vector2(1.675, 1.745)
+texture_normal = ExtResource("2_rg3jk")
+action = "ui_jump0"
+
 [node name="Virtual Joystick" parent="." instance=ExtResource("3_ifnkr")]
+offset_left = 4.0
+offset_top = -455.0
+offset_right = 304.0
+offset_bottom = -155.0
+scale = Vector2(1.5, 1.5)
+pressed_color = Color(1, 1, 1, 1)
+deadzone_size = 100.0
+clampzone_size = 175.0
 action_left = "ui_left0"
 action_right = "ui_right0"
-action_up = "ui_jump0"
-action_down = "ui_down0"
+action_up = ""
+action_down = ""
