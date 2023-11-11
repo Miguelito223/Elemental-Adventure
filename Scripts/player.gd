@@ -3,6 +3,11 @@ extends CharacterBody2D
 var DEBUGGING
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var gravity_swim = 0.25
+var velocity_swim = 200
+var jump_speed_swim = -100
+var is_in_water = false
+
 var bullet = preload("res://Scenes/fireball.tscn")
 var can_fire = true
 
@@ -146,7 +151,10 @@ func get_input_axis():
 	
 func move(delta):
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		if not is_in_water:
+			velocity.y += gravity * delta 
+		else:
+			velocity.y = clamp( velocity.y + (gravity * delta * gravity_swim), -velocity_swim, velocity_swim)
 		
 	axis = get_input_axis()
 	
@@ -162,8 +170,12 @@ func move(delta):
 			if !$Pasos.playing:
 				$Pasos.play()	
 
-	if Input.is_action_pressed(ui_inputs.keys()[2]) and is_on_floor():
-		velocity.y = jump_speed
+	if Input.is_action_pressed(ui_inputs.keys()[2]):
+		if is_on_floor():
+			velocity.y = jump_speed
+		
+		if is_in_water:
+			velocity.y += jump_speed_swim
 
 	move_and_slide()
 
@@ -287,9 +299,19 @@ func _on_exit_pressed():
 	get_tree().paused = true
 	
 func in_water():
-	damage(3)
+	is_in_water = true
+
+	if not player_name == "Water":
+		damage(3)
+
 	gravity = gravity / 3
 	max_speed = max_speed_in_water
+
+func out_water():
+	is_in_water = false
+
+	gravity = gravity
+	max_speed = max_speed
 
 
 func _on_invunerability_timeout():
