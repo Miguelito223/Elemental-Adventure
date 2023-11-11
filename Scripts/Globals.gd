@@ -9,13 +9,13 @@ var time = 0.0
 #others
 var num_players = 0
 var player_index = 0
-var use_keyboard = false
 var player_name = "Fire"
 
 #player
 var level = "level_1"
 var level_int = 1
 var hearths = {}
+var max_hearth = 3
 var coins = 0
 var score = 0
 var pos_x = -438
@@ -35,4 +35,5 @@ var autosave = true
 var autosave_length = "5"
 var autosaver_start_time = "0"
 var use_mobile_buttons = OS.get_name() == "Android"
+var use_keyboard = true
 var inputs = false

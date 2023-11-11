@@ -6,7 +6,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var bullet = preload("res://Scenes/fireball.tscn")
 var can_fire = true
 
-@export var max_hearth = 3
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
 @onready var Marker = $Node2D/Marker2D
@@ -24,6 +23,9 @@ var friction = 1200
 var axis = Vector2.ZERO
 
 var player_name = "Fire"
+
+
+var hearths_size = 80
 
 var start_position = Vector2(100.0, 100.0)
 
@@ -232,18 +234,18 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 
 	
 func setlifes(value):
-	Globals.hearths[str(Globals.player_index)] = clamp(value,0,max_hearth)
+	Globals.hearths[str(Globals.player_index)] = clamp(value,0,Globals.max_hearth)
 	if Globals.hearths[str(Globals.player_index)] <= 0:
 		if player_name == "Fire":
 			print("you dead")
-			Globals.hearths[str(Globals.player_index)] = max_hearth
+			Globals.hearths[str(Globals.player_index)] = Globals.max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
 			LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
 		else:
 			print("player number: '%s'" % device_num)
-			Globals.hearths[str(Globals.player_index)] = max_hearth
+			Globals.hearths[str(Globals.player_index)] = Globals.max_hearth
 			position = start_position
 			DataState.save_file_state()
 			Data.save_file()
@@ -282,7 +284,7 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Panel/Label.text = ":" + str(Globals.hearths[str(0)])
+	$CanvasLayer/Panel/Hearths.size.x = Globals.hearths[str(Globals.player_index)] * hearths_size
 	$CanvasLayer/Panel2/Label2.text = ":" + str(Globals.coins)
 	$CanvasLayer/Panel3/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	$CanvasLayer/Panel4/Label4.text =   "Score:" + str(Globals.score)
@@ -316,7 +318,7 @@ func save():
 		"hearths" : Globals.hearths,
 		"coins" : Globals.coins,
 		"score" : Globals.score,
-		"max_health" : max_hearth,
+		"max_healths" : Globals.max_hearth,
 	}
 	return save_dict
 	
