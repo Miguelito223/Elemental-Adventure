@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var hearths_size = 80
+var hearths_size = 1200
 
 
 # Called when the node enters the scene tree for the first time.

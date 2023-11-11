@@ -513,12 +513,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
 offset_top = 10.0
-offset_right = 984.0
+offset_right = 3384.0
 offset_bottom = 969.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_uo812")
+expand_mode = 1
 stretch_mode = 1
 
 [node name="Panel2" type="Panel" parent="CanvasLayer"]
