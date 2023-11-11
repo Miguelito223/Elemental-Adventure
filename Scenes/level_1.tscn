@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgnbppy6meuyf"]
+[gd_scene load_steps=13 format=3 uid="uid://dgnbppy6meuyf"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_7jleq"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_4quoi"]
@@ -7,9 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="7_32dsa"]
 [ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://Scenes/hearth.tscn" id="8_mpvrg"]
 [ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="8_qpj2w"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vfq3"]
-size = Vector2(32.6387, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_320jh"]
 size = Vector2(0.518592, 9.54374)
@@ -41,10 +38,6 @@ layer_0/tile_data = PackedInt32Array(-29, 0, 0, -28, 0, 0, -27, 0, 0, -26, 0, 0,
 [node name="Death Zone" type="Area2D" parent="."]
 position = Vector2(1869, -48)
 scale = Vector2(95.7652, 13.1505)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Zone"]
-position = Vector2(-10.6719, 21.5201)
-shape = SubResource("RectangleShape2D_5vfq3")
 
 [node name="Victory Zone" type="Area2D" parent="."]
 position = Vector2(1869, -48)
