@@ -81,6 +81,6 @@ text = "make by Miguelito"
 [node name="Victory music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_dqktq")
 autoplay = true
-bus = &"Music"
+bus = &"FX"
 
 [connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

@@ -66,7 +66,7 @@ text = "make by Miguelito"
 [node name="Death music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_lxwha")
 autoplay = true
-bus = &"Music"
+bus = &"FX"
 
 [connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/return" to="." method="_on_return_pressed"]
