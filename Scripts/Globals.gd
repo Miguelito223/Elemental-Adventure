@@ -30,7 +30,7 @@ var master_volume = 0
 var fx_volume = 0
 var music_volume = 0
 var fullscreen = false
-var resolution = Vector2i(1920, 1080)
+var resolution = Vector2i(1920, 1080) if OS.get_name() == "Windows" or OS.get_name() == "Linux" else Vector2i(2400, 1080)
 var initial_time = "12"
 var time_speed = "1.0"
 var autosave = true
