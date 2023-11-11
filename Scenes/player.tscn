@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dwypr7om4wpeo"]
+[gd_scene load_steps=67 format=3 uid="uid://dwypr7om4wpeo"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
@@ -24,7 +24,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
-height = 62.941
+height = 64.7923
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1nox7"]
 atlas = ExtResource("2_da7ng")
@@ -474,9 +474,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="player" type="CharacterBody2D" groups=["persistent"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xrs"]
+size = Vector2(40, 15)
+
+[node name="player" type="CharacterBody2D" groups=["persistent", "water"]]
 scale = Vector2(0.4, 0.4)
-collision_mask = 3
 script = ExtResource("1_peqvs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -632,6 +634,28 @@ position = Vector2(30, 0)
 stream = ExtResource("11_m2wrv")
 bus = &"FX"
 
+[node name="WaterDetector2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterDetector2D"]
+position = Vector2(2.5, 9.99999)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_g0xrs")
+
+[node name="LavaDetector2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaDetector2D"]
+position = Vector2(2.5, 9.99999)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_g0xrs")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="CanvasLayer/pause" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]
+[connection signal="body_entered" from="WaterDetector2D" to="." method="_on_water_detector_2d_body_entered"]
+[connection signal="body_exited" from="WaterDetector2D" to="." method="_on_water_detector_2d_body_exited"]
+[connection signal="body_entered" from="LavaDetector2D" to="." method="_on_lava_detector_2d_body_entered"]
+[connection signal="body_exited" from="LavaDetector2D" to="." method="_on_lava_detector_2d_body_exited"]

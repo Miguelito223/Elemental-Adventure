@@ -199,7 +199,7 @@ _data = {
 "rest": SubResource("Animation_h0bwp")
 }
 
-[node name="enemy" type="CharacterBody2D" groups=["persistent"]]
+[node name="enemy" type="CharacterBody2D" groups=["persistent", "water"]]
 script = ExtResource("1_skb27")
 
 [node name="detection_area2" type="Area2D" parent="."]

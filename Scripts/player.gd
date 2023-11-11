@@ -7,6 +7,7 @@ var gravity_swim = 0.25
 var velocity_swim = 200
 var jump_speed_swim = -100
 var is_in_water = false
+var is_in_lava = false
 
 var bullet = preload("res://Scenes/fireball.tscn")
 var can_fire = true
@@ -22,6 +23,7 @@ var can_fire = true
 var max_speed = 300
 var max_speed_in_air = 500
 var max_speed_in_water = 200
+var max_speed_in_lava = 100
 var jump_speed = -400.0
 var speed = 1500
 var friction = 1200
@@ -176,7 +178,7 @@ func move(delta):
 		if is_on_floor():
 			velocity.y = jump_speed
 		
-		if is_in_water:
+		if is_in_water == true:
 			velocity.y += jump_speed_swim
 
 	move_and_slide()
@@ -303,19 +305,55 @@ func _on_exit_pressed():
 	get_tree().paused = true
 	
 func in_water():
-	is_in_water = true
+	if is_in_water == false:
+		is_in_water = true
+		print(is_in_water)
 
-	if not player_name == "Water":
+		if not player_name == "Water":
+			damage(3)
+
+		gravity = gravity / 3
+		max_speed = max_speed_in_water
+
+func out_water():
+	if is_in_water == true:
+		is_in_water = false
+		print(is_in_water)
+
+		gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+		max_speed = 300
+
+func out_lava():
+	is_in_water = false
+	print(is_in_water)
+
+	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	max_speed = 300
+
+func in_lava():
+	is_in_water = true
+	print(is_in_water)
+
+	if not player_name == "Fire":
 		damage(3)
 
 	gravity = gravity / 3
-	max_speed = max_speed_in_water
+	max_speed = max_speed_in_lava
 
-func out_water():
-	is_in_water = false
 
-	gravity = gravity
-	max_speed = max_speed
+
+func _on_water_detector_2d_body_entered(body):
+	in_water()
+
+func _on_water_detector_2d_body_exited(body):
+	out_water()
+
+func _on_lava_detector_2d_body_entered(body):
+	in_lava()
+
+func _on_lava_detector_2d_body_exited(body):
+	out_lava()
+
 
 
 func _on_invunerability_timeout():
@@ -357,3 +395,4 @@ func load(info):
 
 func _on_animation_player_animation_finished(anim_name):
 	pass
+

@@ -161,6 +161,10 @@ func in_water():
 	damage(10)
 	gravity = gravity / 3
 	max_speed = max_speed_in_water
+
+func out_water():
+	gravity = gravity
+	max_speed = max_speed
 		
 func save():
 	var save_dict = {

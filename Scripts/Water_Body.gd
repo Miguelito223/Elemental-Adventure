@@ -169,8 +169,14 @@ func splash(index, speed):
 		springs[index].velocity += speed
 	pass
 
-func _on_Water_Body_Area_body_entered(body):
-	if body.has_method("in_water"):
+
+func _on_water_body_area_body_exited(body:Node2D):
+	if body.has_method("out_water"):
+		body.out_water()
+
+
+func _on_water_body_area_body_entered(body:Node2D):
+	if body.is_in_group("water"):
 		body.in_water()
 	
 	#creates a instace of the particle system
@@ -183,8 +189,3 @@ func _on_Water_Body_Area_body_entered(body):
 	s.global_position = body.global_position
 	
 	pass # Replace with function body.
-
-
-func _on_water_body_area_body_exited(body:Node2D):
-	if body.has_method("out_water"):
-		body.out_water()

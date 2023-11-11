@@ -83,18 +83,11 @@ func _on_Area2D_body_entered(body):
 	if body == collided_with:
 		return
 	
-	if body.get_class() == "CharacterBody2D":
+	if body.is_in_group("water"):
 		var speed = body.velocity.y * motion_factor
 		emit_signal("splash",index,speed)
-	
-	if body.get_scene_file_path() == "res://Scenes/player.tscn":
-		if not body.player_name == "Water":
-			body.damage(3)
-			
-		
-		
-	if body.get_scene_file_path() == "res://Scenes/enemy.tscn":
-		body.damage(10)
+
+		body.in_water()
 	
 	#the body is the last thing this spring collided with
 	collided_with = body
@@ -107,3 +100,11 @@ func _on_Area2D_body_entered(body):
 	#emit the signal "splash" to call the splash function, at our water body script
 	
 	pass # Replace with function body.
+
+
+func _on_area_2d_body_exited(body:Node2D):
+	if body.is_in_group("water"):
+		var speed = body.velocity.y * motion_factor
+		emit_signal("splash",index,speed)
+		
+		body.out_water()
