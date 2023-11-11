@@ -7,6 +7,9 @@ var hearths_size = 1200
 func _ready():
 	update_label()
 	Globals.hud = self
+
+func _process(delta):
+	update_label()
 	
 
 func update_label():

@@ -55,6 +55,8 @@ func _ready():
 			}))
 	
 	Pause_Menu.hide()
+	position = start_position
+
 	get_tree().paused = false
 	setlifes(Globals.hearths[str(Globals.player_index)])
 	Signals.player_ready.emit()
