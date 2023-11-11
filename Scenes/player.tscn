@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="10_6u4n5"]
 [ext_resource type="AudioStream" uid="uid://1dqe1autfygr" path="res://sounds/pasos cesped.mp3" id="11_m2wrv"]
 [ext_resource type="PackedScene" uid="uid://ywyhxmenkfw" path="res://Scenes/mobilecontrolls.tscn" id="11_tb078"]
-[ext_resource type="Script" path="res://Scenes/CanvasLayer.gd" id="15_oj2yd"]
+[ext_resource type="Script" path="res://Scripts/CanvasLayer.gd" id="15_jtxs5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -498,7 +498,7 @@ libraries = {
 visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("15_oj2yd")
+script = ExtResource("15_jtxs5")
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 offset_top = 2.0

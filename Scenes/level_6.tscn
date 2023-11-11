@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bkd2d7efy733f" path="res://sounds/Level music.mp3" id="10_0p1jq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brrbs"]
-size = Vector2(0.490783, 6.59691)
+size = Vector2(0.490783, 7.60429)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2kaei"]
 size = Vector2(44, 652.48)
@@ -72,7 +72,7 @@ position = Vector2(1213, -56.0001)
 scale = Vector2(95.7652, 13.1505)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Victory Zone"]
-position = Vector2(0.349813, -1.47341)
+position = Vector2(0.365477, -1.90105)
 shape = SubResource("RectangleShape2D_brrbs")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

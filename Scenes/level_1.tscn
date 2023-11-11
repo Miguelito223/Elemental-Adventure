@@ -13,7 +13,7 @@
 size = Vector2(32.6387, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_320jh"]
-size = Vector2(1.49664, 9.54374)
+size = Vector2(0.518592, 9.54374)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j75a3"]
 size = Vector2(44, 652.48)
@@ -56,7 +56,7 @@ position = Vector2(1869, -48)
 scale = Vector2(95.7652, 13.1505)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Victory Zone"]
-position = Vector2(-0.0313263, 0.0760422)
+position = Vector2(0.626534, -0.228127)
 shape = SubResource("RectangleShape2D_320jh")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -183,7 +183,16 @@ position = Vector2(1554, -38)
 position = Vector2(1617, -40)
 
 [node name="Coin32" parent="." instance=ExtResource("6_ypqjp")]
-position = Vector2(1703, -41)
+position = Vector2(1673, -41)
+
+[node name="Coin34" parent="." instance=ExtResource("6_ypqjp")]
+position = Vector2(1729, -46)
+
+[node name="Coin35" parent="." instance=ExtResource("6_ypqjp")]
+position = Vector2(1786, -39)
+
+[node name="Coin36" parent="." instance=ExtResource("6_ypqjp")]
+position = Vector2(1855, -40)
 
 [node name="Coin29" parent="." instance=ExtResource("6_ypqjp")]
 position = Vector2(1441, -42)
@@ -195,7 +204,7 @@ position = Vector2(1270, -41)
 position = Vector2(468, -48)
 
 [node name="Enemigo2" parent="." instance=ExtResource("7_32dsa")]
-position = Vector2(1529, -49)
+position = Vector2(1520, -246)
 
 [node name="Hearth2" parent="." instance=ExtResource("8_mpvrg")]
 position = Vector2(589, -45)

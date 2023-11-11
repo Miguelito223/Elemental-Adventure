@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://Scenes/hearth.tscn" id="9_gnp82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua2aw"]
-size = Vector2(1.49664, 9.54374)
+size = Vector2(0.466378, 9.54374)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j75a3"]
 size = Vector2(44, 652.48)
@@ -51,7 +51,7 @@ position = Vector2(1213, -56.0001)
 scale = Vector2(95.7652, 13.1505)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Victory Zone"]
-position = Vector2(2.38082, -1.36876)
+position = Vector2(2.89595, -1.36876)
 shape = SubResource("RectangleShape2D_ua2aw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -152,6 +152,12 @@ position = Vector2(1198, -44)
 
 [node name="Coin22" parent="." instance=ExtResource("7_w1o5k")]
 position = Vector2(1280, -41)
+
+[node name="Coin24" parent="." instance=ExtResource("7_w1o5k")]
+position = Vector2(1348, -41)
+
+[node name="Coin25" parent="." instance=ExtResource("7_w1o5k")]
+position = Vector2(1419, -40)
 
 [node name="Coin23" parent="." instance=ExtResource("7_w1o5k")]
 position = Vector2(997, -69)

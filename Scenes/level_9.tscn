@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://r6nxo2uj0e0o" path="res://Scenes/plataform.tscn" id="8_1r11l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brrbs"]
-size = Vector2(1.49664, 9.54374)
+size = Vector2(0.529034, 9.54374)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2kaei"]
 size = Vector2(44, 652.48)
@@ -68,7 +68,7 @@ position = Vector2(1213, -56.0001)
 scale = Vector2(95.7652, 13.1505)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Victory Zone"]
-position = Vector2(-0.0313263, 0)
+position = Vector2(0.438572, -2.88961)
 shape = SubResource("RectangleShape2D_brrbs")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
