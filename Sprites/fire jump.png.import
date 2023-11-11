@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chrndh6qoxids"
-path="res://.godot/imported/fuego jump.png-ecbec2f0df99b2ffee03ce597e1ab921.ctex"
+path="res://.godot/imported/fire jump.png-7804029c324ea451d5e6e452238ffcec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/fuego jump.png"
-dest_files=["res://.godot/imported/fuego jump.png-ecbec2f0df99b2ffee03ce597e1ab921.ctex"]
+source_file="res://Sprites/fire jump.png"
+dest_files=["res://.godot/imported/fire jump.png-7804029c324ea451d5e6e452238ffcec.ctex"]
 
 [params]
 

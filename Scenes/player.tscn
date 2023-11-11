@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
 [ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
 [ext_resource type="Texture2D" uid="uid://chvkp0udsig5q" path="res://Sprites/air jump.png" id="2_da7ng"]
-[ext_resource type="Texture2D" uid="uid://chrndh6qoxids" path="res://Sprites/fuego jump.png" id="3_je3ue"]
 [ext_resource type="Texture2D" uid="uid://j4ka8e1a5uyy" path="res://Sprites/air idle.png" id="3_jsqec"]
 [ext_resource type="Texture2D" uid="uid://mil2oi5o8x10" path="res://Sprites/air walk.png" id="4_0wtjx"]
 [ext_resource type="Texture2D" uid="uid://dfkfd625506bu" path="res://Sprites/Fire Walk.png" id="4_ixnqo"]
@@ -17,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b6it1ygasjm8a" path="res://Sprites/earth walk.png" id="7_mwys2"]
 [ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/coin.png" id="7_s7rtk"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
+[ext_resource type="Texture2D" uid="uid://chrndh6qoxids" path="res://Sprites/fire jump.png" id="9_ptmh2"]
 [ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="10_6u4n5"]
 [ext_resource type="AudioStream" uid="uid://1dqe1autfygr" path="res://sounds/pasos cesped.mp3" id="11_m2wrv"]
 [ext_resource type="PackedScene" uid="uid://ywyhxmenkfw" path="res://Scenes/mobilecontrolls.tscn" id="11_tb078"]
@@ -102,7 +102,7 @@ atlas = ExtResource("2_bg8xc")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5bub"]
-atlas = ExtResource("3_je3ue")
+atlas = ExtResource("9_ptmh2")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_667f8"]

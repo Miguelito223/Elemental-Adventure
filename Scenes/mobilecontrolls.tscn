@@ -33,5 +33,5 @@ action = "ui_shoot0"
 [node name="Virtual Joystick" parent="." instance=ExtResource("3_ifnkr")]
 action_left = "ui_left0"
 action_right = "ui_right0"
-action_up = "ui_up0"
+action_up = "ui_jump0"
 action_down = "ui_down0"
