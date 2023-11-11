@@ -88,6 +88,9 @@ func _on_Area2D_body_entered(body):
 		emit_signal("splash",index,speed)
 	
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
+		if body.player_name == "Water":
+			return
+			
 		body.damage(3)
 		
 	if body.get_scene_file_path() == "res://Scenes/enemy.tscn":
