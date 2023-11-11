@@ -37,7 +37,7 @@ var autosave = true
 var autosave_length = "5"
 var autosaver_start_time = "0"
 var use_mobile_buttons = OS.get_name() == "Android"
-var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux"
+var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux" or OS.get_name() == "Web"
 
 func _ready():
 	if OS.get_name() == "Windows" or OS.get_name() == "Linux": 
