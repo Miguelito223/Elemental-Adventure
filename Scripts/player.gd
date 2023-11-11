@@ -24,9 +24,6 @@ var axis = Vector2.ZERO
 
 var player_name = "Fire"
 
-
-var hearths_size = 80
-
 var start_position = Vector2(100.0, 100.0)
 
 var color = Color("White", 1) # color, alpha
@@ -59,8 +56,6 @@ func _ready():
 
 	
 func _process(_delta):	
-	update_label()
-
 	if Globals.use_keyboard:
 		Marker_Parent.look_at(get_global_mouse_position())
 	else:
@@ -253,11 +248,13 @@ func setlifes(value):
 func getcoin():
 	Globals.coins += 1
 	Globals.score += 3
+	Globals.hud.update_label()
 	DataState.save_file_state()
 	Data.save_file()
 	
 func getlife():
 	Globals.hearths[str(Globals.player_index)] += 1
+	Globals.hud.update_label()
 	DataState.save_file_state()
 	Data.save_file()
 	
@@ -279,15 +276,10 @@ func damage(ammount):
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		Globals.score -= 3
+		Globals.hud.update_label()
 		DataState.save_file_state()
 		Data.save_file()
 		
-
-func update_label():
-	$CanvasLayer/Panel/Hearths.size.x = Globals.hearths[str(0)] * hearths_size
-	$CanvasLayer/Panel2/Label2.text = ":" + str(Globals.coins)
-	$CanvasLayer/Panel3/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
-	$CanvasLayer/Panel4/Label4.text =   "Score:" + str(Globals.score)
 	
 
 func _on_exit_pressed():

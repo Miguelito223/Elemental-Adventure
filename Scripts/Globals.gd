@@ -12,10 +12,12 @@ var player_index = 0
 var player_name = "Fire"
 
 #player
+
+var hud
 var level = "level_1"
 var level_int = 1
-var hearths = {}
 var max_hearth = 3
+var hearths = {}
 var coins = 0
 var score = 0
 var pos_x = -438

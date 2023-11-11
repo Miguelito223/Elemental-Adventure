@@ -323,7 +323,7 @@ func add_player(player_index):
 	
 	if DataState.node_data.is_empty():
 		print("node data is empy")
-		Globals.hearths[str(player_index)] = 3
+		Globals.hearths[str(player_index)] = Globals.max_hearth
 		player.position = player.start_position
 	else:
 		if DataState.node_data.filename == "res://Scenes/player.tscn":
@@ -331,7 +331,7 @@ func add_player(player_index):
 
 	if not Globals.hearths.has(str(Globals.player_index)):
 		print("hearths is empty")
-		Globals.hearths[str(player_index)] = 3
+		Globals.hearths[str(player_index)] = Globals.max_hearth
 
 	input_maps.append({
 		"ui_right{n}".format({"n":player_index}): Vector2.RIGHT,
