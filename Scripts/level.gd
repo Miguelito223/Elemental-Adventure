@@ -370,4 +370,7 @@ func _on_victory_zone_body_entered(body):
 
 func _on_death_zone_body_entered(body):
 	if body.get_scene_file_path() == "res://Scenes/player.tscn":
+		if body.player_name == "Water":
+			return
+		
 		body.damage(3)
