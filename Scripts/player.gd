@@ -284,7 +284,7 @@ func damage(ammount):
 		
 
 func update_label():
-	$CanvasLayer/Panel/Hearths.size.x = Globals.hearths[str(Globals.player_index)] * hearths_size
+	$CanvasLayer/Panel/Hearths.size.x = Globals.hearths[str(0)] * hearths_size
 	$CanvasLayer/Panel2/Label2.text = ":" + str(Globals.coins)
 	$CanvasLayer/Panel3/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	$CanvasLayer/Panel4/Label4.text =   "Score:" + str(Globals.score)
