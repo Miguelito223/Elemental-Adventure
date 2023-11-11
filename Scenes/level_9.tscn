@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4n8vf46ncqro"]
+[gd_scene load_steps=14 format=3 uid="uid://b4n8vf46ncqro"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_htipo"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_ave4t"]
@@ -29,9 +29,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 410, -23)
 }
 point_count = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3d2"]
-size = Vector2(32.6387, 20)
 
 [node name="level_9" type="Node2D"]
 position = Vector2(549, 994)
@@ -110,6 +107,48 @@ position = Vector2(-299, -43)
 [node name="Coin9" parent="." instance=ExtResource("5_g3l6x")]
 position = Vector2(189, -16)
 
+[node name="Coin24" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(-105, 171)
+
+[node name="Coin25" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(11, 168)
+
+[node name="Coin26" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(-52, 172)
+
+[node name="Coin27" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(-180, 177)
+
+[node name="Coin28" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(84, 172)
+
+[node name="Coin29" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(157, 173)
+
+[node name="Coin30" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(315, 173)
+
+[node name="Coin32" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(397, 174)
+
+[node name="Coin33" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(525, 174)
+
+[node name="Coin34" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(682, 173)
+
+[node name="Coin35" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(841, 175)
+
+[node name="Coin36" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(748, 171)
+
+[node name="Coin37" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(604, 176)
+
+[node name="Coin31" parent="." instance=ExtResource("5_g3l6x")]
+position = Vector2(233, 173)
+
 [node name="Coin10" parent="." instance=ExtResource("5_g3l6x")]
 position = Vector2(454, -33)
 
@@ -173,13 +212,4 @@ curve = SubResource("Curve2D_stbqy")
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(780, -482)
 
-[node name="Death Zone" type="Area2D" parent="."]
-position = Vector2(1766, -17)
-scale = Vector2(95.7652, 13.1505)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Zone"]
-position = Vector2(-10.6719, 21.5201)
-shape = SubResource("RectangleShape2D_4c3d2")
-
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
-[connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]

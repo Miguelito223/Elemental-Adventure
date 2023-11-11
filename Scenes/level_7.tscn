@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dt63ulpvh8spe"]
+[gd_scene load_steps=12 format=3 uid="uid://dt63ulpvh8spe"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_3f7iv"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_83uct"]
@@ -22,9 +22,6 @@ size = Vector2(10.3734, 10.2091)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_v5lbu"]
 cull_mode = 1
 polygon = PackedVector2Array(200, 200)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7x157"]
-size = Vector2(32.6387, 20)
 
 [node name="level_7" type="Node2D"]
 position = Vector2(549, 994)
@@ -109,6 +106,27 @@ position = Vector2(436, -75)
 [node name="Coin11" parent="." instance=ExtResource("7_2w3am")]
 position = Vector2(347, -75)
 
+[node name="Coin24" parent="." instance=ExtResource("7_2w3am")]
+position = Vector2(-39, 177)
+
+[node name="Coin25" parent="." instance=ExtResource("7_2w3am")]
+position = Vector2(275, 179)
+
+[node name="Coin26" parent="." instance=ExtResource("7_2w3am")]
+position = Vector2(648, 181)
+
+[node name="Coin27" parent="." instance=ExtResource("7_2w3am")]
+position = Vector2(788, 177)
+
+[node name="Coin28" parent="." instance=ExtResource("7_2w3am")]
+position = Vector2(453, 183)
+
+[node name="Coin29" parent="." instance=ExtResource("7_2w3am")]
+position = Vector2(103, 179)
+
+[node name="Coin30" parent="." instance=ExtResource("7_2w3am")]
+position = Vector2(-137, 179)
+
 [node name="Coin12" parent="." instance=ExtResource("7_2w3am")]
 position = Vector2(526, -45)
 
@@ -162,13 +180,4 @@ bus = &"Music"
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(780, -482)
 
-[node name="Death Zone" type="Area2D" parent="."]
-position = Vector2(1869, -48)
-scale = Vector2(95.7652, 13.1505)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Zone"]
-position = Vector2(-10.6719, 21.5201)
-shape = SubResource("RectangleShape2D_7x157")
-
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
-[connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]

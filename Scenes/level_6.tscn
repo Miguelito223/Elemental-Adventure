@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://8ja0wgtkdkfm"]
+[gd_scene load_steps=16 format=3 uid="uid://8ja0wgtkdkfm"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_wfsls"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_2165g"]
@@ -23,9 +23,6 @@ size = Vector2(10.3734, 10.2091)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_v5lbu"]
 cull_mode = 1
 polygon = PackedVector2Array(200, 200)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kc12l"]
-size = Vector2(32.6387, 20)
 
 [sub_resource type="Curve2D" id="Curve2D_efmdh"]
 _data = {
@@ -113,6 +110,12 @@ position = Vector2(55, -43)
 [node name="Coin6" parent="." instance=ExtResource("3_3hy2r")]
 position = Vector2(-2, -44)
 
+[node name="Coin24" parent="." instance=ExtResource("3_3hy2r")]
+position = Vector2(-36, 219)
+
+[node name="Coin25" parent="." instance=ExtResource("3_3hy2r")]
+position = Vector2(45, 218)
+
 [node name="Coin7" parent="." instance=ExtResource("3_3hy2r")]
 position = Vector2(-83, -47)
 
@@ -182,14 +185,6 @@ bus = &"Music"
 position = Vector2(780, -482)
 zoom = Vector2(4, 4)
 
-[node name="Death Zone" type="Area2D" parent="."]
-position = Vector2(1572, -58)
-scale = Vector2(95.7652, 13.1505)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Zone"]
-position = Vector2(-11.3716, 22.8889)
-shape = SubResource("RectangleShape2D_kc12l")
-
 [node name="plataform" parent="." instance=ExtResource("6_m342p")]
 curve = SubResource("Curve2D_efmdh")
 
@@ -202,4 +197,3 @@ position = Vector2(320, 7)
 curve = SubResource("Curve2D_ny7mg")
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
-[connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]

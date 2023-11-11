@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdva7ywxrbgk3"]
+[gd_scene load_steps=14 format=3 uid="uid://cdva7ywxrbgk3"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_bk6t0"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_87yrv"]
@@ -29,9 +29,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -11, -8, 0, 0, 0, 0, 830, -25)
 }
 point_count = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wvh8"]
-size = Vector2(32.6387, 20)
 
 [node name="level_10" type="Node2D"]
 position = Vector2(549, 994)
@@ -91,6 +88,27 @@ position = Vector2(-193, -41)
 
 [node name="Coin3" parent="." instance=ExtResource("5_ldjro")]
 position = Vector2(-126, -41)
+
+[node name="Coin24" parent="." instance=ExtResource("5_ldjro")]
+position = Vector2(-144, 129)
+
+[node name="Coin25" parent="." instance=ExtResource("5_ldjro")]
+position = Vector2(50, 127)
+
+[node name="Coin26" parent="." instance=ExtResource("5_ldjro")]
+position = Vector2(194, 126)
+
+[node name="Coin27" parent="." instance=ExtResource("5_ldjro")]
+position = Vector2(367, 122)
+
+[node name="Coin28" parent="." instance=ExtResource("5_ldjro")]
+position = Vector2(503, 127)
+
+[node name="Coin29" parent="." instance=ExtResource("5_ldjro")]
+position = Vector2(275, 126)
+
+[node name="Coin30" parent="." instance=ExtResource("5_ldjro")]
+position = Vector2(-67, 127)
 
 [node name="Coin4" parent="." instance=ExtResource("5_ldjro")]
 position = Vector2(255, -45)
@@ -169,13 +187,4 @@ speed_scale = 0.5
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(780, -482)
 
-[node name="Death Zone" type="Area2D" parent="."]
-position = Vector2(1869, -48)
-scale = Vector2(95.7652, 13.1505)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Zone"]
-position = Vector2(-10.6719, 21.5201)
-shape = SubResource("RectangleShape2D_8wvh8")
-
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
-[connection signal="body_entered" from="Death Zone" to="." method="_on_death_zone_body_entered"]
