@@ -21,7 +21,7 @@ func save_file():
 			"autosave":  Globals.autosave,
 			"autosave_length":  Globals.autosave_length,
 			"autosaver_start_time":  Globals.autosaver_start_time,
-			"set_inputs": Globals.inputs,
+			"use_keyboard": Globals.use_keyboard,
 			"use_mobile_buttons": Globals.use_mobile_buttons,
 		},
 		"time":{
@@ -42,7 +42,7 @@ func save_file():
 		},
 		"others":{
 			"num_players": Globals.num_players,
-			"use_keyboard": Globals.use_keyboard,
+			
 			"player_index": Globals.player_index,
 		}
 	}
@@ -90,8 +90,8 @@ func load_file():
 		Globals.autosave = settings.autosave
 		Globals.autosave_length = settings.autosave_length
 		Globals.autosaver_start_time = settings.autosaver_start_time
-		Globals.inputs = settings.set_inputs
 		Globals.use_mobile_buttons = settings.use_mobile_buttons
+		Globals.use_keyboard = settings.use_keyboard
 
 		var time = data.time
 
@@ -114,7 +114,6 @@ func load_file():
 		var others = data.others
 
 		Globals.num_players = others.num_players
-		Globals.use_keyboard = others.use_keyboard
 		Globals.player_index = others.player_index
 		
 		Signals.finish_load_data.emit()
@@ -166,6 +165,5 @@ func load_resolution(value):
 
 func load_inputs(value):
 	Globals.use_keyboard = value
-	Globals.inputs = value
 	save_file()
 

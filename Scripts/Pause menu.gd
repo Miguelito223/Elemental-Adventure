@@ -41,7 +41,7 @@ func addresolutions():
 		index += 1
 
 func addinputs():
-	var current_input = Globals.inputs
+	var current_input = Globals.use_keyboard
 	var index = 0
 	
 	for r in inputs:

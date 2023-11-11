@@ -37,5 +37,4 @@ var autosave = true
 var autosave_length = "5"
 var autosaver_start_time = "0"
 var use_mobile_buttons = OS.get_name() == "Android"
-var use_keyboard = true
-var inputs = false
+var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux"
