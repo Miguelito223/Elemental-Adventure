@@ -290,6 +290,8 @@ func damage(ammount):
 		Animation_Effects.play("damage")
 		Animation_Effects.queue("flash")
 		Globals.score -= 3
+		if Globals.score < 0:
+			Globals.score = 0
 		Globals.hud.update_label()
 		DataState.save_file_state()
 		Data.save_file()
