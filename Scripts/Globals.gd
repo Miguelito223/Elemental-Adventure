@@ -30,7 +30,7 @@ var master_volume = 0
 var fx_volume = 0
 var music_volume = 0
 var fullscreen = false
-var resolution = Vector2i(1920, 1080) if OS.get_name() == "Windows" or OS.get_name() == "Linux" else Vector2i(2400, 1080)
+var resolution
 var initial_time = "12"
 var time_speed = "1.0"
 var autosave = true
@@ -38,3 +38,11 @@ var autosave_length = "5"
 var autosaver_start_time = "0"
 var use_mobile_buttons = OS.get_name() == "Android"
 var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux"
+
+func _ready():
+	if OS.get_name() == "Windows" or OS.get_name() == "Linux": 
+		resolution = Vector2i(1920, 1080) 
+	elif OS.get_name() == "Web":
+		resolution = Vector2i(1920, 1080)
+	else: 
+		resolution = Vector2i(2400, 1080)
