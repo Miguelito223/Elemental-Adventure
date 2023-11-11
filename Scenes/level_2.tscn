@@ -35,7 +35,7 @@ script = ExtResource("1_qgu7p")
 [node name="environment" parent="." instance=ExtResource("2_yvtgd")]
 
 [node name="Water_Body" parent="." instance=ExtResource("4_bl4xi")]
-position = Vector2(121, 8)
+position = Vector2(134, 21)
 
 [node name="Water_Body2" parent="." instance=ExtResource("4_bl4xi")]
 position = Vector2(392, 20)

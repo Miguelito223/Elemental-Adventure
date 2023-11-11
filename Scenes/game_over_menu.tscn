@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://v8uq1u8p3nxj"]
 
-[ext_resource type="Script" path="res://Scripts/Death Menu.gd" id="1_o4flf"]
+[ext_resource type="Script" path="res://Scripts/game over Menu.gd" id="1_i0b3j"]
 [ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_xqlid"]
 [ext_resource type="AudioStream" uid="uid://bo7c13lq4gxuu" path="res://sounds/game over sound.wav" id="3_lxwha"]
 
@@ -13,7 +13,7 @@ offset_right = -1920.0
 offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_o4flf")
+script = ExtResource("1_i0b3j")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
