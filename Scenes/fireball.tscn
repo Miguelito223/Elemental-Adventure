@@ -55,7 +55,7 @@ texture = ExtResource("3_v3vlo")
 texture_scale = 0.36
 
 [node name="Fire" type="GPUParticles2D" parent="."]
-amount = 500
+amount = 100
 process_material = SubResource("ParticleProcessMaterial_68iho")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
