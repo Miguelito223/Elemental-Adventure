@@ -37,6 +37,7 @@ var speed = 100
 var max_speed = 70
 var max_speed_in_air = 60
 var max_speed_in_water = 20
+var max_speed_in_lava = 100
 
 func _ready():
 	setlifes(hearth)
@@ -165,6 +166,15 @@ func in_water():
 func out_water():
 	gravity = gravity
 	max_speed = max_speed
+
+func out_lava():
+	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	max_speed = 300
+
+func in_lava():
+	damage(20)
+	gravity = gravity / 3
+	max_speed = max_speed_in_lava
 		
 func save():
 	var save_dict = {
@@ -184,3 +194,19 @@ func load(info):
 	name = info.name
 	position = Vector2(info.pos_x, info.pos_y)
 	hearth = info.enemy_hearth
+
+
+func _on_water_detector_2d_body_entered(body:Node2D):
+	in_water()
+
+
+func _on_water_detector_2d_body_exited(body:Node2D):
+	out_water()
+
+
+func _on_lava_detector_2d_body_entered(body:Node2D):
+	in_lava()
+
+
+func _on_lava_detector_2d_body_exited(body:Node2D):
+	out_lava()

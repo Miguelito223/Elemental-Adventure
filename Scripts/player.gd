@@ -155,7 +155,7 @@ func get_input_axis():
 	
 func move(delta):
 	if not is_on_floor():
-		if not is_in_water:
+		if not is_in_water or not is_in_lava:
 			velocity.y += gravity * delta 
 		else:
 			velocity.y = clamp( velocity.y + (gravity * delta * gravity_swim), -velocity_swim, velocity_swim)
@@ -178,7 +178,7 @@ func move(delta):
 		if is_on_floor():
 			velocity.y = jump_speed
 		
-		if is_in_water == true:
+		if is_in_water == true or is_in_lava == true:
 			velocity.y += jump_speed_swim
 
 	move_and_slide()
