@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://da61af5kfk5ik"]
+[gd_scene load_steps=23 format=3 uid="uid://da61af5kfk5ik"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_skb27"]
 [ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://Sprites/enemigo1.png" id="2_evuxq"]
@@ -11,6 +11,9 @@ radius = 35.2278
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hdx6"]
 radius = 149.0
 height = 298.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wawfh"]
+size = Vector2(40, 20.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gqy"]
 size = Vector2(38, 21)
@@ -214,6 +217,24 @@ shape = SubResource("CircleShape2D_u0cx1")
 position = Vector2(4, 2)
 shape = SubResource("CapsuleShape2D_0hdx6")
 
+[node name="WaterDetector2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterDetector2D"]
+position = Vector2(8, 1)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_wawfh")
+
+[node name="LavaDetector2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaDetector2D"]
+position = Vector2(8, -1.75)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_wawfh")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(7, -0.5)
 shape = SubResource("RectangleShape2D_r0gqy")
@@ -257,4 +278,8 @@ position = Vector2(30, 0)
 [connection signal="body_entered" from="detection_area2" to="." method="_on_detection_area_2_body_entered"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="WaterDetector2D" to="." method="_on_water_detector_2d_body_entered"]
+[connection signal="body_exited" from="WaterDetector2D" to="." method="_on_water_detector_2d_body_exited"]
+[connection signal="body_entered" from="LavaDetector2D" to="." method="_on_lava_detector_2d_body_entered"]
+[connection signal="body_exited" from="LavaDetector2D" to="." method="_on_lava_detector_2d_body_exited"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]
