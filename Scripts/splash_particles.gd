@@ -1,13 +1,3 @@
-extends Node2D
-
-@onready var timer = $Timer
-@onready var particle = $Particles2D
-
-func _ready():
-	timer.wait_time = particle.lifetime
-	timer.start()
-
-func _on_Timer_timeout():
-	#will delete itself on timer timeout
-	queue_free()
-	pass # Replace with function body.
+version https://git-lfs.github.com/spec/v1
+oid sha256:9446a472a632d7d970e7046f6b73e6f8ce5e9150a7bbb475dc81eec4518ffaff
+size 264

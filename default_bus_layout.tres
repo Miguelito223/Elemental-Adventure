@@ -1,15 +1,3 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://clwghed1t8ru2"]
-
-[resource]
-bus/1/name = &"Music"
-bus/1/solo = false
-bus/1/mute = false
-bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
-bus/1/send = &"Master"
-bus/2/name = &"FX"
-bus/2/solo = false
-bus/2/mute = false
-bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
-bus/2/send = &"Master"
+version https://git-lfs.github.com/spec/v1
+oid sha256:e19a1bd2d043407fd2a3b0b06b553f63b0140a901bc758919fcf61e364637600
+size 338

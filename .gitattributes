@@ -1,2 +1,3 @@
-# Normalize EOL for all files that Git considers text files.
-* text=auto eol=lf
+version https://git-lfs.github.com/spec/v1
+oid sha256:5734132848ca1108a09dc1f99053c37762cdc0a7acd726e1d88d00d57532aca2
+size 144

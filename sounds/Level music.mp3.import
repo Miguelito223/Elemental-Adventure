@@ -1,19 +1,3 @@
-[remap]
-
-importer="mp3"
-type="AudioStreamMP3"
-uid="uid://bkd2d7efy733f"
-path="res://.godot/imported/Level music.mp3-ea5a89548278bc56774811fddf328cca.mp3str"
-
-[deps]
-
-source_file="res://sounds/Level music.mp3"
-dest_files=["res://.godot/imported/Level music.mp3-ea5a89548278bc56774811fddf328cca.mp3str"]
-
-[params]
-
-loop=true
-loop_offset=0
-bpm=0
-beat_count=0
-bar_beats=4
+version https://git-lfs.github.com/spec/v1
+oid sha256:e3da19b946015445fa751c9560b72707a96f1673b5d7e26e2e0f1787ddda30db
+size 368

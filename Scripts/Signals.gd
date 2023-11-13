@@ -1,13 +1,3 @@
-extends Node
-
-signal level_loaded
-signal player_ready
-signal disconnected
-signal connected
-signal finish_remove_data
-signal finish_add_data
-signal finish_load_data
-signal finish_set_vars
-signal finish_loading
-signal time_tick(day,hour,minute)
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:028f537bd17d1a47d0c23f7bd2aec747ce9b3129ddeb8e65f564b1a9ddb6005f
+size 244
