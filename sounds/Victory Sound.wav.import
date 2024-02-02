@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:347763f2e152786668ec587264c031501e93fe082a628a195a7855a1b912fdca
-size 504
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ciykj3og6wxmg"
+path="res://.godot/imported/Victory Sound.wav-92aa15f8fe892bd4ce2c5ead23ccca63.sample"
+
+[deps]
+
+source_file="res://Sounds/Victory Sound.wav"
+dest_files=["res://.godot/imported/Victory Sound.wav-92aa15f8fe892bd4ce2c5ead23ccca63.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

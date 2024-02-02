@@ -1,3 +1,74 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0ac982c3ce99608c10f267743a969fd8cddc1925eb0b801d1956d358a46c5b96
-size 2254
+[gd_scene load_steps=5 format=3 uid="uid://v8uq1u8p3nxj"]
+
+[ext_resource type="Script" path="res://Scripts/game over Menu.gd" id="1_i0b3j"]
+[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_xqlid"]
+[ext_resource type="AudioStream" uid="uid://bo7c13lq4gxuu" path="res://Sounds/game over sound.wav" id="3_lxwha"]
+[ext_resource type="Script" path="res://Scripts/Button.gd" id="3_p0xq0"]
+
+[node name="Death Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i0b3j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1913.0
+offset_bottom = 1088.0
+color = Color(0.211765, 0, 0.411765, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 159.0
+offset_right = 1522.0
+offset_bottom = 299.0
+theme_override_fonts/font = ExtResource("2_xqlid")
+theme_override_font_sizes/font_size = 100
+text = "You Dead...
+Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 676.0
+offset_top = 591.0
+offset_right = 1224.0
+offset_bottom = 791.0
+
+[node name="return" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xqlid")
+theme_override_font_sizes/font_size = 90
+text = "Return"
+
+[node name="back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xqlid")
+theme_override_font_sizes/font_size = 90
+text = "Back"
+script = ExtResource("3_p0xq0")
+
+[node name="Credits" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 1057.0
+offset_right = 416.0
+offset_bottom = 1084.0
+theme_override_fonts/font = ExtResource("2_xqlid")
+theme_override_font_sizes/font_size = 24
+text = "make by Michael2911"
+
+[node name="Death music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lxwha")
+autoplay = true
+bus = &"FX"
+
+[connection signal="pressed" from="VBoxContainer/return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

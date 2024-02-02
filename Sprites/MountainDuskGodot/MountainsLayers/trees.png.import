@@ -1,3 +1,34 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:69c8dd815fa9b7b2596b307969cc31b0d090bb8335ee03298f22a12cd9971fe1
-size 791
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dxjs1s2ge2yl0"
+path="res://.godot/imported/trees.png-6d681e77bc0998a0434895bba8996adb.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Sprites/MountainDuskGodot/MountainsLayers/trees.png"
+dest_files=["res://.godot/imported/trees.png-6d681e77bc0998a0434895bba8996adb.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1
