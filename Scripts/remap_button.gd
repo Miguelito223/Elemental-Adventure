@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8b3fc2697ef3766df67b70a3f62c8374142f5b74f6822565662c87066a419d13
-size 638
+extends Button
+class_name RemapButton
+
+@export var action: String
+
+func _init():
+	toggle_mode = true
+	theme_type_variation = "RemapButton"
+
+
+
+
+func _ready():
+	set_process_unhandled_input(false)
+	update_key_text()
+
+
+
+func _toggled(toggled_on):
+	set_process_unhandled_input(toggled_on)
+	if toggled_on:
+		text = "...awaiting input..."
+		release_focus()
+	else:
+		update_key_text()
+		grab_focus()
+
+func _unhandled_input(event):
+	if event.pressed:
+		InputMap.action_erase_events(action)
+		InputMap.action_add_event(action, event)
+		button_pressed = false
+
+func update_key_text():
+	text = "%s" % InputMap.action_get_events(action)[0].as_text()
+
