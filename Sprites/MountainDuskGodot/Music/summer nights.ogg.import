@@ -1,19 +1,3 @@
-[remap]
-
-importer="oggvorbisstr"
-type="AudioStreamOggVorbis"
-uid="uid://lfkxxo68r08r"
-path="res://.godot/imported/summer nights.ogg-fb3cd7b23078eb625796f9d2ea8e058e.oggvorbisstr"
-
-[deps]
-
-source_file="res://Sprites/MountainDuskGodot/Music/summer nights.ogg"
-dest_files=["res://.godot/imported/summer nights.ogg-fb3cd7b23078eb625796f9d2ea8e058e.oggvorbisstr"]
-
-[params]
-
-loop=false
-loop_offset=0
-bpm=0
-beat_count=0
-bar_beats=4
+version https://git-lfs.github.com/spec/v1
+oid sha256:731b118c391ee55ae99b8a4635992d358ea9d015a0e3774d28b744934193b711
+size 426
