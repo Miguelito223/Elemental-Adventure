@@ -1,33 +1,3 @@
-[remap]
-
-importer="font_data_dynamic"
-type="FontFile"
-uid="uid://d4rdvku6d6bf"
-path="res://.godot/imported/PressStart2P.ttf-01b421b2059bc9d11e989c6910b33153.fontdata"
-
-[deps]
-
-source_file="res://PressStart2P.ttf"
-dest_files=["res://.godot/imported/PressStart2P.ttf-01b421b2059bc9d11e989c6910b33153.fontdata"]
-
-[params]
-
-Rendering=null
-antialiasing=1
-generate_mipmaps=false
-multichannel_signed_distance_field=false
-msdf_pixel_range=8
-msdf_size=48
-allow_system_fallback=true
-force_autohinter=false
-hinting=1
-subpixel_positioning=1
-oversampling=0.0
-Fallbacks=null
-fallbacks=[]
-Compress=null
-compress=true
-preload=[]
-language_support={}
-script_support={}
-opentype_features={}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1b4eab634d593ed113d55b22840929ec8e08af8c1a485a343894a2f05f820684
+size 672

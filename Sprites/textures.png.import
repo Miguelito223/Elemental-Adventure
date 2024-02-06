@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://wybf7dhflfge"
-path="res://.godot/imported/textures.png-64d6fb185ff71af096b1a26b6fe757ed.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://Sprites/textures.png"
-dest_files=["res://.godot/imported/textures.png-64d6fb185ff71af096b1a26b6fe757ed.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:297768225ea96b0d102953b760d11c3e4c113f327e9330e89f5864f77a352392
+size 765
