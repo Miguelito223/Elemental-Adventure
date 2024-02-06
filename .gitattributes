@@ -1,2 +1,0 @@
-# Normalize EOL for all files that Git considers text files.
-*.aar filter=lfs diff=lfs merge=lfs -text
