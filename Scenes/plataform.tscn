@@ -1,7 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://r6nxo2uj0e0o"]
+[gd_scene load_steps=9 format=3 uid="uid://r6nxo2uj0e0o"]
 
 [ext_resource type="Script" path="res://Scripts/plataform.gd" id="1_a0my1"]
 [ext_resource type="Texture2D" uid="uid://bgchyjys2xhev" path="res://Sprites/plataform.png" id="1_sge3r"]
+
+[sub_resource type="Curve2D" id="Curve2D_ov2lw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, -75, 0, 0, 0, 0, 122, -3)
+}
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylvgc"]
 size = Vector2(23, 21.9986)
@@ -48,6 +54,7 @@ _data = {
 }
 
 [node name="plataform" type="Path2D" groups=["persistent"]]
+curve = SubResource("Curve2D_ov2lw")
 script = ExtResource("1_a0my1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]

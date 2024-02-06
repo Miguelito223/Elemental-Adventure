@@ -28,13 +28,12 @@ func save_state():
 		"loop": loop,
 		"pos_x": position.x,
 		"pos_y": position.y,
-		"path_pos_x": path.position.x,
-		"path_pos_y": path.position.y,
 		"curve2D": curve.resource_path,
 	}
 	return save_dict
 	
 func load_state(info):
+	set_process(false)
 	name = info.name
 	curve = load(info.curve2D)
 	loop = info.loop
@@ -42,8 +41,6 @@ func load_state(info):
 	path.progress_ratio = info.path_progress_ratio
 	speed = info.speed
 	speed_scale = info.speed_scale
-	path.position.x = info.path_pos_x
-	path.position.y = info.path_pos_y
 	position.x = info.pos_x
 	position.y = info.pos_y
 	set_process(true)
