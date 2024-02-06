@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ae0276a3c1d147ae9d5a077e4c6de76e80d66ee9630d0050ec8da3515320c5ab
-size 681
+extends Node2D
+
+@onready var paradax_background_1 = $ParallaxBackground
+@onready var paradax_background_2 = $ParallaxBackground2
+@onready var paradax_background_3 = $ParallaxBackground3
+
+func _process(_delta):
+	if Globals.level_int >= 12 and Globals.level_int < 22 :
+		paradax_background_1.visible = false
+		paradax_background_2.visible = true
+		paradax_background_3.visible = false
+	elif Globals.level_int >= 22 and Globals.level_int < 32 :
+		paradax_background_1.visible = false
+		paradax_background_2.visible = false
+		paradax_background_3.visible = true
+	else:
+		paradax_background_1.visible = true
+		paradax_background_2.visible = false
+		paradax_background_3.visible = false

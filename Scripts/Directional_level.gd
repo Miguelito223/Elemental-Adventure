@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c64465bfaf4795f9c56ba808e2f554e40444e0864cc041565888548026e131d0
-size 303
+extends DirectionalLight2D
+
+@export var gradient: GradientTexture1D
+
+func _process(delta):
+	var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)
+	self.color = gradient.gradient.sample(value)
+	self.enabled = Globals.Graphics
+	self.shadow_enabled = Globals.Graphics
+	self.shadow_filter = Globals.Graphics

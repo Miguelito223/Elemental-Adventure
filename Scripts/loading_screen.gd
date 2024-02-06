@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:55668298d699504506d1762a15917a851f75e030c5293423e6fbf3899e16b3e8
-size 398
+extends CanvasLayer
+
+signal safe_to_load
+
+@onready var Progress_bar = $Control/ProgressBar
+
+func update_progress_bar(new_value: float):
+	Progress_bar.set_value_no_signal(new_value * 100)
+
+func fade_out_loading_screen():
+	$AnimationPlayer.play("fade_in")
+	await $AnimationPlayer.animation_finished
+	$AnimationPlayer.play_backwards("fade_in")
+	await $AnimationPlayer.animation_finished
+	queue_free()

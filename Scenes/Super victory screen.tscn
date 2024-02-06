@@ -1,3 +1,88 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:58b330054172dd3d7f21a6bfb3697afc235eda4b7bbf88d51f0a72bef3071c9d
-size 2597
+[gd_scene load_steps=5 format=3 uid="uid://dj5hoawm4c8hc"]
+
+[ext_resource type="Script" path="res://Scripts/Super victory screen.gd" id="1_x1h5b"]
+[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_6pc16"]
+[ext_resource type="Script" path="res://Scripts/Button.gd" id="3_fhev0"]
+[ext_resource type="AudioStream" uid="uid://ciykj3og6wxmg" path="res://Sounds/Victory Sound.wav" id="4_dqktq"]
+
+[node name="Super Victory menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x1h5b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1913.0
+offset_bottom = 1088.0
+color = Color(0.211765, 0, 0.411765, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_right = 1820.0
+offset_bottom = 188.0
+theme_override_fonts/font = ExtResource("2_6pc16")
+theme_override_font_sizes/font_size = 91
+text = "you won!!
+Thank to play this!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 392.0
+offset_right = 1723.0
+offset_bottom = 602.0
+
+[node name="energys" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6pc16")
+theme_override_font_sizes/font_size = 100
+text = "energys balls:0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="score" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6pc16")
+theme_override_font_sizes/font_size = 100
+text = "Score:0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 725.0
+offset_top = 780.0
+offset_right = 1093.0
+offset_bottom = 878.0
+
+[node name="back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6pc16")
+theme_override_font_sizes/font_size = 90
+text = "Exit"
+script = ExtResource("3_fhev0")
+
+[node name="Credits" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 1057.0
+offset_right = 416.0
+offset_bottom = 1084.0
+theme_override_fonts/font = ExtResource("2_6pc16")
+theme_override_font_sizes/font_size = 24
+text = "make by Michael2911"
+
+[node name="Victory music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dqktq")
+autoplay = true
+bus = &"FX"
+
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

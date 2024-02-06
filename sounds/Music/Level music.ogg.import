@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:143047ee2070fae58d78b3428e135abec300a16156e76f31914e8e2d142c3ba0
-size 400
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://lfkxxo68r08r"
+path="res://.godot/imported/Level music.ogg-3f9fe02617b9092c628eb9f97be06090.oggvorbisstr"
+
+[deps]
+
+source_file="res://sounds/Music/Level music.ogg"
+dest_files=["res://.godot/imported/Level music.ogg-3f9fe02617b9092c628eb9f97be06090.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

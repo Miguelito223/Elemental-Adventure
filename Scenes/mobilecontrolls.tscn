@@ -1,3 +1,45 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:50cc156171035f46cc32fa924c542cf111fc6dcb38571e405d2b7919686ef36b
-size 1398
+[gd_scene load_steps=5 format=3 uid="uid://ywyhxmenkfw"]
+
+[ext_resource type="Texture2D" uid="uid://kj8ifcn7mn3m" path="res://Sprites/up.png" id="2_rg3jk"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="3_ifnkr"]
+[ext_resource type="Texture2D" uid="uid://dr8824cpi75tl" path="res://Sprites/shoot.png" id="5_t4wdv"]
+
+[sub_resource type="GDScript" id="GDScript_qkajy"]
+script/source = "extends CanvasLayer
+
+# Called when the node enters the scene tree for the first time.
+func _process(delta):
+	if not Globals.use_mobile_buttons:
+		hide()
+	else:
+		show()
+"
+
+[node name="Mobilecontrolls" type="CanvasLayer"]
+script = SubResource("GDScript_qkajy")
+
+[node name="shoot" type="TouchScreenButton" parent="."]
+position = Vector2(1318, 797)
+scale = Vector2(0.696835, 0.710785)
+texture_normal = ExtResource("5_t4wdv")
+action = "shoot0"
+
+[node name="jump" type="TouchScreenButton" parent="."]
+position = Vector2(1597, 743)
+scale = Vector2(1.675, 1.745)
+texture_normal = ExtResource("2_rg3jk")
+action = "jump0"
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("3_ifnkr")]
+offset_left = 4.0
+offset_top = -455.0
+offset_right = 304.0
+offset_bottom = -155.0
+scale = Vector2(1.5, 1.5)
+pressed_color = Color(1, 1, 1, 1)
+deadzone_size = 100.0
+clampzone_size = 175.0
+action_left = "left0"
+action_right = "right0"
+action_up = ""
+action_down = ""

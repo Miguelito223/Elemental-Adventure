@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:04a2266a8a5027588a449cc37909c7469d42a1a4fdcc323f2450c1057e26457e
-size 368
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://digf4fchglwuv"
+path="res://.godot/imported/coin sound.mp3-9dbe9378f164f2bb36e8bd0296d6d691.mp3str"
+
+[deps]
+
+source_file="res://sounds/coin sound.mp3"
+dest_files=["res://.godot/imported/coin sound.mp3-9dbe9378f164f2bb36e8bd0296d6d691.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0.0
+beat_count=0
+bar_beats=4

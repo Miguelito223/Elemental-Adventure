@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a4a36366f881d01284ec4b90c18af99ded51d72dff4a1f9bd7bc1e0b42582d65
-size 373
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://1dqe1autfygr"
+path="res://.godot/imported/pasos cesped.mp3-73acd80bf2c36927d45b9de32dcb0142.mp3str"
+
+[deps]
+
+source_file="res://sounds/pasos cesped.mp3"
+dest_files=["res://.godot/imported/pasos cesped.mp3-73acd80bf2c36927d45b9de32dcb0142.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0.0
+beat_count=0
+bar_beats=4

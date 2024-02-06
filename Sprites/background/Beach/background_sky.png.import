@@ -1,3 +1,34 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1ab885a9a231cfb11b07903c65e6d84a1742a498f78270ec68ae71f451e0fad1
-size 801
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bx24olty3o4wp"
+path="res://.godot/imported/background_sky.png-45fe7c4a2e4634edf2164dcd1047f17b.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Sprites/background/Beach/background_sky.png"
+dest_files=["res://.godot/imported/background_sky.png-45fe7c4a2e4634edf2164dcd1047f17b.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

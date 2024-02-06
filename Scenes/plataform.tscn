@@ -1,3 +1,78 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cde138e6e3e28e07a5ff1672745832a26af73691d64ace50a39c7b5a8539d1b8
-size 2409
+[gd_scene load_steps=8 format=3 uid="uid://r6nxo2uj0e0o"]
+
+[ext_resource type="Script" path="res://Scripts/plataform.gd" id="1_a0my1"]
+[ext_resource type="Texture2D" uid="uid://bgchyjys2xhev" path="res://Sprites/plataform.png" id="1_sge3r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylvgc"]
+size = Vector2(23, 21.9986)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q2677"]
+polygon = PackedVector2Array(-11.8302, -11.1824, -12.1669, 10.8151, 10.8304, 11.1671, 11.1671, -10.8304)
+
+[sub_resource type="Animation" id="Animation_55wjb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_e2dlq"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.56, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wg80"]
+_data = {
+"RESET": SubResource("Animation_55wjb"),
+"move": SubResource("Animation_e2dlq")
+}
+
+[node name="plataform" type="Path2D" groups=["persistent"]]
+script = ExtResource("1_a0my1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+scale = Vector2(1.5, 1.5)
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture_filter = 1
+texture = ExtResource("1_sge3r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_ylvgc")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatableBody2D"]
+occluder = SubResource("OccluderPolygon2D_q2677")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_7wg80")
+}
+autoplay = "move"
