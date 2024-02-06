@@ -30,10 +30,7 @@ func save_state():
 		"pos_y": position.y,
 		"path_pos_x": path.position.x,
 		"path_pos_y": path.position.y,
-		"plataform_pos_x": plataform.position.x,
-		"plataform_pos_y": plataform.position.y,
 		"curve2D": curve.resource_path,
-
 	}
 	return save_dict
 	
@@ -47,8 +44,6 @@ func load_state(info):
 	speed_scale = info.speed_scale
 	path.position.x = info.path_pos_x
 	path.position.y = info.path_pos_y
-	plataform.position.x = info.plataform_pos_x
-	plataform.position.y = info.plataform_pos_y
 	position.x = info.pos_x
 	position.y = info.pos_y
 	set_process(true)
