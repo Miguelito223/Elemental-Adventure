@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="4_cbef0"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="5_qiv16"]
 [ext_resource type="PackedScene" uid="uid://r6nxo2uj0e0o" path="res://Scenes/plataform.tscn" id="6_m342p"]
-[ext_resource type="AudioStream" uid="uid://deh208fn5805g" path="res://Sounds/Music/Level music.mp3" id="6_tvr3m"]
+[ext_resource type="AudioStream" uid="uid://deh208fn5805g" path="res://sounds/Music/Level music.mp3" id="6_tvr3m"]
 [ext_resource type="PackedScene" uid="uid://c4r7b2dhlrtfi" path="res://Scenes/checkpoint.tscn" id="8_la3d5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brrbs"]

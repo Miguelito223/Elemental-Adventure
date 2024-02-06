@@ -14,6 +14,7 @@ func _ready():
 		set_process(false)
 
 func _process(delta):
+	await get_tree().create_timer(2.0).timeout
 	path.progress += speed * delta
 
 func save_state():
@@ -38,14 +39,13 @@ func load_state(info):
 	name = info.name
 	curve = load(info.curve2D)
 	loop = info.loop
-	position.x = info.pos_x
-	position.y = info.pos_y
+	position = Vector2(info.pos_x, info.pos_y)
 	speed = info.speed
 	speed_scale = info.speed_scale
 	path.progress = info.path_progress
 	path.progress_ratio = info.path_progress_ratio
-	path.position.x = info.path_pos_x
-	path.position.y = info.path_pos_y
+	path.position = Vector2(info.path_pos_x, info.path_pos_y)
+	print(path.progress_ratio)
 
 
 
