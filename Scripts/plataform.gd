@@ -16,8 +16,6 @@ func _ready():
 func _process(delta):
 	path.progress += speed * delta
 
-
-
 func save_state():
 	var save_dict = {
 		"filename" : get_scene_file_path(),
