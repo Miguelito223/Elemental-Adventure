@@ -25,6 +25,8 @@ func save_state():
 		"speed": speed,
 		"path_progress": path.progress,
 		"path_progress_ratio": path.progress_ratio,
+		"path_pos_x": path.position.x,
+		"path_pos_y": path.position.y,
 		"loop": loop,
 		"pos_x": position.x,
 		"pos_y": position.y,
@@ -36,10 +38,14 @@ func load_state(info):
 	name = info.name
 	curve = load(info.curve2D)
 	loop = info.loop
-	path.progress = info.path_progress
-	path.progress_ratio = info.path_progress_ratio
-	speed = info.speed
-	speed_scale = info.speed_scale
 	position.x = info.pos_x
 	position.y = info.pos_y
+	speed = info.speed
+	speed_scale = info.speed_scale
+	path.progress = info.path_progress
+	path.progress_ratio = info.path_progress_ratio
+	path.position.x = info.path_pos_x
+	path.position.y = info.path_pos_y
+
+
 
