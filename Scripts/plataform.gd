@@ -14,7 +14,6 @@ func _ready():
 		set_process(false)
 
 func _process(delta):
-	await get_tree().create_timer(2.0).timeout
 	path.progress += speed * delta
 
 func save_state():
