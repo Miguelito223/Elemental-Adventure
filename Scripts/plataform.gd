@@ -1,8 +1,8 @@
 extends Path2D
 
 @export var loop: bool = true
-@export var speed: float = 2.0
-@export var speed_scale: float = 1.0
+@export var speed = 2
+@export var speed_scale = 1
 @onready var path = $PathFollow2D
 @onready var plataform = $PathFollow2D/RemoteTransform2D
 @onready var animation = $AnimationPlayer
@@ -44,7 +44,6 @@ func load_state(info):
 	path.progress = info.path_progress
 	path.progress_ratio = info.path_progress_ratio
 	path.position = Vector2(info.path_pos_x, info.path_pos_y)
-	print(path.progress_ratio)
 
 
 
