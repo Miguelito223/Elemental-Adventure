@@ -1,7 +1,5 @@
 extends Node
 
-
-
 var DEBUGGING = true
 
 var level
