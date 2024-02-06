@@ -1,6 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://2t5xqdooqkml"]
-
-[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_b64g1"]
-
-[node name="Game" type="Node"]
-script = ExtResource("1_b64g1")
+version https://git-lfs.github.com/spec/v1
+oid sha256:1069f8f7068faa5e603153249d0b2c76e7864515d44ca16f1bd50d42bb876e64
+size 194
