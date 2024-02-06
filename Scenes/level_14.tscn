@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_vm40u"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_i5bqx"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_2exd6"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://Sounds/Music/Level music.ogg" id="4_wla0n"]
+[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://sounds/Music/Level music.ogg" id="4_wla0n"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="5_8qvy3"]
 [ext_resource type="PackedScene" uid="uid://by7461i8vp65b" path="res://Scenes/enemy_3.tscn" id="7_ufduv"]
 [ext_resource type="PackedScene" uid="uid://choeqgyk2lvq5" path="res://Scenes/plataform_2.tscn" id="8_1w5om"]
@@ -22,13 +22,13 @@ size = Vector2(0.490783, 7.60429)
 
 [sub_resource type="Curve2D" id="Curve2D_ocaih"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -13, 0, 0, 0, 0, 0, 427, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -2, 0, 0, 0, 0, 0, 418, -1)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_kqihl"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -8, -8, 0, 0, 0, 0, 528, -8)
+"points": PackedVector2Array(0, 0, 0, 0, 3, -8, 0, 0, 0, 0, 518, -7)
 }
 point_count = 2
 
