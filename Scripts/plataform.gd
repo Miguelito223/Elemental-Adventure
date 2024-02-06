@@ -33,7 +33,6 @@ func save_state():
 	return save_dict
 	
 func load_state(info):
-	set_process(false)
 	name = info.name
 	curve = load(info.curve2D)
 	loop = info.loop
@@ -43,5 +42,4 @@ func load_state(info):
 	speed_scale = info.speed_scale
 	position.x = info.pos_x
 	position.y = info.pos_y
-	set_process(true)
 
