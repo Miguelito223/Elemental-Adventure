@@ -13,8 +13,8 @@ func _ready():
 		animation.speed_scale = speed_scale
 		set_process(false)
 
-func _process(delta):
-	path.progress += speed * delta
+func _process(_delta):
+	path.progress += speed
 
 func save_state():
 	var save_dict = {
