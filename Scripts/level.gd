@@ -120,8 +120,8 @@ func add_player(player_index):
 		print("node data is empy")
 		player.setposspawn()
 	else: 
+		print("node data is not empy")
 		for i in DataState.node_data:
-			print("node data is not empy")
 			var node_data = DataState.node_data[i]
 			if node_data.filename == "res://Scenes/player.tscn":
 				if node_data.device_num == player_index or node_data.player_name == player.player_name:
