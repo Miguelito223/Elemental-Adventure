@@ -3,7 +3,7 @@ extends Path2D
 @export var loop: bool = true
 @export var speed = 2
 @export var speed_scale = 1
-@onready var path = $PathFollow2D
+@onready var pathfollow = $PathFollow2D
 @onready var plataform = $PathFollow2D/RemoteTransform2D
 @onready var animation = $AnimationPlayer
 
@@ -14,7 +14,7 @@ func _ready():
 		set_process(false)
 
 func _process(_delta):
-	path.progress += speed
+	pathfollow.progress += speed
 
 func save_state():
 	var save_dict = {
@@ -23,10 +23,10 @@ func save_state():
 		"name" : name,
 		"speed_scale": speed_scale,
 		"speed": speed,
-		"path_progress": path.progress,
-		"path_progress_ratio": path.progress_ratio,
-		"path_pos_x": path.position.x,
-		"path_pos_y": path.position.y,
+		"path_progress": pathfollow.progress,
+		"path_progress_ratio": pathfollow.progress_ratio,
+		"path_pos_x": pathfollow.position.x,
+		"path_pos_y": pathfollow.position.y,
 		"loop": loop,
 		"pos_x": position.x,
 		"pos_y": position.y,
@@ -41,9 +41,9 @@ func load_state(info):
 	position = Vector2(info.pos_x, info.pos_y)
 	speed = info.speed
 	speed_scale = info.speed_scale
-	path.progress = info.path_progress
-	path.progress_ratio = info.path_progress_ratio
-	path.position = Vector2(info.path_pos_x, info.path_pos_y)
+	pathfollow.progress = info.path_progress
+	pathfollow.progress_ratio = info.path_progress_ratio
+	pathfollow.position = Vector2(info.path_pos_x, info.path_pos_y)
 
 
 

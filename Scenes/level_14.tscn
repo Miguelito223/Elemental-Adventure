@@ -209,15 +209,9 @@ shape = SubResource("RectangleShape2D_fpcck")
 [node name="plataform_2" parent="." instance=ExtResource("8_1w5om")]
 position = Vector2(24, -10)
 curve = SubResource("Curve2D_ocaih")
-loop = null
-speed = null
-speed_scale = null
 
 [node name="plataform_3" parent="." instance=ExtResource("8_1w5om")]
 position = Vector2(643, -2)
 curve = SubResource("Curve2D_kqihl")
-loop = null
-speed = null
-speed_scale = null
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
