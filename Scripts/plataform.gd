@@ -32,9 +32,7 @@ func save_state():
 		"pos_x": position.x,
 		"pos_y": position.y,
 		"curve2D": curve.resource_path,
-		"Animation_step": animationplayer.get_animation(animation).step,
-		"Animation_loop": animationplayer.get_animation(animation).loop_mode,
-		"Animation_length": animationplayer.get_animation(animation).length,
+		"Animation_step": animationplayer.current_animation_position,
 	}
 	return save_dict
 	
@@ -48,8 +46,6 @@ func load_state(info):
 	pathfollow.progress = info.path_progress
 	pathfollow.progress_ratio = info.path_progress_ratio
 	pathfollow.position = Vector2(info.path_pos_x, info.path_pos_y)
-	animationplayer.get_animation(animation).step = info.Animation_step
-	animationplayer.get_animation(animation).loop_mode = info.Animation_loop
-	animationplayer.get_animation(animation).length = info.Animation_length
+	animationplayer.current_animation_position = info.Animation_step
 
 
