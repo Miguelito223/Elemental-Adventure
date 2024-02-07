@@ -5,12 +5,13 @@ extends Path2D
 @export var speed_scale = 1
 @onready var pathfollow = $PathFollow2D
 @onready var plataform = $PathFollow2D/RemoteTransform2D
-@onready var animation = $AnimationPlayer
+@onready var animationplayer = $AnimationPlayer
+@onready var animation = "move"
 
 func _ready():
 	if not loop:
-		animation.play("move")
-		animation.speed_scale = speed_scale
+		animationplayer.play("move")
+		animationplayer.speed_scale = speed_scale
 		set_process(false)
 
 func _process(_delta):
@@ -31,6 +32,7 @@ func save_state():
 		"pos_x": position.x,
 		"pos_y": position.y,
 		"curve2D": curve.resource_path,
+		"Animation_time": animationplayer.get_animation(animation).get_frame(),
 	}
 	return save_dict
 	
@@ -44,6 +46,7 @@ func load_state(info):
 	pathfollow.progress = info.path_progress
 	pathfollow.progress_ratio = info.path_progress_ratio
 	pathfollow.position = Vector2(info.path_pos_x, info.path_pos_y)
+	animationplayer.get_animation(animation).frame = info.Animation_time
 
 
 
