@@ -49,9 +49,6 @@ _data = {
 
 [node name="plataform_3" type="Path2D" groups=["persistent"]]
 script = ExtResource("1_h04up")
-loop = null
-speed = null
-speed_scale = null
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
