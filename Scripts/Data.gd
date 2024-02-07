@@ -120,7 +120,7 @@ func remove_file():
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		if not Globals.level == "level_21":
+		if not Globals.level == "level_31":
 			save_file()
 		else:
 			remove_file()

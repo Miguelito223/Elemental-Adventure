@@ -21,7 +21,7 @@
 [ext_resource type="Script" path="res://Scripts/CanvasLayer.gd" id="15_jtxs5"]
 [ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/energy.png" id="18_6b2vi"]
 [ext_resource type="Texture2D" uid="uid://b4fb32ngehhw0" path="res://Sprites/deaths-head-153588_1280.webp" id="19_ftjg4"]
-[ext_resource type="AudioStream" uid="uid://1dqe1autfygr" path="res://Sounds/pasos cesped.mp3" id="21_ctvyi"]
+[ext_resource type="AudioStream" uid="uid://1dqe1autfygr" path="res://sounds/pasos cesped.mp3" id="21_ctvyi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -664,6 +664,7 @@ text = "Fire"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(0.651042, 0.439453)
+color = Color(1, 0.701961, 0, 1)
 range_layer_min = -1
 shadow_enabled = true
 shadow_filter = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnrrcfwirut5i"]
+[gd_scene load_steps=11 format=3 uid="uid://dnrrcfwirut5i"]
 
 [ext_resource type="Material" uid="uid://cok4lop8bu6a6" path="res://water_shader.tres" id="1_0cyxf"]
 [ext_resource type="Texture2D" uid="uid://wybf7dhflfge" path="res://Sprites/textures.png" id="1_dgwbu"]
@@ -8,9 +8,6 @@
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jdgkb"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_isny5"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mrn8w"]
@@ -48,7 +45,6 @@ texture = ExtResource("1_dgwbu")
 1:0/0/physics_layer_3/angular_velocity = 0.0
 2:0/0 = 0
 2:0/0/material = ExtResource("1_0cyxf")
-2:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_isny5")
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
 2:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
