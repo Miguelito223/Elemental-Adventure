@@ -17,3 +17,11 @@ position = Vector2(-229, -58)
 [node name="environment" parent="Camera" instance=ExtResource("7_12gnv")]
 position = Vector2(140, -181)
 scale = Vector2(0.950302, 0.342247)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("../Marker2D")
+spawn_limit = 1
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(445, -219)

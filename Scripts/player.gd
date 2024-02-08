@@ -184,7 +184,6 @@ func _physics_process(delta):
 			rpc("remote", velocity, position)
 	else:
 		move(delta, axis * speed * delta, friction * delta)
-		rpc("remote", velocity, position)
 
 
 func move(delta, accel, amount):
@@ -333,29 +332,28 @@ func changelevel():
 	
 func setposspawn():
 	if Network.is_networking:
-		if is_multiplayer_authority():
-			if last_position:
+		if last_position:
+			position = last_position
+		else:
+			if device_num == 0:
+				last_position = Vector2(660,-347)
 				position = last_position
+				last_position = null
+			elif device_num == 1:
+				last_position = Vector2(272,-347)
+				position = last_position
+				last_position = null
+			elif device_num == 2:
+				last_position = Vector2(451,-235)
+				position = last_position
+				last_position = null
+			elif device_num == 3:
+				last_position = Vector2(353,-232)
+				position = last_position
+				last_position = null
 			else:
-				if device_num == 0:
-					last_position = Vector2(660,-347)
-					position = last_position
-					last_position = null
-				elif device_num == 1:
-					last_position = Vector2(272,-347)
-					position = last_position
-					last_position = null
-				elif device_num == 2:
-					last_position = Vector2(451,-235)
-					position = last_position
-					last_position = null
-				elif device_num == 3:
-					last_position = Vector2(353,-232)
-					position = last_position
-					last_position = null
-				else:
-					print("no more of four players")
-					return	
+				print("no more of four players")
+				return	
 	else:
 		if last_position:
 			position = last_position

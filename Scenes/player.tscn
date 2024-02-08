@@ -496,6 +496,8 @@ libraries = {
 [node name="Mobilecontrolls" parent="." instance=ExtResource("11_tb078")]
 visible = false
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("15_jtxs5")
 
