@@ -245,11 +245,19 @@ func _on_return_pressed():
 
 
 func _on_back_pressed():
-	hide()
-	get_tree().paused = false
-	DataState.save_file_state()
-	Data.save_file()
-	LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
+	if Network.is_networking:
+		hide()
+		get_tree().paused = false
+		Network.is_networking = false
+		DataState.save_file_state()
+		Data.save_file()
+		LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
+	else:
+		hide()
+		get_tree().paused = false
+		DataState.save_file_state()
+		Data.save_file()
+		LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
 
 
 func _on_button_pressed():

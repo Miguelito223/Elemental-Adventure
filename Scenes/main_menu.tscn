@@ -112,38 +112,70 @@ alignment = 1
 visible = false
 layout_mode = 2
 
+[node name="port text" type="Label" parent="Online Menu/Host2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_his25")
+text = "port"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="port" type="LineEdit" parent="Online Menu/Host2"]
 layout_mode = 2
+text = "9999"
+
+[node name="ip text" type="Label" parent="Online Menu/Host2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_his25")
+text = "ip"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ip" type="LineEdit" parent="Online Menu/Host2"]
 layout_mode = 2
+text = "172.0.0.1"
 
-[node name="Join" type="Button" parent="Online Menu/Host2"]
+[node name="create" type="Button" parent="Online Menu/Host2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
-text = "Join"
+text = "Create"
 
 [node name="Join2" type="VBoxContainer" parent="Online Menu"]
 visible = false
 layout_mode = 2
 
+[node name="port text" type="Label" parent="Online Menu/Join2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_his25")
+text = "port"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="port" type="LineEdit" parent="Online Menu/Join2"]
 layout_mode = 2
+text = "9999"
+
+[node name="ip text" type="Label" parent="Online Menu/Join2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_his25")
+text = "ip"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ip" type="LineEdit" parent="Online Menu/Join2"]
 layout_mode = 2
+text = "172.0.0.1"
 
-[node name="Join" type="Button" parent="Online Menu/Join2"]
+[node name="join" type="Button" parent="Online Menu/Join2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
 
-[node name="Host" type="Button" parent="Online Menu"]
+[node name="host" type="Button" parent="Online Menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Host"
 
-[node name="Join" type="Button" parent="Online Menu"]
+[node name="join" type="Button" parent="Online Menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
@@ -397,10 +429,14 @@ bus = &"Music"
 [connection signal="pressed" from="main menu/option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="main menu/delete data" to="." method="_on_delete_data_pressed"]
 [connection signal="pressed" from="main menu/exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Online Menu/Host2/Join" to="." method="_on_online_pressed"]
-[connection signal="pressed" from="Online Menu/Join2/Join" to="." method="_on_online_pressed"]
-[connection signal="pressed" from="Online Menu/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Online Menu/Join" to="." method="_on_join_pressed"]
+[connection signal="text_changed" from="Online Menu/Host2/port" to="." method="_on_port_text_changed"]
+[connection signal="text_changed" from="Online Menu/Host2/ip" to="." method="_on_ip_text_changed"]
+[connection signal="pressed" from="Online Menu/Host2/create" to="." method="_on_create_pressed"]
+[connection signal="text_changed" from="Online Menu/Join2/port" to="." method="_on_port_text_changed"]
+[connection signal="text_changed" from="Online Menu/Join2/ip" to="." method="_on_ip_text_changed"]
+[connection signal="pressed" from="Online Menu/Join2/join" to="." method="_on_join2_pressed"]
+[connection signal="pressed" from="Online Menu/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Online Menu/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Online Menu/back" to="." method="_on_back2_pressed"]
 [connection signal="toggled" from="Settings menu/Graphics/fullscreen tongle" to="." method="_on_fullscreen_tongle_toggled"]
 [connection signal="item_selected" from="Settings menu/Graphics/resolution" to="." method="_on_option_button_item_selected"]

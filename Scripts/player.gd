@@ -178,9 +178,23 @@ func get_input_axis():
 	return axis.normalized()
 
 func _physics_process(delta):
-	move(delta, axis * speed * delta, friction * delta)
-	
+	if Network.is_networking:
+		if is_multiplayer_authority():
+			move(delta, axis * speed * delta, friction * delta)
+			rpc("remote", velocity, position)
+	else:
+		move(delta, axis * speed * delta, friction * delta)
+		rpc("remote", velocity, position)
+
+
+@rpc
+func remote(authorizy_velocity, authorizy_position):
+	velocity = authorizy_velocity
+	position = authorizy_position
+
+
 func move(delta, accel, amount):
+	
 	if not is_on_floor():
 		if (!is_in_water or !is_in_lava):
 			velocity.y += gravity * delta 
@@ -223,19 +237,29 @@ func move(delta, accel, amount):
 		if is_in_water == true or is_in_lava == true:
 			velocity.y += jump_speed_swim
 
+
 	move_and_slide()
 
 
 
 
 func _input(event):
+	if Network.is_networking:
+		if is_multiplayer_authority():
 
-	if event.is_action_pressed(ui_inputs.keys()[5]):
-		position.y += 1
-	
-	
-	if event.is_action_pressed(ui_inputs.keys()[3]):
-		shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
+			if event.is_action_pressed(ui_inputs.keys()[5]):
+				position.y += 1
+			
+			
+			if event.is_action_pressed(ui_inputs.keys()[3]):
+				shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
+
+	else:
+		if event.is_action_pressed(ui_inputs.keys()[5]):
+			position.y += 1
+		
+		if event.is_action_pressed(ui_inputs.keys()[3]):
+			shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
 		
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
@@ -311,28 +335,55 @@ func changelevel():
 	Data.save_file()
 	
 func setposspawn():
-	if last_position:
-		position = last_position
+	if Network.is_networking:
+		if is_multiplayer_authority():
+			if last_position:
+				position = last_position
+			else:
+				if device_num == 0:
+					last_position = Vector2(660,-347)
+					position = last_position
+					last_position = null
+				elif device_num == 1:
+					last_position = Vector2(272,-347)
+					position = last_position
+					last_position = null
+				elif device_num == 2:
+					last_position = Vector2(451,-235)
+					position = last_position
+					last_position = null
+				elif device_num == 3:
+					last_position = Vector2(353,-232)
+					position = last_position
+					last_position = null
+				else:
+					print("no more of four players")
+					return	
+		
 	else:
-		if device_num == 0:
-			last_position = Vector2(-460,-45)
+		if last_position:
 			position = last_position
-			last_position = null
-		elif device_num == 1:
-			last_position = Vector2(-399,-45)
-			position = last_position
-			last_position = null
-		elif device_num == 2:
-			last_position = Vector2(-340,-45)
-			position = last_position
-			last_position = null
-		elif device_num == 3:
-			last_position = Vector2(-280,-45)
-			position = last_position
-			last_position = null
 		else:
-			print("no more of four players")
-			return	
+			if device_num == 0:
+				last_position = Vector2(-460,-45)
+				position = last_position
+				last_position = null
+			elif device_num == 1:
+				last_position = Vector2(-399,-45)
+				position = last_position
+				last_position = null
+			elif device_num == 2:
+				last_position = Vector2(-340,-45)
+				position = last_position
+				last_position = null
+			elif device_num == 3:
+				last_position = Vector2(-280,-45)
+				position = last_position
+				last_position = null
+			else:
+				print("no more of four players")
+				return	
+
 	
 
 func damage(ammount):
