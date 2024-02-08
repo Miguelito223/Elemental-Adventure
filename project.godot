@@ -23,6 +23,7 @@ boot_splash/minimum_display_time=7
 [autoload]
 
 Globals="*res://Scripts/Globals.gd"
+Network="*res://Scripts/Network.gd"
 Signals="*res://Scripts/Signals.gd"
 Data="*res://Scripts/Data.gd"
 DataState="*res://Scripts/DataState.gd"

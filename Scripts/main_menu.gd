@@ -2,6 +2,7 @@ extends Control
 
 @onready var main_menu = $"main menu"
 @onready var settings_menu = $"Settings menu"
+@onready var online_menu = $"Online Menu"
 @onready var graphics_button = $"Settings menu/graphics button"
 @onready var autosave_button = $"Settings menu/autosave button"
 @onready var time_button = $"Settings menu/time button"
@@ -16,6 +17,14 @@ extends Control
 @onready var volumen_box = $"Settings menu/Volumen"
 @onready var input_box = $"Settings menu/Inputs"
 @onready var multiplayer_box = $"Settings menu/Multiplayer"
+
+@onready var host_button = $"Online Menu/host"
+
+
+@onready var join_button = $"Online Menu/join"
+
+@onready var host_box = $"Online Menu/host2"
+@onready var join_box = $"Online Menu/join2"
 
 
 #volumen
@@ -162,6 +171,7 @@ func _ready():
 	
 	main_menu.show()
 	settings_menu.hide()
+	online_menu.hide()
 	graphics_box.hide()
 	volumen_box.hide()
 	autosave_box.hide()
@@ -399,3 +409,34 @@ func _on_multiplayer_button_pressed():
 	time_button.hide()
 	input_button.hide()
 	multiplayer_button.hide()
+
+
+func _on_online_pressed():
+	Network.is_networking = true
+	main_menu.hide()
+	online_menu.show()
+
+
+func _on_host_pressed():
+	host_box.visible.show()
+	join_box.visible.hide()
+	host_button.visible.hide()
+	join_button.visible.hide()
+
+
+func _on_join_pressed():
+	host_box.visible.hide()
+	join_box.visible.show()
+	host_button.visible.hide()
+	join_button.visible.hide()
+
+
+func _on_back2_pressed():
+	if join_box.visible == true or host_box.visible == true:
+		host_box.visible.hide()
+		join_box.visible.hide()
+		host_button.visible.show()
+		join_button.visible.show()
+	else:
+		main_menu.show()
+		online_menu.hide()
