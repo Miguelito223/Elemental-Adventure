@@ -19,12 +19,10 @@ extends Control
 @onready var multiplayer_box = $"Settings menu/Multiplayer"
 
 @onready var host_button = $"Online Menu/host"
-
-
 @onready var join_button = $"Online Menu/join"
 
-@onready var host_box = $"Online Menu/host2"
-@onready var join_box = $"Online Menu/join2"
+@onready var host_box = $"Online Menu/Host2"
+@onready var join_box = $"Online Menu/Join2"
 
 
 #volumen
@@ -412,31 +410,30 @@ func _on_multiplayer_button_pressed():
 
 
 func _on_online_pressed():
-	Network.is_networking = true
 	main_menu.hide()
 	online_menu.show()
 
 
 func _on_host_pressed():
-	host_box.visible = true
-	join_box.visible = false
-	host_button.visible = false
-	join_button.visible = false
+	host_box.show()
+	join_box.hide()
+	host_button.hide()
+	join_button.hide()
 
 
 func _on_join_pressed():
-	host_box.visible = false
-	join_box.visible = true
-	host_button.visible = false
-	join_button.visible = false
+	host_box.hide()
+	join_box.show()
+	host_button.hide()
+	join_button.hide()
 
 
 func _on_back2_pressed():
 	if join_box.visible == true or host_box.visible == true:
-		host_box.visible = false
-		join_box.visible = false
-		host_button.visible = true
-		join_button.visible = true
+		host_box.hide()
+		join_box.hide()
+		host_button.show()
+		join_button.show()
 	else:
 		main_menu.show()
 		online_menu.hide()
@@ -445,12 +442,14 @@ func _on_back2_pressed():
 func _on_create_pressed():
 	Network.multiplayer_peer.create_server(Network.port)
 	multiplayer.multiplayer_peer = Network.multiplayer_peer
+	Network.is_networking = true
 	LoadScene.load_scene(self, "res://Scenes/map_1.tscn")
 
 
 func _on_join2_pressed():
 	Network.multiplayer_peer.create_client(Network.ip, Network.port)
 	multiplayer.multiplayer_peer = Network.multiplayer_peer
+	Network.is_networking = true
 	LoadScene.load_scene(self, "res://Scenes/map_1.tscn")
 
 func _on_ip_text_changed(new_text:String):
