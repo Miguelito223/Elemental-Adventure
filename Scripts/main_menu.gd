@@ -19,12 +19,10 @@ extends Control
 @onready var multiplayer_box = $"Settings menu/Multiplayer"
 
 @onready var host_button = $"Online Menu/host"
-
-
 @onready var join_button = $"Online Menu/join"
 
-@onready var host_box = $"Online Menu/host2"
-@onready var join_box = $"Online Menu/join2"
+@onready var host_box = $"Online Menu/Host2"
+@onready var join_box = $"Online Menu/Join2"
 
 
 #volumen
@@ -418,25 +416,25 @@ func _on_online_pressed():
 
 
 func _on_host_pressed():
-	host_box.visible.show()
-	join_box.visible.hide()
-	host_button.visible.hide()
-	join_button.visible.hide()
+	host_box.show()
+	join_box.hide()
+	host_button.hide()
+	join_button.hide()
 
 
 func _on_join_pressed():
-	host_box.visible.hide()
-	join_box.visible.show()
-	host_button.visible.hide()
-	join_button.visible.hide()
+	host_box.hide()
+	join_box.show()
+	host_button.hide()
+	join_button.hide()
 
 
 func _on_back2_pressed():
 	if join_box.visible == true or host_box.visible == true:
-		host_box.visible.hide()
-		join_box.visible.hide()
-		host_button.visible.show()
-		join_button.visible.show()
+		host_box.hide()
+		join_box.hide()
+		host_button.show()
+		join_button.show()
 	else:
 		main_menu.show()
 		online_menu.hide()
