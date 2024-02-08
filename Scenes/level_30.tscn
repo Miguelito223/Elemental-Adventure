@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_ycw17"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_02q70"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_2mp33"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://Sounds/Music/Level music.ogg" id="4_c4oar"]
+[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://sounds/Music/Level music.ogg" id="4_c4oar"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="5_xoi07"]
 [ext_resource type="PackedScene" uid="uid://dydhta53ptgt1" path="res://Scenes/enemy_2.tscn" id="6_cwu8m"]
 [ext_resource type="PackedScene" uid="uid://ddbba7cpls6he" path="res://Scenes/plataform_3.tscn" id="7_80blh"]
@@ -63,87 +63,97 @@ shape = SubResource("RectangleShape2D_nij2r")
 
 [node name="energy" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(-243, -48)
+rotation = -0.111701
 
 [node name="energy2" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(-193, -41)
+rotation = -0.111701
 
 [node name="energy3" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(-126, -41)
+rotation = -0.111701
 
 [node name="energy24" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(948, 131)
+rotation = -0.111701
 
 [node name="energy4" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(255, -45)
+rotation = -0.111701
 
 [node name="energy5" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(90, -42)
+rotation = -0.111701
 
 [node name="energy6" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(13, -43)
+rotation = -0.111701
 
 [node name="energy7" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(-54, -42)
+rotation = -0.111701
 
 [node name="energy8" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(-299, -43)
+rotation = -0.111701
 
 [node name="energy9" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(157, -44)
+rotation = -0.111701
 
 [node name="energy23" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(510, 129)
+rotation = -0.111701
 
 [node name="energy25" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(458, 128)
+rotation = -0.111701
 
 [node name="energy26" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(168, 130)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy27" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(244, 126)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy28" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(332, 131)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy29" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(407, 127)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy31" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(811, 128)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy32" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(721, 127)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy33" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(861, 125)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy34" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(-81, 138)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy35" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(37, 138)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy36" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(1039, 144)
-rotation = -1.51748
+rotation = -0.111701
 
 [node name="energy37" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(1165, 141)
-rotation = -1.51748
 
 [node name="energy38" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(1110, 141)
-rotation = -1.51748
 
 [node name="energy10" parent="." instance=ExtResource("3_2mp33")]
 position = Vector2(458, -44)
