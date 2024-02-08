@@ -28,14 +28,14 @@ func _ready():
 	
 	DataState.load_file_state()
 
-	add_player(0)
+	add_player(0, 1)
 
 	Network.multiplayer_peer.peer_connected.connect(
 		func(new_peer_id):
 			await get_tree().create_timer(1).timeout
 			rpc("add_newly_player", new_peer_id)
 			rpc_id(new_peer_id, "add_previus_player", connected_ids)
-			add_player(new_peer_id)
+			add_player(Network.multiplayer_players_numbers, new_peer_id)
 	)
 			
 
@@ -86,28 +86,28 @@ func camera_settings():
 	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
 
 
-func remove_player(player_id):
+func remove_player(player_index):
 	if Network.is_networking:
 		var player = players[-1]
-		players.remove_at(player_id)
+		players.remove_at(player_index)
+		connected_ids.remove_at(player_index)
 		if is_instance_valid(player):
 			player.queue_free()
 
 @rpc		
 func add_newly_player(player_id):
 	if Network.is_networking:
-		add_player(player_id)
+		add_player(Network.multiplayer_players_numbers, player_id)
 @rpc	
 func add_previus_player(player_id):
 	if Network.is_networking:
 		for player_ids in player_id:
-			add_player(player_ids)
+			add_player(Network.multiplayer_players_numbers, player_ids)
 
-func add_player(player_id):
+func add_player(player_index, player_id):
 	if Network.is_networking:
-		Network.multiplayer_players_numbers += 1
 
-		if player_id < players.size():
+		if player_index < players.size():
 			return
 
 		players.append(player_scene.instantiate())
@@ -117,17 +117,17 @@ func add_player(player_id):
 
 		player.setposspawn()
 
-		player.device_num = player_id
+		player.device_num = player_index
 
-		player.name = Globals.player_name[player_id]
-		player.ball_color = Globals.ball_color_dict[player_id]
-		player.player_color = Globals.player_color_dict[player_id]
+		player.name = Globals.player_name[player_index]
+		player.ball_color = Globals.ball_color_dict[player_index]
+		player.player_color = Globals.player_color_dict[player_index]
 
-		player.player_name = Globals.player_name[player_id]
-		player.energys = Globals.energys[player_id]
-		player.score = Globals.score[player_id]
-		player.Hearths = Globals.hearths[player_id]
-		player.deaths = Globals.deaths[player_id]
+		player.player_name = Globals.player_name[player_index]
+		player.energys = Globals.energys[player_index]
+		player.score = Globals.score[player_index]
+		player.Hearths = Globals.hearths[player_index]
+		player.deaths = Globals.deaths[player_index]
 
 		if DataState.node_data.is_empty():
 			print("node data is empy")
@@ -137,23 +137,25 @@ func add_player(player_id):
 			for i in DataState.node_data:
 				var node_data = DataState.node_data[i]
 				if node_data.filename == "res://Scenes/player.tscn":
-					if node_data.device_num == player_id or node_data.player_name == player.player_name:
+					if node_data.device_num == player_index or node_data.player_name == player.player_name:
 						print(node_data)
 						player.load_state(node_data)
 
 
 		input_maps.append({
-			"right{n}".format({"n":player_id}): Vector2.RIGHT,
-			"left{n}".format({"n":player_id}): Vector2.LEFT,
-			"jump{n}".format({"n":player_id}): null,
-			"shoot{n}".format({"n":player_id}): null,
-			"pause{n}".format({"n":player_id}): null,
-			"down{n}".format({"n":player_id}): null,
+			"right{n}".format({"n":player_index}): Vector2.RIGHT,
+			"left{n}".format({"n":player_index}): Vector2.LEFT,
+			"jump{n}".format({"n":player_index}): null,
+			"shoot{n}".format({"n":player_index}): null,
+			"pause{n}".format({"n":player_index}): null,
+			"down{n}".format({"n":player_index}): null,
 		})
 		
-		player.ui_inputs = input_maps[player_id]
+		player.ui_inputs = input_maps[player_index]
 
-		Globals._inputs_player(player_id)
+		Globals._inputs_player(player_index)
+
+		Network.multiplayer_players_numbers += 1
 
 		add_child(player)
 

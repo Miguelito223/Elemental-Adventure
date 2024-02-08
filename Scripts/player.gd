@@ -187,12 +187,6 @@ func _physics_process(delta):
 		rpc("remote", velocity, position)
 
 
-@rpc
-func remote(authorizy_velocity, authorizy_position):
-	velocity = authorizy_velocity
-	position = authorizy_position
-
-
 func move(delta, accel, amount):
 	
 	if not is_on_floor():
@@ -240,7 +234,10 @@ func move(delta, accel, amount):
 
 	move_and_slide()
 
-
+@rpc("unreliable")
+func remote(authorizy_velocity, authorizy_position):
+	velocity = authorizy_velocity
+	position = authorizy_position
 
 
 func _input(event):
@@ -359,7 +356,6 @@ func setposspawn():
 				else:
 					print("no more of four players")
 					return	
-		
 	else:
 		if last_position:
 			position = last_position
