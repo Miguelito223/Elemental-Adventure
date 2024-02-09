@@ -74,6 +74,11 @@ func _ready():
 	Pause_Menu.hide()
 	get_tree().paused = false
 	setlifes(Hearths)
+
+	if Network.is_networking:
+		Network.connection_count += 1
+		Network.send_data_to(name.to_int(), Network.connection_count)
+
 	Signals.player_ready.emit()
 
 func _enter_tree():
@@ -183,7 +188,7 @@ var ui_inputs = {
 	"down": null,
 }
 
-
+@rpc("unreliable")
 func get_input_axis():
 	axis.x = int(Input.is_action_pressed(ui_inputs.keys()[0])) - int(Input.is_action_pressed(ui_inputs.keys()[1]))
 	return axis.normalized()
@@ -342,11 +347,10 @@ func changelevel():
 	DataState.save_file_state()
 	Data.save_file()
 	
-@rpc("any_peer", "call_local")
+@rpc("any_peer")
 func setposspawn():
 	if Network.is_networking:
 		position = Vector2(449, -219)
-
 	else:
 		if last_position:
 			position = last_position

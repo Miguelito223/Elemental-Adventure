@@ -94,10 +94,11 @@ func load_file_state():
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		if not Globals.level == "level_31":
-			save_file_state()
-		else:
-			remove_state_file()
+		if not Network.is_networking:
+			if not Globals.level == "level_31":
+				save_file_state()
+			else:
+				remove_state_file()
 		
 func remove_state_file():
 	if FileAccess.file_exists(data_state_path):
