@@ -76,6 +76,8 @@ func _ready():
 	setlifes(Hearths)
 	Signals.player_ready.emit()
 
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())
 	
 func _process(_delta):	
 	if Globals.use_keyboard and not Globals.use_mobile_buttons:
@@ -181,9 +183,10 @@ func _physics_process(delta):
 	if Network.is_networking:
 		if is_multiplayer_authority():
 			move(delta, axis * speed * delta, friction * delta)
-			rpc("remote", velocity, position)
 	else:
 		move(delta, axis * speed * delta, friction * delta)
+
+	move_and_slide()
 
 
 func move(delta, accel, amount):
@@ -231,12 +234,6 @@ func move(delta, accel, amount):
 			velocity.y += jump_speed_swim
 
 
-	move_and_slide()
-
-@rpc("unreliable")
-func remote(authorizy_velocity, authorizy_position):
-	velocity = authorizy_velocity
-	position = authorizy_position
 
 
 func _input(event):

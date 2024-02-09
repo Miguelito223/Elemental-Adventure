@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_ycw17"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_02q70"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_2mp33"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://sounds/Music/Level music.ogg" id="4_c4oar"]
+[ext_resource type="AudioStream" uid="uid://dk7hhpr4vhlq8" path="res://sounds/Music/Level music.ogg" id="4_c4oar"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="5_xoi07"]
 [ext_resource type="PackedScene" uid="uid://dydhta53ptgt1" path="res://Scenes/enemy_2.tscn" id="6_cwu8m"]
 [ext_resource type="PackedScene" uid="uid://ddbba7cpls6he" path="res://Scenes/plataform_3.tscn" id="7_80blh"]

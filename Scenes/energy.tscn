@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://tonkdrpt1uk3"]
 
 [ext_resource type="Script" path="res://Scripts/energy.gd" id="1_pgc38"]
-[ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/energy.png" id="2_4imes"]
+[ext_resource type="Texture2D" uid="uid://c3wdxsquphqdl" path="res://Sprites/energy.png" id="2_4imes"]
 [ext_resource type="PackedScene" uid="uid://dta6yivprfdbo" path="res://Scenes/point_light_2d.tscn" id="2_yth5b"]
-[ext_resource type="AudioStream" uid="uid://digf4fchglwuv" path="res://sounds/coin sound.mp3" id="3_mo1th"]
+[ext_resource type="AudioStream" uid="uid://dqfnjwxtidm8n" path="res://sounds/coin sound.mp3" id="3_mo1th"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cm52s"]
 radius = 9.33333

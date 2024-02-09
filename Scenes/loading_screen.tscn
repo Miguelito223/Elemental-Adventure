@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2oeebmpp07gk"]
 
 [ext_resource type="Script" path="res://Scripts/loading_screen.gd" id="1_vy314"]
-[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_qyxjy"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_qyxjy"]
 
 [sub_resource type="Animation" id="Animation_fabrc"]
 length = 0.001

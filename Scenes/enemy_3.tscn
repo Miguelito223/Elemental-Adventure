@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://by7461i8vp65b"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_3.gd" id="1_hmubj"]
-[ext_resource type="Texture2D" uid="uid://dhngi1ncfih7t" path="res://Sprites/enemigo3_attack.png" id="2_m2bv6"]
-[ext_resource type="Texture2D" uid="uid://bv3tlskskovc3" path="res://Sprites/enemigo3_idle.png" id="3_t0aqp"]
-[ext_resource type="Texture2D" uid="uid://bs1rn4vyr2iph" path="res://Sprites/enemigo3.png" id="4_2iwts"]
+[ext_resource type="Texture2D" uid="uid://b68ttwomdstg7" path="res://Sprites/enemigo3_attack.png" id="2_m2bv6"]
+[ext_resource type="Texture2D" uid="uid://k6asv8qrmhwd" path="res://Sprites/enemigo3_idle.png" id="3_t0aqp"]
+[ext_resource type="Texture2D" uid="uid://b4rnajhno5ier" path="res://Sprites/enemigo3.png" id="4_2iwts"]
 [ext_resource type="PackedScene" uid="uid://dta6yivprfdbo" path="res://Scenes/point_light_2d.tscn" id="5_gpyp6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ienj8"]

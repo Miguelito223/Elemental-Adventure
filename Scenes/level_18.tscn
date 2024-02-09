@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_cjit4"]
 [ext_resource type="AudioStream" uid="uid://dc0t7e1f08mgx" path="res://sounds/volcano_idle.wav" id="3_v2bjx"]
 [ext_resource type="PackedScene" uid="uid://dta6yivprfdbo" path="res://Scenes/point_light_2d.tscn" id="4_asdfc"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://sounds/Music/Level music.ogg" id="4_cmy20"]
+[ext_resource type="AudioStream" uid="uid://dk7hhpr4vhlq8" path="res://sounds/Music/Level music.ogg" id="4_cmy20"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="5_71hbl"]
 [ext_resource type="PackedScene" uid="uid://by7461i8vp65b" path="res://Scenes/enemy_3.tscn" id="7_c2nhx"]
 [ext_resource type="PackedScene" uid="uid://choeqgyk2lvq5" path="res://Scenes/plataform_2.tscn" id="7_srnuq"]

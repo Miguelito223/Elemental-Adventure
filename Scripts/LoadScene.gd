@@ -49,7 +49,8 @@ var use_aub_theads: bool = false
 
 
 func load_scene(current_scene, next_scene):
-	scene_path = next_scene
+	if next_scene != null:
+		scene_path = next_scene
 	var loading_screen_intance = loading_screen.instantiate()
 	get_tree().get_root().get_node("Game").add_child(loading_screen_intance)
 	
@@ -88,7 +89,6 @@ func _process(_delta):
 			get_tree().get_root().get_node("Game").add_child(new_scene)
 			emit_signal("progress_changed", 1.0)
 			emit_signal("load_done")
-
 
 func _ready():
 	load_scene(null, "res://Scenes/main_menu.tscn")

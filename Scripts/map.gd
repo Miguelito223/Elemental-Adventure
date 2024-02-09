@@ -17,7 +17,7 @@ var margin = Vector2(100, 25)
 
 var rng = RandomNumberGenerator.new()
 
-var player_scene = preload("res://Scenes/player.tscn")
+@export var player_scene = preload("res://Scenes/player.tscn")
 
 func _ready():
 	if DEBUGGING:
@@ -29,8 +29,8 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 
-	multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(remove_player)
+	get_parent().multiplayer.peer_connected.connect(add_player)
+	get_parent().multiplayer.peer_disconnected.connect(remove_player)
 
 	for id in multiplayer.get_peers():
 		add_player(id)
@@ -105,8 +105,6 @@ func add_player(player_id):
 		var player = players[-1]
 
 		connected_ids.append(player_id)
-
-		player.set_multiplayer_authority(player_id)
 
 		player.setposspawn()
 
