@@ -25,14 +25,21 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 		}))
-
-	add_player(1)
+		
+	if not multiplayer.is_server():
+		return
 
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
-			
 
+	for id in multiplayer.get_peers():
+		add_player(id)
+
+	if not OS.has_feature("dedicated_server"):
+		add_player(1)
+		
 	Signals.level_loaded.emit()
+	
 
 func _process(_delta):
 	camera_settings()

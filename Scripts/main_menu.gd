@@ -184,6 +184,10 @@ func _ready():
 	multiplayer_button.show()
 	
 
+	if DisplayServer.get_name() == "headless":
+		print("Automatically starting dedicated server.")
+		_on_create_pressed.call_deferred()
+
 	popup.hide()
 	popup2.hide()
 	
@@ -440,17 +444,26 @@ func _on_back2_pressed():
 
 
 func _on_create_pressed():
-	Network.multiplayer_peer.create_server(Network.port)
-	multiplayer.multiplayer_peer = Network.multiplayer_peer
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_server(Network.port)
+	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
+		OS.alert("Failed to start multiplayer client.")
+		return
+	get_parent().multiplayer.multiplayer_peer = peer
 	Network.is_networking = true
-	LoadScene.load_scene(self, "res://Scenes/map_1.tscn")
+	if multiplayer.is_server():
+		LoadScene.load_scene(self, "res://Scenes/map_1.tscn")
 
 
 func _on_join2_pressed():
-	Network.multiplayer_peer.create_client(Network.ip, Network.port)
-	multiplayer.multiplayer_peer = Network.multiplayer_peer
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_client(Network.ip, Network.port)
+	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
+		OS.alert("Failed to start multiplayer client.")
+		return
+	get_parent().multiplayer.multiplayer_peer = peer
 	Network.is_networking = true
-	LoadScene.load_scene(self, "res://Scenes/map_1.tscn")
+	self.queue_free()
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text

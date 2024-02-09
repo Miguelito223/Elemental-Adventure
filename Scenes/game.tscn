@@ -4,3 +4,8 @@
 
 [node name="Game" type="Node"]
 script = ExtResource("1_b64g1")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/map_1.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 1

@@ -1,27 +1,27 @@
-[gd_scene load_steps=67 format=3 uid="uid://dwypr7om4wpeo"]
+[gd_scene load_steps=68 format=3 uid="uid://dwypr7om4wpeo"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
-[ext_resource type="Texture2D" uid="uid://iud24expoimj" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
-[ext_resource type="Texture2D" uid="uid://chvkp0udsig5q" path="res://Sprites/air jump.png" id="2_da7ng"]
-[ext_resource type="Texture2D" uid="uid://j4ka8e1a5uyy" path="res://Sprites/air idle.png" id="3_jsqec"]
-[ext_resource type="Texture2D" uid="uid://mil2oi5o8x10" path="res://Sprites/air walk.png" id="4_0wtjx"]
-[ext_resource type="Texture2D" uid="uid://dfkfd625506bu" path="res://Sprites/Fire Walk.png" id="4_ixnqo"]
-[ext_resource type="Texture2D" uid="uid://blxbivlipgn6n" path="res://Sprites/water jump.png" id="5_be2hm"]
-[ext_resource type="Texture2D" uid="uid://dcy3c3g66uxh1" path="res://Sprites/earth jump.png" id="5_dfufg"]
-[ext_resource type="Texture2D" uid="uid://df41m1kgskmh7" path="res://Sprites/hearth.png" id="5_uo812"]
-[ext_resource type="Texture2D" uid="uid://kir8d0incjwt" path="res://Sprites/earth idle.png" id="6_7p2a1"]
-[ext_resource type="Texture2D" uid="uid://dq1243rj3k12n" path="res://Sprites/water idle.png" id="6_jjcc7"]
-[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="6_nj16g"]
-[ext_resource type="Texture2D" uid="uid://b0qovs57e4hqf" path="res://Sprites/water walk.png" id="7_mtq2t"]
-[ext_resource type="Texture2D" uid="uid://b6it1ygasjm8a" path="res://Sprites/earth walk.png" id="7_mwys2"]
+[ext_resource type="Texture2D" uid="uid://d3l2e26s0r3op" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
+[ext_resource type="Texture2D" uid="uid://bc5u0xmvsjgcc" path="res://Sprites/air jump.png" id="2_da7ng"]
+[ext_resource type="Texture2D" uid="uid://dn2uwttahe5bw" path="res://Sprites/air idle.png" id="3_jsqec"]
+[ext_resource type="Texture2D" uid="uid://la0cqca4d5i0" path="res://Sprites/air walk.png" id="4_0wtjx"]
+[ext_resource type="Texture2D" uid="uid://clbynqy13ftyy" path="res://Sprites/Fire Walk.png" id="4_ixnqo"]
+[ext_resource type="Texture2D" uid="uid://couliinx2knw1" path="res://Sprites/water jump.png" id="5_be2hm"]
+[ext_resource type="Texture2D" uid="uid://dthy14ir4ole8" path="res://Sprites/earth jump.png" id="5_dfufg"]
+[ext_resource type="Texture2D" uid="uid://chda8y1tj8hby" path="res://Sprites/hearth.png" id="5_uo812"]
+[ext_resource type="Texture2D" uid="uid://bff040cb4af36" path="res://Sprites/earth idle.png" id="6_7p2a1"]
+[ext_resource type="Texture2D" uid="uid://bhtn0asm5ij01" path="res://Sprites/water idle.png" id="6_jjcc7"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="6_nj16g"]
+[ext_resource type="Texture2D" uid="uid://n7bbluihv0n0" path="res://Sprites/water walk.png" id="7_mtq2t"]
+[ext_resource type="Texture2D" uid="uid://bocc2mirsx48o" path="res://Sprites/earth walk.png" id="7_mwys2"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
-[ext_resource type="Texture2D" uid="uid://chrndh6qoxids" path="res://Sprites/fire jump.png" id="9_ptmh2"]
-[ext_resource type="Texture2D" uid="uid://gmay321ykmjj" path="res://Sprites/linght.png" id="10_6u4n5"]
+[ext_resource type="Texture2D" uid="uid://bvi0omxm6df8s" path="res://Sprites/fire jump.png" id="9_ptmh2"]
+[ext_resource type="Texture2D" uid="uid://c45gcdl5erpan" path="res://Sprites/linght.png" id="10_6u4n5"]
 [ext_resource type="PackedScene" uid="uid://ywyhxmenkfw" path="res://Scenes/mobilecontrolls.tscn" id="11_tb078"]
 [ext_resource type="Script" path="res://Scripts/CanvasLayer.gd" id="15_jtxs5"]
-[ext_resource type="Texture2D" uid="uid://bd3mm6u4404va" path="res://Sprites/energy.png" id="18_6b2vi"]
-[ext_resource type="Texture2D" uid="uid://b4fb32ngehhw0" path="res://Sprites/deaths-head-153588_1280.webp" id="19_ftjg4"]
-[ext_resource type="AudioStream" uid="uid://1dqe1autfygr" path="res://sounds/pasos cesped.mp3" id="21_ctvyi"]
+[ext_resource type="Texture2D" uid="uid://c3wdxsquphqdl" path="res://Sprites/energy.png" id="18_6b2vi"]
+[ext_resource type="Texture2D" uid="uid://clolk7yspwv7q" path="res://Sprites/deaths-head-153588_1280.webp" id="19_ftjg4"]
+[ext_resource type="AudioStream" uid="uid://ft1r657tvajy" path="res://sounds/pasos cesped.mp3" id="21_ctvyi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy66o"]
 radius = 29.7705
@@ -423,6 +423,20 @@ _data = {
 "rest": SubResource("Animation_h0bwp")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uy6bv"]
+properties/0/path = NodePath(".:player")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:direction")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]
 corner_radius_top_left = 15
 corner_radius_top_right = 15
@@ -497,6 +511,7 @@ libraries = {
 visible = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_uy6bv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("15_jtxs5")
