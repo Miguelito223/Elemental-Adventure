@@ -183,6 +183,7 @@ var ui_inputs = {
 	"down": null,
 }
 
+
 func get_input_axis():
 	axis.x = int(Input.is_action_pressed(ui_inputs.keys()[0])) - int(Input.is_action_pressed(ui_inputs.keys()[1]))
 	return axis.normalized()
@@ -197,6 +198,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 
+@rpc("unreliable")
 func move(delta, accel, amount):
 	
 	if not is_on_floor():
@@ -261,7 +263,9 @@ func _input(event):
 		
 		if event.is_action_pressed(ui_inputs.keys()[3]):
 			shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
-		
+
+
+@rpc("any_peer", "call_local")
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
 		var bullet_lol = bullet.instantiate()
@@ -297,7 +301,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		await get_tree().create_timer(0.8).timeout
 		can_fire = true
 
-	
+@rpc("any_peer", "call_local")
 func setlifes(value):
 	Hearths = clamp(value,0,Max_Hearths)
 	if Hearths <= 0:
@@ -316,18 +320,21 @@ func setlifes(value):
 			print("player number: '%s'" % device_num)
 			Hearths = Max_Hearths
 			setposspawn()
-		
+
+@rpc("any_peer", "call_local")		
 func getenergy():
 	energys += 1
 	score += 3
 	DataState.save_file_state()
 	Data.save_file()
 	
+@rpc("any_peer", "call_local")
 func getlife():
 	Hearths += 1
 	DataState.save_file_state()
 	Data.save_file()
 	
+@rpc("any_peer", "call_local")
 func changelevel():
 	Globals.level_int += 1
 	Globals.level = "level_" + str(Globals.level_int)
@@ -335,31 +342,11 @@ func changelevel():
 	DataState.save_file_state()
 	Data.save_file()
 	
+@rpc("any_peer", "call_local")
 func setposspawn():
 	if Network.is_networking:
-		if last_position:
-			position = last_position
-		else:
-			if device_num == 0:
-				last_position = Vector2(660,-347)
-				position = last_position
-				last_position = null
-			elif device_num == 1:
-				last_position = Vector2(272,-347)
-				position = last_position
-				last_position = null
-			elif device_num == 2:
-				last_position = Vector2(451,-235)
-				position = last_position
-				last_position = null
-			elif device_num == 3:
-				last_position = Vector2(353,-232)
-				position = last_position
-				last_position = null
-			else: 
-				last_position = Vector2(660,-347)
-				position = last_position
-				last_position = null
+		position = Vector2(449, -219)
+
 	else:
 		if last_position:
 			position = last_position
@@ -385,7 +372,7 @@ func setposspawn():
 				return	
 
 	
-
+@rpc("any_peer", "call_local")
 func damage(ammount):
 	if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
 		InvunerabilityTime.start()

@@ -21,8 +21,11 @@ func _ready():
 		Globals._inputs_player(i)
 
 	await Signals.level_loaded	
-	level = get_node(Globals.level)
-	map = get_node(Globals.map)
+	if Network.is_networking:
+		map = get_node(Globals.map)
+	else:
+		level = get_node(Globals.level)
+	
 	
 	if Globals.use_keyboard:
 		Globals.num_players = 1
