@@ -35,14 +35,13 @@ func _ready():
 		
 	Signals.level_loaded.emit()
 
-@rpc
+
 func remove_player(player_id):
 	if Network.is_networking:
 		var player = get_node(str(player_id))
 		if is_instance_valid(player):
 			player.queue_free()
 
-@rpc
 func add_player(player_index, player_id):
 	if Network.is_networking:
 
