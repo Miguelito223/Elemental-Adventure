@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bq8c11xjf1nct"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_2vk4l"]
-[ext_resource type="Texture2D" uid="uid://diyn67rcpa176" path="res://Sprites/fuego.png" id="2_44f6u"]
-[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="3_his25"]
-[ext_resource type="AudioStream" uid="uid://dfhdsafqgewxy" path="res://sounds/Music/main menu music.mp3" id="4_07aup"]
+[ext_resource type="Texture2D" uid="uid://cbvya6vhmaigo" path="res://Sprites/fuego.png" id="2_44f6u"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="3_his25"]
+[ext_resource type="AudioStream" uid="uid://dsi8jiqv1o424" path="res://sounds/Music/main menu music.mp3" id="4_07aup"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="4_236ea"]
 [ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="5_tq5s4"]
 

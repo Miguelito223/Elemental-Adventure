@@ -35,6 +35,7 @@ const GAME_SCENE ={
 	"level_29": "res://Scenes/level_29.tscn",
 	"level_30": "res://Scenes/level_30.tscn",
 	"level_31": "res://Scenes/level_31.tscn",
+	"map_1": "res://Scenes/map_1.tscn",
 }
 
 var loading_screen_path: String = "res://Scenes/loading_screen.tscn"

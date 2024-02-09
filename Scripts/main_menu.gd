@@ -452,7 +452,7 @@ func _on_create_pressed():
 	get_parent().multiplayer.multiplayer_peer = peer
 	Network.is_networking = true
 	if multiplayer.is_server():
-		LoadScene.load_scene(self, "res://Scenes/map_1.tscn")
+		LoadScene.load_scene(self, Globals.map)
 
 
 func _on_join2_pressed():
@@ -467,7 +467,6 @@ func _on_join2_pressed():
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
-
 
 func _on_port_text_changed(new_text:String):
 	Network.port = int(new_text)

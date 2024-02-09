@@ -3,6 +3,7 @@ extends Node
 var DEBUGGING = true
 
 var level
+var map
 
 func _ready():
 	if DEBUGGING:
@@ -21,6 +22,7 @@ func _ready():
 
 	await Signals.level_loaded	
 	level = get_node(Globals.level)
+	map = get_node(Globals.map)
 	
 	if Globals.use_keyboard:
 		Globals.num_players = 1
