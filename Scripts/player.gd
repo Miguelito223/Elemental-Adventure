@@ -20,6 +20,7 @@ var can_fire = true
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var light = $PointLight2D
 @onready var canvas = $CanvasLayer
+@onready var syncronizer = $MultiplayerSynchronizer
 
 var max_speed = 300.0
 var max_speed_in_air = 500.0
@@ -32,6 +33,7 @@ var friction = 1200.0
 var axis = Vector2.ZERO
 
 var device_num = 0 # default to device 0
+var player_id = 1
 
 var Max_Hearths = Globals.max_hearths
 var player_name = "Fire"
@@ -45,6 +47,8 @@ var ball_color = Color("White", 1) # color, alpha
 
 var last_position = null
 var is_moving: bool = false
+
+
 
 func _init():
 	print("device_num: " + str(device_num))
@@ -82,7 +86,8 @@ func _ready():
 	Signals.player_ready.emit()
 
 func _enter_tree():
-	set_multiplayer_authority(name.to_int())
+	if Network.is_networking:
+		set_multiplayer_authority(player_id)
 	
 func _process(_delta):	
 	if Globals.use_keyboard and not Globals.use_mobile_buttons:
@@ -188,7 +193,7 @@ var ui_inputs = {
 	"down": null,
 }
 
-@rpc("unreliable")
+
 func get_input_axis():
 	axis.x = int(Input.is_action_pressed(ui_inputs.keys()[0])) - int(Input.is_action_pressed(ui_inputs.keys()[1]))
 	return axis.normalized()
@@ -201,7 +206,6 @@ func _physics_process(delta):
 		move(delta, axis * speed * delta, friction * delta)
 
 	move_and_slide()
-
 
 @rpc("unreliable")
 func move(delta, accel, amount):
@@ -260,7 +264,7 @@ func _input(event):
 			
 			
 			if event.is_action_pressed(ui_inputs.keys()[3]):
-				shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
+				shoot.rpc(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
 
 	else:
 		if event.is_action_pressed(ui_inputs.keys()[5]):
@@ -268,7 +272,6 @@ func _input(event):
 		
 		if event.is_action_pressed(ui_inputs.keys()[3]):
 			shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
-
 
 @rpc("any_peer", "call_local")
 func shoot( bullet_direction, bullet_pos, bullet_speed):
@@ -306,7 +309,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		await get_tree().create_timer(0.8).timeout
 		can_fire = true
 
-@rpc("any_peer", "call_local")
+
 func setlifes(value):
 	Hearths = clamp(value,0,Max_Hearths)
 	if Hearths <= 0:
@@ -326,20 +329,20 @@ func setlifes(value):
 			Hearths = Max_Hearths
 			setposspawn()
 
-@rpc("any_peer", "call_local")		
+	
 func getenergy():
 	energys += 1
 	score += 3
 	DataState.save_file_state()
 	Data.save_file()
 	
-@rpc("any_peer", "call_local")
+
 func getlife():
 	Hearths += 1
 	DataState.save_file_state()
 	Data.save_file()
 	
-@rpc("any_peer", "call_local")
+
 func changelevel():
 	Globals.level_int += 1
 	Globals.level = "level_" + str(Globals.level_int)
@@ -347,7 +350,7 @@ func changelevel():
 	DataState.save_file_state()
 	Data.save_file()
 	
-@rpc("any_peer")
+@rpc("unreliable")
 func setposspawn():
 	if Network.is_networking:
 		position = Vector2(449, -219)
