@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a3f3cdbacb989feaea39166a9d8bb60b5de27294dd2133ebd21f85950b2131b5
-size 399
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cd2p26tag5uq0"
+path="res://.godot/imported/BOSS BATTLE! Ft Jex.mp3-00a54345f56d605d7217841d91d61017.mp3str"
+
+[deps]
+
+source_file="res://sounds/Music/BOSS BATTLE! Ft Jex.mp3"
+dest_files=["res://.godot/imported/BOSS BATTLE! Ft Jex.mp3-00a54345f56d605d7217841d91d61017.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0.0
+beat_count=0
+bar_beats=4
