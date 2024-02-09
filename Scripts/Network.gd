@@ -6,5 +6,5 @@ var connection_count = 0
 var is_networking = false
 
 @rpc("any_peer")
-func send_data_to(id, data):
-    rpc_id(id, "data_received", data)
+func send_data_to(data):
+    rpc("data_received", data)

@@ -77,7 +77,7 @@ func _ready():
 
 	if Network.is_networking:
 		Network.connection_count += 1
-		Network.send_data_to(name.to_int(), Network.connection_count)
+		Network.send_data_to(Network.connection_count)
 
 	Signals.player_ready.emit()
 
