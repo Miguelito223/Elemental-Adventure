@@ -39,51 +39,7 @@ func _ready():
 		add_player(1)
 		
 	Signals.level_loaded.emit()
-	
 
-func _process(_delta):
-	camera_settings()
-
-func camera_settings():
-	if !players or players.is_empty() or players == null: 
-		return
-
-	if margin == null or not margin: 
-		move_speed =  0.5
-		zoom_speed =  0.05
-		min_zoom = 2
-		max_zoom = 4
-		margin = Vector2(100, 25)
-		return
-	
-	var pos = Vector2.ZERO
-
-	for player in players:
-		if not is_instance_valid(player):
-			return
-		pos += player.position
-
-	pos /= players.size()
-
-	camera.position = lerp(camera.position, pos, move_speed)
-	
-	var rect = Rect2(camera.position, Vector2.ONE)
-
-	for player in players:
-		rect = rect.expand(player.position)
-
-	rect = rect.grow_individual(margin.x, margin.y, margin.x, margin.y)
-
-	var _distance = max(rect.size.x, rect.size.y)
-
-	var zoom_range 
-
-	if rect.size.x > rect.size.y * screen_size.aspect():
-		zoom_range = clamp(rect.size.x / screen_size.x, min_zoom, max_zoom)
-	else:
-		zoom_range = clamp(rect.size.y / screen_size.y, min_zoom, max_zoom)
-
-	camera.zoom = lerp(camera.zoom, Vector2.ONE * zoom_range, zoom_speed)
 
 
 func remove_player(player_id):

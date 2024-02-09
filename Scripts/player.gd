@@ -102,6 +102,14 @@ func _process(_delta):
 	Globals.deaths[device_num] = deaths
 	Globals.energys[device_num] = energys
 	Globals.score[device_num] = score
+
+	if Network.is_networking:
+		if is_multiplayer_authority():
+			$Camera2D.enabled = true
+		else:
+			$Camera2D.enabled = false
+	else:
+		$Camera2D.enabled = false
 	
 
 	if device_num == 0:
@@ -348,9 +356,10 @@ func setposspawn():
 				last_position = Vector2(353,-232)
 				position = last_position
 				last_position = null
-			else:
-				print("no more of four players")
-				return	
+			else: 
+				last_position = Vector2(660,-347)
+				position = last_position
+				last_position = null
 	else:
 		if last_position:
 			position = last_position
