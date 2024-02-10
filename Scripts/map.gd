@@ -17,10 +17,6 @@ func _ready():
 			"p":get_parent().name,
 		}))
 
-	if not multiplayer.is_server() or not Network.is_networking:
-		return
-
-	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
 	get_parent().multiplayer.server_disconnected.connect(server_disconected)
@@ -32,10 +28,6 @@ func _ready():
 	Signals.level_loaded.emit()
 
 func _process(_delta):
-
-	if not multiplayer.is_server():
-		return
-
 	Network.count.rpc(connected_ids.size())
 
 func server_disconected():
@@ -52,6 +44,8 @@ func server_conected():
 	print("Server Started")
 
 func add_player(player_id):
+
+
 	print("adding player id: " + str(player_id))
 
 	connected_ids.append(player_id)
@@ -76,6 +70,8 @@ func add_player(player_id):
 	player.deaths = Network.deaths[player.device_num]
 
 	Globals._inputs_player(player.device_num)
+
+	player.position = $Marker2D.position
 
 	add_child(player, true)
 
