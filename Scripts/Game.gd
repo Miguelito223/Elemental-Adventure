@@ -26,7 +26,7 @@ func _ready():
 	else:
 		level = get_node(Globals.level)
 
-	if "--server" in OS.get_cmdline_args():
+	if OS.has_feature("dedicated_server"):
 		var peer = ENetMultiplayerPeer.new()
 		peer.create_server(Network.port)
 		if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
