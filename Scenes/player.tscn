@@ -443,16 +443,16 @@ properties/5/path = NodePath("Camera2D:enabled")
 properties/5/spawn = true
 properties/5/replication_mode = 1
 properties/6/path = NodePath(".:device_num")
-properties/6/spawn = false
+properties/6/spawn = true
 properties/6/replication_mode = 1
 properties/7/path = NodePath(".:player_name")
-properties/7/spawn = false
+properties/7/spawn = true
 properties/7/replication_mode = 1
 properties/8/path = NodePath(".:player_color")
-properties/8/spawn = false
+properties/8/spawn = true
 properties/8/replication_mode = 1
 properties/9/path = NodePath(".:ball_color")
-properties/9/spawn = false
+properties/9/spawn = true
 properties/9/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]

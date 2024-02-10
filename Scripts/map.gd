@@ -3,7 +3,6 @@ extends Node2D
 var DEBUGGING = true
 
 var connected_ids: Array = []
-var input_maps: Array = []
 
 var rng = RandomNumberGenerator.new()
 @onready var lineedit = $CanvasLayer/LineEdit
@@ -21,21 +20,14 @@ func _ready():
 			"p":get_parent().name,
 		}))
 
-	if not multiplayer.is_server():
-		return
-		
+	add_player(1)	
 
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
 	get_parent().multiplayer.server_disconnected.connect(server_disconected)
 	get_parent().multiplayer.connected_to_server.connect(server_conected)
 	get_parent().multiplayer.connection_failed.connect(disconected_fail)
-
-	for id in multiplayer.get_peers():
-		add_player(id)
-
-	if not OS.has_feature("dedicated_server"):
-		add_player(1)
+		
 		
 	Signals.level_loaded.emit()
 
@@ -51,12 +43,21 @@ func disconected_fail():
 func server_conected():
 	print("Server Started")
 
+@rpc
+func add_newly_player(new_player_id):
+	add_player(new_player_id)
+
+@rpc
+func add_previusly_player(player_ids):
+	for player_id in player_ids:
+		add_player(player_id)
+
 func add_player(player_id):
 	if Network.is_networking:
 
 		print("adding player id: " + str(player_id))
 
-		Network.connection_count += 1
+		Network.plus_count.rpc(1)
 
 		connected_ids.append(player_id)
 
@@ -88,7 +89,6 @@ func remove_player(player_id):
 		print("removing player id: " + str(player_id))
 		var player = get_node(str(player_id))
 		connected_ids.erase(player_id)
-		Network.connection_count -= 1
 		if is_instance_valid(player):
 			player.queue_free()
 
@@ -96,25 +96,12 @@ func _on_multiplayer_spawner(node:Node):
 	if Network.is_networking:
 		print("spawned player id: " + str(node.player_id))	
 		node.setposspawn()
-
-
+		
 @rpc("any_peer", "call_local")
 func msg_rcp(user, data):
 	textedit.text += str(user,  ":", data, "\n")
 	lineedit.text = ""
 	textedit.scroll_vertical = textedit.get_line_height()
-	
-
-func _exit_tree():
-
-	if not multiplayer.is_server():
-		return
-
-	get_parent().multiplayer.peer_connected.disconnect(add_player)
-	get_parent().multiplayer.peer_disconnected.disconnect(remove_player)
-	
-
-
 
 func _on_line_edit_gui_input(event:InputEvent):
 	if event.is_action_pressed("ui_accept"):

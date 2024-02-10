@@ -6,6 +6,7 @@ var connection_count = 0
 var is_networking = false
 
 var player_name: Array = [
+	"Void",
 	"Fire",
 	"Water",
 	"Air",
@@ -81,3 +82,10 @@ var deaths: Dictionary = {
 	4: 0, 
 }
 
+@rpc("any_peer", "call_local", "reliable")
+func plus_count(number):
+	Network.connection_count += number
+
+@rpc("any_peer", "call_local", "reliable")
+func less_count(number):
+	Network.connection_count -= number
