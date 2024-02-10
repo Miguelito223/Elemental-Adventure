@@ -104,13 +104,22 @@ func _process(_delta):
 	elif velocity.x > 0:
 		AnimatedSprite.scale.x = 1
 
-	Globals.max_hearths = Max_Hearths
-	Globals.last_position = last_position
-	Globals.player_name[device_num] = player_name
-	Globals.hearths[device_num] = Hearths
-	Globals.deaths[device_num] = deaths
-	Globals.energys[device_num] = energys
-	Globals.score[device_num] = score
+	if not Network.is_networking:
+		Globals.max_hearths = Max_Hearths
+		Globals.last_position = last_position
+		Globals.player_name[device_num] = player_name
+		Globals.hearths[device_num] = Hearths
+		Globals.deaths[device_num] = deaths
+		Globals.energys[device_num] = energys
+		Globals.score[device_num] = score
+	else:
+		Network.max_hearths = Max_Hearths
+		Network.last_position = last_position
+		Network.player_name[device_num] = player_name
+		Network.hearths[device_num] = Hearths
+		Network.deaths[device_num] = deaths
+		Network.energys[device_num] = energys
+		Network.score[device_num] = score
 
 	if Network.is_networking:
 		if is_multiplayer_authority():
@@ -374,21 +383,38 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 func setlifes(value):
 	Hearths = clamp(value,0,Max_Hearths)
 	if Hearths <= 0:
-		if device_num == 0:
-			print("you dead")
-			Hearths = Max_Hearths
-			deaths += 1
-			setposspawn()
-			if deaths >= Max_Hearths:
-				print("you dead, game over")
-				deaths = 0
-				last_position = null
+		if not Network.is_networking:
+			if device_num == 0:
+				print("you dead")
+				Hearths = Max_Hearths
+				deaths += 1
 				setposspawn()
-				LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
+				if deaths >= Max_Hearths:
+					print("you dead, game over")
+					deaths = 0
+					last_position = null
+					setposspawn()
+					LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
+			else:
+				print("player number: '%s'" % device_num)
+				Hearths = Max_Hearths
+				setposspawn()
 		else:
-			print("player number: '%s'" % device_num)
-			Hearths = Max_Hearths
-			setposspawn()
+			if device_num == 1:
+				print("you dead")
+				Hearths = Max_Hearths
+				deaths += 1
+				setposspawn()
+				if deaths >= Max_Hearths:
+					print("you dead, game over")
+					deaths = 0
+					last_position = null
+					setposspawn()
+					LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
+			else:
+				print("player number: '%s'" % device_num)
+				Hearths = Max_Hearths
+				setposspawn()
 
 	
 func getenergy():

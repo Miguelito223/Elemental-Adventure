@@ -192,10 +192,15 @@ func _process(_delta):
 	create_action_remap_items()
 
 func _input(event):
-	if get_parent().get_parent().device_num == 0:
+	if Network.is_networking:
 		if event.is_action_pressed("pause0"):
 			visible = !visible
 			get_tree().paused = !get_tree().paused
+	else:
+		if get_parent().get_parent().device_num == 0:
+			if event.is_action_pressed("pause0"):
+				visible = !visible
+				get_tree().paused = !get_tree().paused
 
 func _on_exit_pressed():
 	get_tree().quit()
