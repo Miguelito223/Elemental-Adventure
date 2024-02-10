@@ -47,6 +47,7 @@ func disconected_fail():
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
 func server_conected():
+	LoadScene.load_scene(null, self)
 	print("Server Started")
 
 func add_player(peer_id = 1):
@@ -101,8 +102,6 @@ func _on_multiplayer_spawner(node:Node):
 	node.score = Network.score[Network.connection_count]
 	node.Hearths = Network.hearths[Network.connection_count]
 	node.deaths = Network.deaths[Network.connection_count]
-
-	Globals._inputs_player(Network.connection_count)
 		
 @rpc("any_peer", "call_local")
 func msg_rcp(user, data):
