@@ -77,7 +77,7 @@ var deaths: Dictionary = {
 }
 
 @rpc("call_local", "any_peer") func set_connected_ids_number():
-	connection_count = connected_ids.size() - 1
+	connection_count = connected_ids.size()
 
 @rpc("call_local", "any_peer") func append_connected_ids(id):
 	connected_ids.append(id)

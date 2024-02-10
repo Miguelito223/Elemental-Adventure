@@ -51,9 +51,10 @@ func server_conected():
 func add_player(peer_id):
 	print("adding player id: " + str(peer_id))
 
-	Network.append_connected_ids.rpc(peer_id)
+	Network.connected_ids.append(peer_id)
 
-	Network.set_connected_ids_number.rpc()
+	Network.connection_count += 1
+
 
 	var player = player_scene.instantiate()	
 
@@ -84,8 +85,10 @@ func add_player(peer_id):
 func remove_player(peer_id):
 	print("removing player id: " + str(peer_id))
 	var player = get_node(str(peer_id))
-	Network.erase_connected_ids.rpc(peer_id)
-	Network.set_connected_ids_number.rpc()
+	Network.connected_ids.erase(peer_id)
+	Network.connection_count -= 1
+	if Network.connection_count < 0:
+		Network.connection_count = 0
 	if is_instance_valid(player):
 		player.queue_free()
 		
