@@ -1,12 +1,15 @@
 extends Node
 
-var port = 9999
-var ip = "127.0.0.1"
+var port
+var ip
+var username
 var connection_count = 0
 var is_networking = false
 
+
+
 var player_name: Array = [
-	"Void",
+	"Null",
 	"Fire",
 	"Water",
 	"Air",
@@ -89,3 +92,7 @@ func plus_count(number):
 @rpc("any_peer", "call_local", "reliable")
 func less_count(number):
 	Network.connection_count -= number
+
+@rpc("any_peer", "call_local", "reliable")
+func count(number):
+	Network.connection_count = number

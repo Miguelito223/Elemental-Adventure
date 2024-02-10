@@ -8,9 +8,6 @@ var rng = RandomNumberGenerator.new()
 @onready var lineedit = $CanvasLayer/LineEdit
 @onready var textedit = $CanvasLayer/TextEdit
 
-var username: String
-var msg: String
-
 var player_scene = preload("res://Scenes/player.tscn")
 
 func _ready():
@@ -19,6 +16,9 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 		}))
+
+	if not multiplayer.is_server():
+		return
 
 	add_player(1)	
 
@@ -30,6 +30,10 @@ func _ready():
 		
 		
 	Signals.level_loaded.emit()
+
+func _process(_delta):
+	await get_tree().create_timer(1).timeout
+	Network.count.rpc(connected_ids.size())
 
 func server_disconected():
 	print("Server Finish")
@@ -44,21 +48,10 @@ func disconected_fail():
 func server_conected():
 	print("Server Started")
 
-@rpc
-func add_newly_player(new_player_id):
-	add_player(new_player_id)
-
-@rpc
-func add_previusly_player(player_ids):
-	for player_id in player_ids:
-		add_player(player_id)
-
 func add_player(player_id):
 	if Network.is_networking:
 
 		print("adding player id: " + str(player_id))
-
-		Network.plus_count.rpc(1)
 
 		connected_ids.append(player_id)
 
@@ -70,16 +63,16 @@ func add_player(player_id):
 		player.player_id = player_id
 
 		player.name =  str(player_id)
-		player.ball_color = Network.ball_color_dict[Network.connection_count]
-		player.player_color = Network.player_color_dict[Network.connection_count]
+		player.ball_color = Network.ball_color_dict[player.device_num]
+		player.player_color = Network.player_color_dict[player.device_num]
 
-		player.player_name = Network.player_name[Network.connection_count]
-		player.energys = Network.energys[Network.connection_count]
-		player.score = Network.score[Network.connection_count]
-		player.Hearths = Network.hearths[Network.connection_count]
-		player.deaths = Network.deaths[Network.connection_count]
+		player.player_name = Network.player_name[player.device_num]
+		player.energys = Network.energys[player.device_num]
+		player.score = Network.score[player.device_num]
+		player.Hearths = Network.hearths[player.device_num]
+		player.deaths = Network.deaths[player.device_num]
 
-		Globals._inputs_player(Network.connection_count)
+		Globals._inputs_player(player.device_num)
 
 		player.position = $Marker2D.position
 
@@ -106,4 +99,4 @@ func msg_rcp(user, data):
 
 func _on_line_edit_gui_input(event:InputEvent):
 	if event.is_action_pressed("ui_accept"):
-		msg_rcp.rpc(username, lineedit.text)
+		msg_rcp.rpc(Network.username, lineedit.text)
