@@ -27,7 +27,8 @@ func _ready():
 	get_parent().multiplayer.connected_to_server.connect(server_conected)
 	get_parent().multiplayer.connection_failed.connect(disconected_fail)
 
-	add_player(1)
+	if not OS.has_feature("dedicated_server"):
+		add_player(1)
 		
 	Signals.level_loaded.emit()
 
