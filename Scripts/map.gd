@@ -52,9 +52,7 @@ func add_player(peer_id):
 	print("adding player id: " + str(peer_id))
 
 	Network.connected_ids.append(peer_id)
-
-	Network.connection_count += 1
-
+	Network.connection_count = Network.connected_ids.size()
 
 	var player = player_scene.instantiate()	
 
@@ -86,9 +84,7 @@ func remove_player(peer_id):
 	print("removing player id: " + str(peer_id))
 	var player = get_node(str(peer_id))
 	Network.connected_ids.erase(peer_id)
-	Network.connection_count -= 1
-	if Network.connection_count < 0:
-		Network.connection_count = 0
+	Network.connection_count = Network.connected_ids.size()
 	if is_instance_valid(player):
 		player.queue_free()
 		
