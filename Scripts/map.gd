@@ -38,6 +38,7 @@ func server_disconected():
 
 func disconected_fail():
 	print("Fail to load")
+	get_parent().multiplayer.multiplayer_peer = null
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
 func server_conected():
