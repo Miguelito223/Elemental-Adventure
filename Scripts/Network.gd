@@ -4,6 +4,7 @@ var port = 9999
 var ip = "127.0.0.1"
 var username = "MichaxD"
 var connection_count = 0
+var connected_ids: Array = []
 var is_networking = false
 
 var player_name: Array = [
@@ -74,3 +75,12 @@ var deaths: Dictionary = {
 	2: 0, 
 	3: 0, 
 }
+
+@rpc("call_local", "any_peer") func set_connected_ids_number():
+	connection_count = connected_ids.size() - 1
+
+@rpc("call_local", "any_peer") func append_connected_ids(id):
+	connected_ids.append(id)
+
+@rpc("call_local", "any_peer") func erase_connected_ids(id):
+	connected_ids.erase(id)

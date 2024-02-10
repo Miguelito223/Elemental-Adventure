@@ -2,8 +2,6 @@ extends Node2D
 
 var DEBUGGING = true
 
-var connected_ids: Array = []
-
 var rng = RandomNumberGenerator.new()
 @onready var lineedit = $CanvasLayer/LineEdit
 @onready var textedit = $CanvasLayer/TextEdit
@@ -20,7 +18,7 @@ func _ready():
 	if not Network.is_networking:
 		return
 
-	if not multiplayer.is_server():
+	if not get_parent().multiplayer.is_server():
 		return
 
 	get_parent().multiplayer.peer_connected.connect(add_player)
@@ -33,8 +31,7 @@ func _ready():
 		
 	Signals.level_loaded.emit()
 
-func _process(_delta):
-	Network.connection_count = connected_ids.size()
+
 
 func server_disconected():
 	print("Server Finish")
@@ -50,21 +47,23 @@ func server_conected():
 	LoadScene.load_scene(null, self)
 	print("Server Started")
 
-func add_player(peer_id = 1):
+func add_player(peer_id):
 	print("adding player id: " + str(peer_id))
 
-	connected_ids.append(peer_id)
+	Network.append_connected_ids.rpc(peer_id)
+
+	Network.set_connected_ids_number.rpc()
 
 	var player = player_scene.instantiate()	
 
-	player.setposspawn()
-
 	player.set_multiplayer_authority(peer_id)
+
+	player.setposspawn()
 
 	player.device_num = Network.connection_count
 	player.player_id = peer_id
 
-	player.name =  str(peer_id)
+	player.name = str(peer_id)
 	player.ball_color = Network.ball_color_dict[Network.connection_count]
 	player.player_color = Network.player_color_dict[Network.connection_count]
 
@@ -78,30 +77,16 @@ func add_player(peer_id = 1):
 	
 	add_child(player, true)
 
+	
+
 
 func remove_player(peer_id):
 	print("removing player id: " + str(peer_id))
 	var player = get_node(str(peer_id))
-	connected_ids.erase(peer_id)
+	Network.erase_connected_ids.rpc(peer_id)
+	Network.set_connected_ids_number.rpc()
 	if is_instance_valid(player):
 		player.queue_free()
-
-func _on_multiplayer_spawner(node:Node):
-	print("spawned player id: " + str(node.player_id))
-
-	node.setposspawn()
-
-	node.device_num = Network.connection_count
-
-	node.name =  str(node.player_id)
-	node.ball_color = Network.ball_color_dict[Network.connection_count]
-	node.player_color = Network.player_color_dict[Network.connection_count]
-
-	node.player_name = Network.username
-	node.energys = Network.energys[Network.connection_count]
-	node.score = Network.score[Network.connection_count]
-	node.Hearths = Network.hearths[Network.connection_count]
-	node.deaths = Network.deaths[Network.connection_count]
 		
 @rpc("any_peer", "call_local")
 func msg_rcp(user, data):

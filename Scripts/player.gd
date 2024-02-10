@@ -74,6 +74,8 @@ func _ready():
 	get_tree().paused = false
 	setlifes(Hearths)
 
+	setposspawn()
+
 	Signals.player_ready.emit()
 
 
@@ -319,16 +321,17 @@ func setlifes(value):
 	Hearths = clamp(value,0,Max_Hearths)
 	if Hearths <= 0:
 		if Network.is_networking:
-			print("you dead")
-			Hearths = Max_Hearths
-			deaths += 1
-			setposspawn()
-			if deaths >= Max_Hearths:
-				print("you dead, game over")
-				deaths = 0
-				last_position = null
+			if is_multiplayer_authority():
+				print("you dead")
+				Hearths = Max_Hearths
+				deaths += 1
 				setposspawn()
-				LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
+				if deaths >= Max_Hearths:
+					print("you dead, game over")
+					deaths = 0
+					last_position = null
+					setposspawn()
+					LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
 		else:
 			if device_num == 0:
 				print("you dead")
@@ -405,17 +408,32 @@ func setposspawn():
 
 	
 func damage(ammount):
-	if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
-		InvunerabilityTime.start()
-		setlifes(Hearths - ammount)
-		Animation_Effects.play("damage")
-		Animation_Effects.queue("flash")
-		score -= 3
-		if score < 0:
-			score = 0
-		if not Network.is_networking:
-			DataState.save_file_state()
-			Data.save_file()
+	if Network.is_networking:
+		if is_multiplayer_authority():
+			if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
+				InvunerabilityTime.start()
+				setlifes(Hearths - ammount)
+				Animation_Effects.play("damage")
+				Animation_Effects.queue("flash")
+				score -= 3
+				if score < 0:
+					score = 0
+				if not Network.is_networking:
+					DataState.save_file_state()
+					Data.save_file()
+	else:
+		if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
+			InvunerabilityTime.start()
+			setlifes(Hearths - ammount)
+			Animation_Effects.play("damage")
+			Animation_Effects.queue("flash")
+			score -= 3
+			if score < 0:
+				score = 0
+			if not Network.is_networking:
+				DataState.save_file_state()
+				Data.save_file()
+
 		
 	
 
