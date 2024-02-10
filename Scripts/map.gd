@@ -50,8 +50,6 @@ func add_player(peer_id):
 
 	var player = player_scene.instantiate()	
 
-	player.set_multiplayer_authority(peer_id)
-
 	player.setposspawn()
 
 	player.device_num = Network.connection_count
@@ -69,8 +67,6 @@ func add_player(peer_id):
 
 	Globals._inputs_player(player.device_num)
 
-	player.position = $Marker2D.position
-
 	add_child(player, true)
 
 func remove_player(peer_id):
@@ -82,6 +78,7 @@ func remove_player(peer_id):
 
 func _on_multiplayer_spawner(node:Node):
 	print("spawned player id: " + str(node.player_id))
+	node.setposspawn()
 	
 	
 		

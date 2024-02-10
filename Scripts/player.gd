@@ -80,7 +80,6 @@ func _ready():
 
 func _enter_tree():
 	if Network.is_networking:
-		set_multiplayer_authority(str(name).to_int())
 		$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	
 func _process(_delta):	
