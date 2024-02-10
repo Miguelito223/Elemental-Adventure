@@ -25,14 +25,6 @@ func _ready():
 		map = get_node(Globals.map)
 	else:
 		level = get_node(Globals.level)
-
-	if OS.has_feature("dedicated_server"):
-		var peer = ENetMultiplayerPeer.new()
-		peer.create_server(Network.port)
-		multiplayer.multiplayer_peer = peer
-		Network.is_networking = true
-		if multiplayer.is_server():
-			LoadScene.load_scene(self, Globals.map)
 	
 	
 	if Globals.use_keyboard:

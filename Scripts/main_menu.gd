@@ -184,9 +184,13 @@ func _ready():
 	multiplayer_button.show()
 	
 
-	if DisplayServer.get_name() == "headless":
-		print("Automatically starting dedicated server.")
-		_on_create_pressed.call_deferred()
+	if OS.has_feature("dedicated_server"):
+		var peer = ENetMultiplayerPeer.new()
+		peer.create_server(Network.port)
+		get_parent().multiplayer.multiplayer_peer = peer
+		Network.is_networking = true
+		if multiplayer.is_server():
+			LoadScene.load_scene(self, Globals.map)
 
 	popup.hide()
 	popup2.hide()
