@@ -32,7 +32,7 @@ func _ready():
 		if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 			OS.alert("Failed to start multiplayer Server.")
 			return
-		get_parent().multiplayer.multiplayer_peer = peer
+		multiplayer.multiplayer_peer = peer
 		Network.is_networking = true
 		if multiplayer.is_server():
 			LoadScene.load_scene(self, Globals.map)
