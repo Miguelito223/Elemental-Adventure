@@ -17,10 +17,8 @@ func _ready():
 			"p":get_parent().name,
 		}))
 
-	if not multiplayer.is_server():
+	if not multiplayer.is_server() or not Network.is_networking:
 		return
-
-	add_player(1)	
 
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
@@ -28,11 +26,15 @@ func _ready():
 	get_parent().multiplayer.connected_to_server.connect(server_conected)
 	get_parent().multiplayer.connection_failed.connect(disconected_fail)
 		
+	add_player(1)
 		
 	Signals.level_loaded.emit()
 
 func _process(_delta):
-	await get_tree().create_timer(1).timeout
+
+	if not multiplayer.is_server():
+		return
+
 	Network.count.rpc(connected_ids.size())
 
 func server_disconected():
@@ -49,47 +51,45 @@ func server_conected():
 	print("Server Started")
 
 func add_player(player_id):
-	if Network.is_networking:
 
-		print("adding player id: " + str(player_id))
 
-		connected_ids.append(player_id)
+	print("adding player id: " + str(player_id))
 
-		var player = player_scene.instantiate()	
+	connected_ids.append(player_id)
 
-		player.set_multiplayer_authority(player_id)
+	var player = player_scene.instantiate()	
 
-		player.device_num = Network.connection_count
-		player.player_id = player_id
+	player.set_multiplayer_authority(player_id)
 
-		player.name =  str(player_id)
-		player.ball_color = Network.ball_color_dict[player.device_num]
-		player.player_color = Network.player_color_dict[player.device_num]
+	player.device_num = Network.connection_count
+	player.player_id = player_id
 
-		player.player_name = Network.player_name[player.device_num]
-		player.energys = Network.energys[player.device_num]
-		player.score = Network.score[player.device_num]
-		player.Hearths = Network.hearths[player.device_num]
-		player.deaths = Network.deaths[player.device_num]
+	player.name =  str(player_id)
+	player.ball_color = Network.ball_color_dict[player.device_num]
+	player.player_color = Network.player_color_dict[player.device_num]
 
-		Globals._inputs_player(player.device_num)
+	player.player_name = Network.username
+	player.energys = Network.energys[player.device_num]
+	player.score = Network.score[player.device_num]
+	player.Hearths = Network.hearths[player.device_num]
+	player.deaths = Network.deaths[player.device_num]
 
-		player.position = $Marker2D.position
+	Globals._inputs_player(player.device_num)
 
-		add_child(player, true)
+	player.position = $Marker2D.position
+
+	add_child(player, true)
 
 func remove_player(player_id):
-	if Network.is_networking:
-		print("removing player id: " + str(player_id))
-		var player = get_node(str(player_id))
-		connected_ids.erase(player_id)
-		if is_instance_valid(player):
-			player.queue_free()
+	print("removing player id: " + str(player_id))
+	var player = get_node(str(player_id))
+	connected_ids.erase(player_id)
+	if is_instance_valid(player):
+		player.queue_free()
 
 func _on_multiplayer_spawner(node:Node):
-	if Network.is_networking:
-		print("spawned player id: " + str(node.player_id))	
-		node.setposspawn()
+	print("spawned player id: " + str(node.player_id))	
+	node.setposspawn()
 		
 @rpc("any_peer", "call_local")
 func msg_rcp(user, data):

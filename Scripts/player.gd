@@ -124,126 +124,66 @@ func _process(_delta):
 	else:
 		$Camera2D.enabled = false
 	
-	if Network.is_networking:
-		if device_num == 1:
-			canvas.show()
-			light.enabled = Globals.Graphics
-			light.shadow_enabled = Globals.Graphics
-			light.shadow_filter = Globals.Graphics
-			light.shadow_filter_smooth = Globals.Graphics
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("fire walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("fire jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("fire fall")
-			else:
-				AnimatedSprite.play("fire idle")
-		elif device_num == 2:
-			canvas.hide()
-			light.enabled = false
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("water walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("water jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("water fall")
-			else:
-				AnimatedSprite.play("water idle")
-		elif device_num == 3:
-			canvas.hide()
-			light.enabled = false
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("air walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("air jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("air fall")
-			else:
-				AnimatedSprite.play("air idle")
-		elif device_num == 4:
-			canvas.hide()
-			light.enabled = false
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("earth walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("earth jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("earth fall")
-			else:
-				AnimatedSprite.play("earth idle")
+
+	if device_num == 0:
+		canvas.show()
+		light.enabled = Globals.Graphics
+		light.shadow_enabled = Globals.Graphics
+		light.shadow_filter = Globals.Graphics
+		light.shadow_filter_smooth = Globals.Graphics
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("fire walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("fire jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("fire fall")
 		else:
-			canvas.hide()
-			light.enabled = true
-			modulate = str_to_var("Color" + str(player_color))
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("fire walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("fire jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("fire fall")
-			else:
-				AnimatedSprite.play("fire idle")	
+			AnimatedSprite.play("fire idle")
+	elif device_num == 1:
+		canvas.hide()
+		light.enabled = false
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("water walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("water jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("water fall")
+		else:
+			AnimatedSprite.play("water idle")
+	elif device_num == 2:
+		canvas.hide()
+		light.enabled = false
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("air walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("air jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("air fall")
+		else:
+			AnimatedSprite.play("air idle")
+	elif device_num == 3:
+		canvas.hide()
+		light.enabled = false
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("earth walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("earth jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("earth fall")
+		else:
+			AnimatedSprite.play("earth idle")
 	else:
-		if device_num == 0:
-			canvas.show()
-			light.enabled = Globals.Graphics
-			light.shadow_enabled = Globals.Graphics
-			light.shadow_filter = Globals.Graphics
-			light.shadow_filter_smooth = Globals.Graphics
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("fire walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("fire jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("fire fall")
-			else:
-				AnimatedSprite.play("fire idle")
-		elif device_num == 1:
-			canvas.hide()
-			light.enabled = false
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("water walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("water jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("water fall")
-			else:
-				AnimatedSprite.play("water idle")
-		elif device_num == 2:
-			canvas.hide()
-			light.enabled = false
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("air walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("air jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("air fall")
-			else:
-				AnimatedSprite.play("air idle")
-		elif device_num == 3:
-			canvas.hide()
-			light.enabled = false
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("earth walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("earth jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("earth fall")
-			else:
-				AnimatedSprite.play("earth idle")
+		canvas.hide()
+		light.enabled = true
+		modulate = str_to_var("Color" + str(player_color))
+		if velocity.x > 0 or velocity.x < 0:
+			AnimatedSprite.play("fire walk")
+		elif velocity.y < 0:
+			AnimatedSprite.play("fire jump")
+		elif velocity.y > 0:
+			AnimatedSprite.play("fire fall")
 		else:
-			canvas.hide()
-			light.enabled = true
-			modulate = str_to_var("Color" + str(player_color))
-			if velocity.x > 0 or velocity.x < 0:
-				AnimatedSprite.play("fire walk")
-			elif velocity.y < 0:
-				AnimatedSprite.play("fire jump")
-			elif velocity.y > 0:
-				AnimatedSprite.play("fire fall")
-			else:
-				AnimatedSprite.play("fire idle")		
+			AnimatedSprite.play("fire idle")		
 
 		
 	
@@ -378,7 +318,18 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 func setlifes(value):
 	Hearths = clamp(value,0,Max_Hearths)
 	if Hearths <= 0:
-		if not Network.is_networking:
+		if Network.is_networking:
+			print("you dead")
+			Hearths = Max_Hearths
+			deaths += 1
+			setposspawn()
+			if deaths >= Max_Hearths:
+				print("you dead, game over")
+				deaths = 0
+				last_position = null
+				setposspawn()
+				LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
+		else:
 			if device_num == 0:
 				print("you dead")
 				Hearths = Max_Hearths
@@ -394,22 +345,7 @@ func setlifes(value):
 				print("player number: '%s'" % device_num)
 				Hearths = Max_Hearths
 				setposspawn()
-		else:
-			if device_num == 1:
-				print("you dead")
-				Hearths = Max_Hearths
-				deaths += 1
-				setposspawn()
-				if deaths >= Max_Hearths:
-					print("you dead, game over")
-					deaths = 0
-					last_position = null
-					setposspawn()
-					LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
-			else:
-				print("player number: '%s'" % device_num)
-				Hearths = Max_Hearths
-				setposspawn()
+
 
 	
 func getenergy():
