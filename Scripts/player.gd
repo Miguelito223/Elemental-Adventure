@@ -207,7 +207,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-@rpc("unreliable")
+
 func move(delta, accel, amount):
 	
 	if not is_on_floor():
@@ -350,7 +350,6 @@ func changelevel():
 	DataState.save_file_state()
 	Data.save_file()
 	
-@rpc("unreliable")
 func setposspawn():
 	if Network.is_networking:
 		position = Vector2(449, -219)

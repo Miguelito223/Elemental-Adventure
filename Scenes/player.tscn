@@ -439,6 +439,9 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath(".:velocity")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath("Camera2D:enabled")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]
 corner_radius_top_left = 15

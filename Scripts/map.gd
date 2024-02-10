@@ -17,12 +17,11 @@ func _ready():
 		}))
 		
 
-	multiplayer.peer_connected.connect(
+	get_parent().multiplayer.peer_connected.connect(
 		func(id):
-			await get_tree().create_timer(1).timeout
 			add_player(Network.connection_count, id)
 	)
-	multiplayer.peer_disconnected.connect(remove_player)
+	get_parent().multiplayer.peer_disconnected.connect(remove_player)
 
 	for id in multiplayer.get_peers():
 		add_player(Network.connection_count, id)
@@ -32,13 +31,6 @@ func _ready():
 		
 	Signals.level_loaded.emit()
 
-
-func remove_player(player_id):
-	if Network.is_networking:
-		var player = get_node(str(player_id))
-		connected_ids.erase(player_id)
-		if is_instance_valid(player):
-			player.queue_free()
 
 func add_player(player_index, player_id):
 	if Network.is_networking:
@@ -77,15 +69,24 @@ func add_player(player_index, player_id):
 
 		Globals._inputs_player(player_index)
 
-		add_child(player)
+		add_child(player, true)
+
+func remove_player(player_id):
+	if Network.is_networking:
+		var player = get_node(str(player_id))
+		connected_ids.erase(player_id)
+		Network.connection_count -= 1
+		Network.send_data_to(Network.connection_count)
+		if is_instance_valid(player):
+			player.queue_free()
+	
 
 func _exit_tree():
 
-	multiplayer.peer_connected.disconnect(
+	get_parent().multiplayer.peer_connected.disconnect(
 		func(id):
-			await get_tree().create_timer(1).timeout
 			add_player(Network.connection_count, id)
 	)
-	multiplayer.peer_disconnected.disconnect(remove_player)
+	get_parent().multiplayer.peer_disconnected.disconnect(remove_player)
 	
 
