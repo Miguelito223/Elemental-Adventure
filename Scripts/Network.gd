@@ -74,15 +74,3 @@ var deaths: Dictionary = {
 	2: 0, 
 	3: 0, 
 }
-
-@rpc("any_peer", "call_local", "reliable")
-func plus_count(number):
-	Network.connection_count += number
-
-@rpc("any_peer", "call_local", "reliable")
-func less_count(number):
-	Network.connection_count -= number
-
-@rpc("any_peer", "call_local", "reliable")
-func count(number):
-	Network.connection_count = number

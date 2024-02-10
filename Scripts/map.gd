@@ -34,7 +34,7 @@ func _ready():
 	Signals.level_loaded.emit()
 
 func _process(_delta):
-	Network.count.rpc(connected_ids.size())
+	Network.connection_count = connected_ids.size()
 
 func server_disconected():
 	print("Server Finish")
