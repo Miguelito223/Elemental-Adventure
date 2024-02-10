@@ -21,6 +21,7 @@ func _ready():
 		return
 
 	get_parent().multiplayer.peer_connected.connect(add_player)
+	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
 	get_parent().multiplayer.server_disconnected.connect(server_disconected)
 	get_parent().multiplayer.connected_to_server.connect(server_conected)
@@ -51,8 +52,6 @@ func server_conected():
 	print("Server Started")
 
 func add_player(player_id):
-
-
 	print("adding player id: " + str(player_id))
 
 	connected_ids.append(player_id)
@@ -60,6 +59,8 @@ func add_player(player_id):
 	var player = player_scene.instantiate()	
 
 	player.set_multiplayer_authority(player_id)
+
+	player.setposspawn()
 
 	player.device_num = Network.connection_count
 	player.player_id = player_id
@@ -76,8 +77,6 @@ func add_player(player_id):
 
 	Globals._inputs_player(player.device_num)
 
-	player.position = $Marker2D.position
-
 	add_child(player, true)
 
 func remove_player(player_id):
@@ -88,8 +87,9 @@ func remove_player(player_id):
 		player.queue_free()
 
 func _on_multiplayer_spawner(node:Node):
-	print("spawned player id: " + str(node.player_id))	
-	node.setposspawn()
+	print("spawned player id: " + str(node.player_id))
+	
+	
 		
 @rpc("any_peer", "call_local")
 func msg_rcp(user, data):
