@@ -99,8 +99,8 @@ func _on_multiplayer_spawner(node:Node):
 
 
 @rpc("any_peer", "call_local")
-func msg_rcp(username, data):
-	textedit.text += str(username,  ":", data, "\n")
+func msg_rcp(user, data):
+	textedit.text += str(user,  ":", data, "\n")
 	lineedit.text = ""
 	textedit.scroll_vertical = textedit.get_line_height()
 	
