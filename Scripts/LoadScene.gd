@@ -42,15 +42,17 @@ var loading_screen_path: String = "res://Scenes/loading_screen.tscn"
 var loading_screen = load(loading_screen_path)
 var loader_resource: PackedScene
 var scene_path: String
+var scene_path2: String
 var progress: Array = []
+var progress2: Array = []
 
 var use_aub_theads: bool = false
-
-
 
 func load_scene(current_scene, next_scene):
 	if next_scene != null:
 		scene_path = next_scene
+
+
 	var loading_screen_intance = loading_screen.instantiate()
 	get_tree().get_root().get_node("Game").add_child(loading_screen_intance)
 	
@@ -64,6 +66,24 @@ func load_scene(current_scene, next_scene):
 
 	start_load()
 
+func remove_scene(current_scene):
+
+	if current_scene != null:
+		scene_path2 = current_scene
+
+	var loading_screen_intance = loading_screen.instantiate()
+	get_tree().get_root().get_node("Game").add_child(loading_screen_intance)
+	
+	progress_changed.connect(loading_screen_intance.update_progress_bar)
+	load_done.connect(loading_screen_intance.fade_out_loading_screen)
+
+	await Signal(loading_screen_intance, "safe_to_load")
+
+	if current_scene != null:
+		current_scene.queue_free()
+	
+	start_load2()
+
 
 func start_load():
 	if GAME_SCENE.has(scene_path):
@@ -72,6 +92,16 @@ func start_load():
 		scene_path = scene_path
 	
 	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path)
+	if loader_next_scene == OK:
+		set_process(true)
+
+func start_load2():
+	if GAME_SCENE.has(scene_path):
+		scene_path2 = GAME_SCENE[scene_path2]
+	else:
+		scene_path2 = scene_path2
+	
+	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path2)
 	if loader_next_scene == OK:
 		set_process(true)
 
@@ -89,6 +119,19 @@ func _process(_delta):
 			get_tree().get_root().get_node("Game").add_child(new_scene)
 			emit_signal("progress_changed", 1.0)
 			emit_signal("load_done")
+
+	var load_status2 = ResourceLoader.load_threaded_get_status(scene_path2, progress2)
+	match load_status2:
+		0,2:
+			set_process(false)
+			print("failed to load")
+			return
+		1:
+			emit_signal("progress_changed", progress2[0])
+		3:
+			emit_signal("progress_changed", 1.0)
+			emit_signal("load_done")
+
 
 func _ready():
 	load_scene(null, "res://Scenes/main_menu.tscn")

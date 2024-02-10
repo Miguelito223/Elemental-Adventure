@@ -463,7 +463,8 @@ func _on_join2_pressed():
 		return
 	get_parent().multiplayer.multiplayer_peer = peer
 	Network.is_networking = true
-	queue_free()
+	if not multiplayer.is_server():
+		LoadScene.remove_scene(self)
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text

@@ -6,7 +6,6 @@ var connection_count = 0
 var is_networking = false
 
 var player_name: Array = [
-    "None",
 	"Fire",
 	"Water",
 	"Air",

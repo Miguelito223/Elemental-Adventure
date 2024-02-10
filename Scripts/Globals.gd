@@ -139,7 +139,6 @@ func remove_duplicates(a):
 				a.remove_at(j)
 
 
-@rpc("any_peer")
 func _clear_inputs_player(player_index):
 
 	if not Globals.use_keyboard:
@@ -355,7 +354,6 @@ func _clear_inputs_player(player_index):
 
 		actions_items.clear()
 
-@rpc("any_peer")
 func _inputs_player(player_index):
 
 	if not Globals.use_keyboard:

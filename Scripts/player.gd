@@ -47,11 +47,6 @@ var ball_color = Color("White", 1) # color, alpha
 
 var last_position = null
 var is_moving: bool = false
-
-
-
-func _init():
-	print("device_num: " + str(device_num))
 		
 func _ready():
 	var parent_node = get_parent()

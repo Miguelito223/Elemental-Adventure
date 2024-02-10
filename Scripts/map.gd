@@ -27,6 +27,9 @@ func _ready():
 
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
+	get_parent().multiplayer.server_disconnected.connect(server_disconected)
+	get_parent().multiplayer.connected_to_server.connect(server_conected)
+	get_parent().multiplayer.connection_failed.connect(disconected_fail)
 
 	for id in multiplayer.get_peers():
 		add_player(id)
@@ -36,6 +39,17 @@ func _ready():
 		
 	Signals.level_loaded.emit()
 
+func server_disconected():
+	print("Server Finish")
+	get_parent().multiplayer.multiplayer_peer = null
+	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
+
+func disconected_fail():
+	print("Fail to load")
+	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
+
+func server_conected():
+	print("Server Started")
 
 func add_player(player_id):
 	if Network.is_networking:
@@ -71,9 +85,10 @@ func add_player(player_id):
 
 func remove_player(player_id):
 	if Network.is_networking:
-		print("removing removing id: " + str(player_id))
+		print("removing player id: " + str(player_id))
 		var player = get_node(str(player_id))
 		connected_ids.erase(player_id)
+		Network.connection_count -= 1
 		if is_instance_valid(player):
 			player.queue_free()
 
