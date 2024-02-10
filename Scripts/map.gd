@@ -43,23 +43,21 @@ func disconected_fail():
 func server_conected():
 	print("Server Started")
 
-func add_player(player_id):
+func add_player(peer_id):
+	print("adding player id: " + str(peer_id))
 
-
-	print("adding player id: " + str(player_id))
-
-	connected_ids.append(player_id)
+	connected_ids.append(peer_id)
 
 	var player = player_scene.instantiate()	
 
-	player.set_multiplayer_authority(player_id)
+	player.set_multiplayer_authority(peer_id)
 
 	player.setposspawn()
 
 	player.device_num = Network.connection_count
-	player.player_id = player_id
+	player.player_id = peer_id
 
-	player.name =  str(player_id)
+	player.name =  str(peer_id)
 	player.ball_color = Network.ball_color_dict[player.device_num]
 	player.player_color = Network.player_color_dict[player.device_num]
 
@@ -75,10 +73,10 @@ func add_player(player_id):
 
 	add_child(player, true)
 
-func remove_player(player_id):
-	print("removing player id: " + str(player_id))
-	var player = get_node(str(player_id))
-	connected_ids.erase(player_id)
+func remove_player(peer_id):
+	print("removing player id: " + str(peer_id))
+	var player = get_node(str(peer_id))
+	connected_ids.erase(peer_id)
 	if is_instance_valid(player):
 		player.queue_free()
 
