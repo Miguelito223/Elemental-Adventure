@@ -79,9 +79,6 @@ func _ready():
 	get_tree().paused = false
 	setlifes(Hearths)
 
-	if Network.is_networking:
-		Network.connection_count += 1
-
 	Signals.player_ready.emit()
 
 
@@ -123,66 +120,126 @@ func _process(_delta):
 	else:
 		$Camera2D.enabled = false
 	
-
-	if device_num == 0:
-		canvas.show()
-		light.enabled = Globals.Graphics
-		light.shadow_enabled = Globals.Graphics
-		light.shadow_filter = Globals.Graphics
-		light.shadow_filter_smooth = Globals.Graphics
-		if velocity.x > 0 or velocity.x < 0:
-			AnimatedSprite.play("fire walk")
-		elif velocity.y < 0:
-			AnimatedSprite.play("fire jump")
-		elif velocity.y > 0:
-			AnimatedSprite.play("fire fall")
+	if Network.is_networking:
+		if device_num == 1:
+			canvas.show()
+			light.enabled = Globals.Graphics
+			light.shadow_enabled = Globals.Graphics
+			light.shadow_filter = Globals.Graphics
+			light.shadow_filter_smooth = Globals.Graphics
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("fire walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("fire jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("fire fall")
+			else:
+				AnimatedSprite.play("fire idle")
+		elif device_num == 2:
+			canvas.hide()
+			light.enabled = false
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("water walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("water jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("water fall")
+			else:
+				AnimatedSprite.play("water idle")
+		elif device_num == 3:
+			canvas.hide()
+			light.enabled = false
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("air walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("air jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("air fall")
+			else:
+				AnimatedSprite.play("air idle")
+		elif device_num == 4:
+			canvas.hide()
+			light.enabled = false
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("earth walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("earth jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("earth fall")
+			else:
+				AnimatedSprite.play("earth idle")
 		else:
-			AnimatedSprite.play("fire idle")
-	elif device_num == 1:
-		canvas.hide()
-		light.enabled = false
-		if velocity.x > 0 or velocity.x < 0:
-			AnimatedSprite.play("water walk")
-		elif velocity.y < 0:
-			AnimatedSprite.play("water jump")
-		elif velocity.y > 0:
-			AnimatedSprite.play("water fall")
-		else:
-			AnimatedSprite.play("water idle")
-	elif device_num == 2:
-		canvas.hide()
-		light.enabled = false
-		if velocity.x > 0 or velocity.x < 0:
-			AnimatedSprite.play("air walk")
-		elif velocity.y < 0:
-			AnimatedSprite.play("air jump")
-		elif velocity.y > 0:
-			AnimatedSprite.play("air fall")
-		else:
-			AnimatedSprite.play("air idle")
-	elif device_num == 3:
-		canvas.hide()
-		light.enabled = false
-		if velocity.x > 0 or velocity.x < 0:
-			AnimatedSprite.play("earth walk")
-		elif velocity.y < 0:
-			AnimatedSprite.play("earth jump")
-		elif velocity.y > 0:
-			AnimatedSprite.play("earth fall")
-		else:
-			AnimatedSprite.play("earth idle")
+			canvas.hide()
+			light.enabled = true
+			modulate = str_to_var("Color" + str(player_color))
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("fire walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("fire jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("fire fall")
+			else:
+				AnimatedSprite.play("fire idle")	
 	else:
-		canvas.hide()
-		light.enabled = true
-		modulate = str_to_var("Color" + str(player_color))
-		if velocity.x > 0 or velocity.x < 0:
-			AnimatedSprite.play("fire walk")
-		elif velocity.y < 0:
-			AnimatedSprite.play("fire jump")
-		elif velocity.y > 0:
-			AnimatedSprite.play("fire fall")
+		if device_num == 0:
+			canvas.show()
+			light.enabled = Globals.Graphics
+			light.shadow_enabled = Globals.Graphics
+			light.shadow_filter = Globals.Graphics
+			light.shadow_filter_smooth = Globals.Graphics
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("fire walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("fire jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("fire fall")
+			else:
+				AnimatedSprite.play("fire idle")
+		elif device_num == 1:
+			canvas.hide()
+			light.enabled = false
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("water walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("water jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("water fall")
+			else:
+				AnimatedSprite.play("water idle")
+		elif device_num == 2:
+			canvas.hide()
+			light.enabled = false
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("air walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("air jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("air fall")
+			else:
+				AnimatedSprite.play("air idle")
+		elif device_num == 3:
+			canvas.hide()
+			light.enabled = false
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("earth walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("earth jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("earth fall")
+			else:
+				AnimatedSprite.play("earth idle")
 		else:
-			AnimatedSprite.play("fire idle")		
+			canvas.hide()
+			light.enabled = true
+			modulate = str_to_var("Color" + str(player_color))
+			if velocity.x > 0 or velocity.x < 0:
+				AnimatedSprite.play("fire walk")
+			elif velocity.y < 0:
+				AnimatedSprite.play("fire jump")
+			elif velocity.y > 0:
+				AnimatedSprite.play("fire fall")
+			else:
+				AnimatedSprite.play("fire idle")		
 
 		
 	
@@ -337,26 +394,34 @@ func setlifes(value):
 func getenergy():
 	energys += 1
 	score += 3
-	DataState.save_file_state()
-	Data.save_file()
+	if not Network.is_networking:
+		DataState.save_file_state()
+		Data.save_file()
 	
 
 func getlife():
 	Hearths += 1
-	DataState.save_file_state()
-	Data.save_file()
+	if not Network.is_networking:
+		DataState.save_file_state()
+		Data.save_file()
 	
 
 func changelevel():
 	Globals.level_int += 1
 	Globals.level = "level_" + str(Globals.level_int)
 	save_state().parent = "/root/Game/" + Globals.level
-	DataState.save_file_state()
-	Data.save_file()
+	if not Network.is_networking:
+		DataState.save_file_state()
+		Data.save_file()
 	
 func setposspawn():
 	if Network.is_networking:
-		position = Vector2(449, -219)
+		if last_position:
+			position = last_position
+		else:
+			last_position = Vector2(449, -219)
+			position = last_position
+			last_position = null
 	else:
 		if last_position:
 			position = last_position
@@ -391,8 +456,9 @@ func damage(ammount):
 		score -= 3
 		if score < 0:
 			score = 0
-		DataState.save_file_state()
-		Data.save_file()
+		if not Network.is_networking:
+			DataState.save_file_state()
+			Data.save_file()
 		
 	
 

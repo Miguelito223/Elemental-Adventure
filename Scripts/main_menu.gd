@@ -447,7 +447,7 @@ func _on_create_pressed():
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(Network.port)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-		OS.alert("Failed to start multiplayer client.")
+		OS.alert("Failed to start multiplayer Server.")
 		return
 	get_parent().multiplayer.multiplayer_peer = peer
 	Network.is_networking = true
@@ -459,7 +459,7 @@ func _on_join2_pressed():
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(Network.ip, Network.port)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-		OS.alert("Failed to start multiplayer client.")
+		OS.alert("Failed to start multiplayer Client.")
 		return
 	get_parent().multiplayer.multiplayer_peer = peer
 	Network.is_networking = true

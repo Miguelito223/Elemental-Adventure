@@ -85,6 +85,8 @@ var deaths: Dictionary = {
 	3: 0, 
 }
 
+
+
 var actions_items: Array[String]
 
 func check_duplicates(a):

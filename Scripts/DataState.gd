@@ -111,6 +111,7 @@ func autosave_logic():
 	var time_passed = Time.get_unix_time_from_system() - int(Globals.autosaver_start_time)
 		
 	if (time_passed > (int(Globals.autosave_length) * 60)) :
-		save_file_state()
-		Data.save_file()
-		Globals.autosaver_start_time = str(Time.get_unix_time_from_system())
+		if not Network.is_networking:
+			save_file_state()
+			Data.save_file()
+			Globals.autosaver_start_time = str(Time.get_unix_time_from_system())
