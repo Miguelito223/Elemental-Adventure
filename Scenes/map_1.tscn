@@ -24,3 +24,21 @@ script = ExtResource("4_u82h6")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(449, -219)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 645.0
+offset_right = 503.0
+offset_bottom = 941.0
+editable = false
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer"]
+offset_left = 3.0
+offset_top = 940.0
+offset_right = 503.0
+offset_bottom = 971.0
+placeholder_text = "Message"
+
+[connection signal="gui_input" from="CanvasLayer/LineEdit" to="." method="_on_line_edit_gui_input"]

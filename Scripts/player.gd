@@ -81,13 +81,15 @@ func _ready():
 
 	if Network.is_networking:
 		Network.connection_count += 1
-		Network.send_data_to(Network.connection_count)
 
 	Signals.player_ready.emit()
 
+
+
 func _enter_tree():
 	if Network.is_networking:
-		set_multiplayer_authority(player_id)
+		set_multiplayer_authority(str(name).to_int())
+		$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	
 func _process(_delta):	
 	if Globals.use_keyboard and not Globals.use_mobile_buttons:
@@ -185,12 +187,14 @@ func _process(_delta):
 		
 	
 var ui_inputs = {
-	"right": Vector2.RIGHT,
-	"left":  Vector2.LEFT,
-	"jump": null,
-	"shoot": null,
-	"pause": null,
-	"down": null,
+
+	"right{n}".format({"n":device_num}): Vector2.RIGHT,
+	"left{n}".format({"n":device_num}): Vector2.LEFT,
+	"jump{n}".format({"n":device_num}): null,
+	"shoot{n}".format({"n":device_num}): null,
+	"pause{n}".format({"n":device_num}): null,
+	"down{n}".format({"n":device_num}): null,
+		
 }
 
 
@@ -378,7 +382,6 @@ func setposspawn():
 				return	
 
 	
-@rpc("any_peer", "call_local")
 func damage(ammount):
 	if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
 		InvunerabilityTime.start()

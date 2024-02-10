@@ -3,9 +3,15 @@ extends Node2D
 var DEBUGGING = true
 
 var connected_ids: Array = []
+var players: Array = []
 var input_maps: Array = []
 
 var rng = RandomNumberGenerator.new()
+@onready var lineedit = $CanvasLayer/LineEdit
+@onready var textedit = $CanvasLayer/TextEdit
+
+var username: String
+var msg: String
 
 var player_scene = preload("res://Scenes/player.tscn")
 
@@ -15,13 +21,19 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 		}))
+
+	if not multiplayer.is_server():
+		return
 		
 
 	get_parent().multiplayer.peer_connected.connect(
 		func(id):
 			add_player(Network.connection_count, id)
 	)
-	get_parent().multiplayer.peer_disconnected.connect(remove_player)
+	get_parent().multiplayer.peer_disconnected.connect(
+		func(id):
+			remove_player(Network.connection_count, id)
+	)
 
 	for id in multiplayer.get_peers():
 		add_player(Network.connection_count, id)
@@ -35,9 +47,15 @@ func _ready():
 func add_player(player_index, player_id):
 	if Network.is_networking:
 
-		var player = player_scene.instantiate()
+		print("adding player id: " + str(player_id))
 
+		if player_index < players.size():
+			return
+
+		players.append(player_scene.instantiate())
 		connected_ids.append(player_id)
+
+		var player = players[-1]	
 
 		player.set_multiplayer_authority(player_id)
 
@@ -46,47 +64,59 @@ func add_player(player_index, player_id):
 		player.device_num = player_index
 		player.player_id = player_id
 
-		player.name =  Globals.player_name[player_index]
+		player.name =  str(player_id)
 		player.ball_color = Globals.ball_color_dict[player_index]
 		player.player_color = Globals.player_color_dict[player_index]
 
 		player.player_name = Globals.player_name[player_index]
+		username = player.player_name
 		player.energys = Globals.energys[player_index]
 		player.score = Globals.score[player_index]
 		player.Hearths = Globals.hearths[player_index]
 		player.deaths = Globals.deaths[player_index]
-		
-		input_maps.append({
-			"right{n}".format({"n":player_index}): Vector2.RIGHT,
-			"left{n}".format({"n":player_index}): Vector2.LEFT,
-			"jump{n}".format({"n":player_index}): null,
-			"shoot{n}".format({"n":player_index}): null,
-			"pause{n}".format({"n":player_index}): null,
-			"down{n}".format({"n":player_index}): null,
-		})
-		
-		player.ui_inputs = input_maps[player_index]
 
 		Globals._inputs_player(player_index)
 
 		add_child(player, true)
 
-func remove_player(player_id):
+func remove_player(player_index, player_id):
 	if Network.is_networking:
-		var player = get_node(str(player_id))
+		print("removing removing id: " + str(player_id))
+
+		var player = players[-1]
+		players.remove_at(player_index)
 		connected_ids.erase(player_id)
 		Network.connection_count -= 1
-		Network.send_data_to(Network.connection_count)
 		if is_instance_valid(player):
 			player.queue_free()
+
+			
+
+@rpc("any_peer", "call_local")
+func msg_rcp(username, data):
+	textedit.text += str(username,  ":", data, "\n")
+	lineedit.text = ""
+	textedit.scroll_vertical = textedit.get_line_height()
 	
 
 func _exit_tree():
+
+	if not multiplayer.is_server():
+		return
 
 	get_parent().multiplayer.peer_connected.disconnect(
 		func(id):
 			add_player(Network.connection_count, id)
 	)
-	get_parent().multiplayer.peer_disconnected.disconnect(remove_player)
+	get_parent().multiplayer.peer_disconnected.disconnect(		
+		func(id):
+			remove_player(Network.connection_count, id)
+	)
 	
+
+
+
+func _on_line_edit_gui_input(event:InputEvent):
+	if event.is_action_pressed("ui_accept"):
+		msg_rcp.rpc(username, lineedit.text)
 

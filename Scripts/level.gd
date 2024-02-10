@@ -128,18 +128,6 @@ func add_player(player_index):
 					print(node_data)
 					player.load_state(node_data)
 
-
-	input_maps.append({
-		"right{n}".format({"n":player_index}): Vector2.RIGHT,
-		"left{n}".format({"n":player_index}): Vector2.LEFT,
-		"jump{n}".format({"n":player_index}): null,
-		"shoot{n}".format({"n":player_index}): null,
-		"pause{n}".format({"n":player_index}): null,
-		"down{n}".format({"n":player_index}): null,
-	})
-	
-	player.ui_inputs = input_maps[player_index]
-
 	Globals._inputs_player(player_index)
 
 	add_child(player)
