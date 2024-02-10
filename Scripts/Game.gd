@@ -29,9 +29,6 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		var peer = ENetMultiplayerPeer.new()
 		peer.create_server(Network.port)
-		if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-			OS.alert("Failed to start multiplayer Server.")
-			return
 		multiplayer.multiplayer_peer = peer
 		Network.is_networking = true
 		if multiplayer.is_server():
