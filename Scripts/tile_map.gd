@@ -11,7 +11,7 @@ var dirt_atlas = Vector2i(1,0)
 
 var tile_arg: Array = []
 
-@rpc("call_local", "any_peer")
+@rpc("any_peer")
 func generate_terrain():
 	var noise: FastNoiseLite = noise_imagen.noise
 	var cave_noise: FastNoiseLite = cave_noise_imagen.noise
