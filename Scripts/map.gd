@@ -12,7 +12,7 @@ var enemy_scene = preload("res://Scenes/enemy.tscn")
 var rand = RandomNumberGenerator.new()
 
 @export var timer = 10
-@export var NumEnemys = 20
+@export var NumEnemys = 10
 
 func _ready():
 	if DEBUGGING:
