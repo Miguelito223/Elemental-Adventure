@@ -3,7 +3,7 @@ extends TileMap
 @export var noise_imagen: NoiseTexture2D
 @export var cave_noise_imagen: NoiseTexture2D
 
-var width = 2000
+var width = 10000
 var height = 100
 
 var dirt_grass_atlas = Vector2i(0,0)
