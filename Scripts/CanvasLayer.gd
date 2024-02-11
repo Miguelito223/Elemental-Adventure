@@ -5,16 +5,11 @@ var hearths_size = 1200
 
 
 func _process(_delta):
-	if Network.is_networking:
-		if is_multiplayer_authority():
-			update_label()
-	else:
-		update_label()
+	update_label()
 
 	
 
 func update_label():
-
 	$Panel/Hearths.size.x = player.Hearths * hearths_size
 	$Panel2/Label2.text = ":" + str(player.energys)
 	$Panel3/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)

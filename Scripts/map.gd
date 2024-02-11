@@ -76,6 +76,7 @@ func add_player(peer_id):
 
 
 func _on_multiplayer_spawner_spawned(node):
+	print("spawning player id: " + node.name)
 
 	Network.connected_ids.append(node.name.to_int())
 	Network.connection_count = Network.connected_ids.size() - 1
@@ -109,6 +110,5 @@ func msg_rcp(user, data):
 func _on_line_edit_gui_input(event:InputEvent):
 	if event.is_action_pressed("ui_accept"):
 		msg_rcp.rpc(Network.username, lineedit.text)
-
 
 

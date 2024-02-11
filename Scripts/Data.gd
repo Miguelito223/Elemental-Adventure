@@ -36,7 +36,8 @@ func save_file():
 		"players":{
 			"level": Globals.level,
 			"level_int": Globals.level_int,
-			"num_players": Globals.num_players
+			"num_players": Globals.num_players,
+			"username": Network.username,
 		},
 	}
 

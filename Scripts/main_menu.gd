@@ -452,6 +452,9 @@ func _on_create_pressed():
 	peer.create_server(Network.port)
 	get_parent().multiplayer.multiplayer_peer = peer
 	Network.is_networking = true
+	
+	UPNP_setup()
+
 	if multiplayer.is_server():
 		LoadScene.load_scene(self, Globals.map)
 
@@ -471,3 +474,14 @@ func _on_port_text_changed(new_text:String):
 
 func _on_name_port_text_changed(new_text:String):
 	Network.username = new_text
+
+func UPNP_setup():
+	var upnp = UPNP.new()
+
+	var discover_result = upnp.discover()
+	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP discover Failed")
+	
+	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), "UPNP invalid gateway")
+
+	var map_result = upnp.add_port_mapping(Network.port)
+	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP port mapping failed")

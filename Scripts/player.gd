@@ -83,6 +83,8 @@ func _enter_tree():
 		set_multiplayer_authority(str(name).to_int())
 		$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 		setposspawn()
+
+
 	
 func _process(_delta):	
 	if Globals.use_keyboard and not Globals.use_mobile_buttons:
@@ -125,9 +127,15 @@ func _process(_delta):
 	else:
 		$Camera2D.enabled = false
 	
+	if Network.is_networking:
+		if syncronizer.is_multiplayer_authority():
+			canvas.show()
+		else:
+			canvas.hide()
 
 	if device_num == 0:
-		canvas.show()
+		if not Network.is_networking:
+			canvas.show()
 		light.enabled = Globals.Graphics
 		light.shadow_enabled = Globals.Graphics
 		light.shadow_filter = Globals.Graphics
@@ -141,7 +149,8 @@ func _process(_delta):
 		else:
 			AnimatedSprite.play("fire idle")
 	elif device_num == 1:
-		canvas.hide()
+		if not Network.is_networking:
+			canvas.hide()
 		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("water walk")
@@ -152,7 +161,8 @@ func _process(_delta):
 		else:
 			AnimatedSprite.play("water idle")
 	elif device_num == 2:
-		canvas.hide()
+		if not Network.is_networking:
+			canvas.hide()
 		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("air walk")
@@ -163,7 +173,8 @@ func _process(_delta):
 		else:
 			AnimatedSprite.play("air idle")
 	elif device_num == 3:
-		canvas.hide()
+		if not Network.is_networking:
+			canvas.hide()
 		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("earth walk")
@@ -174,7 +185,8 @@ func _process(_delta):
 		else:
 			AnimatedSprite.play("earth idle")
 	else:
-		canvas.hide()
+		if not Network.is_networking:
+			canvas.hide()
 		light.enabled = true
 		modulate = str_to_var("Color" + str(player_color))
 		if velocity.x > 0 or velocity.x < 0:
