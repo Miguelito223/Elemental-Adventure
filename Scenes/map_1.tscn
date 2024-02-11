@@ -39,4 +39,5 @@ offset_right = 503.0
 offset_bottom = 971.0
 placeholder_text = "Message"
 
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
 [connection signal="gui_input" from="CanvasLayer/LineEdit" to="." method="_on_line_edit_gui_input"]

@@ -4,15 +4,13 @@ var hearths_size = 1200
 @onready var player = get_parent()
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	update_label()
-
 func _process(_delta):
-	update_label()
+	if is_multiplayer_authority():
+		update_label()
 	
 
 func update_label():
+
 	$Panel/Hearths.size.x = player.Hearths * hearths_size
 	$Panel2/Label2.text = ":" + str(player.energys)
 	$Panel3/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)

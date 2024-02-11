@@ -24,7 +24,7 @@ func _on_body_entered(body):
 		
 	else: 
 		if body.is_in_group("player"):
-			body.damage(0.5)
+			body.damage.rpc(0.5)
 
 		get_parent().add_child(explosion)
 		explosion.position = position

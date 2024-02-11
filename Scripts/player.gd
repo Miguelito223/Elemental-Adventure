@@ -74,8 +74,6 @@ func _ready():
 	get_tree().paused = false
 	setlifes(Hearths)
 
-	setposspawn()
-
 	Signals.player_ready.emit()
 
 
@@ -84,6 +82,7 @@ func _enter_tree():
 	if Network.is_networking:
 		set_multiplayer_authority(str(name).to_int())
 		$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+		setposspawn()
 	
 func _process(_delta):	
 	if Globals.use_keyboard and not Globals.use_mobile_buttons:
@@ -119,7 +118,7 @@ func _process(_delta):
 		Network.score[device_num] = score
 
 	if Network.is_networking:
-		if is_multiplayer_authority():
+		if $MultiplayerSynchronizer.is_multiplayer_authority():
 			$Camera2D.enabled = true
 		else:
 			$Camera2D.enabled = false
@@ -207,7 +206,7 @@ func get_input_axis():
 
 func _physics_process(delta):
 	if Network.is_networking:
-		if is_multiplayer_authority():
+		if $MultiplayerSynchronizer.is_multiplayer_authority():
 			move(delta, axis * speed * delta, friction * delta)
 	else:
 		move(delta, axis * speed * delta, friction * delta)
@@ -264,7 +263,7 @@ func move(delta, accel, amount):
 
 func _input(event):
 	if Network.is_networking:
-		if is_multiplayer_authority():
+		if $MultiplayerSynchronizer.is_multiplayer_authority():
 
 			if event.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1
@@ -321,7 +320,7 @@ func setlifes(value):
 	Hearths = clamp(value,0,Max_Hearths)
 	if Hearths <= 0:
 		if Network.is_networking:
-			if is_multiplayer_authority():
+			if $MultiplayerSynchronizer.is_multiplayer_authority():
 				print("you dead")
 				Hearths = Max_Hearths
 				deaths += 1
@@ -406,21 +405,20 @@ func setposspawn():
 				print("no more of four players")
 				return	
 
-	
+@rpc("any_peer", "call_local")
 func damage(ammount):
 	if Network.is_networking:
-		if is_multiplayer_authority():
-			if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
-				InvunerabilityTime.start()
-				setlifes(Hearths - ammount)
-				Animation_Effects.play("damage")
-				Animation_Effects.queue("flash")
-				score -= 3
-				if score < 0:
-					score = 0
-				if not Network.is_networking:
-					DataState.save_file_state()
-					Data.save_file()
+		if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
+			InvunerabilityTime.start()
+			setlifes(Hearths - ammount)
+			Animation_Effects.play("damage")
+			Animation_Effects.queue("flash")
+			score -= 3
+			if score < 0:
+				score = 0
+			if not Network.is_networking:
+				DataState.save_file_state()
+				Data.save_file()
 	else:
 		if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
 			InvunerabilityTime.start()
@@ -448,7 +446,7 @@ func in_water():
 			print(is_in_water)
 
 			if not player_name == "Water":
-				damage(Max_Hearths)
+				damage.rpc(Max_Hearths)
 
 func out_water():
 	if $WaterDetector2D.get_overlapping_bodies().size() == 0:
@@ -463,7 +461,7 @@ func in_lava():
 		print(is_in_lava)
 
 		if not player_name == "Fire":
-			damage(Max_Hearths)
+			damage.rpc(Max_Hearths)
 
 func out_lava():
 	if $LavaDetector2D.get_overlapping_bodies().size() == 0:
