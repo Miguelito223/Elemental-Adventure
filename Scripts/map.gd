@@ -58,7 +58,7 @@ func add_player(peer_id):
 	player.name = str(peer_id)
 	player.device_num = Network.connection_count
 
-	player.player_id = player.name
+	player.player_id = player.name.to_int()
 
 	player.player_name = Network.username
 	player.ball_color = Network.ball_color_dict[player.device_num]
@@ -81,7 +81,7 @@ func _on_multiplayer_spawner_spawned(node):
 	Network.connection_count = Network.connected_ids.size() - 1
 	
 	node.device_num = Network.connection_count
-	node.player_id = node.name
+	node.player_id = node.name.to_int()
 
 	node.ball_color = Network.ball_color_dict[node.device_num]
 	node.player_color = Network.player_color_dict[node.device_num]
