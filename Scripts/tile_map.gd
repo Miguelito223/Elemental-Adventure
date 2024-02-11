@@ -13,8 +13,11 @@ var tile_arg: Array = []
 
 func _ready():
 	var noise: FastNoiseLite = noise_imagen.noise
-	var noise_height 
 	var cave_noise: FastNoiseLite = cave_noise_imagen.noise
+	cave_noise.seed = randi()
+	noise.seed = randi() 
+	var noise_height 
+	
 	for x in width:
 		noise_height = int(noise.get_noise_1d(x) * 10)
 
