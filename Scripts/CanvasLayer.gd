@@ -5,8 +5,12 @@ var hearths_size = 1200
 
 
 func _process(_delta):
-	if is_multiplayer_authority():
+	if Network.is_networking:
+		if is_multiplayer_authority():
+			update_label()
+	else:
 		update_label()
+
 	
 
 func update_label():

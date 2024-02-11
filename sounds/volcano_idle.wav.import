@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dc0t7e1f08mgx"
-path="res://.godot/imported/volcano_idle.wav-526a2d70c79ad7a218df2bb353b06a78.sample"
+path="res://.godot/imported/volcano_idle.wav-5b2575a89ef33cec9cffcd51503c2acb.sample"
 
 [deps]
 
-source_file="res://Sounds/volcano_idle.wav"
-dest_files=["res://.godot/imported/volcano_idle.wav-526a2d70c79ad7a218df2bb353b06a78.sample"]
+source_file="res://sounds/volcano_idle.wav"
+dest_files=["res://.godot/imported/volcano_idle.wav-5b2575a89ef33cec9cffcd51503c2acb.sample"]
 
 [params]
 
