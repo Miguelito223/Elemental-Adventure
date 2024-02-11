@@ -11,7 +11,8 @@ var dirt_atlas = Vector2i(1,0)
 
 var tile_arg: Array = []
 
-func _ready():
+@rpc("call_local", "any_peer")
+func generate_terrain():
 	var noise: FastNoiseLite = noise_imagen.noise
 	var cave_noise: FastNoiseLite = cave_noise_imagen.noise
 	cave_noise.seed = randi()
@@ -36,4 +37,8 @@ func _ready():
 
 	BetterTerrain.set_cells(self, 0, tile_arg, 0)
 	BetterTerrain.update_terrain_cells(self, 0, tile_arg, true)
+
+
+func _ready():
+	generate_terrain.rpc()
 
