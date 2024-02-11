@@ -83,7 +83,6 @@ func _on_multiplayer_spawner_spawned(node):
 	node.device_num = Network.connection_count
 	node.player_id = node.name
 
-	node.player_name = Network.username
 	node.ball_color = Network.ball_color_dict[node.device_num]
 	node.player_color = Network.player_color_dict[node.device_num]
 
