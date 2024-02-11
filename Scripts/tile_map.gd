@@ -23,7 +23,7 @@ func _ready():
 
 		for y in height:
 			if y > 5:
-				set_cell(1, Vector2i(x, noise_height + y),0, dirt_atlas)
+				set_cell(0, Vector2i(x, noise_height + y),1, dirt_atlas)
 
 
 			if cave_noise.get_noise_2d(x,y) < 0.4:

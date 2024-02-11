@@ -225,7 +225,7 @@ physics_layer_2/collision_mask = 0
 physics_layer_3/collision_layer = 8
 physics_layer_3/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_r7utw")
-sources/2 = SubResource("TileSetAtlasSource_klxcv")
+sources/1 = SubResource("TileSetAtlasSource_klxcv")
 metadata/_better_terrain = {
 "decoration": ["Decoration", Color(0.411765, 0.411765, 0.411765, 1), 3, [], {
 "path": "res://addons/better-terrain/icons/Decoration.svg"
