@@ -1,30 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://br25r5ymobg8n"]
+[gd_scene load_steps=11 format=3 uid="uid://br25r5ymobg8n"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_g7w7i"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_v6kvx"]
-[ext_resource type="Script" path="res://Scripts/tile_map.gd" id="3_w1q01"]
+[ext_resource type="Script" path="res://Scripts/tile_map.gd" id="3_0nlrc"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="7_12gnv"]
 
-[sub_resource type="Gradient" id="Gradient_1pg6r"]
+[sub_resource type="Gradient" id="Gradient_fpkth"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_f5ib0"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jt4ho"]
+frequency = 0.0431
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eylrm"]
-color_ramp = SubResource("Gradient_1pg6r")
-noise = SubResource("FastNoiseLite_f5ib0")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v7hmd"]
+color_ramp = SubResource("Gradient_fpkth")
+noise = SubResource("FastNoiseLite_jt4ho")
+
+[sub_resource type="Gradient" id="Gradient_w7u3v"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w2dcm"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ci7os"]
+color_ramp = SubResource("Gradient_w7u3v")
+noise = SubResource("FastNoiseLite_w2dcm")
 
 [node name="map_1" type="Node2D"]
 position = Vector2(499, 1030)
 script = ExtResource("1_g7w7i")
 
 [node name="TileMap" parent="." instance=ExtResource("2_v6kvx")]
-position = Vector2(449, -134)
-layer_0/tile_data = PackedInt32Array(65535, 0, 0, 0, 0, 0, 131071, 65536, 0, 65536, 65536, 0)
-script = ExtResource("3_w1q01")
-
-[node name="noise" type="Sprite2D" parent="TileMap"]
-position = Vector2(1, -1)
-texture = SubResource("NoiseTexture2D_eylrm")
+position = Vector2(-501, -50)
+script = ExtResource("3_0nlrc")
+noise_imagen = SubResource("NoiseTexture2D_v7hmd")
+cave_noise_imagen = SubResource("NoiseTexture2D_ci7os")
 
 [node name="environment" parent="." instance=ExtResource("7_12gnv")]
 position = Vector2(-77, -234)
@@ -36,7 +42,7 @@ spawn_path = NodePath("..")
 spawn_limit = 4
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(449, -219)
+position = Vector2(456, -119)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

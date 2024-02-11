@@ -28,6 +28,7 @@ Signals="*res://Scripts/Signals.gd"
 Data="*res://Scripts/Data.gd"
 DataState="*res://Scripts/DataState.gd"
 LoadScene="*res://Scripts/LoadScene.gd"
+BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 
 [debug]
 
@@ -41,6 +42,10 @@ window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 window/handheld/orientation=4
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
 
 [importer_defaults]
 
