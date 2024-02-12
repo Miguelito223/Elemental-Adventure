@@ -42,6 +42,9 @@ func _ready():
 		
 	Signals.level_loaded.emit()
 	
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		get_parent().multiplayer.multiplayer_peer = null
 
 func enemys_generation():
 	while true:

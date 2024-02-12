@@ -10,9 +10,9 @@ extends TileMap
 var width = 1000
 var height = 100
 
-var dirt_grass_atlas = Vector2i(0,0)
-var dirt_atlas = Vector2i(1,0)
-var rock_atlas = Vector2i(4,0)
+var dirt_grass_atlas = Vector2i(0, 0)
+var dirt_atlas = Vector2i(1, 0)
+var rock_atlas = Vector2i(4, 0)
 
 var tile_arg: Array = []
 
@@ -23,32 +23,36 @@ var cave_noise_seed
 var rock_noise_seed
 
 func _ready():
+
 	if not Network.is_networking:
 		return
-	
-	if get_parent().get_parent().multiplayer.is_server():
+
+
+	if multiplayer.is_server():
 		noise_seed = randi()
 		cave_noise_seed = randi()
 		rock_noise_seed = randi()
-		send_noise_seeds.rpc(noise_seed, cave_noise_seed, rock_noise_seed)
+		receive_seeds.rpc(received_noise_seed, received_cave_noise_seed, received_rock_noise_seed)
+	else:
+		request_seed.rpc_id(1)
 
-		
-	world_generation_server()
-		
+@rpc("any_peer", "call_local", "reliable")
+func receive_seeds(received_noise_seed, received_cave_noise_seed, received_rock_noise_seed):
+	noise_seed = received_noise_seed
+	cave_noise_seed = received_cave_noise_seed
+	rock_noise_seed = received_rock_noise_seed
+	world_generation()
 
-@rpc("any_peer", "call_local")
-func send_noise_seeds(noise_seed, cave_noise_seed, rock_noise_seed):
-	noise_seed = noise_seed
-	cave_noise_seed = cave_noise_seed
-	rock_noise_seed = rock_noise_seed
-	world_generation_server.rpc()
+@rpc("any_peer", "call_local", "reliable")
+func request_seed():
+	receive_seed.rpc_id(1)
 
+func world_generation():
+	print("Generating world...")
 
-@rpc("authority", "call_remote")
-func world_generation_server(noise_seed = 0, cave_noise_seed = 0, rock_noise_seed = 0):
-	noise.seed = noise_seed
-	cave_noise.seed = cave_noise_seed
-	rock_noise.seed = rock_noise_seed
+    noise.seed = noise_seed
+    cave_noise.seed = cave_noise_seed
+    rock_noise.seed = rock_noise_seed
 
 	for x in range(width):
 		noise_height = int(noise.get_noise_1d(x) * 10)
@@ -57,8 +61,8 @@ func world_generation_server(noise_seed = 0, cave_noise_seed = 0, rock_noise_see
 			if y > 5:
 				set_cell(0, Vector2i(x, noise_height + y), 1, dirt_atlas)
 
-			if cave_noise.get_noise_2d(x,y) < 0.4:
-				if rock_noise.get_noise_2d(x,y) < -0.4:
+			if cave_noise.get_noise_2d(x, y) < 0.4:
+				if rock_noise.get_noise_2d(x, y) < -0.4:
 					set_cell(0, Vector2i(x, noise_height + y), 0, rock_atlas)
 				else:
 					tile_arg.append(Vector2i(x, noise_height + y))
