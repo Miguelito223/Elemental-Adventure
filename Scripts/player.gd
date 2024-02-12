@@ -21,7 +21,6 @@ var can_fire = true
 @onready var light = $PointLight2D
 @onready var canvas = $CanvasLayer
 @onready var syncronizer = $MultiplayerSynchronizer
-
 var max_speed = 300.0
 var max_speed_in_air = 500.0
 var max_speed_in_water = 200.0
@@ -390,7 +389,7 @@ func setposspawn():
 		if last_position:
 			position = last_position
 		else:
-			last_position = Vector2(449, -219)
+			last_position = get_parent().get_node("Marker2D").position
 			position = last_position
 			last_position = null
 	else:
