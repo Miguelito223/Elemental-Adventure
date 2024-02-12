@@ -27,7 +27,7 @@ position = Vector2(499, 1030)
 script = ExtResource("1_g7w7i")
 
 [node name="TileMap" parent="." instance=ExtResource("2_v6kvx")]
-position = Vector2(-501, -50)
+position = Vector2(-500, -50)
 script = ExtResource("3_0nlrc")
 noise_imagen = SubResource("NoiseTexture2D_v7hmd")
 cave_noise_imagen = SubResource("NoiseTexture2D_ci7os")
