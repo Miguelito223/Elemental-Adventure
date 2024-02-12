@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://y6bboatewubh"]
 
 [ext_resource type="Script" path="res://Scripts/Pause menu.gd" id="1_77nxw"]
-[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_8qk3t"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_8qk3t"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="3_8hatb"]
 [ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="4_p5q2r"]
 

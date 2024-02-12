@@ -251,11 +251,12 @@ func _on_return_pressed():
 
 func _on_back_pressed():
 	if Network.is_networking:
-		hide()
-		get_tree().paused = false
-		Network.is_networking = false
-		get_parent().get_parent().get_parent().get_parent().multiplayer.multiplayer_peer = null
-		LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
+		if is_multiplayer_authority():
+			hide()
+			get_tree().paused = false
+			Network.is_networking = false
+			get_parent().get_parent().get_parent().get_parent().multiplayer.multiplayer_peer = null
+			LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
 	else:
 		hide()
 		get_tree().paused = false
