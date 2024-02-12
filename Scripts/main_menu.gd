@@ -483,11 +483,11 @@ func UPNP_setup():
 		print("UPNP discover Failed")
 		return
 	
-	if upnp.get_gateway() and !upnp.get_gateway().is_valid_gateway():
+	if !upnp.get_gateway() and !upnp.get_gateway().is_valid_gateway():
 		print("UPNP invalid gateway")
 		return 
 
 	var map_result = upnp.add_port_mapping(Network.port)
-	if map_result == UPNP.UPNP_RESULT_SUCCESS:
+	if map_result != UPNP.UPNP_RESULT_SUCCESS:
 		print("UPNP port mapping failed")
 		return
