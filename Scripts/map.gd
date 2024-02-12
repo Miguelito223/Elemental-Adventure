@@ -27,6 +27,7 @@ func _ready():
 	if not get_parent().multiplayer.is_server():
 		return
 
+	var viewport_size = get_viewport().get_visible_rect().size
 
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
@@ -43,9 +44,9 @@ func _ready():
 			await get_tree().create_timer(5).timeout
 			var enemy = enemy_scene.instantiate()
 			rand.randomize()
-			var x = rand.randf_range(0, 1000)
+			var x = rand.randf_range(0, viewport_size.x)
 			rand.randomize()
-			var y = rand.randf_range(100, 200)
+			var y = rand.randf_range(-50, -60)
 			enemy.position = Vector2(x, y)
 			add_child(enemy)
 		

@@ -479,9 +479,15 @@ func UPNP_setup():
 	var upnp = UPNP.new()
 
 	var discover_result = upnp.discover()
-	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP discover Failed")
+	if discover_result != UPNP.UPNP_RESULT_SUCCESS:  
+		print("UPNP discover Failed")
+		return
 	
-	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), "UPNP invalid gateway")
+	if upnp.get_gateway() and !upnp.get_gateway().is_valid_gateway():
+		print("UPNP invalid gateway")
+		return 
 
 	var map_result = upnp.add_port_mapping(Network.port)
-	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP port mapping failed")
+	if map_result == UPNP.UPNP_RESULT_SUCCESS:
+		print("UPNP port mapping failed")
+		return
