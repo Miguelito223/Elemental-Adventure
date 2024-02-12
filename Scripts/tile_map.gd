@@ -13,18 +13,17 @@ var rock_atlas = Vector2i(4,0)
 
 var tile_arg: Array = []
 
-@rpc("call_local", "any_peer", "reliable")
+@rpc("call_local", "any_peer")
 func terrain_generation():
 	var noise: FastNoiseLite = noise_imagen.noise
 	var cave_noise: FastNoiseLite = cave_noise_imagen.noise
 	var rock_noise: FastNoiseLite = rock_noise_imagen.noise
-	var noise_height 
 	
-	noise.noise.seed = randi()
 	cave_noise.seed = randi()
+	noise.seed = randi()
 	rock_noise.seed = randi()
 
-	
+	var noise_height 
 
 	for x in width:
 		noise_height = int(noise.get_noise_1d(x) * 10)
@@ -39,11 +38,6 @@ func terrain_generation():
 					set_cell(0, Vector2i(x, noise_height + y),0, rock_atlas)
 				else:
 					tile_arg.append(Vector2i(x, noise_height + y))
-				
-
-				
-
-
 
 		if tile_arg.find(Vector2i(x, noise_height + 1)) != 1:
 			tile_arg.append(Vector2i(x, noise_height))
