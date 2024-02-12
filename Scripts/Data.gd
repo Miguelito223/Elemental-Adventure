@@ -104,6 +104,7 @@ func load_file():
 		Globals.num_players = players.num_players
 		Globals.level = players.level
 		Globals.level_int = players.level_int
+		Network.username = players.username
 		
 		Signals.finish_load_data.emit()
 	
