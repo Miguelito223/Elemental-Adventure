@@ -35,7 +35,14 @@ func _ready():
 
 	if not OS.has_feature("dedicated_server") and get_parent().multiplayer.is_server():
 		add_player(1)
+		
+	enemys_generation.rpc()
+		
+	Signals.level_loaded.emit()
 
+
+@rpc("call_local", "any_peer")
+func enemys_generation():
 	while true:
 		await get_tree().create_timer(timer).timeout
 		for i in range(1, NumEnemys):
@@ -47,12 +54,6 @@ func _ready():
 			var y = rand.randf_range(-50, -60)
 			enemy.position = Vector2(x, y)
 			add_child(enemy)
-		
-	Signals.level_loaded.emit()
-
-
-	
-
 
 func server_disconected():
 	print("Server Finish")

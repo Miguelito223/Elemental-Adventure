@@ -49,7 +49,6 @@ var use_aub_theads: bool = false
 func _ready():
 	load_scene(null, "res://Scenes/main_menu.tscn")
 
-@rpc("call_local", "authority")
 func load_scene(current_scene, next_scene):
 	if next_scene != null:
 		scene_path = next_scene
