@@ -483,7 +483,7 @@ func UPNP_setup():
 		print("UPNP discover Failed")
 		return
 	
-	if !upnp.get_gateway() and !upnp.get_gateway().is_valid_gateway():
+	if upnp.get_gateway() and !upnp.get_gateway().is_valid_gateway():
 		print("UPNP invalid gateway")
 		return 
 
