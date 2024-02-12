@@ -20,6 +20,8 @@ func generate_seed():
 	cave_noise_imagen.noise.seed = randi()
 	rock_noise_imagen.noise.seed = randi()
 
+
+@rpc("authority", "call_local", "reliable")
 func terrain_generation():
 	var noise: FastNoiseLite = noise_imagen.noise
 	var cave_noise: FastNoiseLite = cave_noise_imagen.noise
@@ -53,5 +55,5 @@ func _ready():
 		return
 	
 	generate_seed.rpc()
-	terrain_generation()
+	terrain_generation.rpc()
 
