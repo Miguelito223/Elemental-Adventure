@@ -76,16 +76,3 @@ var deaths: Dictionary = {
 	3: 0, 
 }
 
-@rpc("call_local", "any_peer") 
-func set_connected_ids_number():
-	connection_count = connected_ids.size()
-
-@rpc("call_local", "any_peer") 
-func append_connected_ids(id):
-	connected_ids.append(id)
-
-@rpc("call_local", "any_peer") 
-func erase_connected_ids(id):
-	connected_ids.erase(id)
-
-
