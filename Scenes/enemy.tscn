@@ -1,9 +1,9 @@
 [gd_scene load_steps=23 format=3 uid="uid://da61af5kfk5ik"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_skb27"]
-[ext_resource type="Texture2D" uid="uid://bysw70gw27g6a" path="res://Sprites/enemigo1.png" id="2_evuxq"]
-[ext_resource type="Texture2D" uid="uid://cla5phqruofno" path="res://Sprites/enemigo1_attack.png" id="2_sttes"]
-[ext_resource type="Texture2D" uid="uid://dihgomfh35els" path="res://Sprites/enemigo1_idle.png" id="3_atkjq"]
+[ext_resource type="Texture2D" uid="uid://d0vm765cr4nxo" path="res://Sprites/enemigo1.png" id="2_evuxq"]
+[ext_resource type="Texture2D" uid="uid://c3i0k0p83xxum" path="res://Sprites/enemigo1_attack.png" id="2_sttes"]
+[ext_resource type="Texture2D" uid="uid://dauodg5nd35hj" path="res://Sprites/enemigo1_idle.png" id="3_atkjq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ienj8"]
 radius = 404.085

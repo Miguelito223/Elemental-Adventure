@@ -5,22 +5,20 @@
 [ext_resource type="Script" path="res://Scripts/tile_map.gd" id="3_0nlrc"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="7_12gnv"]
 
-[sub_resource type="Gradient" id="Gradient_fpkth"]
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jt4ho"]
-frequency = 0.0431
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v7hmd"]
-color_ramp = SubResource("Gradient_fpkth")
 noise = SubResource("FastNoiseLite_jt4ho")
-
-[sub_resource type="Gradient" id="Gradient_w7u3v"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_w2dcm"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ci7os"]
-color_ramp = SubResource("Gradient_w7u3v")
 noise = SubResource("FastNoiseLite_w2dcm")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8fmas"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yk7sn"]
+noise = SubResource("FastNoiseLite_8fmas")
 
 [node name="map_1" type="Node2D"]
 position = Vector2(499, 1030)
@@ -31,6 +29,7 @@ position = Vector2(-500, -50)
 script = ExtResource("3_0nlrc")
 noise_imagen = SubResource("NoiseTexture2D_v7hmd")
 cave_noise_imagen = SubResource("NoiseTexture2D_ci7os")
+rock_noise_imagen = SubResource("NoiseTexture2D_yk7sn")
 
 [node name="environment" parent="." instance=ExtResource("7_12gnv")]
 position = Vector2(-77, -234)
