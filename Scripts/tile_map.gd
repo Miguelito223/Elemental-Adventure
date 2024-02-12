@@ -28,20 +28,25 @@ func _ready():
 		return
 
 
-	if multiplayer.is_server():
-		noise_seed = randi()
-		cave_noise_seed = randi()
-		rock_noise_seed = randi()
+	if get_parent().get_parent().multiplayer.is_server():
+		generate_seeds()
 		receive_seeds.rpc(noise_seed, cave_noise_seed, rock_noise_seed)
 	else:
 		request_seed.rpc_id(1)
 
-@rpc("any_peer", "call_local", "reliable")
-func request_seed():
-	receive_seeds.rpc_id(1)
+func generate_seeds():
+	noise_seed = randi()
+	cave_noise_seed = randi()
+	rock_noise_seed = randi()
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_local")
+func request_seed():
+	print("requesteando semillas...")
+	receive_seeds.rpc_id(1, noise_seed, cave_noise_seed, rock_noise_seed)
+
+@rpc("any_peer", "call_local")
 func receive_seeds(received_noise_seed, received_cave_noise_seed, received_rock_noise_seed):
+	print("recibiendo semillas...")
 	noise_seed = received_noise_seed
 	cave_noise_seed = received_cave_noise_seed
 	rock_noise_seed = received_rock_noise_seed
