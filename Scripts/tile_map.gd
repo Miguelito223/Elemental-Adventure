@@ -32,9 +32,13 @@ func _ready():
 		noise_seed = randi()
 		cave_noise_seed = randi()
 		rock_noise_seed = randi()
-		receive_seeds.rpc(received_noise_seed, received_cave_noise_seed, received_rock_noise_seed)
+		receive_seeds.rpc(noise_seed, cave_noise_seed, rock_noise_seed)
 	else:
 		request_seed.rpc_id(1)
+
+@rpc("any_peer", "call_local", "reliable")
+func request_seed():
+	receive_seeds.rpc_id(1)
 
 @rpc("any_peer", "call_local", "reliable")
 func receive_seeds(received_noise_seed, received_cave_noise_seed, received_rock_noise_seed):
@@ -43,16 +47,12 @@ func receive_seeds(received_noise_seed, received_cave_noise_seed, received_rock_
 	rock_noise_seed = received_rock_noise_seed
 	world_generation()
 
-@rpc("any_peer", "call_local", "reliable")
-func request_seed():
-	receive_seed.rpc_id(1)
-
 func world_generation():
 	print("Generating world...")
 
-    noise.seed = noise_seed
-    cave_noise.seed = cave_noise_seed
-    rock_noise.seed = rock_noise_seed
+	noise.seed = noise_seed
+	cave_noise.seed = cave_noise_seed
+	rock_noise.seed = rock_noise_seed
 
 	for x in range(width):
 		noise_height = int(noise.get_noise_1d(x) * 10)
