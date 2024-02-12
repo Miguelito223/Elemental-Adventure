@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/game over Menu.gd" id="1_i0b3j"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_xqlid"]
-[ext_resource type="AudioStream" uid="uid://cegwxo4m0nxd3" path="res://Sounds/game over sound.wav" id="3_lxwha"]
+[ext_resource type="AudioStream" uid="uid://cegwxo4m0nxd3" path="res://sounds/game over sound.wav" id="3_lxwha"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="3_p0xq0"]
 
 [node name="Death Menu" type="Control"]

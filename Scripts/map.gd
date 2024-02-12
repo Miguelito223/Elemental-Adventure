@@ -23,6 +23,8 @@ func _ready():
 
 	if not Network.is_networking:
 		return
+		
+	enemys_generation()
 
 	if not get_parent().multiplayer.is_server():
 		return
@@ -36,12 +38,10 @@ func _ready():
 	if not OS.has_feature("dedicated_server") and get_parent().multiplayer.is_server():
 		add_player(1)
 		
-	enemys_generation.rpc()
 		
 	Signals.level_loaded.emit()
+	
 
-
-@rpc("call_local", "any_peer")
 func enemys_generation():
 	while true:
 		await get_tree().create_timer(timer).timeout
