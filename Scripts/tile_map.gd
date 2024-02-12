@@ -14,15 +14,12 @@ var rock_atlas = Vector2i(4,0)
 var tile_arg: Array = []
 
 
-@rpc("call_remote")
+@rpc("authority", "call_local", "reliable")
 func generate_seed():
 	noise_imagen.noise.seed = randi()
 	cave_noise_imagen.noise.seed = randi()
 	rock_noise_imagen.noise.seed = randi()
 
-
-
-@rpc("call_local", "any_peer")
 func terrain_generation():
 	var noise: FastNoiseLite = noise_imagen.noise
 	var cave_noise: FastNoiseLite = cave_noise_imagen.noise
@@ -56,5 +53,5 @@ func _ready():
 		return
 	
 	generate_seed.rpc()
-	terrain_generation.rpc()
+	terrain_generation()
 
