@@ -256,6 +256,7 @@ func _on_back_pressed():
 			get_tree().paused = false
 			Network.is_networking = false
 			get_parent().get_parent().get_parent().get_parent().multiplayer.multiplayer_peer = null
+			Network.connected_ids.clear()
 			LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
 	else:
 		hide()
