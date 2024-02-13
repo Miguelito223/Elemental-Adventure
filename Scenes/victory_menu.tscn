@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Victory menu.gd" id="1_hcj18"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_lqoqo"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="3_y1f2y"]
-[ext_resource type="AudioStream" uid="uid://cnvsxqk4pvf7y" path="res://Sounds/Victory Sound.wav" id="4_r03k4"]
+[ext_resource type="AudioStream" uid="uid://cnvsxqk4pvf7y" path="res://sounds/Victory Sound.wav" id="4_r03k4"]
 
 [node name="Victory menu" type="Control"]
 process_mode = 3

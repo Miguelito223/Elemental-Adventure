@@ -6,8 +6,8 @@ func _ready():
 
 func _on_return_pressed():
 	if Network.is_networking:
-		if is_multiplayer_authority():
-			self.queue_free()
+		print("removing game over menu...")
+		self.queue_free()
 	else:
 		get_tree().paused = false
 		LoadScene.load_scene(self, Globals.level)

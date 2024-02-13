@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Super victory screen.gd" id="1_x1h5b"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_6pc16"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="3_fhev0"]
-[ext_resource type="AudioStream" uid="uid://cnvsxqk4pvf7y" path="res://Sounds/Victory Sound.wav" id="4_dqktq"]
+[ext_resource type="AudioStream" uid="uid://cnvsxqk4pvf7y" path="res://sounds/Victory Sound.wav" id="4_dqktq"]
 
 [node name="Super Victory menu" type="Control"]
 process_mode = 3
