@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dpwro3crqbft3"]
 
 [ext_resource type="Script" path="res://Scripts/Victory menu.gd" id="1_hcj18"]
-[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="2_lqoqo"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_lqoqo"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="3_y1f2y"]
-[ext_resource type="AudioStream" uid="uid://ciykj3og6wxmg" path="res://Sounds/Victory Sound.wav" id="4_r03k4"]
+[ext_resource type="AudioStream" uid="uid://cnvsxqk4pvf7y" path="res://Sounds/Victory Sound.wav" id="4_r03k4"]
 
 [node name="Victory menu" type="Control"]
 layout_mode = 3
@@ -16,14 +16,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hcj18")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="Victory music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r03k4")
+autoplay = true
+bus = &"FX"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1913.0
 offset_bottom = 1088.0
 color = Color(0.211765, 0, 0.411765, 1)
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
+[node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 31.0
 offset_top = 25.0
 offset_right = 1911.0
@@ -35,14 +40,13 @@ level_1 !!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-layout_mode = 0
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 152.0
 offset_top = 441.0
 offset_right = 1652.0
 offset_bottom = 645.0
 
-[node name="energys" type="Label" parent="VBoxContainer2"]
+[node name="energys" type="Label" parent="CanvasLayer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
@@ -50,7 +54,7 @@ text = "energys balls:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="score" type="Label" parent="VBoxContainer2"]
+[node name="score" type="Label" parent="CanvasLayer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
@@ -58,14 +62,13 @@ text = "Score:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 707.0
 offset_top = 768.0
 offset_right = 1075.0
 offset_bottom = 968.0
 
-[node name="next" type="Button" parent="VBoxContainer"]
+[node name="next" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
@@ -73,14 +76,13 @@ text = "next
 "
 script = ExtResource("3_y1f2y")
 
-[node name="back" type="Button" parent="VBoxContainer"]
+[node name="back" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
 text = "Back"
 
-[node name="Credits" type="Label" parent="."]
-layout_mode = 0
+[node name="Credits" type="Label" parent="CanvasLayer"]
 offset_left = 8.0
 offset_top = 1057.0
 offset_right = 464.0
@@ -89,10 +91,5 @@ theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 24
 text = "make by Michael2911"
 
-[node name="Victory music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_r03k4")
-autoplay = true
-bus = &"FX"
-
-[connection signal="pressed" from="VBoxContainer/next" to="." method="_on_next_pressed"]
-[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/back" to="." method="_on_back_pressed"]
