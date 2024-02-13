@@ -10,8 +10,10 @@ var rng = RandomNumberGenerator.new()
 var player_scene = preload("res://Scenes/player.tscn")
 var enemy_scene = preload("res://Scenes/enemy.tscn")
 
-@export var timer = 10
-@export var NumEnemys = 10
+var enemy_list = []
+
+@onready var timer = 10
+@onready var NumEnemys = 10
 
 func _ready():
 	if DEBUGGING:
@@ -35,14 +37,14 @@ func _ready():
 	get_parent().multiplayer.connection_failed.connect(disconected_fail)
 
 	if not OS.has_feature("dedicated_server") and get_parent().multiplayer.is_server():
-		add_player(1)
-		
+		add_player(1)	
 		
 	Signals.level_loaded.emit()
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_parent().multiplayer.multiplayer_peer = null
+
 
 func enemys_generation():
 	while true:
@@ -53,7 +55,8 @@ func enemys_generation():
 			var x = randf_range(tile_map.position.x, tile_map.position.x + tile_map.width)
 			var y = randf_range(tile_map.position.y, tile_map.position.y + 10)
 			enemy.position = Vector2(x, y)
-			add_child(enemy)
+			add_child(enemy, true)
+			enemy_list.append(enemy)
 
 func server_disconected():
 	print("Server Finish")
@@ -99,6 +102,32 @@ func add_player(peer_id):
 		tile_map.request_seeds(1)
 	else:
 		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
+
+	for enemy in enemy_list:
+		send_enemy_to_player.rpc_id(peer_id, enemy)
+
+func decode_enemy_data(encoded_enemy_data: Object) -> Dictionary:
+	var encoded_string = encoded_enemy_data.to_string()
+	var json = JSON.new()
+
+	var decoded_enemy_data = {}
+	if encoded_string != "":
+		var parse_result = json.parse(encoded_string)
+		if parse_result.error == OK:
+			decoded_enemy_data = parse_result.result
+		else:
+			print("Error al decodificar los datos del enemigo...")
+	else:
+		print("Los datos del enemigo están vacíos.")
+
+	return decoded_enemy_data
+
+@rpc("any_peer", "call_local")
+func send_enemy_to_player(enemy):
+	enemy = decode_enemy_data(enemy)
+	if enemy:
+		add_child(enemy)
+
 
 
 func _on_multiplayer_spawner_spawned(node):
