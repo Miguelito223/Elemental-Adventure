@@ -126,9 +126,9 @@ func _on_multiplayer_spawner_spawned(node):
 func remove_player(peer_id):
 	print("removing player id: " + str(peer_id))
 	var player = get_node(str(peer_id))
-	Network.connected_ids.erase(player.name.to_int())
-	Network.connection_count = Network.connected_ids.size() - 1
 	if is_instance_valid(player):
+		Network.connected_ids.erase(player.name.to_int())
+		Network.connection_count = Network.connected_ids.size() - 1
 		player.queue_free()
 		
 @rpc("any_peer", "call_local")
