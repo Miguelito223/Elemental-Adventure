@@ -342,8 +342,6 @@ func setlifes(value):
 					deaths = 0
 					last_position = null
 					setposspawn()
-					Network.connected_ids.clear()
-					$Camera2D.enabled = false
 					LoadScene.load_scene(null, "res://Scenes/game_over_menu.tscn")
 		else:
 			if device_num == 0:

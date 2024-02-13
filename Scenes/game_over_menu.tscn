@@ -17,6 +17,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i0b3j")
 
+[node name="Death music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_lxwha")
+autoplay = true
+bus = &"FX"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 2
@@ -71,12 +77,6 @@ offset_bottom = 1084.0
 theme_override_fonts/font = ExtResource("2_xqlid")
 theme_override_font_sizes/font_size = 24
 text = "make by Michael2911"
-
-[node name="Death music" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("3_lxwha")
-autoplay = true
-bus = &"FX"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/back" to="." method="_on_back_pressed"]

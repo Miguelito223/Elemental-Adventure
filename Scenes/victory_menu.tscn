@@ -25,6 +25,7 @@ bus = &"FX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+layer = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3
