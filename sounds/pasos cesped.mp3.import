@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://ft1r657tvajy"
-path="res://.godot/imported/pasos cesped.mp3-161ed206f09c94433dcc226f3db60d15.mp3str"
+path="res://.godot/imported/pasos cesped.mp3-73acd80bf2c36927d45b9de32dcb0142.mp3str"
 
 [deps]
 
-source_file="res://Sounds/pasos cesped.mp3"
-dest_files=["res://.godot/imported/pasos cesped.mp3-161ed206f09c94433dcc226f3db60d15.mp3str"]
+source_file="res://sounds/pasos cesped.mp3"
+dest_files=["res://.godot/imported/pasos cesped.mp3-73acd80bf2c36927d45b9de32dcb0142.mp3str"]
 
 [params]
 
