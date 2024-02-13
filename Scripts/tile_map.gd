@@ -14,6 +14,8 @@ var dirt_grass_atlas = Vector2i(0, 0)
 var dirt_atlas = Vector2i(1, 0)
 var rock_atlas = Vector2i(4, 0)
 
+var tile_map = self
+
 var tile_arg: Array = []
 
 var noise_height 
@@ -26,6 +28,13 @@ func _ready():
 
 	if not Network.is_networking:
 		return
+		
+	if not get_parent().get_parent().multiplayer.is_server():
+		request_seeds(1)
+	else:
+		generate_seeds()
+		receive_seeds.rpc(noise_seed, cave_noise_seed,rock_noise_seed)
+
 
 func generate_seeds():
 	noise_seed = randi()
