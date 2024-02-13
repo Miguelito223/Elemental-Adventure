@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	pass
+	get_tree().paused = true
 
 func _process(_delta):
 	$CanvasLayer/Label.text = "You Completed Level: \n level " + str(Globals.level_int - 1) + "!!!"
@@ -10,6 +10,7 @@ func _process(_delta):
 
 
 func _on_next_pressed():
+	get_tree().paused = false
 	LoadScene.load_scene(self, Globals.level)
 
 

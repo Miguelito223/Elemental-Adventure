@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	get_tree().paused = true
+
 func _process(_delta):
 	$CanvasLayer/Label.text = "You Completed Level: \n level " + str(Globals.level_int - 1) + "!!!"
 	$CanvasLayer/VBoxContainer2/energys.text = "Energys Balls:" + str(Globals.energys[0] + Globals.energys[1] + Globals.energys[2] + Globals.energys[3])

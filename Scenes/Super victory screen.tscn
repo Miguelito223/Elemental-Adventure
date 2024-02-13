@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cnvsxqk4pvf7y" path="res://Sounds/Victory Sound.wav" id="4_dqktq"]
 
 [node name="Super Victory menu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,18 +18,22 @@ grow_vertical = 2
 script = ExtResource("1_x1h5b")
 
 [node name="Victory music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("4_dqktq")
 autoplay = true
 bus = &"FX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+process_mode = 3
 offset_right = 1913.0
 offset_bottom = 1088.0
 color = Color(0.211765, 0, 0.411765, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
+process_mode = 3
 offset_right = 1820.0
 offset_bottom = 188.0
 theme_override_fonts/font = ExtResource("2_6pc16")
@@ -39,12 +44,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+process_mode = 3
 offset_left = 223.0
 offset_top = 392.0
 offset_right = 1723.0
 offset_bottom = 602.0
 
 [node name="energys" type="Label" parent="CanvasLayer/VBoxContainer2"]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 100
@@ -53,6 +60,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="score" type="Label" parent="CanvasLayer/VBoxContainer2"]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 100
@@ -61,12 +69,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+process_mode = 3
 offset_left = 725.0
 offset_top = 780.0
 offset_right = 1093.0
 offset_bottom = 878.0
 
 [node name="back" type="Button" parent="CanvasLayer/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6pc16")
 theme_override_font_sizes/font_size = 90
@@ -74,6 +84,7 @@ text = "Exit"
 script = ExtResource("3_fhev0")
 
 [node name="Credits" type="Label" parent="CanvasLayer"]
+process_mode = 3
 offset_left = 8.0
 offset_top = 1057.0
 offset_right = 464.0

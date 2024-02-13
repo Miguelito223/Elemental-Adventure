@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cnvsxqk4pvf7y" path="res://Sounds/Victory Sound.wav" id="4_r03k4"]
 
 [node name="Victory menu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,18 +18,22 @@ grow_vertical = 2
 script = ExtResource("1_hcj18")
 
 [node name="Victory music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("4_r03k4")
 autoplay = true
 bus = &"FX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+process_mode = 3
 offset_right = 1913.0
 offset_bottom = 1088.0
 color = Color(0.211765, 0, 0.411765, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
+process_mode = 3
 offset_left = 31.0
 offset_top = 25.0
 offset_right = 1911.0
@@ -41,12 +46,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+process_mode = 3
 offset_left = 152.0
 offset_top = 441.0
 offset_right = 1652.0
 offset_bottom = 645.0
 
 [node name="energys" type="Label" parent="CanvasLayer/VBoxContainer2"]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
@@ -55,6 +62,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="score" type="Label" parent="CanvasLayer/VBoxContainer2"]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 100
@@ -63,12 +71,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+process_mode = 3
 offset_left = 707.0
 offset_top = 768.0
 offset_right = 1075.0
 offset_bottom = 968.0
 
 [node name="next" type="Button" parent="CanvasLayer/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
@@ -77,12 +87,14 @@ text = "next
 script = ExtResource("3_y1f2y")
 
 [node name="back" type="Button" parent="CanvasLayer/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_lqoqo")
 theme_override_font_sizes/font_size = 90
 text = "Back"
 
 [node name="Credits" type="Label" parent="CanvasLayer"]
+process_mode = 3
 offset_left = 8.0
 offset_top = 1057.0
 offset_right = 464.0
