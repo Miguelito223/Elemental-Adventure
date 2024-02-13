@@ -54,6 +54,8 @@ func _ready():
 	else:
 		DEBUGGING = true
 
+		
+
 	if DEBUGGING:
 		print("Running Player.gd: {n}._ready()... {pn}".format({
 			"n": name,
@@ -72,6 +74,13 @@ func _ready():
 	Pause_Menu.hide()
 	get_tree().paused = false
 	setlifes(Hearths)
+
+
+	if Network.is_networking:
+		$Camera2D.enabled = $MultiplayerSynchronizer.is_multiplayer_authority()
+	else:
+		$Camera2D.enabled = false
+
 
 	Signals.player_ready.emit()
 
@@ -117,14 +126,6 @@ func _process(_delta):
 		Network.deaths[device_num] = deaths
 		Network.energys[device_num] = energys
 		Network.score[device_num] = score
-
-	if Network.is_networking:
-		if $MultiplayerSynchronizer.is_multiplayer_authority():
-			$Camera2D.enabled = true
-		else:
-			$Camera2D.enabled = false
-	else:
-		$Camera2D.enabled = false
 	
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
@@ -342,7 +343,8 @@ func setlifes(value):
 					last_position = null
 					setposspawn()
 					Network.connected_ids.clear()
-					LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
+					$Camera2D.enabled = false
+					LoadScene.load_scene(null, "res://Scenes/game_over_menu.tscn")
 		else:
 			if device_num == 0:
 				print("you dead")

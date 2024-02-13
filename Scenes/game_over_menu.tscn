@@ -16,18 +16,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i0b3j")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1913.0
 offset_bottom = 1088.0
 color = Color(0.211765, 0, 0.411765, 1)
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
+[node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 352.0
 offset_top = 159.0
 offset_right = 1522.0
-offset_bottom = 299.0
+offset_bottom = 362.0
 theme_override_fonts/font = ExtResource("2_xqlid")
 theme_override_font_sizes/font_size = 100
 text = "You Dead...
@@ -35,31 +36,29 @@ Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 676.0
 offset_top = 591.0
 offset_right = 1224.0
 offset_bottom = 791.0
 
-[node name="return" type="Button" parent="VBoxContainer"]
+[node name="return" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_xqlid")
 theme_override_font_sizes/font_size = 90
 text = "Return"
 
-[node name="back" type="Button" parent="VBoxContainer"]
+[node name="back" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_xqlid")
 theme_override_font_sizes/font_size = 90
 text = "Back"
 script = ExtResource("3_p0xq0")
 
-[node name="Credits" type="Label" parent="."]
-layout_mode = 0
+[node name="Credits" type="Label" parent="CanvasLayer"]
 offset_left = 8.0
 offset_top = 1057.0
-offset_right = 416.0
+offset_right = 464.0
 offset_bottom = 1084.0
 theme_override_fonts/font = ExtResource("2_xqlid")
 theme_override_font_sizes/font_size = 24
@@ -70,5 +69,5 @@ stream = ExtResource("3_lxwha")
 autoplay = true
 bus = &"FX"
 
-[connection signal="pressed" from="VBoxContainer/return" to="." method="_on_return_pressed"]
-[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/back" to="." method="_on_back_pressed"]

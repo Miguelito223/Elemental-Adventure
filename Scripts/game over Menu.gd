@@ -3,11 +3,12 @@ extends Control
 func _on_return_pressed():
 	if Network.is_networking:
 		if is_multiplayer_authority():
+			var player = get_parent().get_node(Globals.map).get_node(str(multiplayer.get_unique_id()))
 			Network.connected_ids.clear()
-			if get_parent().multiplayer.is_server():
-				LoadScene.load_scene(self, Globals.map)
-			else:
-				queue_free()
+			queue_free()
+			player.get_node("Camera2D").enabled = true
+			
+
 	else:
 		LoadScene.load_scene(self, Globals.level)
 
