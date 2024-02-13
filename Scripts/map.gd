@@ -25,11 +25,10 @@ func _ready():
 	if not Network.is_networking:
 		return
 	
+	if not get_parent().multiplayer.is_server():
+		enemys_generation()
+		return
 	
-
-		
-		
-		
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
 	get_parent().multiplayer.server_disconnected.connect(server_disconected)
