@@ -4,10 +4,10 @@ func _on_return_pressed():
 	if Network.is_networking:
 		if is_multiplayer_authority():
 			Network.connected_ids.clear()
-			if not multiplayer.is_server():
-				queue_free()
-			else:
+			if get_parent().multiplayer.is_server():
 				LoadScene.load_scene(self, Globals.map)
+			else:
+				queue_free()
 	else:
 		LoadScene.load_scene(self, Globals.level)
 
