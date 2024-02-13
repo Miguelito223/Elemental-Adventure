@@ -336,7 +336,7 @@ func setlifes(value):
 				Hearths = Max_Hearths
 				deaths += 1
 				setposspawn()
-				if deaths >= Max_Hearths:
+				if deaths >= 1:
 					print("you dead, game over")
 					deaths = 0
 					last_position = null

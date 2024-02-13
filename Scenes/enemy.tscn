@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://da61af5kfk5ik"]
+[gd_scene load_steps=24 format=3 uid="uid://da61af5kfk5ik"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_skb27"]
 [ext_resource type="Texture2D" uid="uid://d0vm765cr4nxo" path="res://Sprites/enemigo1.png" id="2_evuxq"]
@@ -87,6 +87,32 @@ animations = [{
 "name": &"walk",
 "speed": 5.0
 }]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h1tp1"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Node2D:position")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("AnimatedSprite2D:animation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("AnimatedSprite2D:frame")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:hearth")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:speed")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_gf7xr"]
 length = 0.001
@@ -248,6 +274,9 @@ scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_3q7bq")
 animation = &"attack"
 autoplay = "idle"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_h1tp1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

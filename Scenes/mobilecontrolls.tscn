@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ywyhxmenkfw"]
 
-[ext_resource type="Texture2D" uid="uid://kj8ifcn7mn3m" path="res://Sprites/up.png" id="2_rg3jk"]
+[ext_resource type="Texture2D" uid="uid://cfro4taixkxu6" path="res://Sprites/up.png" id="2_rg3jk"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="3_ifnkr"]
-[ext_resource type="Texture2D" uid="uid://dr8824cpi75tl" path="res://Sprites/shoot.png" id="5_t4wdv"]
+[ext_resource type="Texture2D" uid="uid://b18sru4fovsis" path="res://Sprites/shoot.png" id="5_t4wdv"]
 
 [sub_resource type="GDScript" id="GDScript_qkajy"]
 script/source = "extends CanvasLayer
