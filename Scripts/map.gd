@@ -52,7 +52,7 @@ func enemys_generation():
 			await get_tree().create_timer(5).timeout
 			var enemy = enemy_scene.instantiate()
 			rand.randomize()
-			var x = rand.randf_range(tile_map.position.x, tile_map.position.x * 1000)
+			var x = rand.randf_range(tile_map.position.x, tile_map.position.x + 1000)
 			rand.randomize()
 			var y = rand.randf_range(tile_map.position.y, tile_map.position.y + 10)
 			enemy.position = Vector2(x, y)
