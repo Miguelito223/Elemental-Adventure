@@ -10,8 +10,6 @@ var rng = RandomNumberGenerator.new()
 var player_scene = preload("res://Scenes/player.tscn")
 var enemy_scene = preload("res://Scenes/enemy.tscn")
 
-var rand = RandomNumberGenerator.new()
-
 @export var timer = 10
 @export var NumEnemys = 10
 
@@ -52,10 +50,8 @@ func enemys_generation():
 		for i in range(1, NumEnemys):
 			await get_tree().create_timer(5).timeout
 			var enemy = enemy_scene.instantiate()
-			rand.randomize()
-			var x = rand.randf_range(tile_map.position.x, tile_map.position.x + 1000)
-			rand.randomize()
-			var y = rand.randf_range(tile_map.position.y, tile_map.position.y + 10)
+			var x = randf_range(tile_map.position.x, tile_map.position.x + tile_map.width)
+			var y = randf_range(tile_map.position.y, tile_map.position.y + 10)
 			enemy.position = Vector2(x, y)
 			add_child(enemy)
 
