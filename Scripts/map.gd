@@ -25,10 +25,17 @@ func _ready():
 	if not Network.is_networking:
 		return
 		
-	enemys_generation()
+	
 
-	if not get_parent().multiplayer.is_server():
+	if get_parent().multiplayer.is_server():
+		tile_map.generate_seeds()
+		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed, tile_map.rock_noise_seed)
+	else:
+		tile_map.request_seeds(1)
+		tile_map.enemys_generation()
 		return
+
+		
 
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
