@@ -17,6 +17,7 @@ var rock_atlas = Vector2i(4, 0)
 var tile_map = self
 
 var tile_arg: Array = []
+var rock_arg: Array = []
 
 var noise_height 
 
@@ -70,14 +71,19 @@ func world_generation():
 			if y > 5:
 				set_cell(0, Vector2i(x, noise_height + y), 1, dirt_atlas)
 
-			if cave_noise.get_noise_2d(x, y) < 0.4:
-				if rock_noise.get_noise_2d(x, y) < -0.4:
-					set_cell(0, Vector2i(x, noise_height + y), 0, rock_atlas)
-				else:
-					tile_arg.append(Vector2i(x, noise_height + y))
+			if (cave_noise.get_noise_2d(x, y) > 0.6) and y > 20:	
+				rock_arg.append(Vector2i(x, y))
+			else:
+				tile_arg.append(Vector2(x, noise_height+y))
 
 		if not tile_arg.find(Vector2i(x, noise_height + 1)):
 			tile_arg.append(Vector2i(x, noise_height))
+			var rand_num = randi_range(0,20)
+			if rand_num == 1:
+				set_cell(0, Vector2(x, noise_height-1),0, dirt_grass_atlas)
 
 	BetterTerrain.set_cells(self, 0, tile_arg, 0)
 	BetterTerrain.update_terrain_cells(self, 0, tile_arg, true)
+
+	BetterTerrain.set_cells(tile_map, 0,rock_arg, 1)
+	BetterTerrain.update_terrain_cells(tile_map, 0,rock_arg,true )
