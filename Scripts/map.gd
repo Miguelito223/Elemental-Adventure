@@ -115,29 +115,6 @@ func add_player(peer_id):
 	for positions in enemy_positions:
 		spawn_enemy_remotely.rpc_id(peer_id, positions)
 
-func decode_enemy_data(encoded_enemy_data):
-	var encoded_string = encoded_enemy_data.to_string()
-	var json = JSON.new()
-
-	var decoded_enemy_data = {}
-	if encoded_string != "":
-		var parse_result = json.parse(encoded_string)
-		var parse_result_str = JSON.parse_string(encoded_string)
-		if parse_result == OK:
-			decoded_enemy_data = parse_result_str
-		else:
-			print("Error al decodificar los datos del enemigo...")
-	else:
-		print("Los datos del enemigo están vacíos.")
-
-	return decoded_enemy_data
-
-@rpc("any_peer", "call_local")
-func send_enemy_to_player(enemy):
-	enemy = decode_enemy_data(enemy)
-	if enemy:
-		add_child(enemy)
-
 
 
 func _on_multiplayer_spawner_spawned(node):
