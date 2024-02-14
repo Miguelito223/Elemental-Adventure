@@ -31,11 +31,9 @@ func _ready():
 		return
 		
 	if not get_parent().get_parent().multiplayer.is_server():
-		request_seeds(1)
-	else:
-		generate_seeds()
-		receive_seeds.rpc(noise_seed, cave_noise_seed,rock_noise_seed)
-
+		return
+	
+	generate_seeds()
 
 func generate_seeds():
 	noise_seed = randi()
