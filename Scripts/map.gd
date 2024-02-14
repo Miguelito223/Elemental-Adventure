@@ -11,10 +11,10 @@ var player_scene = preload("res://Scenes/player.tscn")
 var enemy_scene = preload("res://Scenes/enemy.tscn")
 
 var enemy_list = []
-var enemy_positions = []
 
-@onready var timer = 10
+@onready var timer = 5
 @onready var NumEnemys = 10
+@onready var MaxEnemies = 30
 
 func _ready():
 	if DEBUGGING:
@@ -29,7 +29,11 @@ func _ready():
 	if not get_parent().multiplayer.is_server():
 		return
 
-	enemys_generation()
+	timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", enemys_generation)
+	timer.wait_time = timer
+	timer.start()
 	
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
@@ -47,17 +51,18 @@ func _notification(what):
 		get_parent().multiplayer.multiplayer_peer = null
 
 func enemys_generation():
-	while true:
-		await get_tree().create_timer(timer).timeout
-		for i in range(1, NumEnemys):
-			await get_tree().create_timer(5).timeout
-			var enemy = enemy_scene.instantiate()
-			var x = randf_range(tile_map.position.x, tile_map.position.x + tile_map.width)
-			var y = randf_range(tile_map.position.y, tile_map.position.y + 10)
-			enemy.position = Vector2(x, y)
-			add_child(enemy, true)
-			enemy_list.append(enemy)
-			enemy_positions.append(enemy.position)
+
+	var enemy = enemy_scene.instantiate()
+	var x = randf_range(tile_map.position.x, tile_map.position.x + tile_map.width)
+	var y = randf_range(tile_map.position.y, tile_map.position.y + 10)
+	enemy.position = Vector2(x, y)
+	add_child(enemy, true)
+	enemy_list.append(enemy)
+
+	if enemy_list.size() > MaxEnemies:
+		timer.stop()
+
+		
 
 
 

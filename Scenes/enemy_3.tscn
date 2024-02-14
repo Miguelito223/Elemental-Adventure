@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://by7461i8vp65b"]
+[gd_scene load_steps=25 format=3 uid="uid://by7461i8vp65b"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_3.gd" id="1_hmubj"]
 [ext_resource type="Texture2D" uid="uid://b68ttwomdstg7" path="res://Sprites/enemigo3_attack.png" id="2_m2bv6"]
@@ -199,6 +199,23 @@ _data = {
 "rest": SubResource("Animation_h0bwp")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fqd78"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Node2D:position")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Node2D:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
 [node name="enemy_3" type="CharacterBody2D" groups=["enemy", "persistent", "water"]]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_hmubj")
@@ -254,6 +271,9 @@ autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_fjqwq")
 }
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_fqd78")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -15.0
