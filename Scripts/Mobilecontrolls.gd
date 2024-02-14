@@ -8,8 +8,15 @@ extends CanvasLayer
 
 
 # Called when the node enters the scene tree for the first time.
-func _process(delta):
-	if not Globals.use_mobile_buttons:
-		hide()
+func _process(_delta):
+	if Network.is_networking:
+		if get_parent().is_multiplayer_authority():
+			if not Globals.use_mobile_buttons:
+				hide()
+			else:
+				show()
 	else:
-		show()
+		if not Globals.use_mobile_buttons:
+			hide()
+		else:
+			show()

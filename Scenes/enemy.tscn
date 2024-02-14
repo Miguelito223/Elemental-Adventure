@@ -313,6 +313,8 @@ position = Vector2(8, 1)
 [node name="Marker2D" type="Marker2D" parent="Node2D"]
 position = Vector2(30, 0)
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="detection_area3" to="." method="_on_detection_area_3_body_entered"]
 [connection signal="body_exited" from="detection_area3" to="." method="_on_detection_area_3_body_exited"]
 [connection signal="body_entered" from="detection_area2" to="." method="_on_detection_area_2_body_entered"]

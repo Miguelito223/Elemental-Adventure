@@ -12,9 +12,12 @@ var enemy_scene = preload("res://Scenes/enemy.tscn")
 
 var enemy_list = []
 
-@onready var timer = 5
+@onready var timer_wait = 5
 @onready var NumEnemys = 10
 @onready var MaxEnemies = 30
+
+var timer
+
 
 func _ready():
 	if DEBUGGING:
@@ -32,7 +35,7 @@ func _ready():
 	timer = Timer.new()
 	add_child(timer)
 	timer.connect("timeout", enemys_generation)
-	timer.wait_time = timer
+	timer.wait_time = timer_wait
 	timer.start()
 	
 	get_parent().multiplayer.peer_connected.connect(add_player)

@@ -20,6 +20,7 @@ var can_fire = true
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var light = $PointLight2D
 @onready var canvas = $CanvasLayer
+@onready var MobileButtons = $Mobilecontrolls
 @onready var syncronizer = $MultiplayerSynchronizer
 var max_speed = 300.0
 var max_speed_in_air = 500.0
