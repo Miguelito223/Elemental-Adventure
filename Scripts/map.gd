@@ -48,7 +48,7 @@ func _notification(what):
 
 @rpc
 func spawn_enemy_remotely(position):
-	var enemy = enemy_scene.instance()
+	var enemy = enemy_scene.instantiate()
 	enemy.position = position
 	add_child(enemy)
 
