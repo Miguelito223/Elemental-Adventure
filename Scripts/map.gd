@@ -24,11 +24,12 @@ func _ready():
 
 	if not Network.is_networking:
 		return
-
-	enemys_generation()
 	
 	if not get_parent().multiplayer.is_server():
+		enemys_generation.rpc_id(1)
 		return
+
+	enemys_generation.rpc()
 	
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
@@ -45,7 +46,7 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_parent().multiplayer.multiplayer_peer = null
 
-
+@rpc("any_peer", "call_local")
 func enemys_generation():
 	while true:
 		await get_tree().create_timer(timer).timeout
