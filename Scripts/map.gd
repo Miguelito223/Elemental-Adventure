@@ -29,6 +29,7 @@ func _ready():
 	if not get_parent().multiplayer.is_server():
 		return
 
+	enemys_generation()
 	
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
@@ -45,13 +46,6 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_parent().multiplayer.multiplayer_peer = null
 
-@rpc("any_peer", "call_local")
-func spawn_enemy_remotely(position):
-	var enemy = enemy_scene.instantiate()
-	enemy.position = position
-	add_child(enemy)
-
-@rpc("any_peer", "call_local")
 func enemys_generation():
 	while true:
 		await get_tree().create_timer(timer).timeout
@@ -109,13 +103,9 @@ func add_player(peer_id):
 	
 	if not get_parent().multiplayer.is_server():
 		tile_map.request_seeds(1)
-		enemys_generation.rpc_id(1)
 	else:
 		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
-		enemys_generation.rpc()
 
-	for positions in enemy_positions:
-		spawn_enemy_remotely.rpc_id(peer_id, positions)
 
 
 
