@@ -11,6 +11,7 @@ var player_scene = preload("res://Scenes/player.tscn")
 var enemy_scene = preload("res://Scenes/enemy.tscn")
 
 var enemy_list = []
+var enemy_positions = []
 
 @onready var timer = 10
 @onready var NumEnemys = 10
@@ -24,12 +25,11 @@ func _ready():
 
 	if not Network.is_networking:
 		return
+
+	enemys_generation()
 	
 	if not get_parent().multiplayer.is_server():
-		enemys_generation.rpc_id(1)
 		return
-
-	enemys_generation.rpc()
 	
 	get_parent().multiplayer.peer_connected.connect(add_player)
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
@@ -46,7 +46,12 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_parent().multiplayer.multiplayer_peer = null
 
-@rpc("any_peer", "call_local")
+@rpc
+func spawn_enemy_remotely(position):
+	var enemy = enemy_scene.instance()
+	enemy.position = position
+	add_child(enemy)
+
 func enemys_generation():
 	while true:
 		await get_tree().create_timer(timer).timeout
@@ -58,6 +63,9 @@ func enemys_generation():
 			enemy.position = Vector2(x, y)
 			add_child(enemy, true)
 			enemy_list.append(enemy)
+			enemy_positions.append(enemy.position)
+
+
 
 func server_disconected():
 	print("Server Finish")
@@ -104,8 +112,8 @@ func add_player(peer_id):
 	else:
 		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
 
-	for enemy in enemy_list:
-		send_enemy_to_player.rpc_id(peer_id, enemy)
+	for positions in enemy_positions:
+		spawn_enemy_remotely.rpc_id(peer_id, positions)
 
 func decode_enemy_data(encoded_enemy_data):
 	var encoded_string = encoded_enemy_data.to_string()
