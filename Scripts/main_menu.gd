@@ -485,7 +485,7 @@ func _on_join2_pressed():
 
 func web_socket_server():
 	var peer_server =  WebSocketMultiplayerPeer.new()
-	var err = peer_server.create_server(Network.port, CertificatedGenerator.server_tls_options)
+	var err = peer_server.create_server(Network.port, Network.ip, CertificatedGenerator.server_tls_options)
 	if err == OK:
 		get_tree().get_multiplayer().multiplayer_peer = peer_server
 		set_process(true)
