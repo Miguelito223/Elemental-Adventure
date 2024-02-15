@@ -451,28 +451,57 @@ func _on_back2_pressed():
 
 
 func _on_create_pressed():
+
+	if OS.get_name() == "Web":
+		web_socket_server()
+		return
+
 	var peer_server =  ENetMultiplayerPeer.new()
 	peer_server.create_server(Network.port, 4)
 	get_parent().multiplayer.multiplayer_peer = peer_server
 	Network.is_networking = true
 	
 	UPNP_setup()
-	set_process(true)
+
 
 	if multiplayer.is_server():
 		LoadScene.load_scene(self, Globals.map)
 
 func _on_join2_pressed():
-	var peer_client = ENetMultiplayerPeer.new()
+
+	if OS.get_name() == "Web":
+		web_socket_client()
+		return
+
+	var peer_client =  ENetMultiplayerPeer.new()
 	peer_client.create_client(Network.ip, Network.port)
 	get_parent().multiplayer.multiplayer_peer = peer_client
 	Network.is_networking = true
-	set_process(true)
+
+
+
 	if not multiplayer.is_server():
 		LoadScene.load_scene(self, "res://Scenes/game.tscn")
 
-
+func web_socket_server():
+	var peer_server =  WebSocketMultiplayerPeer.new()
+	peer_server.create_server(Network.port)
+	get_parent().multiplayer.multiplayer_peer = peer_server
+	set_process(true)
+	Network.is_networking = true
+	UPNP_setup()
+	if multiplayer.is_server():
+		LoadScene.load_scene(self, Globals.map)
 	
+func web_socket_client():
+	var peer_server =  WebSocketMultiplayerPeer.new()
+	peer_server.create_client("wss://" + Network.ip + ":" + str(Network.port))
+	get_parent().multiplayer.multiplayer_peer = peer_server
+	set_process(true)
+	Network.is_networking = true
+
+	if not multiplayer.is_server():
+		LoadScene.load_scene(self, "res://Scenes/game.tscn")
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
@@ -496,7 +525,12 @@ func UPNP_setup():
 		print("UPNP invalid gateway")
 		return 
 
-	var map_result = upnp.add_port_mapping(Network.port)
-	if map_result != UPNP.UPNP_RESULT_SUCCESS:
-		print("UPNP port mapping failed")
+	var map_result_udp = upnp.add_port_mapping(Network.port, Network.port, "", "UDP")
+	if map_result_udp != UPNP.UPNP_RESULT_SUCCESS:
+		print("UPNP port UDP mapping failed")
+		return
+
+	var map_result_tcp = upnp.add_port_mapping(Network.port, Network.port, "", "TCP")
+	if map_result_tcp != UPNP.UPNP_RESULT_SUCCESS:
+		print("UPNP port TCP mapping failed")
 		return
