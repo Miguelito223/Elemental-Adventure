@@ -30,7 +30,7 @@ func _ready():
 	if not Network.is_networking:
 		return
 		
-	if not get_parent().get_parent().multiplayer.is_server():
+	if not get_tree().get_multiplayer().is_server():
 		return
 	
 	generate_seeds()

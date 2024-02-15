@@ -29,7 +29,7 @@ func _ready():
 	if not Network.is_networking:
 		return
 	
-	if not get_parent().multiplayer.is_server():
+	if not get_tree().get_multiplayer().is_server():
 		return
 
 	timer = Timer.new()
@@ -38,20 +38,20 @@ func _ready():
 	timer.wait_time = timer_wait
 	timer.start()
 	
-	get_parent().multiplayer.peer_connected.connect(add_player)
-	get_parent().multiplayer.peer_disconnected.connect(remove_player)
-	get_parent().multiplayer.server_disconnected.connect(server_disconected)
-	get_parent().multiplayer.connected_to_server.connect(server_conected)
-	get_parent().multiplayer.connection_failed.connect(conected_fail)
+	get_tree().get_multiplayer().peer_connected.connect(add_player)
+	get_tree().get_multiplayer().peer_disconnected.connect(remove_player)
+	get_tree().get_multiplayer().server_disconnected.connect(server_disconected)
+	get_tree().get_multiplayer().connected_to_server.connect(server_conected)
+	get_tree().get_multiplayer().connection_failed.connect(conected_fail)
 
-	if not OS.has_feature("dedicated_server") and get_parent().multiplayer.is_server():
+	if not OS.has_feature("dedicated_server") and get_tree().get_multiplayer().is_server():
 		add_player(1)	
 		
 	Signals.level_loaded.emit()
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		get_parent().multiplayer.multiplayer_peer = null
+		get_tree().get_multiplayer().multiplayer_peer = null
 
 func enemys_generation():
 
@@ -71,12 +71,12 @@ func enemys_generation():
 
 func server_disconected():
 	print("Server Finish")
-	get_parent().multiplayer.multiplayer_peer = null
+	get_tree().get_multiplayer().multiplayer_peer = null
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
 func conected_fail():
 	print("Fail to load")
-	get_parent().multiplayer.multiplayer_peer = null
+	get_tree().get_multiplayer().multiplayer_peer = null
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
 func server_conected():
@@ -108,7 +108,7 @@ func add_player(peer_id):
 	
 	add_child(player, true)
 	
-	if not get_parent().multiplayer.is_server():
+	if not get_tree().get_multiplayer().is_server():
 		tile_map.request_seeds(1)
 	else:
 		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)

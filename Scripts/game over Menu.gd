@@ -19,7 +19,7 @@ func _on_return_pressed():
 func _on_back_pressed():
 	if Network.is_networking:
 		if player.is_multiplayer_authority():
-			get_parent().multiplayer.multiplayer_peer = null
+			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.is_networking = false
 			Network.connected_ids.clear()
 			LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")

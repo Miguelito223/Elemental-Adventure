@@ -190,7 +190,7 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		var peer = ENetMultiplayerPeer.new()
 		peer.create_server(Network.port)
-		get_parent().multiplayer.multiplayer_peer = peer
+		get_tree().get_multiplayer().multiplayer_peer = peer
 		Network.is_networking = true
 
 		UPNP_setup()
@@ -458,7 +458,7 @@ func _on_create_pressed():
 
 	var peer_server =  ENetMultiplayerPeer.new()
 	peer_server.create_server(Network.port, 4)
-	get_parent().multiplayer.multiplayer_peer = peer_server
+	get_tree().get_multiplayer().multiplayer_peer = peer_server
 	Network.is_networking = true
 	
 	UPNP_setup()
@@ -475,7 +475,7 @@ func _on_join2_pressed():
 
 	var peer_client =  ENetMultiplayerPeer.new()
 	peer_client.create_client(Network.ip, Network.port)
-	get_parent().multiplayer.multiplayer_peer = peer_client
+	get_tree().get_multiplayer().multiplayer_peer = peer_client
 	Network.is_networking = true
 
 
@@ -486,7 +486,7 @@ func _on_join2_pressed():
 func web_socket_server():
 	var peer_server =  WebSocketMultiplayerPeer.new()
 	peer_server.create_server(Network.port)
-	get_parent().multiplayer.multiplayer_peer = peer_server
+	get_tree().get_multiplayer().multiplayer_peer = peer_server
 	set_process(true)
 	Network.is_networking = true
 	if multiplayer.is_server():
@@ -494,8 +494,8 @@ func web_socket_server():
 	
 func web_socket_client():
 	var peer_server =  WebSocketMultiplayerPeer.new()
-	peer_server.create_client("wss://" + Network.ip + ":" + str(Network.port))
-	get_parent().multiplayer.multiplayer_peer = peer_server
+	peer_server.create_client("wss://" + Network.ip + ":" + str(443))
+	get_tree().get_multiplayer().multiplayer_peer = peer_server
 	set_process(true)
 	Network.is_networking = true
 	if not multiplayer.is_server():
