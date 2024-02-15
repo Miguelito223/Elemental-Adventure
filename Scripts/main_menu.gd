@@ -471,7 +471,7 @@ func _on_join2_pressed():
 	self.queue_free()
 
 func _process(_delta):
- 	pass
+	pass
 	
 
 	
