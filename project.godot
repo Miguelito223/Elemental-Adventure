@@ -29,6 +29,7 @@ Data="*res://Scripts/Data.gd"
 DataState="*res://Scripts/DataState.gd"
 LoadScene="*res://Scripts/LoadScene.gd"
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
+CertificatedGenerator="*res://Scripts/Certificated_generator.gd"
 
 [debug]
 

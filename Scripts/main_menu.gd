@@ -485,7 +485,7 @@ func _on_join2_pressed():
 
 func web_socket_server():
 	var peer_server =  WebSocketMultiplayerPeer.new()
-	var err = peer_server.create_server(Network.port)
+	var err = peer_server.create_server(Network.port, CertificatedGenerator.server_tls_options)
 	if err == OK:
 		get_tree().get_multiplayer().multiplayer_peer = peer_server
 		set_process(true)
@@ -496,10 +496,10 @@ func web_socket_server():
 		push_error("Error creating server: " + str(err))
 	
 func web_socket_client():
-	var peer_server =  WebSocketMultiplayerPeer.new()
-	var err = peer_server.create_client("ws://" + Network.ip + ":" + str(Network.port))
+	var peer_client =  WebSocketMultiplayerPeer.new()
+	var err = peer_client.create_client("wss://" + Network.ip + ":" + str(Network.port), CertificatedGenerator.client_tls_options)
 	if err == OK:
-		get_tree().get_multiplayer().multiplayer_peer = peer_server
+		get_tree().get_multiplayer().multiplayer_peer = peer_client
 		set_process(true)
 		Network.is_networking = true
 		if not multiplayer.is_server():
