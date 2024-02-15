@@ -468,7 +468,7 @@ func _on_join2_pressed():
 	get_parent().multiplayer.multiplayer_peer = peer_client
 	Network.is_networking = true
 	set_process(true)
-	var lol = ResourceLoader.load_threaded_get("res://EscenaPrincipal.tscn")
+	var lol = ResourceLoader.load_threaded_get("res://Scenes/loading_screen.tscn")
 	lol.connect("completed", _on_main_scene_loaded)
 	self.queue_free()
 
