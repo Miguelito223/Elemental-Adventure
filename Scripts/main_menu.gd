@@ -485,21 +485,28 @@ func _on_join2_pressed():
 
 func web_socket_server():
 	var peer_server =  WebSocketMultiplayerPeer.new()
-	peer_server.create_server(Network.port)
-	get_tree().get_multiplayer().multiplayer_peer = peer_server
-	set_process(true)
-	Network.is_networking = true
-	if multiplayer.is_server():
-		LoadScene.load_scene(self, Globals.map)
+	var err = peer_server.create_server(Network.port)
+	if err == OK:
+		get_tree().get_multiplayer().multiplayer_peer = peer_server
+		set_process(true)
+		Network.is_networking = true
+		if multiplayer.is_server():
+			LoadScene.load_scene(self, Globals.map)
+	else:
+		push_error("Error creating server: " + str(err))
 	
 func web_socket_client():
 	var peer_server =  WebSocketMultiplayerPeer.new()
-	peer_server.create_client("wss://" + Network.ip + ":" + str(443))
-	get_tree().get_multiplayer().multiplayer_peer = peer_server
-	set_process(true)
-	Network.is_networking = true
-	if not multiplayer.is_server():
-		LoadScene.load_scene(self, "res://Scenes/game.tscn")
+	var err = peer_server.create_client("ws://" + Network.ip + ":" + str(Network.port))
+	if err == OK:
+		get_tree().get_multiplayer().multiplayer_peer = peer_server
+		set_process(true)
+		Network.is_networking = true
+		if not multiplayer.is_server():
+			LoadScene.load_scene(self, "res://Scenes/game.tscn")
+	else:
+		push_error("Error creating client: " + str(err))
+
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
