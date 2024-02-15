@@ -56,7 +56,7 @@ extends Control
 #multiplayer
 @onready var set_multiplayer_num = $"Settings menu/Multiplayer/player Num text"
 
-
+var url = "ws://" + str(Network.ip) + ":" + str(Network.port)
 
 var resolution = {
 	"2400x1080 ": Vector2i(2400, 1080 ),
@@ -189,7 +189,7 @@ func _ready():
 	create_action_remap_items()
 
 	if OS.has_feature("dedicated_server"):
-		var peer = ENetMultiplayerPeer.new()
+		var peer = WebSocketMultiplayerPeer.new()
 		peer.create_server(Network.port)
 		get_parent().multiplayer.multiplayer_peer = peer
 		Network.is_networking = true
@@ -465,7 +465,6 @@ func _on_create_pressed():
 		LoadScene.load_scene(self, Globals.map)
 
 var peer_client
-var url = "ws://" + str(Network.ip) + ":" + str(Network.port)
 func _on_join2_pressed():
 	peer_client = WebSocketMultiplayerPeer.new()
 	peer_client.create_client(url)
@@ -485,9 +484,11 @@ func _process(_delta):
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
+	url = "ws://" + str(Network.ip) + ":" + str(Network.port)
 
 func _on_port_text_changed(new_text:String):
 	Network.port = int(new_text)
+	url = "ws://" + str(Network.ip) + ":" + str(Network.port)
 
 func _on_name_port_text_changed(new_text:String):
 	Network.username = new_text
