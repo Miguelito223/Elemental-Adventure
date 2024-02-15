@@ -56,7 +56,7 @@ extends Control
 #multiplayer
 @onready var set_multiplayer_num = $"Settings menu/Multiplayer/player Num text"
 
-var url = "ws://" + str(Network.ip) + ":" + str(Network.port)
+
 
 var resolution = {
 	"2400x1080 ": Vector2i(2400, 1080 ),
@@ -164,6 +164,7 @@ func create_action_remap_items():
 
 
 func _ready():
+
 	set_process(true)
 
 	
@@ -213,9 +214,6 @@ func _ready():
 	Vsync.button_pressed = Globals.Vsync
 	FPS.button_pressed = Globals.FPS
 	autosave_length.text = str(Globals.autosave_length)
-
-func _process(_delta):
-	create_action_remap_items()
 	
 func _on_play_pressed():
 	print(Globals.level)
@@ -447,10 +445,11 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 
+var peer_server
 func _on_create_pressed():
-	var peer = WebSocketMultiplayerPeer.new()
-	peer.create_server(Network.port)
-	get_parent().multiplayer.multiplayer_peer = peer
+	var peer_server = WebSocketMultiplayerPeer.new()
+	peer_server.create_server(Network.port)
+	get_parent().multiplayer.multiplayer_peer = peer_server
 	Network.is_networking = true
 	
 	UPNP_setup()
@@ -458,13 +457,20 @@ func _on_create_pressed():
 	if multiplayer.is_server():
 		LoadScene.load_scene(self, Globals.map)
 
-
+var peer_client
+var url = "ws://" + str(Network.ip) + ":" + str(Network.port)
 func _on_join2_pressed():
-	var peer = WebSocketMultiplayerPeer.new()
-	peer.create_client(url)
-	get_parent().multiplayer.multiplayer_peer = peer
+	peer_client = WebSocketMultiplayerPeer.new()
+	peer_client.create_client(url)
+	get_parent().multiplayer.multiplayer_peer = peer_client
 	Network.is_networking = true
 	self.queue_free()
+
+func _process(_delta):
+	peer_client.poll()
+	peer_server.poll()
+	create_action_remap_items()
+
 	
 
 func _on_ip_text_changed(new_text:String):
