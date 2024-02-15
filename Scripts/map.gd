@@ -80,8 +80,7 @@ func disconected_fail():
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
 func server_conected():
-	LoadScene.load_scene(null, get_tree().get_current_scene())
-	print("Server Started")
+	print("Server Conected")
 
 func add_player(peer_id):
 	print("adding player id: " + str(peer_id))

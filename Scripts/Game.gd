@@ -99,5 +99,9 @@ func _input(event):
 						return 
 						
 					level.add_player(event.device)
-				
 
+
+func Remove_loading_screen():
+	var load_screen = get_node("res://Scenes/loading_screen.tscn")
+	if is_instance_valid(load_screen):
+		load_screen.queue_free()

@@ -92,7 +92,14 @@ func _process(_delta):
 			emit_signal("progress_changed", progress[0])
 		3:
 			var new_scene = ResourceLoader.load_threaded_get(scene_path).instantiate()
-			get_tree().get_root().get_node("Game").add_child(new_scene)
+
+			
+			if scene_path == "res://Scenes/game.tscn":
+				get_tree().change_scene_to_packed(new_scene)
+			else:
+				get_tree().get_root().get_node("Game").add_child(new_scene)
+
+
 			emit_signal("progress_changed", 1.0)
 			emit_signal("load_done")
 
