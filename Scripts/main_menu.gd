@@ -452,7 +452,7 @@ func _on_back2_pressed():
 
 func _on_create_pressed():
 	var peer_server =  ENetMultiplayerPeer.new()
-	peer_server.create_server(Network.port)
+	peer_server.create_server(Network.port, 4)
 	get_parent().multiplayer.multiplayer_peer = peer_server
 	Network.is_networking = true
 	

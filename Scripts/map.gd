@@ -42,7 +42,7 @@ func _ready():
 	get_parent().multiplayer.peer_disconnected.connect(remove_player)
 	get_parent().multiplayer.server_disconnected.connect(server_disconected)
 	get_parent().multiplayer.connected_to_server.connect(server_conected)
-	get_parent().multiplayer.connection_failed.connect(disconected_fail)
+	get_parent().multiplayer.connection_failed.connect(conected_fail)
 
 	if not OS.has_feature("dedicated_server") and get_parent().multiplayer.is_server():
 		add_player(1)	
@@ -74,7 +74,7 @@ func server_disconected():
 	get_parent().multiplayer.multiplayer_peer = null
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
-func disconected_fail():
+func conected_fail():
 	print("Fail to load")
 	get_parent().multiplayer.multiplayer_peer = null
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
@@ -134,6 +134,7 @@ func _on_multiplayer_spawner_spawned(node):
 	node.Hearths = Network.hearths[node.device_num]
 	node.deaths = Network.deaths[node.device_num]
 
+
 func remove_player(peer_id):
 	print("removing player id: " + str(peer_id))
 	var player = get_node(str(peer_id))
@@ -151,5 +152,3 @@ func msg_rcp(user, data):
 func _on_line_edit_gui_input(event:InputEvent):
 	if event.is_action_pressed("ui_accept"):
 		msg_rcp.rpc(Network.username, lineedit.text)
-
-
