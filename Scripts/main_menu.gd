@@ -489,7 +489,6 @@ func web_socket_server():
 	get_parent().multiplayer.multiplayer_peer = peer_server
 	set_process(true)
 	Network.is_networking = true
-	UPNP_setup()
 	if multiplayer.is_server():
 		LoadScene.load_scene(self, Globals.map)
 	
@@ -499,7 +498,6 @@ func web_socket_client():
 	get_parent().multiplayer.multiplayer_peer = peer_server
 	set_process(true)
 	Network.is_networking = true
-
 	if not multiplayer.is_server():
 		LoadScene.load_scene(self, "res://Scenes/game.tscn")
 
