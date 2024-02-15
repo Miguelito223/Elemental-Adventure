@@ -56,7 +56,7 @@ extends Control
 #multiplayer
 @onready var set_multiplayer_num = $"Settings menu/Multiplayer/player Num text"
 
-var url = "ws://" + str(Network.ip) + ":" + str(Network.port)
+var url = "wss://" + str(Network.ip) + ":" + str(Network.port)
 
 var resolution = {
 	"2400x1080 ": Vector2i(2400, 1080 ),
@@ -129,6 +129,7 @@ func addgraphics():
 		
 func create_action_remap_items():
 	while true:
+		await get_tree().create_timer(1).timeout
 		if Globals.check_duplicates(Globals.actions_items):
 			for i in range(Globals.num_players):
 				Globals._clear_inputs_player(i)
@@ -164,7 +165,7 @@ func create_action_remap_items():
 			
 			break
 
-		await get_tree().create_timer(1).timeout
+		
 
 
 func _ready():
@@ -484,11 +485,11 @@ func _process(_delta):
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
-	url = "ws://" + str(Network.ip) + ":" + str(Network.port)
+	url = "wss://" + str(Network.ip) + ":" + str(Network.port)
 
 func _on_port_text_changed(new_text:String):
 	Network.port = int(new_text)
-	url = "ws://" + str(Network.ip) + ":" + str(Network.port)
+	url = "wss://" + str(Network.ip) + ":" + str(Network.port)
 
 func _on_name_port_text_changed(new_text:String):
 	Network.username = new_text
