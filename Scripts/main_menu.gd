@@ -128,46 +128,48 @@ func addgraphics():
 			
 		
 func create_action_remap_items():
-	if Globals.check_duplicates(Globals.actions_items):
-		for i in range(Globals.num_players):
-			Globals._clear_inputs_player(i)
+	while true:
+		if Globals.check_duplicates(Globals.actions_items):
+			for i in range(Globals.num_players):
+				Globals._clear_inputs_player(i)
 
-		for i in range(Globals.num_players):
-			Globals._inputs_player(i)
+			for i in range(Globals.num_players):
+				Globals._inputs_player(i)
 
-	else:
-		var previus_items 
-		if not (grid.get_child_count() - 1) == -1:
-			previus_items = grid.get_child(grid.get_child_count() - 1)
-		
-		for index in range(Globals.actions_items.size()):
-			var action = Globals.actions_items[index]
-			var label = Label.new()
-			label.text = action
-			grid.add_child(label)
-
-			var button = RemapButton.new()
-			button.action = action
+		else:
+			var previus_items 
+			if not (grid.get_child_count() - 1) == -1:
+				previus_items = grid.get_child(grid.get_child_count() - 1)
 			
-			if not previus_items == null and button.is_inside_tree():
-				button.focus_neighbor_top = previus_items.get_path()
-				previus_items.focus_neighbor_bottom = button.get_path()
-			
-			if index == Globals.actions_items.size() - 1:
+			for index in range(Globals.actions_items.size()):
+				var action = Globals.actions_items[index]
+				var label = Label.new()
+				label.text = action
+				grid.add_child(label)
+
+				var button = RemapButton.new()
+				button.action = action
+				
 				if not previus_items == null and button.is_inside_tree():
-					back.focus_neighbor_top = button.get_path()
-					button.focus_neighbor_bottom = back.get_path()
-					
-			previus_items = button
-			grid.add_child(button)
-		set_process(false)
+					button.focus_neighbor_top = previus_items.get_path()
+					previus_items.focus_neighbor_bottom = button.get_path()
+				
+				if index == Globals.actions_items.size() - 1:
+					if not previus_items == null and button.is_inside_tree():
+						back.focus_neighbor_top = button.get_path()
+						button.focus_neighbor_bottom = back.get_path()
+						
+				previus_items = button
+				grid.add_child(button)
+			
+			break
+
+		await get_tree().create_timer(1).timeout
 
 
 func _ready():
 
-	set_process(true)
-
-	
+	set_process(false)
 	main_menu.show()
 	settings_menu.hide()
 	online_menu.hide()
@@ -184,12 +186,16 @@ func _ready():
 	input_button.show()	
 	multiplayer_button.show()
 	
+	create_action_remap_items()
 
 	if OS.has_feature("dedicated_server"):
 		var peer = ENetMultiplayerPeer.new()
 		peer.create_server(Network.port)
 		get_parent().multiplayer.multiplayer_peer = peer
 		Network.is_networking = true
+
+		UPNP_setup()
+		
 		if multiplayer.is_server():
 			LoadScene.load_scene(self, Globals.map)
 
@@ -453,6 +459,7 @@ func _on_create_pressed():
 	Network.is_networking = true
 	
 	UPNP_setup()
+	set_process(true)
 
 	if multiplayer.is_server():
 		LoadScene.load_scene(self, Globals.map)
@@ -464,12 +471,12 @@ func _on_join2_pressed():
 	peer_client.create_client(url)
 	get_parent().multiplayer.multiplayer_peer = peer_client
 	Network.is_networking = true
+	set_process(true)
 	self.queue_free()
 
 func _process(_delta):
 	peer_client.poll()
 	peer_server.poll()
-	create_action_remap_items()
 
 	
 
