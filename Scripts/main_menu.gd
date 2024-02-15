@@ -195,7 +195,7 @@ func _ready():
 		Network.is_networking = true
 
 		UPNP_setup()
-		
+
 		if multiplayer.is_server():
 			LoadScene.load_scene(self, Globals.map)
 
@@ -453,7 +453,7 @@ func _on_back2_pressed():
 
 var peer_server
 func _on_create_pressed():
-	var peer_server = WebSocketMultiplayerPeer.new()
+	peer_server = WebSocketMultiplayerPeer.new()
 	peer_server.create_server(Network.port)
 	get_parent().multiplayer.multiplayer_peer = peer_server
 	Network.is_networking = true
@@ -475,8 +475,11 @@ func _on_join2_pressed():
 	self.queue_free()
 
 func _process(_delta):
-	peer_client.poll()
-	peer_server.poll()
+	if get_parent().multiplayer.is_server():
+		peer_server.poll()
+	else:
+		peer_client.poll()
+	
 
 	
 
