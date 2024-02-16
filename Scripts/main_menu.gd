@@ -450,7 +450,7 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
-	var err = Network.multiplayer_peer.create_server(Network.port, Network.ip, CertificatedGenerator.server_tls_options)
+	var err = Network.multiplayer_peer.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
 	if err == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer
 		set_process(true)
