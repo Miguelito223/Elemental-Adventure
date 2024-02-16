@@ -450,9 +450,9 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
-	var err = Network.multiplayer_peer.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
+	var err = Network.multiplayer_peer_server.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
 	if err == OK:
-		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer
+		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
 		set_process(true)
 		Network.is_networking = true
 		UPNP_setup()
@@ -462,9 +462,9 @@ func _on_create_pressed():
 		push_error("Error creating server: " + str(err))
 
 func _on_join2_pressed():
-	var err = Network.multiplayer_peer.create_client("wss://" + Network.ip + ":" + str(Network.port), CertificatedGenerator.client_tls_options)
+	var err = Network.multiplayer_peer_client.create_client("wss://" + Network.ip + ":" + str(Network.port), CertificatedGenerator.client_tls_options)
 	if err == OK:
-		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer
+		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
 		set_process(true)
 		Network.is_networking = true
 		if not multiplayer.is_server():
