@@ -1,12 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://8ja0wgtkdkfm"]
+[gd_scene load_steps=16 format=3 uid="uid://7e1r7cgvuhrt"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_wfsls"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_2165g"]
-[ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_3hy2r"]
+[ext_resource type="PackedScene" path="res://Scenes/energy.tscn" id="3_3hy2r"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="4_cbef0"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="5_qiv16"]
 [ext_resource type="PackedScene" uid="uid://r6nxo2uj0e0o" path="res://Scenes/plataform.tscn" id="6_m342p"]
-[ext_resource type="AudioStream" uid="uid://deh208fn5805g" path="res://sounds/Music/Level music.mp3" id="6_tvr3m"]
+[ext_resource type="AudioStream" uid="uid://cuqj2r8nmgubb" path="res://sounds/Music/Level music.mp3" id="6_tvr3m"]
 [ext_resource type="PackedScene" uid="uid://c4r7b2dhlrtfi" path="res://Scenes/checkpoint.tscn" id="8_la3d5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brrbs"]
