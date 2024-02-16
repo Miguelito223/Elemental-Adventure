@@ -450,27 +450,29 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
-	var err = Network.multiplayer_peer_server.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
-	if err == OK:
+	print(Network.port)
+	print(CertificatedGenerator.server_tls_options)
+	var error = Network.multiplayer_peer_server.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
+	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
-		set_process(true)
 		Network.is_networking = true
 		UPNP_setup()
-		if multiplayer.is_server():
+		if get_tree().get_multiplayer().is_server():
 			LoadScene.load_scene(self, Globals.map)
 	else:
-		push_error("Error creating server: " + str(err))
+		push_error("Error creating server: " + str(error))
 
 func _on_join2_pressed():
-	var err = Network.multiplayer_peer_client.create_client("wss://" + Network.ip + ":" + str(Network.port), CertificatedGenerator.client_tls_options)
-	if err == OK:
+	print(Network.port)
+	print(CertificatedGenerator.server_tls_options)
+	var error = Network.multiplayer_peer_client.create_client("wss://" + Network.ip + ":" + str(Network.port), CertificatedGenerator.client_tls_options)
+	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
-		set_process(true)
 		Network.is_networking = true
-		if not multiplayer.is_server():
+		if not get_tree().get_multiplayer().is_server():
 			LoadScene.load_scene(self, "res://Scenes/game.tscn")
 	else:
-		push_error("Error creating client: " + str(err))
+		push_error("Error creating client: ", str(error))
 
 
 func _on_ip_text_changed(new_text:String):
