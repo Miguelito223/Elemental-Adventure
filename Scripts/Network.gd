@@ -6,6 +6,7 @@ var username = "MichaxD"
 var connection_count = 0
 var connected_ids: Array = []
 var is_networking = false
+var multiplayer_peer = WebSocketMultiplayerPeer.new()
 
 var player_name: Array = [
 	"Fire",
