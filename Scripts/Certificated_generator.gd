@@ -1,7 +1,7 @@
 extends Node
 
-@onready var X509_cert_path = "user://Certificated/X509_Certificate.crt"
-@onready var X509_key_path = "user://Certificated/X509_Certificate.key"
+@onready var X509_cert_path = "res://Certificated/X509_Certificate.crt"
+@onready var X509_key_path = "res://Certificated/X509_Certificate.key"
 
 var CN = "ElementalAdventure"
 var O = "Michael2911"
@@ -16,10 +16,10 @@ var not_after = "20340101000000"
 
 func _ready():
 	var directory = DirAccess
-	if directory.dir_exists_absolute("user://Certificated/"):
+	if directory.dir_exists_absolute("res://Certificated/"):
 		pass
 	else:
-		directory.make_dir_absolute("user://Certificated/")
+		directory.make_dir_absolute("res://Certificated/")
 	
 	CreateX509Cert()
 
