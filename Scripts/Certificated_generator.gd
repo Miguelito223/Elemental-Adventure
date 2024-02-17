@@ -5,14 +5,14 @@ extends Node
 
 var CN = "ElementalAdventure"
 var O = "Michael2911"
-var C = "ES"
+var C = "NL"
 var not_before = "20140101000000"
 var not_after = "20340101000000"
 
 @onready var load_key = load(X509_key_path)
 @onready var load_certs = load(X509_cert_path)
 @onready var server_tls_options = TLSOptions.server(load_key, load_certs)
-@onready var client_tls_options = TLSOptions.client(load_certs)
+@onready var client_tls_options = TLSOptions.client_unsafe(load_certs)
 
 func _ready():
 	var directory = DirAccess
