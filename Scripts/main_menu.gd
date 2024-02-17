@@ -450,6 +450,7 @@ func _on_back2_pressed():
 
 func _on_create_pressed():
 	var error = Network.multiplayer_peer_server.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
+	print("Server creation error:", error)
 	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
 		Network.is_networking = true
@@ -461,6 +462,7 @@ func _on_create_pressed():
 
 func _on_join2_pressed():
 	var error = Network.multiplayer_peer_client.create_client("wss://" + Network.ip + ":" + str(Network.port), CertificatedGenerator.client_tls_options)
+	print("Client creation error:", error)
 	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
 		Network.is_networking = true
