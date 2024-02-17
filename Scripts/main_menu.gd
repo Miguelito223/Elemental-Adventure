@@ -188,9 +188,8 @@ func _ready():
 	create_action_remap_items()
 
 	if OS.has_feature("dedicated_server"):
-		var peer = ENetMultiplayerPeer.new()
-		peer.create_server(Network.port)
-		get_tree().get_multiplayer().multiplayer_peer = peer
+		Network.multiplayer_peer_server.create_server(Network.port)
+		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
 		Network.is_networking = true
 
 		UPNP_setup()
