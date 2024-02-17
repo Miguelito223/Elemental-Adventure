@@ -188,14 +188,16 @@ func _ready():
 	create_action_remap_items()
 
 	if OS.has_feature("dedicated_server"):
-		Network.multiplayer_peer_server.create_server(Network.port)
-		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
-		Network.is_networking = true
-
-		UPNP_setup()
-
-		if multiplayer.is_server():
-			LoadScene.load_scene(self, Globals.map)
+		var error = Network.multiplayer_peer_server.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
+		print("Server creation error:", error)
+		if error == OK:
+			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
+			Network.is_networking = true
+			UPNP_setup()
+			if get_tree().get_multiplayer().is_server():
+				LoadScene.load_scene(self, Globals.map)
+		else:
+			push_error("Error creating server: " + str(error))
 
 	popup.hide()
 	popup2.hide()
