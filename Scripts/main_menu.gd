@@ -188,7 +188,7 @@ func _ready():
 	create_action_remap_items()
 
 	if OS.has_feature("dedicated_server"):
-		var error = Network.multiplayer_peer_server.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
+		var error = Network.multiplayer_peer_server.create_server(Network.port)
 		print("Server creation error:", error)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
@@ -451,7 +451,7 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
-	var error = Network.multiplayer_peer_server.create_server(Network.port, "*", CertificatedGenerator.server_tls_options)
+	var error = Network.multiplayer_peer_server.create_server(Network.port)
 	print("Server creation error:", error)
 	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
@@ -463,7 +463,7 @@ func _on_create_pressed():
 		push_error("Error creating server: " + str(error))
 
 func _on_join2_pressed():
-	var error = Network.multiplayer_peer_client.create_client("wss://" + Network.ip + ":" + str(Network.port), CertificatedGenerator.client_tls_options)
+	var error = Network.multiplayer_peer_client.create_client("ws://" + Network.ip + ":" + str(Network.port))
 	print("Client creation error:", error)
 	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
