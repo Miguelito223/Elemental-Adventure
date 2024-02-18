@@ -304,7 +304,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		bullet_lol.set_global_position(bullet_pos)
 		bullet_lol.modulate = str_to_var("Color" + str(ball_color))
 		
-		if player_name == "Fire":
+		if device_num == 0:
 			fire.emitting = true
 			PointLight.enabled = Globals.Graphics
 			PointLight.shadow_enabled = Globals.Graphics
