@@ -8,15 +8,8 @@ var rng = RandomNumberGenerator.new()
 @onready var tile_map = $TileMap
 
 var player_scene = preload("res://Scenes/player.tscn")
-var enemy_scene = preload("res://Scenes/enemy.tscn")
 
-var enemy_list = []
 
-@onready var timer_wait = 5
-@onready var NumEnemys = 10
-@onready var MaxEnemies = 30
-
-var timer
 
 
 func _ready():
@@ -31,12 +24,6 @@ func _ready():
 	
 	if not get_tree().get_multiplayer().is_server():
 		return
-
-	timer = Timer.new()
-	add_child(timer)
-	timer.connect("timeout", enemys_generation)
-	timer.wait_time = timer_wait
-	timer.start()
 	
 	get_tree().get_multiplayer().peer_connected.connect(add_player)
 	get_tree().get_multiplayer().peer_disconnected.connect(remove_player)
@@ -52,18 +39,6 @@ func _ready():
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_tree().get_multiplayer().multiplayer_peer = null
-
-func enemys_generation():
-
-	var enemy = enemy_scene.instantiate()
-	var x = randf_range(tile_map.position.x, tile_map.position.x + tile_map.width)
-	var y = randf_range(tile_map.position.y, tile_map.position.y + 10)
-	enemy.position = Vector2(x, y)
-	add_child(enemy, true)
-	enemy_list.append(enemy)
-
-	if enemy_list.size() > MaxEnemies:
-		timer.stop()
 
 		
 

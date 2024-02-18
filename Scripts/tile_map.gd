@@ -25,6 +25,8 @@ var noise_seed
 var cave_noise_seed
 var rock_noise_seed
 
+var enemy_scene = preload("res://Scenes/enemy.tscn")
+
 func _ready():
 
 	if not Network.is_networking:
@@ -73,6 +75,11 @@ func world_generation():
 				rock_arg.append(Vector2i(x, y))
 			else:
 				tile_arg.append(Vector2(x, noise_height+y))
+			
+			if y <= 0:
+				var rand_num = randi_range(0, 100)
+				if rand_num == 100:
+					enemys_generation(x, noise_height + y)
 
 		if not tile_arg.find(Vector2i(x, noise_height + 1)):
 			tile_arg.append(Vector2i(x, noise_height))
@@ -85,3 +92,8 @@ func world_generation():
 
 	BetterTerrain.set_cells(tile_map, 0,rock_arg, 1)
 	BetterTerrain.update_terrain_cells(tile_map, 0,rock_arg,true )
+
+func enemys_generation(position_x, position_y):
+	var enemy = enemy_scene.instantiate()
+	enemy.global_position = Vector2(position_x, position_y)
+	get_parent().add_child(enemy, true)
