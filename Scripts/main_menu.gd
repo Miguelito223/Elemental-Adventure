@@ -188,6 +188,15 @@ func _ready():
 	create_action_remap_items()
 
 	if OS.has_feature("dedicated_server"):
+		var args = OS.get_cmdline_args()
+		for arg in args:
+			var key_value = arg.rsplit("=")
+			match key_value[0]:
+				"port":
+					Network.port = key_value[1].to_int()
+				"ip":
+					Network.ip = key_value[1].to_string()
+
 		var error = Network.multiplayer_peer_server.create_server(Network.port)
 		print("Server creation error:", error)
 		if error == OK:
