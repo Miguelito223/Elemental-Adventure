@@ -194,8 +194,6 @@ func _ready():
 			match key_value[0]:
 				"port":
 					Network.port = key_value[1].to_int()
-				"ip":
-					Network.ip = key_value[1].to_string()
 
 		var error = Network.multiplayer_peer_server.create_server(Network.port)
 		print("Server creation error:", error)
