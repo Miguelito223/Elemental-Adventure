@@ -57,6 +57,7 @@ _data = {
 bg_color = Color(0.211765, 0.192157, 0.4, 1)
 
 [node name="loading screen" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_vy314")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
