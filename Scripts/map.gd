@@ -109,6 +109,11 @@ func _on_multiplayer_spawner_spawned(node):
 	node.Hearths = Network.hearths[node.device_num]
 	node.deaths = Network.deaths[node.device_num]
 
+	if not get_tree().get_multiplayer().is_server():
+		tile_map.request_seeds(1)
+	else:
+		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
+
 
 func remove_player(peer_id):
 	print("removing player id: " + str(peer_id))
