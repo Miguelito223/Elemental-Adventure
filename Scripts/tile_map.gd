@@ -77,8 +77,8 @@ func world_generation():
 				tile_arg.append(Vector2(x, noise_height+y))
 			
 			if y <= 0:
-				var rand_num = randi_range(0, 100)
-				if rand_num == 100:
+				var rand_num = randi_range(0, width)
+				if rand_num == width:
 					enemys_generation(x, noise_height + y)
 
 		if not tile_arg.find(Vector2i(x, noise_height + 1)):
