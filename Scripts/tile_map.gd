@@ -64,7 +64,7 @@ func world_generation():
 	cave_noise.seed = cave_noise_seed
 	rock_noise.seed = rock_noise_seed
 
-	for x in range(width):
+	for x in range(-width, width):
 		noise_height = int(noise.get_noise_1d(x) * 10)
 
 		for y in range(height):
