@@ -393,7 +393,6 @@ func setposspawn():
 		else:
 			last_position = get_parent().get_node("Marker2D").position
 			position = last_position
-			last_position = null
 	else:
 		if last_position:
 			position = last_position
