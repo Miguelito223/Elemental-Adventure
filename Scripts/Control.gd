@@ -34,21 +34,22 @@ func _process(delta):
 		var data = bytes.get_string_from_ascii()
 		var roominfo2 = JSON.parse_string(data)
 		
-		var child = $Panel/VBoxContainer.find_child(roominfo2.name)
-		if child != null:
-			child.get_node("ip").text = serverip
-			child.get_node("count").text = str(data.playercount)
-		else:
-			var currentinfo2 = currentinfo.instantiate()
-			currentinfo2.get_node("name").text = data.name
-			currentinfo2.get_node("ip").text = serverip
-			currentinfo2.get_node("port").text = serverport
-			currentinfo2.get_node("count").text = str(data.playercount)
-			$Panel/VBoxContainer.add_child(currentinfo2)
+		for i in $Panel/VBoxContainer.get_children():
+			if i.name == roominfo.name:
+				i.get_node("ip").text = serverip
+				i.get_node("count").text = str(data.playercount)
+				return
+
+		var currentinfo2 = currentinfo.instantiate()
+		currentinfo2.get_node("name").text = data.name
+		currentinfo2.get_node("ip").text = serverip
+		currentinfo2.get_node("port").text = serverport
+		currentinfo2.get_node("count").text = str(data.playercount)
+		$Panel/VBoxContainer.add_child(currentinfo2)
 	
 func setupbroadcast(name):
 	roominfo.name = name
-	roominfo.playercount = Network.connection_count
+	roominfo.playercount = Network.connected_ids.size()
 
 	broadcaster = PacketPeerUDP.new()
 	broadcaster.set_broadcast_enabled(true)
@@ -64,10 +65,11 @@ func setupbroadcast(name):
 
 func _on_broadcast_timer_timeout():
 	print("broadcaring game!")
-	roominfo.playercount = Network.connection_count
+	roominfo.playercount = Network.connected_ids.size()
 	var data = JSON.stringify(roominfo)
 	var packet = data.to_ascii_buffer()
-	broadcaster.put_packet(packet)
+	if packet != null:
+		broadcaster.put_packet(packet)
 
 func _exit_tree():
 	lisener.close()
