@@ -12,8 +12,8 @@ var lisener: PacketPeerUDP
 
 var currentinfo = preload("res://Scenes/server_info.tscn")
 
-var lisenerport = 8911
-var broadcasterport = 8912
+var lisenerport = Network.port - 1
+var broadcasterport = Network.port
 var broadcasteripadress = "192.168.1.255"
 
 func _ready():
