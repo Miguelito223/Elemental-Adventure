@@ -37,8 +37,12 @@ func save_file():
 			"level": Globals.level,
 			"level_int": Globals.level_int,
 			"num_players": Globals.num_players,
-			"username": Network.username,
 		},
+		"Network":{
+			"username": Network.username,
+			"ip": Network.ip,
+			"port": Network.port,
+		}
 	}
 
 	var dir = DirAccess.open("user://")
@@ -104,7 +108,11 @@ func load_file():
 		Globals.num_players = players.num_players
 		Globals.level = players.level
 		Globals.level_int = players.level_int
-		Network.username = players.username
+
+		var network = data.Network
+		Network.username = network.username
+		Network.ip = network.ip
+		Network.port = network.port
 		
 		Signals.finish_load_data.emit()
 	

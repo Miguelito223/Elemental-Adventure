@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq8c11xjf1nct"]
+[gd_scene load_steps=8 format=3 uid="uid://bq8c11xjf1nct"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_2vk4l"]
 [ext_resource type="Texture2D" uid="uid://cbvya6vhmaigo" path="res://Sprites/fuego.png" id="2_44f6u"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="3_his25"]
 [ext_resource type="AudioStream" uid="uid://dsi8jiqv1o424" path="res://sounds/Music/main menu music.mp3" id="4_07aup"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="4_236ea"]
+[ext_resource type="Script" path="res://Scripts/Control.gd" id="5_gdsp0"]
 [ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="5_tq5s4"]
 
 [node name="Main Menu" type="Control"]
@@ -192,6 +193,60 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
 
+[node name="Server Browser2" type="VBoxContainer" parent="Online Menu"]
+visible = false
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Online Menu/Server Browser2"]
+layout_mode = 2
+script = ExtResource("5_gdsp0")
+
+[node name="broadcast timer" type="Timer" parent="Online Menu/Server Browser2/Control"]
+autostart = true
+
+[node name="Panel" type="Panel" parent="Online Menu/Server Browser2/Control"]
+layout_mode = 2
+offset_left = -134.766
+offset_top = -151.667
+offset_right = 738.234
+offset_bottom = 151.333
+
+[node name="ServerInfo" type="HBoxContainer" parent="Online Menu/Server Browser2/Control/Panel"]
+layout_mode = 0
+offset_left = 20.9961
+offset_top = -3.33333
+offset_right = 448.996
+offset_bottom = 36.6667
+scale = Vector2(1.96671, 1.4687)
+alignment = 1
+
+[node name="ip" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
+layout_mode = 2
+theme = ExtResource("5_tq5s4")
+text = "ip,"
+
+[node name="port" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
+layout_mode = 2
+theme = ExtResource("5_tq5s4")
+text = "port,"
+
+[node name="name" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
+layout_mode = 2
+theme = ExtResource("5_tq5s4")
+text = "name,"
+
+[node name="player number" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
+layout_mode = 2
+theme = ExtResource("5_tq5s4")
+text = "player number"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Online Menu/Server Browser2/Control/Panel"]
+layout_mode = 0
+offset_left = 114.258
+offset_top = 56.6667
+offset_right = 730.258
+offset_bottom = 96.6667
+
 [node name="host" type="Button" parent="Online Menu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
@@ -201,6 +256,11 @@ text = "Host"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
+
+[node name="server browser" type="Button" parent="Online Menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_his25")
+text = "Server browser local"
 
 [node name="back" type="Button" parent="Online Menu"]
 layout_mode = 2
@@ -459,8 +519,10 @@ bus = &"Music"
 [connection signal="text_changed" from="Online Menu/Join2/port" to="." method="_on_port_text_changed"]
 [connection signal="text_changed" from="Online Menu/Join2/ip" to="." method="_on_ip_text_changed"]
 [connection signal="pressed" from="Online Menu/Join2/join" to="." method="_on_join2_pressed"]
+[connection signal="timeout" from="Online Menu/Server Browser2/Control/broadcast timer" to="Online Menu/Server Browser2/Control" method="_on_broadcast_timer_timeout"]
 [connection signal="pressed" from="Online Menu/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Online Menu/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Online Menu/server browser" to="." method="_on_server_browser_pressed"]
 [connection signal="pressed" from="Online Menu/back" to="." method="_on_back2_pressed"]
 [connection signal="toggled" from="Settings menu/Graphics/fullscreen tongle" to="." method="_on_fullscreen_tongle_toggled"]
 [connection signal="item_selected" from="Settings menu/Graphics/resolution" to="." method="_on_option_button_item_selected"]

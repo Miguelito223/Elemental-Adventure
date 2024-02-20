@@ -19,9 +19,11 @@ extends Control
 @onready var multiplayer_box = $"Settings menu/Multiplayer"
 
 @onready var host_button = $"Online Menu/host"
+@onready var server_browser_button = $"Online Menu/server browser"
 @onready var join_button = $"Online Menu/join"
 
 @onready var host_box = $"Online Menu/Host2"
+@onready var server_browser_box = $"Online Menu/Server Browser2"
 @onready var join_box = $"Online Menu/Join2"
 
 
@@ -55,6 +57,10 @@ extends Control
 
 #multiplayer
 @onready var set_multiplayer_num = $"Settings menu/Multiplayer/player Num text"
+@onready var Username_join = $"Online Menu/Join2/name port"
+@onready var Username_host = $"Online Menu/Host2/name port"
+
+@onready var control = $"Online Menu/Server Browser2/Control"
 
 var resolution = {
 	"2400x1080 ": Vector2i(2400, 1080 ),
@@ -229,6 +235,8 @@ func _ready():
 	Vsync.button_pressed = Globals.Vsync
 	FPS.button_pressed = Globals.FPS
 	autosave_length.text = str(Globals.autosave_length)
+	Username_join.text = str(Network.username)
+	Username_host.text = str(Network.username)
 	
 func _on_play_pressed():
 	print(Globals.level)
@@ -436,25 +444,31 @@ func _on_online_pressed():
 
 
 func _on_host_pressed():
+	server_browser_box.hide()
 	host_box.show()
 	join_box.hide()
 	host_button.hide()
 	join_button.hide()
+	server_browser_button.hide()
 
 
 func _on_join_pressed():
+	server_browser_box.hide()
 	host_box.hide()
 	join_box.show()
 	host_button.hide()
 	join_button.hide()
+	server_browser_button.hide()
 
 
 func _on_back2_pressed():
 	if join_box.visible == true or host_box.visible == true:
+		server_browser_box.hide()
 		host_box.hide()
 		join_box.hide()
 		host_button.show()
 		join_button.show()
+		server_browser_button.show()
 	else:
 		main_menu.show()
 		online_menu.hide()
@@ -465,6 +479,7 @@ func _on_create_pressed():
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
 		Network.is_networking = true
 		UPNP_setup()
+		control.setupbroadcast(Network.username)
 		if get_tree().get_multiplayer().is_server():
 			LoadScene.load_scene(self, Globals.map)
 	else:
@@ -477,6 +492,8 @@ func _on_join2_pressed():
 		Network.is_networking = true
 		if not get_tree().get_multiplayer().is_server():
 			LoadScene.load_scene(self, "res://Scenes/game.tscn")
+
+		
 	else:
 		push_error("Error creating client: ", str(error))
 
@@ -512,3 +529,13 @@ func UPNP_setup():
 	if map_result_tcp != UPNP.UPNP_RESULT_SUCCESS:
 		print("UPNP port TCP mapping failed")
 		return
+
+
+func _on_server_browser_pressed():
+	host_box.hide()
+	join_box.hide()
+	server_browser_box.show()
+	server_browser_button.hide()
+	host_button.hide()
+	join_button.hide()
+

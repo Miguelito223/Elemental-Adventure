@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfkn16lnb518m"]
+
+[ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="1_14cqw"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="name" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_14cqw")
+text = "Michael2911  "
+
+[node name="count" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_14cqw")
+text = "8  "
+
+[node name="ip" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_14cqw")
+text = "192.168.1.155  "
+
+[node name="port" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_14cqw")
+text = "2222  "
