@@ -462,7 +462,7 @@ func _on_join_pressed():
 
 
 func _on_back2_pressed():
-	if join_box.visible == true or host_box.visible == true:
+	if join_box.visible == true or host_box.visible == true or server_browser_box.visible == true:
 		server_browser_box.hide()
 		host_box.hide()
 		join_box.hide()

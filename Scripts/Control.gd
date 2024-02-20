@@ -5,11 +5,11 @@ signal server_removed
 
 var broadcasttimer: Timer
 
-var roominfo = {"name":"name", "playercount": 0}
+var roominfo = {"name":"MichaxD", "playercount": 0}
 var broadcaster: PacketPeerUDP
 var lisener: PacketPeerUDP
 
-var currentinfo = load("res://Scenes/server_info.tscn")
+var currentinfo = preload("res://Scenes/server_info.tscn")
 
 var lisenerport = 8911
 var broadcasterport = 8912
@@ -22,20 +22,22 @@ func _ready():
 
 	var ok = lisener.bind(lisenerport)
 	if ok == OK:
-		print("all correct :D")
+		print("all correct to port: " + str(lisenerport) + ":D")
 	else:
-		print("failed D:")
+		print("failed to port D:")
 
-func _process(delta):
+func _process(_delta):
 	if lisener.get_available_packet_count() > 0:
 		var serverip = lisener.get_packet_ip()
 		var serverport = lisener.get_packet_port()
 		var bytes = lisener.get_packet()
 		var data = bytes.get_string_from_ascii()
 		var roominfo2 = JSON.parse_string(data)
+
+		print(serverip + serverport)
 		
 		for i in $Panel/VBoxContainer.get_children():
-			if i.name == roominfo.name:
+			if i.name == roominfo2.name:
 				i.get_node("ip").text = serverip
 				i.get_node("count").text = str(data.playercount)
 				return
@@ -47,8 +49,8 @@ func _process(delta):
 		currentinfo2.get_node("count").text = str(data.playercount)
 		$Panel/VBoxContainer.add_child(currentinfo2)
 	
-func setupbroadcast(name):
-	roominfo.name = name
+func setupbroadcast(player_name):
+	roominfo.name = player_name
 	roominfo.playercount = Network.connected_ids.size()
 
 	broadcaster = PacketPeerUDP.new()
@@ -57,9 +59,9 @@ func setupbroadcast(name):
 
 	var ok = broadcaster.bind(broadcasterport)
 	if ok == OK:
-		print("all correct :D")
+		print("all correct to port: " + str(broadcasterport) + ":D")
 	else:
-		print("failed D:")
+		print("failed to port D:")
 
 	$"broadcast timer".start()
 
@@ -68,7 +70,7 @@ func _on_broadcast_timer_timeout():
 	roominfo.playercount = Network.connected_ids.size()
 	var data = JSON.stringify(roominfo)
 	var packet = data.to_ascii_buffer()
-	if packet != null:
+	if broadcaster != null:
 		broadcaster.put_packet(packet)
 
 func _exit_tree():
