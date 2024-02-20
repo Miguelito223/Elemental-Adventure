@@ -213,9 +213,9 @@ func _ready():
 		var error = Network.multiplayer_peer_server.create_server(Network.port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
-			Network.is_networking = true
-			UPNP_setup()
 			if get_tree().get_multiplayer().is_server():
+				Network.is_networking = true
+				UPNP_setup()
 				control.setupbroadcast(Network.username)
 				hide()
 				LoadScene.load_scene(null, Globals.map)
@@ -488,9 +488,9 @@ func _on_create_pressed():
 	var error = Network.multiplayer_peer_server.create_server(Network.port)
 	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
-		Network.is_networking = true
-		UPNP_setup()
 		if get_tree().get_multiplayer().is_server():
+			Network.is_networking = true
+			UPNP_setup()
 			control.setupbroadcast(Network.username)
 			hide()
 			LoadScene.load_scene(null, Globals.map)
@@ -500,13 +500,12 @@ func _on_create_pressed():
 func _on_join2_pressed():
 	joinbyip(Network.ip)
 
-
 func joinbyip(ip):
 	var error = Network.multiplayer_peer_client.create_client("ws://" + ip + ":" + str(Network.port))
 	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
-		Network.is_networking = true
 		if not get_tree().get_multiplayer().is_server():
+			Network.is_networking = true
 			hide()
 			LoadScene.load_scene(null, "res://Scenes/game.tscn")	
 	else:
