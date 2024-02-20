@@ -199,7 +199,7 @@ func _ready():
 	
 	create_action_remap_items()
 
-	if OS.has_feature("dedicated_server"):
+	if OS.has_feature("dedicated_server") or "--s" in OS.get_cmdline_user_args() or "--server" in OS.get_cmdline_user_args():
 		var args = OS.get_cmdline_user_args()
 		for arg in args:
 			var key_value = arg.rsplit("=")
