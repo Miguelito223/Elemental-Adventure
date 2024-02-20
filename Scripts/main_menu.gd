@@ -184,12 +184,18 @@ func _ready():
 	time_box.hide()
 	input_box.hide()
 	multiplayer_box.hide()
+	host_box.hide()
+	join_box.hide()
+	server_browser_box.hide()
 	graphics_button.show()
 	volumen_button.show()
 	autosave_button.show()
 	time_button.show()
 	input_button.show()	
 	multiplayer_button.show()
+	host_button.show()
+	join_button.show()
+	server_browser_button.show()
 	
 	create_action_remap_items()
 
@@ -208,6 +214,7 @@ func _ready():
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
 			Network.is_networking = true
+			control.setupbroadcast(Network.username)
 			UPNP_setup()
 			if get_tree().get_multiplayer().is_server():
 				LoadScene.load_scene(self, Globals.map)
@@ -481,7 +488,8 @@ func _on_create_pressed():
 		UPNP_setup()
 		control.setupbroadcast(Network.username)
 		if get_tree().get_multiplayer().is_server():
-			LoadScene.load_scene(self, Globals.map)
+			hide()
+			LoadScene.load_scene(null, Globals.map)
 	else:
 		push_error("Error creating server: " + str(error))
 
@@ -491,7 +499,8 @@ func _on_join2_pressed():
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
 		Network.is_networking = true
 		if not get_tree().get_multiplayer().is_server():
-			LoadScene.load_scene(self, "res://Scenes/game.tscn")
+			hide()
+			LoadScene.load_scene(null, "res://Scenes/game.tscn")
 
 		
 	else:

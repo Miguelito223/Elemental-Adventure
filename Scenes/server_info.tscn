@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfkn16lnb518m"]
+[gd_scene load_steps=3 format=3 uid="uid://cfkn16lnb518m"]
 
 [ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="1_14cqw"]
+[ext_resource type="Script" path="res://Scenes/server_info.gd" id="1_838k7"]
 
-[node name="HBoxContainer" type="HBoxContainer"]
+[node name="Server_info" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+alignment = 1
+script = ExtResource("1_838k7")
 
-[node name="name" type="Label" parent="."]
+[node name="Name" type="Label" parent="."]
 layout_mode = 2
 theme = ExtResource("1_14cqw")
 text = "Michael2911  "
@@ -25,3 +28,10 @@ text = "192.168.1.155  "
 layout_mode = 2
 theme = ExtResource("1_14cqw")
 text = "2222  "
+
+[node name="join" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("1_14cqw")
+text = "join"
+
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]

@@ -11,20 +11,25 @@ var lisener: PacketPeerUDP
 
 var currentinfo = preload("res://Scenes/server_info.tscn")
 
-var lisenerport = 8911
-var broadcasterport = 8912
+var lisenerport = Network.port - 1
+var broadcasterport = Network.port
 var broadcasteripadress = "192.168.1.255"
 
 func _ready():
 	broadcasttimer = $"broadcast timer"
+	setup()
 
+
+func setup():
 	lisener = PacketPeerUDP.new()
 
 	var ok = lisener.bind(lisenerport)
 	if ok == OK:
 		print("all correct to port: " + str(lisenerport) + ":D")
+		$Panel/Label.text = "Bound to lisen port: true"
 	else:
 		print("failed to port D:")
+		$Panel/Label.text = "Bound to lisen port: false"
 
 func _process(_delta):
 	if lisener.get_available_packet_count() > 0:
@@ -34,19 +39,21 @@ func _process(_delta):
 		var data = bytes.get_string_from_ascii()
 		var roominfo2 = JSON.parse_string(data)
 
-		print(serverip + serverport)
+		print(serverip + ":" + str(serverport))
 		
 		for i in $Panel/VBoxContainer.get_children():
 			if i.name == roominfo2.name:
 				i.get_node("ip").text = serverip
-				i.get_node("count").text = str(data.playercount)
+				i.get_node("port").text = str(serverport)
+				i.get_node("count").text = str(roominfo2.playercount)
 				return
 
 		var currentinfo2 = currentinfo.instantiate()
-		currentinfo2.get_node("name").text = data.name
+		currentinfo2.name = roominfo2.name
+		currentinfo2.get_node("Name").text = roominfo2.name
 		currentinfo2.get_node("ip").text = serverip
-		currentinfo2.get_node("port").text = serverport
-		currentinfo2.get_node("count").text = str(data.playercount)
+		currentinfo2.get_node("port").text = str(serverport)
+		currentinfo2.get_node("count").text = str(roominfo2.playercount)
 		$Panel/VBoxContainer.add_child(currentinfo2)
 	
 func setupbroadcast(player_name):
@@ -62,6 +69,7 @@ func setupbroadcast(player_name):
 		print("all correct to port: " + str(broadcasterport) + ":D")
 	else:
 		print("failed to port D:")
+		
 
 	$"broadcast timer".start()
 
@@ -73,9 +81,13 @@ func _on_broadcast_timer_timeout():
 	if broadcaster != null:
 		broadcaster.put_packet(packet)
 
-func _exit_tree():
+func cleanup():
 	lisener.close()
 	
 	$"broadcast timer".stop()
 	if broadcaster != null:
 		broadcaster.close()
+
+
+func _exit_tree():
+	cleanup()

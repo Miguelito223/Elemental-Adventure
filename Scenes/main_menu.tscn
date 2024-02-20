@@ -194,7 +194,6 @@ theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
 
 [node name="Server Browser2" type="VBoxContainer" parent="Online Menu"]
-visible = false
 layout_mode = 2
 
 [node name="Control" type="Control" parent="Online Menu/Server Browser2"]
@@ -247,17 +246,29 @@ offset_top = 56.6667
 offset_right = 730.258
 offset_bottom = 96.6667
 
+[node name="Label" type="Label" parent="Online Menu/Server Browser2/Control/Panel"]
+layout_mode = 0
+offset_left = 17.5781
+offset_top = 271.333
+offset_right = 57.5781
+offset_bottom = 294.333
+theme = ExtResource("5_tq5s4")
+text = "Bound to lisen port: "
+
 [node name="host" type="Button" parent="Online Menu"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Host"
 
 [node name="join" type="Button" parent="Online Menu"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
 
 [node name="server browser" type="Button" parent="Online Menu"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Server browser local"
