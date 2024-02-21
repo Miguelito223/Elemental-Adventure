@@ -26,7 +26,7 @@ func setup():
 
 	var ok = lisener.bind(lisenerport)
 	if ok == OK:
-		print("all correct to port: " + str(lisenerport) + ":D")
+		print("all correct to port: " + str(lisenerport) + " :D")
 		$Panel/Label.text = "Bound to lisen port: true"
 	else:
 		print("failed to port D:")
@@ -68,7 +68,7 @@ func setupbroadcast(player_name):
 
 	var ok = broadcaster.bind(broadcasterport)
 	if ok == OK:
-		print("all correct to port: " + str(broadcasterport) + ":D")
+		print("all correct to port: " + str(broadcasterport) + " :D")
 	else:
 		print("failed to port D:")
 		
