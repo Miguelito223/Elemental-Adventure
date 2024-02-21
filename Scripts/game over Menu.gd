@@ -22,7 +22,8 @@ func _on_back_pressed():
 			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.is_networking = false
 			Network.connected_ids.clear()
-			LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
+			queue_free()
+			get_parent().get_node("Main Menu").show()
 	else:
 		LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfkn16lnb518m"]
 
 [ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="1_14cqw"]
-[ext_resource type="Script" path="res://Scenes/server_info.gd" id="1_838k7"]
+[ext_resource type="Script" path="res://Scripts/server_info.gd" id="1_838k7"]
 
 [node name="Server_info" type="HBoxContainer"]
 offset_right = 40.0
