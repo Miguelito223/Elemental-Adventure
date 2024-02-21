@@ -222,7 +222,7 @@ func _ready():
 		else:
 			push_error("Error creating server: " + str(error))
 
-	control.join.connect(joinbyip)
+	control.JoinGame.connect(joinbyip)
 
 	popup.hide()
 	popup2.hide()

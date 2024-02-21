@@ -2,7 +2,7 @@ extends Node
 
 signal found_server
 signal server_removed
-signal join(ip)
+signal JoinGame(ip)
 
 var broadcasttimer: Timer
 
@@ -68,7 +68,8 @@ func setupbroadcast(player_name):
 		var parts = address.split('.')
 		if (parts.size() == 4):
 			parts[3] = '255'
-			broadcaster.set_dest_address(parts.join('.'), lisenerport)
+			print('.'.join(parts))
+			broadcaster.set_dest_address('.'.join(parts), lisenerport)
 
 	var ok = broadcaster.bind(broadcasterport)
 	if ok == OK:
@@ -100,4 +101,4 @@ func _exit_tree():
 
 
 func joinbyip(ip):
-	join.emit(ip)
+	JoinGame.emit(ip)
