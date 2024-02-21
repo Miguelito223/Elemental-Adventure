@@ -498,10 +498,10 @@ func _on_create_pressed():
 		push_error("Error creating server: " + str(error))
 
 func _on_join2_pressed():
-	joinbyip(Network.ip)
+	joinbyip(Network.ip, Network.port)
 
-func joinbyip(ip):
-	var error = Network.multiplayer_peer_client.create_client("ws://" + ip + ":" + str(Network.port))
+func joinbyip(ip, port):
+	var error = Network.multiplayer_peer_client.create_client("ws://" + ip + ":" + str(port))
 	if error == OK:
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
 		if not get_tree().get_multiplayer().is_server():

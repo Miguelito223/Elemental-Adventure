@@ -2,7 +2,7 @@ extends Node
 
 signal found_server
 signal server_removed
-signal JoinGame(ip)
+signal JoinGame(ip, port)
 
 var broadcasttimer: Timer
 
@@ -95,5 +95,5 @@ func _exit_tree():
 	cleanup()
 
 
-func joinbyip(ip):
-	JoinGame.emit(ip)
+func joinbyip(ip, port):
+	JoinGame.emit(ip, port)

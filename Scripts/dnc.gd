@@ -18,19 +18,8 @@ func set_time_multiplayer(time):
 	Globals.time = time
 
 @rpc("any_peer", "call_local")
-func set_day_multiplayer(day):
-	Globals.day = day
-
-@rpc("any_peer", "call_local")
-func set_hour_multiplayer(hour):
-	Globals.hour = hour
-
-@rpc("any_peer", "call_local")
-func set_minute_multiplayer(minute):
-	Globals.minute = minute
-
-@rpc("any_peer", "call_local")
 func set_color_multiplayer(xd):
+	await get_tree().create_timer(1).timeout
 	self.color = xd
 
 func _ready():
@@ -75,8 +64,5 @@ func _recalculate_time():
 
 	if past_minute != Globals.minute:
 		past_minute = Globals.minute
-		set_day_multiplayer.rpc(Globals.day)
-		set_hour_multiplayer.rpc(Globals.hour)
-		set_minute_multiplayer.rpc(Globals.minute)
 		Signals.time_tick.emit(Globals.day, Globals.hour, Globals.minute)
 		
