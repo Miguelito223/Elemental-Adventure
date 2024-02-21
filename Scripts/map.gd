@@ -9,9 +9,6 @@ var rng = RandomNumberGenerator.new()
 
 var player_scene = preload("res://Scenes/player.tscn")
 
-
-
-
 func _ready():
 	if DEBUGGING:
 		print("Parent of '{n}' is '{p}'".format({
@@ -39,10 +36,6 @@ func _ready():
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_tree().get_multiplayer().multiplayer_peer = null
-
-		
-
-
 
 func server_disconected():
 	print("Server Finish")

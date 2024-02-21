@@ -9,13 +9,6 @@ var is_networking = false
 var multiplayer_peer_client = WebSocketMultiplayerPeer.new()
 var multiplayer_peer_server = WebSocketMultiplayerPeer.new()
 
-
-func _ready():
-	multiplayer_peer_client.inbound_buffer_size = 65535000 * 1024
-	multiplayer_peer_client.outbound_buffer_size = 65535000 * 1024
-	multiplayer_peer_server.inbound_buffer_size = 65535000 * 1024
-	multiplayer_peer_server.outbound_buffer_size = 65535000 * 1024
-
 var player_name: Array = [
 	"Fire",
 	"Water",
