@@ -19,7 +19,6 @@ func set_time_multiplayer(time):
 
 @rpc("any_peer", "call_local")
 func set_color_multiplayer(xd):
-	await get_tree().create_timer(1).timeout
 	self.color = xd
 
 func _ready():
@@ -42,10 +41,7 @@ func _process(delta):
 			set_color_multiplayer.rpc(self.color)
 			
 			_recalculate_time()
-
-
-			
-		
+			await get_tree().create_timer(1).timeout
 	else:
 		Globals.time += delta * ingame_to_real_minute_duration * ingame_speed  
 		var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)
