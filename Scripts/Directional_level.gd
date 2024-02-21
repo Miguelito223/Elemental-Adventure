@@ -11,11 +11,10 @@ func _process(_delta):
 		if get_tree().get_multiplayer().is_server():
 			var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)
 			self.color = gradient.gradient.sample(value)
+			set_color_multiplayer.rpc(gradient.gradient.sample(value))
 			self.enabled = Globals.Graphics
 			self.shadow_enabled = Globals.Graphics
 			self.shadow_filter = Globals.Graphics
-			set_color_multiplayer.rpc(self.color)
-			await get_tree().create_timer(1).timeout
 	else:
 		var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)
 		self.color = gradient.gradient.sample(value)

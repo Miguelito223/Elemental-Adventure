@@ -38,10 +38,9 @@ func _process(delta):
 			set_time_multiplayer.rpc(Globals.time)
 			var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)
 			self.color = gradient.gradient.sample(value)
-			set_color_multiplayer.rpc(self.color)
+			set_color_multiplayer.rpc(gradient.gradient.sample(value))
 			
 			_recalculate_time()
-			await get_tree().create_timer(1).timeout
 	else:
 		Globals.time += delta * ingame_to_real_minute_duration * ingame_speed  
 		var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)

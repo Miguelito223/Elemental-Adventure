@@ -251,7 +251,7 @@ func _on_return_pressed():
 
 func _on_back_pressed():
 	if Network.is_networking:
-		if is_multiplayer_authority():
+		if get_parent().is_multiplayer_authority():
 			hide()
 			get_tree().paused = false
 			Network.is_networking = false
