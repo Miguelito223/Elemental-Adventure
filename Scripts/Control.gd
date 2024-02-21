@@ -14,7 +14,7 @@ var currentinfo = preload("res://Scenes/server_info.tscn")
 
 var lisenerport = 9999
 var broadcasterport = Network.port
-var broadcasteripadress = "192.168.1.255"
+var broadcasteripadress = IP.get_local_addresses()
 
 func _ready():
 	broadcasttimer = $"broadcast timer"
@@ -64,7 +64,11 @@ func setupbroadcast(player_name):
 
 	broadcaster = PacketPeerUDP.new()
 	broadcaster.set_broadcast_enabled(true)
-	broadcaster.set_dest_address(broadcasteripadress, lisenerport)
+	for address in broadcasteripadress:
+		var parts = address.split('.')
+		if (parts.size() == 4):
+			parts[3] = '255'
+			broadcaster.set_dest_address(parts.join('.'), lisenerport)
 
 	var ok = broadcaster.bind(broadcasterport)
 	if ok == OK:
