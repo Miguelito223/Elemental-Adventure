@@ -12,7 +12,7 @@ var lisener: PacketPeerUDP
 
 var currentinfo = preload("res://Scenes/server_info.tscn")
 
-var lisenerport = 9999
+var lisenerport = 8911
 var broadcasterport = Network.port
 var broadcasteripadress = "255.255.255.255"
 
