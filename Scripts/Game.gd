@@ -105,3 +105,7 @@ func Remove_loading_screen():
 	var load_screen = get_node("res://Scenes/loading_screen.tscn")
 	if is_instance_valid(load_screen):
 		load_screen.queue_free()
+
+
+func _on_multiplayer_spawner_spawned(_node):
+	get_node("CanvasLayer").hide()

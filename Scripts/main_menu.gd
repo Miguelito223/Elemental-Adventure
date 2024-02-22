@@ -497,8 +497,11 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
+	hostbyport(Network.port)
+
+func hostbyport(port):
 	if not OS.has_feature("Web"):
-		var error = Network.multiplayer_peer_Enet.create_server(Network.port)
+		var error = Network.multiplayer_peer_Enet.create_server(port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
 			if get_tree().get_multiplayer().is_server():
@@ -506,11 +509,12 @@ func _on_create_pressed():
 				UPNP_setup()
 				control.setupbroadcast(Network.username)
 				hide()
+				get_parent().get_node("CanvasLayer").show()
 				LoadScene.load_scene(null, Globals.map)
 		else:
 			push_error("Error creating server: " + str(error))
 	else:
-		var error = Network.multiplayer_peer_websocker.create_server(Network.port)
+		var error = Network.multiplayer_peer_websocker.create_server(port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
 			if get_tree().get_multiplayer().is_server():
@@ -518,10 +522,10 @@ func _on_create_pressed():
 				UPNP_setup()
 				control.setupbroadcast(Network.username)
 				hide()
+				get_parent().get_node("CanvasLayer").show()
 				LoadScene.load_scene(null, Globals.map)
 		else:
 			push_error("Error creating server: " + str(error))
-
 
 func _on_join2_pressed():
 	joinbyip(Network.ip, Network.port)
@@ -534,6 +538,7 @@ func joinbyip(ip, port):
 			if not get_tree().get_multiplayer().is_server():
 				Network.is_networking = true
 				hide()
+				get_parent().get_node("CanvasLayer").show()
 				LoadScene.load_scene(null, "res://Scenes/game.tscn")	
 		else:
 			push_error("Error creating client: ", str(error))
@@ -544,6 +549,7 @@ func joinbyip(ip, port):
 			if not get_tree().get_multiplayer().is_server():
 				Network.is_networking = true
 				hide()
+				get_parent().get_node("CanvasLayer").show()
 				LoadScene.load_scene(null, "res://Scenes/game.tscn")	
 		else:
 			push_error("Error creating client: ", str(error))
@@ -555,7 +561,7 @@ func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
 
 func _on_port_text_changed(new_text:String):
-	Network.port = new_text.to_int()
+	Network.port = int(new_text)
 
 func _on_name_port_text_changed(new_text:String):
 	Network.username = new_text

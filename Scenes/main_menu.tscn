@@ -135,17 +135,6 @@ vertical_alignment = 1
 layout_mode = 2
 placeholder_text = "9999"
 
-[node name="ip text" type="Label" parent="Online Menu/Host2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
-text = "ip"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ip" type="LineEdit" parent="Online Menu/Host2"]
-layout_mode = 2
-placeholder_text = "127.0.0.1"
-
 [node name="create" type="Button" parent="Online Menu/Host2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_his25")
@@ -524,7 +513,6 @@ bus = &"Music"
 [connection signal="pressed" from="main menu/exit" to="." method="_on_exit_pressed"]
 [connection signal="text_changed" from="Online Menu/Host2/name port" to="." method="_on_name_port_text_changed"]
 [connection signal="text_changed" from="Online Menu/Host2/port" to="." method="_on_port_text_changed"]
-[connection signal="text_changed" from="Online Menu/Host2/ip" to="." method="_on_ip_text_changed"]
 [connection signal="pressed" from="Online Menu/Host2/create" to="." method="_on_create_pressed"]
 [connection signal="text_changed" from="Online Menu/Join2/name port" to="." method="_on_name_port_text_changed"]
 [connection signal="text_changed" from="Online Menu/Join2/port" to="." method="_on_port_text_changed"]

@@ -1,11 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://2t5xqdooqkml"]
+[gd_scene load_steps=3 format=3 uid="uid://2t5xqdooqkml"]
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_b64g1"]
+[ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="2_qo1i1"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_b64g1")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="MapSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/map_1.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Back to Main menu" type="Button" parent="CanvasLayer"]
+offset_left = 1640.0
+offset_right = 1920.0
+offset_bottom = 49.0
+theme = ExtResource("2_qo1i1")
+text = "Back To main Menu"
+
+[node name="Reconnect" type="Button" parent="CanvasLayer"]
+offset_left = 1640.0
+offset_top = 45.0
+offset_right = 1920.0
+offset_bottom = 94.0
+theme = ExtResource("2_qo1i1")
+text = "Reconnect"
+
+[connection signal="spawned" from="MapSpawner" to="." method="_on_multiplayer_spawner_spawned"]
