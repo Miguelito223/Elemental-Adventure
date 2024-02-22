@@ -13,7 +13,6 @@ var lisener: PacketPeerUDP
 var currentinfo = preload("res://Scenes/server_info.tscn")
 
 var lisenerport = 8911
-var broadcasterport = Network.port
 var broadcasteripadress = "255.255.255.255"
 
 func _ready():
@@ -66,9 +65,9 @@ func setupbroadcast(player_name):
 	broadcaster.set_broadcast_enabled(true)
 	broadcaster.set_dest_address(broadcasteripadress, lisenerport)
 
-	var ok = broadcaster.bind(broadcasterport)
+	var ok = broadcaster.bind(Network.port)
 	if ok == OK:
-		print("all correct to port: " + str(broadcasterport) + " :D")
+		print("all correct to port: " + str(Network.port) + " :D")
 	else:
 		print("failed to port D:")
 		
