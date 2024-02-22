@@ -45,7 +45,7 @@ func _process(_delta):
 		for i in $Panel/VBoxContainer.get_children():
 			if i.name == roominfo2.name:
 				i.get_node("ip").text = serverip
-				i.get_node("port").text = str(serverport)
+				i.get_node("port").text = str(serverport - 2)
 				i.get_node("count").text = str(roominfo2.playercount)
 				return
 

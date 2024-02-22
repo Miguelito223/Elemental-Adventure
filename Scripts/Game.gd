@@ -2,6 +2,8 @@ extends Node
 
 var DEBUGGING = true
 
+signal JoinGame(ip,port)
+
 var level
 var map
 
@@ -109,3 +111,20 @@ func Remove_loading_screen():
 
 func _on_multiplayer_spawner_spawned(_node):
 	get_node("CanvasLayer").hide()
+
+
+func _on_map_spawner_despawned(_node):
+	get_node("CanvasLayer").show()
+
+
+func _on_reconnect_toggled(toggled_on:bool):
+	JoinGame.emit()
+
+
+func _on_back_to_main_menu_toggled(toggled_on:bool):
+	if Network.is_networking:
+		if get_parent().is_multiplayer_authority():
+			Network.is_networking = false
+			get_tree().get_multiplayer().multiplayer_peer = null
+			Network.connected_ids.clear()
+			get_node("Main Menu").show()

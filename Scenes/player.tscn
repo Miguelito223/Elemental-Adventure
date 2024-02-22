@@ -542,7 +542,6 @@ visible = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_uy6bv")
-visibility_update_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("15_jtxs5")

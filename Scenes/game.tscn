@@ -29,4 +29,7 @@ offset_bottom = 94.0
 theme = ExtResource("2_qo1i1")
 text = "Reconnect"
 
+[connection signal="despawned" from="MapSpawner" to="." method="_on_map_spawner_despawned"]
 [connection signal="spawned" from="MapSpawner" to="." method="_on_multiplayer_spawner_spawned"]
+[connection signal="toggled" from="CanvasLayer/Back to Main menu" to="." method="_on_back_to_main_menu_toggled"]
+[connection signal="toggled" from="CanvasLayer/Reconnect" to="." method="_on_reconnect_toggled"]

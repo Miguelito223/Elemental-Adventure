@@ -235,6 +235,7 @@ func _ready():
 				push_error("Error creating server: " + str(error))
 
 	control.JoinGame.connect(joinbyip)
+	get_parent().JoinGame.connect(joinbyip)
 
 	popup.hide()
 	popup2.hide()
