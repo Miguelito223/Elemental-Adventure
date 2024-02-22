@@ -37,19 +37,19 @@ func _ready():
 		add_player(1)	
 		
 	Signals.level_loaded.emit()
-	
-func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		get_tree().get_multiplayer().multiplayer_peer = null
 
 func server_disconected():
 	print("Server Finish")
+	Network.is_networking = false
 	get_tree().get_multiplayer().multiplayer_peer = null
+	Network.connected_ids.clear()
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
 func conected_fail():
 	print("Fail to load")
+	Network.is_networking = false
 	get_tree().get_multiplayer().multiplayer_peer = null
+	Network.connected_ids.clear()
 	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
 
 func server_conected():

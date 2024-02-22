@@ -130,3 +130,4 @@ func _on_back_to_main_menu_pressed():
 			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.connected_ids.clear()
 			get_node("Main Menu").show()
+			get_node("CanvasLayer").hide()

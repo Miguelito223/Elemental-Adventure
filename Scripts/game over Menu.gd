@@ -19,8 +19,8 @@ func _on_return_pressed():
 func _on_back_pressed():
 	if Network.is_networking:
 		if player.is_multiplayer_authority():
-			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.is_networking = false
+			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.connected_ids.clear()
 			queue_free()
 			get_parent().get_node("Main Menu").show()
