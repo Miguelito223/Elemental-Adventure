@@ -59,6 +59,9 @@ func Unload_scene(current_scene):
 
 	await Signal(unloading_screen_scene, "safe_to_load")
 
+	if current_scene != null:
+		current_scene.queue_free()
+
 	start_load()
 
 
