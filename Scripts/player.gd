@@ -82,7 +82,8 @@ func _ready():
 	else:
 		$Camera2D.enabled = false
 
-	syncronizer.set_multiplayer_authority(str(name).to_int())
+	if Network.is_networking:
+		syncronizer.set_multiplayer_authority(str(name).to_int())
 
 	Signals.player_ready.emit()
 
