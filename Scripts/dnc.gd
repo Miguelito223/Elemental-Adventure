@@ -13,14 +13,6 @@ var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
 
 var past_minute = -1.0
 
-
-func recalculate_time_client(id):
-	_recalculate_time.rpc_id(id)
-
-func set_time_client(id, time):
-	set_time_multiplayer.rpc_id(id, time)
-
-
 @rpc("any_peer", "call_local")
 func set_time_multiplayer(time):
 	Globals.time = time
@@ -43,9 +35,6 @@ func _ready():
 		if get_tree().get_multiplayer().is_server():
 			Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
 			_recalculate_time.rpc()
-		else:
-			set_time_client(1, Globals.time)
-			recalculate_time_client(1)
 	else:
 		Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
 		Data.load_file()
@@ -56,9 +45,6 @@ func _process(delta):
 			Globals.time += delta * ingame_to_real_minute_duration * ingame_speed  
 			set_time_multiplayer.rpc(Globals.time)
 			_recalculate_time.rpc()
-		else:
-			set_time_client(1, Globals.time)
-			recalculate_time_client(1)
 		
 		var value = (sin(Globals.time - PI / 2) + 1.0 / 2.0)
 		self.color = gradient.gradient.sample(value)

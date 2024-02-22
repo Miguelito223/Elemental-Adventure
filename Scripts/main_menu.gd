@@ -546,19 +546,19 @@ func joinbyip(ip, port):
 				Network.is_networking = true
 				hide()
 				get_parent().get_node("CanvasLayer").show()
-				LoadScene.load_scene(null, "res://Scenes/game.tscn")	
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")
 		else:
 			push_error("Error creating client: ", str(error))
 	else:
 		Network.multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
-		var error = Network.multiplayer_peer_websocker.create_client("ws://" + ip + ":" + port.to_string())
+		var error = Network.multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
 			if not get_tree().get_multiplayer().is_server():
 				Network.is_networking = true
 				hide()
 				get_parent().get_node("CanvasLayer").show()
-				LoadScene.load_scene(null, "res://Scenes/game.tscn")	
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")
 		else:
 			push_error("Error creating client: ", str(error))
 

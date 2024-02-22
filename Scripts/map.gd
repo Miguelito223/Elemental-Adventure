@@ -20,13 +20,14 @@ func _ready():
 		return
 	
 	if not get_tree().get_multiplayer().is_server():
+		get_tree().get_multiplayer().server_disconnected.connect(server_disconected)
+		get_tree().get_multiplayer().connected_to_server.connect(server_conected)
+		get_tree().get_multiplayer().connection_failed.connect(conected_fail)
 		return
 	
 	get_tree().get_multiplayer().peer_connected.connect(add_player)
 	get_tree().get_multiplayer().peer_disconnected.connect(remove_player)
-	get_tree().get_multiplayer().server_disconnected.connect(server_disconected)
-	get_tree().get_multiplayer().connected_to_server.connect(server_conected)
-	get_tree().get_multiplayer().connection_failed.connect(conected_fail)
+
 
 	for id in get_tree().get_multiplayer().get_peers():
 		add_player(id)
@@ -112,6 +113,11 @@ func remove_player(peer_id):
 		Network.connected_ids.erase(player.name.to_int())
 		Network.connection_count = Network.connected_ids.size() - 1
 		player.queue_free()
+
+
+func _on_player_spawner_despawned(node:Node):
+	print("desspawning player id: " + node.name)
+
 		
 @rpc("any_peer", "call_local")
 func msg_rcp(user, data):
@@ -126,11 +132,11 @@ func _on_line_edit_gui_input(event:InputEvent):
 
 func _exit_tree():
 	if not get_tree().get_multiplayer().is_server():
+		get_tree().get_multiplayer().server_disconnected.disconnect(server_disconected)
+		get_tree().get_multiplayer().connected_to_server.disconnect(server_conected)
+		get_tree().get_multiplayer().connection_failed.disconnect(conected_fail)
 		return
 
 	get_tree().get_multiplayer().peer_connected.disconnect(add_player)
 	get_tree().get_multiplayer().peer_disconnected.disconnect(remove_player)
-	get_tree().get_multiplayer().server_disconnected.disconnect(server_disconected)
-	get_tree().get_multiplayer().connected_to_server.disconnect(server_conected)
-	get_tree().get_multiplayer().connection_failed.disconnect(conected_fail)
 

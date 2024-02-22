@@ -82,8 +82,7 @@ func _ready():
 	else:
 		$Camera2D.enabled = false
 
-	if Network.is_networking:
-		syncronizer.set_multiplayer_authority(str(name).to_int())
+
 
 	Signals.player_ready.emit()
 
@@ -92,6 +91,7 @@ func _ready():
 func _enter_tree():
 	if Network.is_networking:
 		set_multiplayer_authority(str(name).to_int())
+		$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 		setposspawn()
 
 
@@ -277,7 +277,7 @@ func move(delta, accel, amount):
 
 func _input(event):
 	if Network.is_networking:
-		if $MultiplayerSynchronizer.is_multiplayer_authority():
+		if syncronizer.is_multiplayer_authority():
 
 			if event.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1

@@ -60,5 +60,6 @@ offset_right = 503.0
 offset_bottom = 971.0
 placeholder_text = "Message"
 
+[connection signal="despawned" from="PlayerSpawner" to="." method="_on_player_spawner_despawned"]
 [connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]
 [connection signal="gui_input" from="CanvasLayer/LineEdit" to="." method="_on_line_edit_gui_input"]

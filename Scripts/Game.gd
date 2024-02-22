@@ -110,20 +110,22 @@ func Remove_loading_screen():
 
 
 func _on_multiplayer_spawner_spawned(_node):
-	get_node("CanvasLayer").hide()
+	if not get_tree().get_multiplayer().is_server():
+		get_node("CanvasLayer").hide()
 
 
 func _on_map_spawner_despawned(_node):
-	get_node("CanvasLayer").show()
+	if not get_tree().get_multiplayer().is_server():
+		get_node("CanvasLayer").show()
 
 
-func _on_reconnect_toggled(toggled_on:bool):
-	JoinGame.emit()
+func _on_reconnect_pressed():
+	JoinGame.emit(Network.ip, Network.port)
 
 
-func _on_back_to_main_menu_toggled(toggled_on:bool):
+func _on_back_to_main_menu_pressed():
 	if Network.is_networking:
-		if get_parent().is_multiplayer_authority():
+		if not get_tree().get_multiplayer().is_server():
 			Network.is_networking = false
 			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.connected_ids.clear()
