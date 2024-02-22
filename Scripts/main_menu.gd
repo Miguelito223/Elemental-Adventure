@@ -209,18 +209,30 @@ func _ready():
 
 		print("port:", Network.port)
 		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
-
-		var error = Network.multiplayer_peer_server.create_server(Network.port)
-		if error == OK:
-			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
-			if get_tree().get_multiplayer().is_server():
-				Network.is_networking = true
-				UPNP_setup()
-				control.setupbroadcast(Network.username)
-				hide()
-				LoadScene.load_scene(null, Globals.map)
+		if not OS.has_feature("Web"):
+			var error = Network.multiplayer_peer_Enet.create_server(Network.port)
+			if error == OK:
+				get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
+				if get_tree().get_multiplayer().is_server():
+					Network.is_networking = true
+					UPNP_setup()
+					control.setupbroadcast(Network.username)
+					hide()
+					LoadScene.load_scene(null, Globals.map)
+			else:
+				push_error("Error creating server: " + str(error))
 		else:
-			push_error("Error creating server: " + str(error))
+			var error = Network.multiplayer_peer_websocker.create_server(Network.port)
+			if error == OK:
+				get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
+				if get_tree().get_multiplayer().is_server():
+					Network.is_networking = true
+					UPNP_setup()
+					control.setupbroadcast(Network.username)
+					hide()
+					LoadScene.load_scene(null, Globals.map)
+			else:
+				push_error("Error creating server: " + str(error))
 
 	control.JoinGame.connect(joinbyip)
 
@@ -516,7 +528,7 @@ func _on_join2_pressed():
 
 func joinbyip(ip, port):
 	if not OS.has_feature("Web"):
-		var error = Network.multiplayer_peer_Enet.create_client(ip, port)
+		var error = Network.multiplayer_peer_Enet.create_client(ip, int(port))
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
 			if not get_tree().get_multiplayer().is_server():
