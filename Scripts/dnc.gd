@@ -15,10 +15,10 @@ var past_minute = -1.0
 
 
 func recalculate_time_client(id):
-	_recalculate_time.rpc(id)
+	_recalculate_time.rpc_id(id)
 
 func set_time_client(id, time):
-	set_time_multiplayer.rpc(id, time)
+	set_time_multiplayer.rpc_id(id, time)
 
 
 @rpc("any_peer", "call_local")
