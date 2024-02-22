@@ -30,6 +30,8 @@ func _ready():
 
 	for id in get_tree().get_multiplayer().get_peers():
 		add_player(id)
+
+		
 	if not OS.has_feature("dedicated_server"):
 		add_player(1)	
 		

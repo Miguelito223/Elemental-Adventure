@@ -28,6 +28,7 @@ Signals="*res://Scripts/Signals.gd"
 Data="*res://Scripts/Data.gd"
 DataState="*res://Scripts/DataState.gd"
 LoadScene="*res://Scripts/LoadScene.gd"
+UnloadScene="*res://Scripts/UnloadScene.gd"
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 
 [debug]

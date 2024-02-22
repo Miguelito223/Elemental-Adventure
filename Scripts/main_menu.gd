@@ -209,7 +209,9 @@ func _ready():
 
 		print("port:", Network.port)
 		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
+		
 		if not OS.has_feature("web"):
+			Network.multiplayer_peer_Enet = ENetMultiplayerPeer.new()
 			var error = Network.multiplayer_peer_Enet.create_server(Network.port)
 			if error == OK:
 				get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
@@ -222,6 +224,7 @@ func _ready():
 			else:
 				push_error("Error creating server: " + str(error))
 		else:
+			Network.multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 			var error = Network.multiplayer_peer_websocker.create_server(Network.port)
 			if error == OK:
 				get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
@@ -502,6 +505,7 @@ func _on_create_pressed():
 
 func hostbyport(port):
 	if not OS.has_feature("web"):
+		Network.multiplayer_peer_Enet = ENetMultiplayerPeer.new()
 		var error = Network.multiplayer_peer_Enet.create_server(port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
@@ -515,6 +519,7 @@ func hostbyport(port):
 		else:
 			push_error("Error creating server: " + str(error))
 	else:
+		Network.multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 		var error = Network.multiplayer_peer_websocker.create_server(port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
@@ -533,6 +538,7 @@ func _on_join2_pressed():
 
 func joinbyip(ip, port):
 	if not OS.has_feature("web"):
+		Network.multiplayer_peer_Enet = ENetMultiplayerPeer.new()
 		var error = Network.multiplayer_peer_Enet.create_client(ip, port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
@@ -544,6 +550,7 @@ func joinbyip(ip, port):
 		else:
 			push_error("Error creating client: ", str(error))
 	else:
+		Network.multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 		var error = Network.multiplayer_peer_websocker.create_client("ws://" + ip + ":" + port.to_string())
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker

@@ -38,34 +38,26 @@ const GAME_SCENE ={
 	"map_1": "res://Scenes/map_1.tscn",
 }
 
-var loading_screen_path: String = "res://Scenes/loading_screen.tscn"
-var loading_screen = load(loading_screen_path)
-var loader_resource: PackedScene
+var unloading_screen_path: String = "res://Scenes/loading_screen.tscn"
+var unloading_screen = load(unloading_screen_path)
+var unloader_resource: PackedScene
 var scene_path: String
 var progress: Array = []
 
 var use_aub_theads: bool = false
 
-func _ready():
-	load_scene(null, "res://Scenes/main_menu.tscn")
-
-
 @rpc("authority", "call_local")
-func load_scene(current_scene, next_scene):
-	if next_scene != null:
-		scene_path = next_scene
-
-
-	var loading_screen_intance = loading_screen.instantiate()
-	get_tree().get_root().get_node("Game").add_child(loading_screen_intance)
-	
-	progress_changed.connect(loading_screen_intance.update_progress_bar)
-	load_done.connect(loading_screen_intance.fade_out_loading_screen)
-
-	await Signal(loading_screen_intance, "safe_to_load")
-
+func Unload_scene(current_scene):
 	if current_scene != null:
-		current_scene.queue_free()
+		scene_path = current_scene.get_path()
+
+	var unloading_screen_scene = unloading_screen.instantiate()
+	get_tree().get_root().get_node("Game").add_child(unloading_screen_scene)
+	
+	progress_changed.connect(unloading_screen_scene.update_progress_bar)
+	load_done.connect(unloading_screen_scene.fade_out_loading_screen)
+
+	await Signal(unloading_screen_scene, "safe_to_load")
 
 	start_load()
 
@@ -75,7 +67,7 @@ func start_load():
 		scene_path = GAME_SCENE[scene_path]
 	else:
 		scene_path = scene_path
-	
+
 	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path)
 	if loader_next_scene == OK:
 		set_process(true)
@@ -91,16 +83,6 @@ func _process(_delta):
 		1:
 			emit_signal("progress_changed", progress[0])
 		3:
-			
-
-			
-			if scene_path == "res://Scenes/game.tscn":
-				pass
-			else:
-				var new_scene = ResourceLoader.load_threaded_get(scene_path).instantiate()
-				get_tree().get_root().get_node("Game").add_child(new_scene)
-
-
 			emit_signal("progress_changed", 1.0)
 			emit_signal("load_done")
 
