@@ -94,8 +94,8 @@ func _process(_delta):
 			var new_scene = ResourceLoader.load_threaded_get(scene_path).instantiate()
 
 			
-			if scene_path == "res://Scenes/game.tscn":
-				get_tree().change_scene_to_packed(new_scene)
+			if scene_path == "res://Scenes/game.tscn" or scene_path == null:
+				get_tree().unload_current_scene()
 			else:
 				get_tree().get_root().get_node("Game").add_child(new_scene)
 

@@ -30,8 +30,6 @@ func _ready():
 
 	for id in get_tree().get_multiplayer().get_peers():
 		add_player(id)
-
-
 	if not OS.has_feature("dedicated_server"):
 		add_player(1)	
 		
@@ -86,9 +84,7 @@ func add_player(peer_id):
 		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
 
 
-
-
-func _on_multiplayer_spawner_spawned(node):
+func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
 
 	Network.connected_ids.append(node.name.to_int())
@@ -135,3 +131,4 @@ func _exit_tree():
 	get_tree().get_multiplayer().server_disconnected.disconnect(server_disconected)
 	get_tree().get_multiplayer().connected_to_server.disconnect(server_conected)
 	get_tree().get_multiplayer().connection_failed.disconnect(conected_fail)
+

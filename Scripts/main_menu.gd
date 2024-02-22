@@ -209,7 +209,7 @@ func _ready():
 
 		print("port:", Network.port)
 		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
-		if not OS.has_feature("Web"):
+		if not OS.has_feature("web"):
 			var error = Network.multiplayer_peer_Enet.create_server(Network.port)
 			if error == OK:
 				get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
@@ -501,7 +501,7 @@ func _on_create_pressed():
 	hostbyport(Network.port)
 
 func hostbyport(port):
-	if not OS.has_feature("Web"):
+	if not OS.has_feature("web"):
 		var error = Network.multiplayer_peer_Enet.create_server(port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
@@ -532,7 +532,7 @@ func _on_join2_pressed():
 	joinbyip(Network.ip, Network.port)
 
 func joinbyip(ip, port):
-	if not OS.has_feature("Web"):
+	if not OS.has_feature("web"):
 		var error = Network.multiplayer_peer_Enet.create_client(ip, port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
