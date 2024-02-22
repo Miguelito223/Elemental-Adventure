@@ -257,7 +257,7 @@ func _on_back_pressed():
 			Network.is_networking = false
 			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.connected_ids.clear()
-			UnloadScene.Unload_scene(self)
+			UnloadScene.Unload_scene(get_parent().get_parent().get_parent())
 			get_parent().get_parent().get_parent().get_parent().get_node("Main Menu").show()
 	else:
 		hide()
