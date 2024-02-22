@@ -107,12 +107,9 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath(".:speed")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath(".:Max_Hearth")
+properties/6/path = NodePath("Node2D:rotation")
 properties/6/spawn = true
 properties/6/replication_mode = 1
-properties/7/path = NodePath("Node2D:rotation")
-properties/7/spawn = true
-properties/7/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_gf7xr"]
 length = 0.001
@@ -277,6 +274,7 @@ autoplay = "idle"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_h1tp1")
+visibility_update_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

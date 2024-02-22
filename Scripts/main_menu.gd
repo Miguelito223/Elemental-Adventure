@@ -485,31 +485,58 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
-	var error = Network.multiplayer_peer_server.create_server(Network.port)
-	if error == OK:
-		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_server
-		if get_tree().get_multiplayer().is_server():
-			Network.is_networking = true
-			UPNP_setup()
-			control.setupbroadcast(Network.username)
-			hide()
-			LoadScene.load_scene(null, Globals.map)
+	if not OS.has_feature("Web"):
+		var error = Network.multiplayer_peer_Enet.create_server(Network.port)
+		if error == OK:
+			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
+			if get_tree().get_multiplayer().is_server():
+				Network.is_networking = true
+				UPNP_setup()
+				control.setupbroadcast(Network.username)
+				hide()
+				LoadScene.load_scene(null, Globals.map)
+		else:
+			push_error("Error creating server: " + str(error))
 	else:
-		push_error("Error creating server: " + str(error))
+		var error = Network.multiplayer_peer_websocker.create_server(Network.port)
+		if error == OK:
+			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
+			if get_tree().get_multiplayer().is_server():
+				Network.is_networking = true
+				UPNP_setup()
+				control.setupbroadcast(Network.username)
+				hide()
+				LoadScene.load_scene(null, Globals.map)
+		else:
+			push_error("Error creating server: " + str(error))
+
 
 func _on_join2_pressed():
 	joinbyip(Network.ip, Network.port)
 
 func joinbyip(ip, port):
-	var error = Network.multiplayer_peer_client.create_client("ws://" + ip + ":" + str(port))
-	if error == OK:
-		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_client
-		if not get_tree().get_multiplayer().is_server():
-			Network.is_networking = true
-			hide()
-			LoadScene.load_scene(null, "res://Scenes/game.tscn")	
+	if not OS.has_feature("Web"):
+		var error = Network.multiplayer_peer_Enet.create_client(ip, port)
+		if error == OK:
+			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
+			if not get_tree().get_multiplayer().is_server():
+				Network.is_networking = true
+				hide()
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")	
+		else:
+			push_error("Error creating client: ", str(error))
 	else:
-		push_error("Error creating client: ", str(error))
+		var error = Network.multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
+		if error == OK:
+			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
+			if not get_tree().get_multiplayer().is_server():
+				Network.is_networking = true
+				hide()
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")	
+		else:
+			push_error("Error creating client: ", str(error))
+
+
 
 
 func _on_ip_text_changed(new_text:String):
