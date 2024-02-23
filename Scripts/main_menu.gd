@@ -541,12 +541,10 @@ func joinbyip(ip, port):
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
 			if not get_tree().get_multiplayer().is_server():
-				set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
 				Network.is_networking = true
-				if is_multiplayer_authority():
-					hide()
-					get_parent().get_node("CanvasLayer").show()
-					LoadScene.load_scene(null, "res://Scenes/game.tscn")
+				hide()
+				get_parent().get_node("CanvasLayer").show()
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")
 		else:
 			push_error("Error creating client: ", str(error))
 	else:
@@ -555,12 +553,10 @@ func joinbyip(ip, port):
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker	
 			if not get_tree().get_multiplayer().is_server():
-				set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
 				Network.is_networking = true
-				if is_multiplayer_authority():
-					hide()
-					get_parent().get_node("CanvasLayer").show()
-					LoadScene.load_scene(null, "res://Scenes/game.tscn")
+				hide()
+				get_parent().get_node("CanvasLayer").show()
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")
 		else:
 			push_error("Error creating client: ", str(error))
 
