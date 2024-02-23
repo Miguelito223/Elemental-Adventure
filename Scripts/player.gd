@@ -326,13 +326,14 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 			PointLight.shadow_enabled = Globals.Graphics
 			PointLight.shadow_filter = Globals.Graphics
 
-		if not Globals.use_keyboard or Globals.use_mobile_buttons :
-			if Marker_Parent.scale.x == 1:
-				bullet_lol.velocity = Vector2(bullet_speed, 0)
-			elif Marker_Parent.scale.x == -1 :
-				bullet_lol.velocity = Vector2(-bullet_speed, 0)
-		else:
-			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
+		if syncronizer.is_multiplayer_authority():
+			if not Globals.use_keyboard or Globals.use_mobile_buttons :
+				if Marker_Parent.scale.x == 1:
+					bullet_lol.velocity = Vector2(bullet_speed, 0)
+				elif Marker_Parent.scale.x == -1 :
+					bullet_lol.velocity = Vector2(-bullet_speed, 0)
+			else:
+				bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
 
 
 		can_fire = false
