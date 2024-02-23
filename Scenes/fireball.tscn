@@ -1,27 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://u6equn2extll"]
+[gd_scene load_steps=7 format=3 uid="uid://u6equn2extll"]
 
 [ext_resource type="Script" path="res://Scripts/fireball.gd" id="1_y16lp"]
 [ext_resource type="Texture2D" uid="uid://dgopfrj4aom1d" path="res://Sprites/fireball.png" id="2_t1plx"]
 [ext_resource type="Texture2D" uid="uid://c45gcdl5erpan" path="res://Sprites/linght.png" id="3_v3vlo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8u2e6"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_407ur"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath(".:scale")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath("Fire:emitting")
-properties/3/spawn = true
-properties/3/replication_mode = 1
-properties/4/path = NodePath("PointLight2D:enabled")
-properties/4/spawn = true
-properties/4/replication_mode = 1
 
 [sub_resource type="Curve" id="Curve_nvcuk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -40,9 +23,6 @@ shape = SubResource("CircleShape2D_8u2e6")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_t1plx")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_407ur")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
