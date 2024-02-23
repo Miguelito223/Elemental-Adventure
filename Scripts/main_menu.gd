@@ -571,9 +571,11 @@ func joinbyip(ip, port):
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
+	Data.save_file()
 
 func _on_port_text_changed(new_text:String):
 	Network.port = int(new_text)
+	Data.save_file()
 
 func _on_name_port_text_changed(new_text:String):
 	Network.username = new_text
