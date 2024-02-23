@@ -463,6 +463,12 @@ properties/11/replication_mode = 1
 properties/12/path = NodePath(".:player_id")
 properties/12/spawn = true
 properties/12/replication_mode = 1
+properties/13/path = NodePath("Node2D/Marker2D:position")
+properties/13/spawn = true
+properties/13/replication_mode = 1
+properties/14/path = NodePath("Node2D/Marker2D:rotation")
+properties/14/spawn = true
+properties/14/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]
 corner_radius_top_left = 15
