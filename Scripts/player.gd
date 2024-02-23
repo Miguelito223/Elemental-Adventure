@@ -55,9 +55,6 @@ func _ready():
 	else:
 		DEBUGGING = true
 
-	if Network.is_networking:
-		syncronizer.set_multiplayer_authority(str(name).to_int())
-
 	if DEBUGGING:
 		print("Running Player.gd: {n}._ready()... {pn}".format({
 			"n": name,
@@ -69,7 +66,8 @@ func _ready():
 			"p":get_parent().name,
 			}))
 
-	print("device_num: " + str(device_num))
+	if Network.is_networking:
+		syncronizer.set_multiplayer_authority(str(name).to_int())
 	
 	Globals.player[device_num] = self
 	
