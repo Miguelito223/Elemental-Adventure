@@ -92,23 +92,39 @@ func _enter_tree():
 		set_multiplayer_authority(str(name).to_int())
 		setposspawn()
 
-@rpc("any_peer", "call_local")
-func move_marker():
-	if Globals.use_keyboard and not Globals.use_mobile_buttons:
-		Marker_Parent.look_at(get_global_mouse_position())
-	else:
-		if velocity.x < 0:
-			Marker_Parent.scale.x = -1
-		elif velocity.x > 0:
-			Marker_Parent.scale.x = 1
+
 	
 func _process(_delta):	
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
-			move_marker.rpc()
-	else:
-		move_marker()
+			if Globals.use_keyboard and not Globals.use_mobile_buttons:
+				Marker_Parent.look_at(get_global_mouse_position())
+			else:
+				if velocity.x < 0:
+					Marker_Parent.scale.x = -1
+				elif velocity.x > 0:
+					Marker_Parent.scale.x = 1
+		
+			if Input.is_action_pressed(ui_inputs.keys()[5]):
+				position.y += 1
 			
+			if Input.is_action_pressed(ui_inputs.keys()[3]):
+				shoot.rpc(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
+	else:
+		if Globals.use_keyboard and not Globals.use_mobile_buttons:
+			Marker_Parent.look_at(get_global_mouse_position())
+		else:
+			if velocity.x < 0:
+				Marker_Parent.scale.x = -1
+			elif velocity.x > 0:
+				Marker_Parent.scale.x = 1
+
+		if Input.is_action_pressed(ui_inputs.keys()[5]):
+			position.y += 1
+		
+		if Input.is_action_pressed(ui_inputs.keys()[3]):
+			shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
+		
 	$Name.text = str(player_name)
 
 	if velocity.x < 0:
@@ -277,37 +293,18 @@ func move(delta, accel, amount):
 			velocity.y += jump_speed_swim
 
 
-
-
-func _input(event):
-	if Network.is_networking:
-		if syncronizer.is_multiplayer_authority():
-
-			if event.is_action_pressed(ui_inputs.keys()[5]):
-				position.y += 1
-			
-			
-			if event.is_action_pressed(ui_inputs.keys()[3]):
-				shoot.rpc(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
-
-	else:
-		if event.is_action_pressed(ui_inputs.keys()[5]):
-			position.y += 1
-		
-		if event.is_action_pressed(ui_inputs.keys()[3]):
-			shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
-
 @rpc("any_peer", "call_local")
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
 		var bullet_lol = bullet.instantiate()
 		var fire = bullet_lol.get_node("Fire")
 		var PointLight = bullet_lol.get_node("PointLight2D")
-		get_parent().add_child(bullet_lol)
+		get_parent().add_child(bullet_lol, true)
 
 		bullet_lol.set_rotation(bullet_direction)
 		bullet_lol.set_global_position(bullet_pos)
 		bullet_lol.modulate = str_to_var("Color" + str(ball_color))
+
 		
 		if device_num == 0:
 			fire.emitting = true
@@ -329,9 +326,8 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		else:
 			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
 
-
 		can_fire = false
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(0.5).timeout
 		can_fire = true
 
 
