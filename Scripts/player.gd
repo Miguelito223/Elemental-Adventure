@@ -55,7 +55,8 @@ func _ready():
 	else:
 		DEBUGGING = true
 
-		
+	if Network.is_networking:
+		syncronizer.set_multiplayer_authority(str(name).to_int())
 
 	if DEBUGGING:
 		print("Running Player.gd: {n}._ready()... {pn}".format({
@@ -78,7 +79,7 @@ func _ready():
 
 
 	if Network.is_networking:
-		$Camera2D.enabled = $MultiplayerSynchronizer.is_multiplayer_authority()
+		$Camera2D.enabled = syncronizer.is_multiplayer_authority()
 	else:
 		$Camera2D.enabled = false
 
@@ -91,7 +92,6 @@ func _ready():
 func _enter_tree():
 	if Network.is_networking:
 		set_multiplayer_authority(str(name).to_int())
-		$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 		setposspawn()
 
 
@@ -345,7 +345,7 @@ func setlifes(value):
 	Hearths = clamp(value,0,Max_Hearths)
 	if Hearths <= 0:
 		if Network.is_networking:
-			if $MultiplayerSynchronizer.is_multiplayer_authority():
+			if syncronizer.is_multiplayer_authority():
 				print("you dead")
 				Hearths = Max_Hearths
 				deaths += 1

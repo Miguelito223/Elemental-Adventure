@@ -110,6 +110,12 @@ properties/5/replication_mode = 1
 properties/6/path = NodePath("Node2D:rotation")
 properties/6/spawn = true
 properties/6/replication_mode = 1
+properties/7/path = NodePath("Node2D/Marker2D:position")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Node2D/Marker2D:rotation")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_gf7xr"]
 length = 0.001
