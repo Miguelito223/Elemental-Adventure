@@ -97,13 +97,23 @@ func _enter_tree():
 
 	
 func _process(_delta):	
-	if Globals.use_keyboard and not Globals.use_mobile_buttons:
-		Marker_Parent.look_at(get_global_mouse_position())
+	if Network.is_networking:
+		if syncronizer.is_multiplayer_authority():
+			if Globals.use_keyboard and not Globals.use_mobile_buttons:
+				Marker_Parent.look_at(get_global_mouse_position())
+			else:
+				if velocity.x < 0:
+					Marker_Parent.scale.x = -1
+				elif velocity.x > 0:
+					Marker_Parent.scale.x = 1
 	else:
-		if velocity.x < 0:
-			Marker_Parent.scale.x = -1
-		elif velocity.x > 0:
-			Marker_Parent.scale.x = 1
+		if Globals.use_keyboard and not Globals.use_mobile_buttons:
+			Marker_Parent.look_at(get_global_mouse_position())
+		else:
+			if velocity.x < 0:
+				Marker_Parent.scale.x = -1
+			elif velocity.x > 0:
+				Marker_Parent.scale.x = 1
 			
 	$Name.text = str(player_name)
 
