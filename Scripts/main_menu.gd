@@ -542,8 +542,8 @@ func joinbyip(ip, port):
 		var error = Network.multiplayer_peer_Enet.create_client(ip, port)
 		if error == OK:
 			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_Enet
-			set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
 			if not get_tree().get_multiplayer().is_server():
+				set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
 				Network.is_networking = true
 				if is_multiplayer_authority():
 					hide()
@@ -555,9 +555,9 @@ func joinbyip(ip, port):
 		Network.multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 		var error = Network.multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
 		if error == OK:
-			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
-			set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
+			get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker	
 			if not get_tree().get_multiplayer().is_server():
+				set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
 				Network.is_networking = true
 				if is_multiplayer_authority():
 					hide()
