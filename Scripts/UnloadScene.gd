@@ -1,7 +1,7 @@
 extends Node
 
 signal progress_changed(progress)
-signal load_done
+signal unload_done
 
 const GAME_SCENE ={
 	"level_1": "res://Scenes/level_1.tscn", 
@@ -44,18 +44,17 @@ var unloader_resource: PackedScene
 var scene_path: String
 var progress: Array = []
 
-var use_aub_theads: bool = false
+var use_sub_theads: bool = false
 
-@rpc("authority", "call_local")
-func Unload_scene(current_scene):
+func unload_scene(current_scene):
 	if current_scene != null:
 		scene_path = current_scene.get_path()
 
 	var unloading_screen_scene = unloading_screen.instantiate()
 	get_tree().get_root().get_node("Game").add_child(unloading_screen_scene)
 	
-	progress_changed.connect(unloading_screen_scene.update_progress_bar)
-	load_done.connect(unloading_screen_scene.fade_out_loading_screen)
+	self.progress_changed.connect(unloading_screen_scene.update_progress_bar)
+	self.unload_done.connect(unloading_screen_scene.fade_out_loading_screen)
 
 	await Signal(unloading_screen_scene, "safe_to_load")
 
@@ -71,7 +70,7 @@ func start_load():
 	else:
 		scene_path = scene_path
 
-	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path)
+	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path, "", use_sub_theads)
 	if loader_next_scene == OK:
 		set_process(true)
 
@@ -87,5 +86,5 @@ func _process(_delta):
 			emit_signal("progress_changed", progress[0])
 		3:
 			emit_signal("progress_changed", 1.0)
-			emit_signal("load_done")
+			emit_signal("unload_done")
 

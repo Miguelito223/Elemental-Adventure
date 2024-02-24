@@ -193,9 +193,10 @@ func _process(_delta):
 
 func _input(event):
 	if Network.is_networking:
-		if event.is_action_pressed("pause0"):
-			visible = !visible
-			get_tree().paused = !get_tree().paused
+		if get_parent().get_parent().is_multiplayer_authority():
+			if event.is_action_pressed("pause0"):
+				visible = !visible
+				get_tree().paused = !get_tree().paused
 	else:
 		if get_parent().get_parent().device_num == 0:
 			if event.is_action_pressed("pause0"):
@@ -251,13 +252,13 @@ func _on_return_pressed():
 
 func _on_back_pressed():
 	if Network.is_networking:
-		if get_parent().is_multiplayer_authority():
+		if get_parent().get_parent().is_multiplayer_authority():
 			hide()
 			get_tree().paused = false
 			Network.is_networking = false
 			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.connected_ids.clear()
-			UnloadScene.Unload_scene(get_parent().get_parent().get_parent())
+			UnloadScene.unload_scene(get_parent().get_parent().get_parent())
 			get_parent().get_parent().get_parent().get_parent().get_node("Main Menu").show()
 	else:
 		hide()

@@ -44,23 +44,20 @@ var loader_resource: PackedScene
 var scene_path: String
 var progress: Array = []
 
-var use_aub_theads: bool = false
+var use_sub_theads: bool = false
 
 func _ready():
 	load_scene(null, "res://Scenes/main_menu.tscn")
 
-
-@rpc("authority", "call_local")
 func load_scene(current_scene, next_scene):
 	if next_scene != null:
 		scene_path = next_scene
 
-
 	var loading_screen_intance = loading_screen.instantiate()
 	get_tree().get_root().get_node("Game").add_child(loading_screen_intance)
 	
-	progress_changed.connect(loading_screen_intance.update_progress_bar)
-	load_done.connect(loading_screen_intance.fade_out_loading_screen)
+	self.progress_changed.connect(loading_screen_intance.update_progress_bar)
+	self.load_done.connect(loading_screen_intance.fade_out_loading_screen)
 
 	await Signal(loading_screen_intance, "safe_to_load")
 
@@ -76,7 +73,7 @@ func start_load():
 	else:
 		scene_path = scene_path
 	
-	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path)
+	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path, "", use_sub_theads)
 	if loader_next_scene == OK:
 		set_process(true)
 
@@ -91,8 +88,6 @@ func _process(_delta):
 		1:
 			emit_signal("progress_changed", progress[0])
 		3:
-			
-
 			
 			if scene_path == "res://Scenes/game.tscn":
 				pass

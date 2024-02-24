@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://b3rdpkoms18pg"]
 
-[ext_resource type="FontFile" uid="uid://d4rdvku6d6bf" path="res://PressStart2P.ttf" id="1_5mh8d"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="1_5mh8d"]
 
 [resource]
 Button/fonts/font = ExtResource("1_5mh8d")

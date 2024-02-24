@@ -103,24 +103,22 @@ func _input(event):
 					level.add_player(event.device)
 
 
-func Remove_loading_screen():
-	var load_screen = get_node("res://Scenes/loading_screen.tscn")
-	if is_instance_valid(load_screen):
-		load_screen.queue_free()
-
 
 func _on_multiplayer_spawner_spawned(_node):
-	if not get_tree().get_multiplayer().is_server():
-		get_node("CanvasLayer").hide()
+	if Network.is_networking:
+		if not get_tree().get_multiplayer().is_server():
+			get_node("CanvasLayer").hide()
 
 
 func _on_map_spawner_despawned(_node):
-	if not get_tree().get_multiplayer().is_server():
-		get_node("CanvasLayer").show()
+	if Network.is_networking:
+		if not get_tree().get_multiplayer().is_server():
+			get_node("CanvasLayer").show()
 
 
 func _on_reconnect_pressed():
-	JoinGame.emit(Network.ip, Network.port)
+	if Network.is_networking:
+		JoinGame.emit(Network.ip, Network.port)
 
 
 func _on_back_to_main_menu_pressed():
