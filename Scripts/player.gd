@@ -9,8 +9,8 @@ var velocity_swim = 80.0
 var is_in_water = false
 var is_in_lava = false
 
-@export var bullet = preload("res://Scenes/fireball.tscn")
-@export var can_fire = true
+var bullet = preload("res://Scenes/fireball.tscn")
+var can_fire = true
 
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
@@ -105,15 +105,12 @@ func _process(_delta):
 				elif velocity.x > 0:
 					Marker_Parent.scale.x = 1
 
-			if get_tree().get_multiplayer().is_server():
-				Network.change_global_var.rpc(Globals.use_keyboard, Globals.use_keyboard)
-				Network.change_global_var.rpc(Globals.use_mobile_buttons, Globals.use_mobile_buttons)
-		
 			if Input.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1
 			
 			if Input.is_action_pressed(ui_inputs.keys()[3]):
 				shoot.rpc(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
+
 	else:
 		if Globals.use_keyboard and not Globals.use_mobile_buttons:
 			Marker_Parent.look_at(get_global_mouse_position())
