@@ -9,8 +9,8 @@ var velocity_swim = 80.0
 var is_in_water = false
 var is_in_lava = false
 
-var bullet = preload("res://Scenes/fireball.tscn")
-var can_fire = true
+@export var bullet = preload("res://Scenes/fireball.tscn")
+@export var can_fire = true
 
 @onready var InvunerabilityTime = $Invunerability
 @onready var Animation_Effects = $AnimationPlayer
@@ -104,6 +104,10 @@ func _process(_delta):
 					Marker_Parent.scale.x = -1
 				elif velocity.x > 0:
 					Marker_Parent.scale.x = 1
+
+			if get_tree().get_multiplayer().is_server():
+				Network.change_global_var.rpc(Globals.use_keyboard, Globals.use_keyboard)
+				Network.change_global_var.rpc(Globals.use_mobile_buttons, Globals.use_mobile_buttons)
 		
 			if Input.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1
@@ -304,7 +308,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		bullet_lol.set_rotation(bullet_direction)
 		bullet_lol.set_global_position(bullet_pos)
 		bullet_lol.modulate = str_to_var("Color" + str(ball_color))
-
+		
 		
 		if device_num == 0:
 			fire.emitting = true
@@ -317,8 +321,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 			PointLight.shadow_enabled = Globals.Graphics
 			PointLight.shadow_filter = Globals.Graphics
 
-		
-		if not Globals.use_keyboard or Globals.use_mobile_buttons :
+		if not Globals.use_keyboard or Globals.use_mobile_buttons:
 			if Marker_Parent.scale.x == 1:
 				bullet_lol.velocity = Vector2(bullet_speed, 0)
 			elif Marker_Parent.scale.x == -1 :

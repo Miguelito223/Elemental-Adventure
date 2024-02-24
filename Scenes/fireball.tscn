@@ -19,6 +19,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:scale")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:global_position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [sub_resource type="Curve" id="Curve_nvcuk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -40,6 +43,7 @@ texture = ExtResource("2_t1plx")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_saomm")
+visibility_update_mode = 1
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

@@ -78,3 +78,6 @@ var deaths: Dictionary = {
 	3: 0, 
 }
 
+@rpc("any_peer", "call_local")
+func change_global_var(global_var, value):
+	global_var = value

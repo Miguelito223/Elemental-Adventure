@@ -469,6 +469,18 @@ properties/13/replication_mode = 1
 properties/14/path = NodePath("Node2D/Marker2D:rotation")
 properties/14/spawn = true
 properties/14/replication_mode = 1
+properties/15/path = NodePath(".:global_position")
+properties/15/spawn = true
+properties/15/replication_mode = 1
+properties/16/path = NodePath("Node2D/Marker2D:scale")
+properties/16/spawn = true
+properties/16/replication_mode = 1
+properties/17/path = NodePath("Node2D/Marker2D:global_position")
+properties/17/spawn = true
+properties/17/replication_mode = 1
+properties/18/path = NodePath("Node2D:global_position")
+properties/18/spawn = true
+properties/18/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]
 corner_radius_top_left = 15
@@ -524,6 +536,8 @@ size = Vector2(40, 15)
 
 [node name="player" type="CharacterBody2D" groups=["persistent", "player", "water"]]
 script = ExtResource("1_peqvs")
+bullet = null
+can_fire = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.537445, 0.540188)
