@@ -125,10 +125,7 @@ func _process(_delta):
 		if Globals.use_keyboard and not Globals.use_mobile_buttons:
 			Marker_Parent.look_at(get_global_mouse_position())
 		else:
-			if scale.x == -1:
-				Marker_Parent.scale.x = -1
-			elif scale.x == 1:
-				Marker_Parent.scale.x = 1
+			Marker_Parent.scale.x = AnimatedSprite.scale.x
 
 		if Input.is_action_pressed(ui_inputs.keys()[5]):
 			position.y += 1
