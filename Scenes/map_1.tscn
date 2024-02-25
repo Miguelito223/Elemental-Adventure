@@ -39,6 +39,10 @@ spawn_limit = 4
 _spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn")
 spawn_path = NodePath("..")
 
+[node name="FireballSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/fireball.tscn")
+spawn_path = NodePath("..")
+
 [node name="environment" parent="." instance=ExtResource("7_12gnv")]
 
 [node name="Marker2D" type="Marker2D" parent="."]

@@ -46,7 +46,7 @@ window/handheld/orientation=4
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Godot-Tracker2D-Plugin-main/addons/Tracker2D/plugin.cfg", "res://addons/better-terrain/plugin.cfg")
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
 
 [importer_defaults]
 

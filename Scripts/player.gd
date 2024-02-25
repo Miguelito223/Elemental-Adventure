@@ -109,8 +109,7 @@ func _process(_delta):
 				position.y += 1
 			
 			if Input.is_action_pressed(ui_inputs.keys()[3]):
-				shoot.rpc(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
-
+				shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
 	else:
 		if Globals.use_keyboard and not Globals.use_mobile_buttons:
 			Marker_Parent.look_at(get_global_mouse_position())
@@ -124,7 +123,7 @@ func _process(_delta):
 			position.y += 1
 		
 		if Input.is_action_pressed(ui_inputs.keys()[3]):
-			shoot(Marker_Parent.get_rotation(), Marker.get_global_position(), 500)
+			shoot(Marker_Parent.rotation, Marker.global_position, 500)
 		
 	$Name.text = str(player_name)
 
@@ -142,13 +141,14 @@ func _process(_delta):
 		Globals.energys[device_num] = energys
 		Globals.score[device_num] = score
 	else:
-		Network.max_hearths = Max_Hearths
-		Network.last_position = last_position
-		Network.player_name[device_num] = player_name
-		Network.hearths[device_num] = Hearths
-		Network.deaths[device_num] = deaths
-		Network.energys[device_num] = energys
-		Network.score[device_num] = score
+		if syncronizer.is_multiplayer_authority():
+			Network.max_hearths = Max_Hearths
+			Network.last_position = last_position
+			Network.player_name[device_num] = player_name
+			Network.hearths[device_num] = Hearths
+			Network.deaths[device_num] = deaths
+			Network.energys[device_num] = energys
+			Network.score[device_num] = score
 	
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
@@ -292,7 +292,6 @@ func move(delta, accel, amount):
 		
 		if is_in_water == true or is_in_lava == true:
 			velocity.y += jump_speed_swim
-
 
 @rpc("any_peer", "call_local")
 func shoot( bullet_direction, bullet_pos, bullet_speed):
