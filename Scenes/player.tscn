@@ -484,6 +484,15 @@ properties/18/replication_mode = 1
 properties/19/path = NodePath("Node2D:scale")
 properties/19/spawn = true
 properties/19/replication_mode = 1
+properties/20/path = NodePath("AnimatedSprite2D:position")
+properties/20/spawn = true
+properties/20/replication_mode = 1
+properties/21/path = NodePath("AnimatedSprite2D:scale")
+properties/21/spawn = true
+properties/21/replication_mode = 1
+properties/22/path = NodePath("AnimatedSprite2D:rotation")
+properties/22/spawn = true
+properties/22/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]
 corner_radius_top_left = 15

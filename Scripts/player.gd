@@ -95,15 +95,14 @@ func _enter_tree():
 
 	
 func _process(_delta):	
-
-	if velocity.x < 0:
-		AnimatedSprite.scale.x = -1
-	elif velocity.x > 0:
-		AnimatedSprite.scale.x = 1
-
-
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
+			if velocity.x < 0:
+				AnimatedSprite.scale.x = -1
+			elif velocity.x > 0:
+				AnimatedSprite.scale.x = 1
+
+
 			if Globals.use_keyboard and not Globals.use_mobile_buttons:
 				Marker_Parent.look_at(get_global_mouse_position())
 			else:
@@ -117,6 +116,11 @@ func _process(_delta):
 				shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
 
 	else:
+		if velocity.x < 0:
+			AnimatedSprite.scale.x = -1
+		elif velocity.x > 0:
+			AnimatedSprite.scale.x = 1
+
 		if Globals.use_keyboard and not Globals.use_mobile_buttons:
 			Marker_Parent.look_at(get_global_mouse_position())
 		else:
