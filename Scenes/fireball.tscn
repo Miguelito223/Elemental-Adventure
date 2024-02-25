@@ -22,6 +22,9 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath(".:global_position")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath(".:color")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [sub_resource type="Curve" id="Curve_nvcuk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
