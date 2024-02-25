@@ -488,6 +488,7 @@ func hostbyport(port):
 			UPNP_setup()
 			control.setupbroadcast(Network.username)
 			hide()
+			$"Main menu music".stop()
 			LoadScene.load_scene(null, Globals.map)
 	else:
 		push_error("Error creating server: " + str(error))
@@ -503,6 +504,7 @@ func joinbyip(ip, port):
 		if not get_tree().get_multiplayer().is_server():
 			Network.is_networking = true
 			hide()
+			$"Main menu music".stop()
 			get_parent().get_node("CanvasLayer").show()
 			LoadScene.load_scene(null, "res://Scenes/game.tscn")
 	else:
