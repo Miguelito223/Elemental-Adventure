@@ -95,28 +95,34 @@ func _enter_tree():
 
 	
 func _process(_delta):	
+
+	if velocity.x < 0:
+		AnimatedSprite.scale.x = -1
+	elif velocity.x > 0:
+		AnimatedSprite.scale.x = 1
+
+
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
 			if Globals.use_keyboard and not Globals.use_mobile_buttons:
 				Marker_Parent.look_at(get_global_mouse_position())
 			else:
-				if velocity.x < 0:
-					Marker_Parent.scale.x = -1
-				elif velocity.x > 0:
-					Marker_Parent.scale.x = 1
+				Marker_Parent.scale.x = AnimatedSprite.scale.x
+
 
 			if Input.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1
 			
 			if Input.is_action_pressed(ui_inputs.keys()[3]):
 				shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
+
 	else:
 		if Globals.use_keyboard and not Globals.use_mobile_buttons:
 			Marker_Parent.look_at(get_global_mouse_position())
 		else:
-			if velocity.x < 0:
+			if scale.x == -1:
 				Marker_Parent.scale.x = -1
-			elif velocity.x > 0:
+			elif scale.x == 1:
 				Marker_Parent.scale.x = 1
 
 		if Input.is_action_pressed(ui_inputs.keys()[5]):
@@ -126,11 +132,6 @@ func _process(_delta):
 			shoot(Marker_Parent.rotation, Marker.global_position, 500)
 		
 	$Name.text = str(player_name)
-
-	if velocity.x < 0:
-		AnimatedSprite.scale.x = -1
-	elif velocity.x > 0:
-		AnimatedSprite.scale.x = 1
 
 	if not Network.is_networking:
 		Globals.max_hearths = Max_Hearths
@@ -318,10 +319,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 			PointLight.shadow_filter = Globals.Graphics
 
 		if not Globals.use_keyboard or Globals.use_mobile_buttons:
-			if Marker_Parent.scale.x == 1:
-				bullet_lol.velocity = Vector2(bullet_speed, 0)
-			elif Marker_Parent.scale.x == -1 :
-				bullet_lol.velocity = Vector2(-bullet_speed, 0)
+			bullet_lol.velocity = Vector2(bullet_speed * Marker_Parent.scale.x, 0)
 		else:
 			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
 
