@@ -493,6 +493,9 @@ properties/21/replication_mode = 1
 properties/22/path = NodePath("AnimatedSprite2D:rotation")
 properties/22/spawn = true
 properties/22/replication_mode = 1
+properties/23/path = NodePath(".:bullet_lol")
+properties/23/spawn = true
+properties/23/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]
 corner_radius_top_left = 15
@@ -756,7 +759,7 @@ one_shot = true
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="Node2D"]
-position = Vector2(30, 0)
+position = Vector2(38, 0)
 
 [node name="Pasos" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("21_ctvyi")

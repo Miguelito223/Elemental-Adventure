@@ -10,6 +10,7 @@ var is_in_water = false
 var is_in_lava = false
 
 var bullet = preload("res://Scenes/fireball.tscn")
+var bullet_lol
 var can_fire = true
 
 @onready var InvunerabilityTime = $Invunerability
@@ -301,7 +302,7 @@ func move(delta, accel, amount):
 @rpc("any_peer", "call_local")
 func shoot( bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
-		var bullet_lol = bullet.instantiate()
+		bullet_lol = bullet.instantiate()
 		var fire = bullet_lol.get_node("Fire")
 		var PointLight = bullet_lol.get_node("PointLight2D")
 		get_parent().add_child(bullet_lol, true)
