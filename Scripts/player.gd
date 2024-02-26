@@ -293,6 +293,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 	bullet_lol = bullet.instantiate()
 	var fire = bullet_lol.get_node("Fire")
 	var PointLight = bullet_lol.get_node("PointLight2D")
+	get_parent().add_child(bullet_lol, true)
 
 	bullet_lol.set_rotation(bullet_direction)
 	bullet_lol.set_global_position(bullet_pos)
@@ -311,7 +312,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 
 	bullet_lol.velocity = Vector2(bullet_speed * Marker_Parent.scale.x, 0).rotated(bullet_direction)
 
-	get_parent().add_child(bullet_lol, true)	
+		
 
 	can_fire = false
 	await get_tree().create_timer(0.5).timeout
