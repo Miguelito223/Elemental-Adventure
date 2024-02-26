@@ -1,10 +1,12 @@
 extends Control
 
-@onready var player = get_parent().get_node(Globals.map).get_node(str(get_tree().get_multiplayer().get_unique_id()))
-
+var player 
 func _ready():
 	if not Network.is_networking:
 		get_tree().paused = true
+	else:
+		player = get_parent().get_node(Globals.map).get_node(str(get_tree().get_multiplayer().get_unique_id()))
+
 
 func _on_return_pressed():
 	if Network.is_networking:
