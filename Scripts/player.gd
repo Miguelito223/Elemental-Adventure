@@ -113,7 +113,7 @@ func _process(_delta):
 			if Input.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1
 			
-			if Input.is_action_pressed(ui_inputs.keys()[3]):
+			if Input.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
 				shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
 
 	else:
@@ -298,36 +298,32 @@ func move(delta, accel, amount):
 
 @rpc("any_peer", "call_local")
 func shoot( bullet_direction, bullet_pos, bullet_speed):
-	if can_fire:
-		bullet_lol = bullet.instantiate()
-		var fire = bullet_lol.get_node("Fire")
-		var PointLight = bullet_lol.get_node("PointLight2D")
-		get_parent().add_child(bullet_lol, true)
+	bullet_lol = bullet.instantiate()
+	var fire = bullet_lol.get_node("Fire")
+	var PointLight = bullet_lol.get_node("PointLight2D")
 
-		bullet_lol.set_rotation(bullet_direction)
-		bullet_lol.set_global_position(bullet_pos)
-		bullet_lol.modulate = str_to_var("Color" + str(ball_color))
-		
-		
-		if device_num == 0:
-			fire.emitting = true
-			PointLight.enabled = Globals.Graphics
-			PointLight.shadow_enabled = Globals.Graphics
-			PointLight.shadow_filter = Globals.Graphics
-		else:
-			fire.emitting = false
-			PointLight.enabled = false
-			PointLight.shadow_enabled = Globals.Graphics
-			PointLight.shadow_filter = Globals.Graphics
+	bullet_lol.set_rotation(bullet_direction)
+	bullet_lol.set_global_position(bullet_pos)
+	bullet_lol.modulate = str_to_var("Color" + str(ball_color))
+	
+	if device_num == 0:
+		fire.emitting = true
+		PointLight.enabled = Globals.Graphics
+		PointLight.shadow_enabled = Globals.Graphics
+		PointLight.shadow_filter = Globals.Graphics
+	else:
+		fire.emitting = false
+		PointLight.enabled = false
+		PointLight.shadow_enabled = Globals.Graphics
+		PointLight.shadow_filter = Globals.Graphics
 
-		if not Globals.use_keyboard or Globals.use_mobile_buttons:
-			bullet_lol.velocity = Vector2(bullet_speed * Marker_Parent.scale.x, 0)
-		else:
-			bullet_lol.velocity = Vector2(bullet_speed, 0).rotated(bullet_direction)	
+	bullet_lol.velocity = Vector2(bullet_speed * Marker_Parent.scale.x, 0).rotated(bullet_direction)
 
-		can_fire = false
-		await get_tree().create_timer(0.5).timeout
-		can_fire = true
+	get_parent().add_child(bullet_lol, true)	
+
+	can_fire = false
+	await get_tree().create_timer(0.5).timeout
+	can_fire = true
 
 
 func setlifes(value):

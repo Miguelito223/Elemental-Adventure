@@ -173,7 +173,6 @@ func create_action_remap_items():
 
 
 func _ready():
-
 	set_process(false)
 	main_menu.show()
 	settings_menu.hide()
@@ -487,8 +486,8 @@ func hostbyport(port):
 			Network.is_networking = true
 			UPNP_setup()
 			control.setupbroadcast(Network.username)
-			hide()
-			$"Main menu music".stop()
+			set_process(true)
+			self.hide()
 			LoadScene.load_scene(null, Globals.map)
 	else:
 		push_error("Error creating server: " + str(error))
@@ -503,15 +502,19 @@ func joinbyip(ip, port):
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker	
 		if not get_tree().get_multiplayer().is_server():
 			Network.is_networking = true
-			hide()
-			$"Main menu music".stop()
+			set_process(true)
+			self.hide()
 			get_parent().get_node("CanvasLayer").show()
 			LoadScene.load_scene(null, "res://Scenes/game.tscn")
 	else:
 		push_error("Error creating client: ", str(error))
 
 
-
+func _process(_delta):
+	if self.visible == false:
+		$"Main menu music".stop()
+	elif self.visible == true:
+		$"Main menu music".play()
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
