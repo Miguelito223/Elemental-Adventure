@@ -103,12 +103,7 @@ func _process(_delta):
 			elif velocity.x > 0:
 				AnimatedSprite.scale.x = 1
 
-
-			if Globals.use_keyboard and not Globals.use_mobile_buttons:
-				Marker_Parent.look_at(get_global_mouse_position())
-			else:
-				Marker_Parent.scale.x = AnimatedSprite.scale.x
-
+			Marker_Parent.look_at(get_global_mouse_position())
 
 			if Input.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1
@@ -122,15 +117,12 @@ func _process(_delta):
 		elif velocity.x > 0:
 			AnimatedSprite.scale.x = 1
 
-		if Globals.use_keyboard and not Globals.use_mobile_buttons:
-			Marker_Parent.look_at(get_global_mouse_position())
-		else:
-			Marker_Parent.scale.x = AnimatedSprite.scale.x
+		Marker_Parent.look_at(get_global_mouse_position())
 
 		if Input.is_action_pressed(ui_inputs.keys()[5]):
 			position.y += 1
 		
-		if Input.is_action_pressed(ui_inputs.keys()[3]):
+		if Input.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
 			shoot(Marker_Parent.rotation, Marker.global_position, 500)
 		
 	$Name.text = str(player_name)
