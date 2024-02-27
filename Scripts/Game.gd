@@ -125,8 +125,7 @@ func _on_reconnect_pressed():
 func _on_back_to_main_menu_pressed():
 	if Network.is_networking:
 		if not get_tree().get_multiplayer().is_server():
-			get_tree().get_multiplayer().peer_disconnected.emit(get_tree().get_multiplayer().get_unique_id())
-			get_tree().get_multiplayer().multiplayer_peer = null
+			get_tree().get_multiplayer().multiplayer_peer.close()
 			Network.is_networking = false
 			Network.connected_ids.clear()
 			get_node("Main Menu").show()
