@@ -19,21 +19,14 @@ func _ready():
 	if not Network.is_networking:
 		return
 	
-	if not get_tree().get_multiplayer().is_server():
-		get_tree().get_multiplayer().server_disconnected.connect(server_disconected)
-		get_tree().get_multiplayer().connected_to_server.connect(server_conected)
-		get_tree().get_multiplayer().connection_failed.connect(conected_fail)
-		return
-	
+
+	get_tree().get_multiplayer().server_disconnected.connect(server_disconected)
+	get_tree().get_multiplayer().connected_to_server.connect(server_conected)
+	get_tree().get_multiplayer().connection_failed.connect(conected_fail)
 	get_tree().get_multiplayer().peer_connected.connect(add_player)
 	get_tree().get_multiplayer().peer_disconnected.connect(remove_player)
 
-
-	for id in get_tree().get_multiplayer().get_peers():
-		add_player(id)
-
-		
-	if not OS.has_feature("dedicated_server"):
+	if not OS.has_feature("dedicated_server") and get_tree().get_multiplayer().is_server():
 		add_player(1)	
 		
 	Signals.level_loaded.emit()
@@ -43,14 +36,16 @@ func server_disconected():
 	Network.is_networking = false
 	get_tree().get_multiplayer().multiplayer_peer = null
 	Network.connected_ids.clear()
-	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
+	UnloadScene.unload_scene(self)
+	get_parent().get_node("Main Menu").show()
 
 func conected_fail():
 	print("Fail to load")
 	Network.is_networking = false
 	get_tree().get_multiplayer().multiplayer_peer = null
 	Network.connected_ids.clear()
-	LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
+	UnloadScene.unload_scene(self)
+	get_parent().get_node("Main Menu").show()
 
 func server_conected():
 	print("Server Conected")
@@ -129,14 +124,10 @@ func _on_line_edit_gui_input(event:InputEvent):
 	if event.is_action_pressed("ui_accept"):
 		msg_rcp.rpc(Network.username, lineedit.text)
 
-
 func _exit_tree():
-	if not get_tree().get_multiplayer().is_server():
-		get_tree().get_multiplayer().server_disconnected.disconnect(server_disconected)
-		get_tree().get_multiplayer().connected_to_server.disconnect(server_conected)
-		get_tree().get_multiplayer().connection_failed.disconnect(conected_fail)
-		return
 
+	get_tree().get_multiplayer().server_disconnected.disconnect(server_disconected)
+	get_tree().get_multiplayer().connected_to_server.disconnect(server_conected)
+	get_tree().get_multiplayer().connection_failed.disconnect(conected_fail)
 	get_tree().get_multiplayer().peer_connected.disconnect(add_player)
 	get_tree().get_multiplayer().peer_disconnected.disconnect(remove_player)
-

@@ -126,8 +126,7 @@ func _on_back_to_main_menu_pressed():
 	if Network.is_networking:
 		if not get_tree().get_multiplayer().is_server():
 			Network.is_networking = false
-			get_tree().get_multiplayer().peer_disconnected.emit()
-			get_tree().get_multiplayer().server_disconnected.emit()
 			Network.connected_ids.clear()
+			get_tree().get_multiplayer().multiplayer_peer = null
 			get_node("Main Menu").show()
 			get_node("CanvasLayer").hide()
