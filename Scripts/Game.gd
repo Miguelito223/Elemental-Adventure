@@ -118,6 +118,7 @@ func _on_map_spawner_despawned(_node):
 
 func _on_reconnect_pressed():
 	if Network.is_networking:
+		Network.connected_ids.clear()
 		JoinGame.emit(Network.ip, Network.port)
 
 

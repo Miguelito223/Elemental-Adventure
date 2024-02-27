@@ -9,8 +9,7 @@ func _ready():
 func _on_return_pressed():
 	if Network.is_networking:
 		if player.is_multiplayer_authority():
-			print("removing game over menu...")
-			self.queue_free()
+			UnloadScene.unload_scene(self)
 	else:
 		get_tree().paused = false
 		LoadScene.load_scene(self, Globals.level)
@@ -22,7 +21,7 @@ func _on_back_pressed():
 			Network.is_networking = false
 			get_tree().get_multiplayer().multiplayer_peer = null
 			Network.connected_ids.clear()
-			queue_free()
+			UnloadScene.unload_scene(self)
 			get_parent().get_node("Main Menu").show()
 	else:
 		LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
