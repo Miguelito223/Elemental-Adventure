@@ -143,6 +143,7 @@ gradient = ExtResource("4_6t5uq")
 
 [node name="ParallaxBackground3" type="ParallaxBackground" parent="."]
 layer = -1
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground3"]
 motion_scale = Vector2(0, 0)
