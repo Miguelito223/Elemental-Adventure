@@ -34,7 +34,7 @@ func _ready():
 func server_disconected():
 	print("Server Finish")
 	get_tree().get_multiplayer().peer_disconnected.emit(get_tree().get_multiplayer().get_unique_id())
-	get_tree().get_multiplayer().multiplayer_peer = null
+	get_tree().get_multiplayer().multiplayer_peer.close()
 	Network.is_networking = false
 	Network.connected_ids.clear()
 	UnloadScene.unload_scene(self)
@@ -43,7 +43,7 @@ func server_disconected():
 func conected_fail():
 	print("Fail to load")
 	get_tree().get_multiplayer().peer_disconnected.emit(get_tree().get_multiplayer().get_unique_id())
-	get_tree().get_multiplayer().multiplayer_peer = null
+	get_tree().get_multiplayer().multiplayer_peer.close()
 	Network.is_networking = false
 	Network.connected_ids.clear()
 	UnloadScene.unload_scene(self)
