@@ -126,10 +126,3 @@ func _on_line_edit_gui_input(event:InputEvent):
 	if event.is_action_pressed("ui_accept"):
 		msg_rcp.rpc(Network.username, lineedit.text)
 
-func _exit_tree():
-
-	get_tree().get_multiplayer().server_disconnected.disconnect(server_disconected)
-	get_tree().get_multiplayer().connected_to_server.disconnect(server_conected)
-	get_tree().get_multiplayer().connection_failed.disconnect(conected_fail)
-	get_tree().get_multiplayer().peer_connected.disconnect(add_player)
-	get_tree().get_multiplayer().peer_disconnected.disconnect(remove_player)
