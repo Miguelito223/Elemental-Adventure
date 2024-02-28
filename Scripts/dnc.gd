@@ -34,6 +34,7 @@ func _ready():
 	if Network.is_networking:
 		if get_tree().get_multiplayer().is_server():
 			Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
+			set_time_multiplayer.rpc(Globals.time)
 			_recalculate_time.rpc()
 	else:
 		Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
