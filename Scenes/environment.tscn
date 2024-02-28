@@ -30,7 +30,6 @@ script = ExtResource("1_ko5dq")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0)
