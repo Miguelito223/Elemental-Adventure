@@ -26,11 +26,11 @@ cull_mode = 1
 polygon = PackedVector2Array(200, 200)
 
 [node name="environment" type="Node2D"]
-visible = false
 script = ExtResource("1_ko5dq")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0)
