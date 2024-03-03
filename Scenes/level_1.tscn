@@ -198,7 +198,6 @@ bus = &"Music"
 position = Vector2(-229, -58)
 
 [node name="environment" parent="Camera" instance=ExtResource("2_4quoi")]
-position = Vector2(140, -181)
 scale = Vector2(0.950302, 0.342247)
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

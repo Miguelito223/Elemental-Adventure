@@ -98,21 +98,6 @@ scale = Vector2(30, 30)
 script = ExtResource("3_21pr6")
 gradient = ExtResource("4_6t5uq")
 
-[node name="Sun" type="Node2D" parent="ParallaxBackground"]
-position = Vector2(1026, 712)
-scale = Vector2(1, 1)
-script = ExtResource("2_vyfel")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sun"]
-position = Vector2(0, 761.52)
-scale = Vector2(11.4624, 10.9022)
-texture = ExtResource("15_v1m5b")
-
-[node name="PointLight2D" type="PointLight2D" parent="ParallaxBackground/Sun"]
-position = Vector2(0, 761.52)
-range_layer_min = -1
-texture = ExtResource("3_neuva")
-
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
 layer = -1
 visible = false
@@ -157,21 +142,6 @@ position = Vector2(51, 39)
 scale = Vector2(30, 30)
 script = ExtResource("3_21pr6")
 gradient = ExtResource("4_6t5uq")
-
-[node name="Sun" type="Node2D" parent="ParallaxBackground2"]
-position = Vector2(1026, 712)
-scale = Vector2(1, 1)
-script = ExtResource("2_vyfel")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/Sun"]
-position = Vector2(0, 761.52)
-scale = Vector2(11.4624, 10.9022)
-texture = ExtResource("15_v1m5b")
-
-[node name="PointLight2D" type="PointLight2D" parent="ParallaxBackground2/Sun"]
-position = Vector2(0, 761.52)
-range_layer_min = -1
-texture = ExtResource("3_neuva")
 
 [node name="ParallaxBackground3" type="ParallaxBackground" parent="."]
 layer = -1
@@ -227,21 +197,6 @@ scale = Vector2(30, 30)
 script = ExtResource("3_21pr6")
 gradient = ExtResource("4_6t5uq")
 
-[node name="Sun" type="Node2D" parent="ParallaxBackground3"]
-position = Vector2(1026, 712)
-scale = Vector2(1, 1)
-script = ExtResource("2_vyfel")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/Sun"]
-position = Vector2(0, 761.52)
-scale = Vector2(11.4624, 10.9022)
-texture = ExtResource("15_v1m5b")
-
-[node name="PointLight2D" type="PointLight2D" parent="ParallaxBackground3/Sun"]
-position = Vector2(0, 761.52)
-range_layer_min = -1
-texture = ExtResource("3_neuva")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(51, 39)
 scale = Vector2(30, 30)
@@ -250,6 +205,21 @@ gradient = ExtResource("4_6t5uq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_keq3x")
+
+[node name="Sun" type="Node2D" parent="."]
+position = Vector2(1026, 712)
+scale = Vector2(1, 1)
+script = ExtResource("2_vyfel")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sun"]
+position = Vector2(0, 761.52)
+scale = Vector2(11.4624, 10.9022)
+texture = ExtResource("15_v1m5b")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sun"]
+position = Vector2(0, 761.52)
+range_layer_min = -1
+texture = ExtResource("3_neuva")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 scale = Vector2(1, 1)
