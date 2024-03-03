@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dwypr7om4wpeo"]
+[gd_scene load_steps=70 format=3 uid="uid://dwypr7om4wpeo"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
 [ext_resource type="Texture2D" uid="uid://d3l2e26s0r3op" path="res://Sprites/Fire IDle.png" id="2_bg8xc"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://bvi0omxm6df8s" path="res://Sprites/fire jump.png" id="9_ptmh2"]
 [ext_resource type="Texture2D" uid="uid://c45gcdl5erpan" path="res://Sprites/linght.png" id="10_6u4n5"]
 [ext_resource type="PackedScene" uid="uid://ywyhxmenkfw" path="res://Scenes/mobilecontrolls.tscn" id="11_tb078"]
+[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="14_vbfsm"]
+[ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="15_78bea"]
 [ext_resource type="Script" path="res://Scripts/CanvasLayer.gd" id="15_jtxs5"]
 [ext_resource type="Texture2D" uid="uid://c3wdxsquphqdl" path="res://Sprites/energy.png" id="18_6b2vi"]
 [ext_resource type="Texture2D" uid="uid://clolk7yspwv7q" path="res://Sprites/deaths-head-153588_1280.webp" id="19_ftjg4"]
@@ -561,6 +563,10 @@ autoplay = "fire fall"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
+script = ExtResource("14_vbfsm")
+
+[node name="environment" parent="Camera2D" instance=ExtResource("15_78bea")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
