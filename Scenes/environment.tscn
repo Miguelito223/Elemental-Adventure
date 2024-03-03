@@ -210,12 +210,12 @@ environment = SubResource("Environment_keq3x")
 script = ExtResource("2_vyfel")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sun"]
-position = Vector2(0, 768)
+position = Vector2(0, 600)
 scale = Vector2(5, 5)
 texture = ExtResource("15_v1m5b")
 
 [node name="PointLight2D" parent="Sun" instance=ExtResource("16_1ptgp")]
-position = Vector2(0, 768)
+position = Vector2(0, 600)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 scale = Vector2(1, 1)
