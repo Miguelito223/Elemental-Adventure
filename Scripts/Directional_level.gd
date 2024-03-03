@@ -8,3 +8,4 @@ func _process(_delta):
 	self.enabled = Globals.Graphics
 	self.shadow_enabled = Globals.Graphics
 	self.shadow_filter = Globals.Graphics
+	self.rotation_degrees = int(Globals.minute) * 0.0166666667
