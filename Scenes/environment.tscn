@@ -207,7 +207,6 @@ gradient = ExtResource("4_6t5uq")
 environment = SubResource("Environment_keq3x")
 
 [node name="Sun" type="Node2D" parent="."]
-position = Vector2(1026, 712)
 scale = Vector2(1, 1)
 script = ExtResource("2_vyfel")
 
