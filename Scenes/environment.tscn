@@ -30,26 +30,6 @@ polygon = PackedVector2Array(200, 200)
 [node name="environment" type="Node2D"]
 script = ExtResource("1_ko5dq")
 
-[node name="Sun" type="Node2D" parent="."]
-position = Vector2(1066, 704)
-scale = Vector2(1, 1)
-script = ExtResource("2_vyfel")
-
-[node name="PointLight2D" type="PointLight2D" parent="Sun"]
-position = Vector2(-9.47996, 769.52)
-texture = ExtResource("3_neuva")
-texture_scale = 0.46
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Sun"]
-position = Vector2(-8.86643, 770.442)
-energy = 0.5
-range_layer_min = -1
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.239216)
-shadow_filter = 1
-script = ExtResource("9_2nj8q")
-gradient = ExtResource("4_6t5uq")
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
 
@@ -222,8 +202,28 @@ scale = Vector2(30, 30)
 script = ExtResource("3_21pr6")
 gradient = ExtResource("4_6t5uq")
 
+[node name="Sun" type="Node2D" parent="."]
+position = Vector2(1026, 712)
+scale = Vector2(1, 1)
+script = ExtResource("2_vyfel")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sun"]
+position = Vector2(14.52, 761.52)
+range_layer_min = -1
+texture = ExtResource("3_neuva")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_keq3x")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+scale = Vector2(1, 1)
+energy = 0.5
+range_layer_min = -1
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_filter = 1
+script = ExtResource("9_2nj8q")
+gradient = ExtResource("4_6t5uq")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_q64j4")
