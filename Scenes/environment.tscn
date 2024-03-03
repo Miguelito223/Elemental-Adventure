@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://inyyvo2opv6x" path="res://daynightcycle-gradient-texture-sky.tres" id="2_nuhq7"]
 [ext_resource type="Script" path="res://Scenes/Sun.gd" id="2_vyfel"]
 [ext_resource type="Script" path="res://Scripts/dnc.gd" id="3_21pr6"]
-[ext_resource type="Texture2D" uid="uid://c45gcdl5erpan" path="res://Sprites/linght.png" id="3_neuva"]
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://daynightcycle-gradient-texture.tres" id="4_6t5uq"]
 [ext_resource type="Texture2D" uid="uid://db78ndiwskn6m" path="res://Sprites/background/MountainDuskGodot/MountainsLayers/far-clouds.png" id="4_a3dqc"]
 [ext_resource type="Texture2D" uid="uid://bocwjx1jbojvl" path="res://Sprites/background/MountainDuskGodot/MountainsLayers/far-mountains.png" id="5_idy20"]
@@ -17,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cyr34yseqgeb" path="res://Sprites/background/Beach/background_ocean.png" id="12_s0mpc"]
 [ext_resource type="Texture2D" uid="uid://c1want20it5lf" path="res://Sprites/background/Beach/background_sand.png" id="13_b3oqv"]
 [ext_resource type="Texture2D" uid="uid://dgopfrj4aom1d" path="res://Sprites/fireball.png" id="15_v1m5b"]
+[ext_resource type="PackedScene" uid="uid://dta6yivprfdbo" path="res://Scenes/point_light_2d.tscn" id="16_1ptgp"]
 
 [sub_resource type="Sky" id="Sky_n8u16"]
 
@@ -207,18 +207,15 @@ gradient = ExtResource("4_6t5uq")
 environment = SubResource("Environment_keq3x")
 
 [node name="Sun" type="Node2D" parent="."]
-scale = Vector2(1, 1)
 script = ExtResource("2_vyfel")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sun"]
-position = Vector2(0, 761.52)
-scale = Vector2(11.4624, 10.9022)
+position = Vector2(0, 768)
+scale = Vector2(5, 5)
 texture = ExtResource("15_v1m5b")
 
-[node name="PointLight2D" type="PointLight2D" parent="Sun"]
-position = Vector2(0, 761.52)
-range_layer_min = -1
-texture = ExtResource("3_neuva")
+[node name="PointLight2D" parent="Sun" instance=ExtResource("16_1ptgp")]
+position = Vector2(0, 768)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 scale = Vector2(1, 1)
