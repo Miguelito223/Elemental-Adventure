@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cmt0g43wqyx8c"]
+[gd_scene load_steps=21 format=3 uid="uid://cmt0g43wqyx8c"]
 
 [ext_resource type="Script" path="res://Scripts/ColorRect.gd" id="1_jtntf"]
 [ext_resource type="Script" path="res://Scripts/environment.gd" id="1_ko5dq"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://egfbcdonxis7" path="res://Sprites/background/Beach/background_clouds_small.png" id="11_m1mx7"]
 [ext_resource type="Texture2D" uid="uid://cyr34yseqgeb" path="res://Sprites/background/Beach/background_ocean.png" id="12_s0mpc"]
 [ext_resource type="Texture2D" uid="uid://c1want20it5lf" path="res://Sprites/background/Beach/background_sand.png" id="13_b3oqv"]
+[ext_resource type="Texture2D" uid="uid://dgopfrj4aom1d" path="res://Sprites/fireball.png" id="15_v1m5b"]
 
 [sub_resource type="Sky" id="Sky_n8u16"]
 
@@ -207,8 +208,13 @@ position = Vector2(1026, 712)
 scale = Vector2(1, 1)
 script = ExtResource("2_vyfel")
 
+[node name="Sprite2D" type="Sprite2D" parent="Sun"]
+position = Vector2(0, 761.52)
+scale = Vector2(11.4624, 10.9022)
+texture = ExtResource("15_v1m5b")
+
 [node name="PointLight2D" type="PointLight2D" parent="Sun"]
-position = Vector2(14.52, 761.52)
+position = Vector2(0, 761.52)
 range_layer_min = -1
 texture = ExtResource("3_neuva")
 
