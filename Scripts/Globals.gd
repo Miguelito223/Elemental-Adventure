@@ -1,9 +1,9 @@
 extends Node
 
 #time
-var minute = "00"
-var day = "1"
-var hour = "12"
+var minute = 00
+var day = 1
+var hour = 12
 var time = 0.0
 
 #others
