@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://cmt0g43wqyx8c"]
+[gd_scene load_steps=18 format=3 uid="uid://cmt0g43wqyx8c"]
 
 [ext_resource type="Script" path="res://Scripts/ColorRect.gd" id="1_jtntf"]
 [ext_resource type="Script" path="res://Scripts/environment.gd" id="1_ko5dq"]
-[ext_resource type="Script" path="res://Scripts/Sun.gd" id="2_kjm6f"]
 [ext_resource type="Texture2D" uid="uid://inyyvo2opv6x" path="res://daynightcycle-gradient-texture-sky.tres" id="2_nuhq7"]
 [ext_resource type="Script" path="res://Scripts/dnc.gd" id="3_21pr6"]
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://daynightcycle-gradient-texture.tres" id="4_6t5uq"]
@@ -15,8 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://egfbcdonxis7" path="res://Sprites/background/Beach/background_clouds_small.png" id="11_m1mx7"]
 [ext_resource type="Texture2D" uid="uid://cyr34yseqgeb" path="res://Sprites/background/Beach/background_ocean.png" id="12_s0mpc"]
 [ext_resource type="Texture2D" uid="uid://c1want20it5lf" path="res://Sprites/background/Beach/background_sand.png" id="13_b3oqv"]
-[ext_resource type="Texture2D" uid="uid://dgopfrj4aom1d" path="res://Sprites/fireball.png" id="15_v1m5b"]
-[ext_resource type="PackedScene" uid="uid://dta6yivprfdbo" path="res://Scenes/point_light_2d.tscn" id="16_1ptgp"]
 
 [sub_resource type="Sky" id="Sky_n8u16"]
 
@@ -45,18 +42,6 @@ color = Color(0, 0.443137, 1, 1)
 script = ExtResource("1_jtntf")
 gradient = ExtResource("2_nuhq7")
 metadata/_edit_use_anchors_ = true
-
-[node name="Sun" type="Node2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(962, 0)
-script = ExtResource("2_kjm6f")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer/Sun"]
-position = Vector2(0, 600)
-scale = Vector2(5, 5)
-texture = ExtResource("15_v1m5b")
-
-[node name="PointLight2D" parent="ParallaxBackground/ParallaxLayer/Sun" instance=ExtResource("16_1ptgp")]
-position = Vector2(0, 600)
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.7, 0.7)
@@ -105,7 +90,6 @@ texture = ExtResource("7_ksccp")
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasModulate2" type="CanvasModulate" parent="ParallaxBackground"]
-position = Vector2(51, 39)
 scale = Vector2(30, 30)
 script = ExtResource("3_21pr6")
 gradient = ExtResource("4_6t5uq")
@@ -125,18 +109,6 @@ color = Color(0, 0.443137, 1, 1)
 script = ExtResource("1_jtntf")
 gradient = ExtResource("2_nuhq7")
 metadata/_edit_use_anchors_ = true
-
-[node name="Sun" type="Node2D" parent="ParallaxBackground2/ParallaxLayer"]
-position = Vector2(962, 0)
-script = ExtResource("2_kjm6f")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer/Sun"]
-position = Vector2(0, 600)
-scale = Vector2(5, 5)
-texture = ExtResource("15_v1m5b")
-
-[node name="PointLight2D" parent="ParallaxBackground2/ParallaxLayer/Sun" instance=ExtResource("16_1ptgp")]
-position = Vector2(0, 600)
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
 motion_scale = Vector2(0.6, 0.6)
@@ -183,18 +155,6 @@ script = ExtResource("1_jtntf")
 gradient = ExtResource("2_nuhq7")
 metadata/_edit_use_anchors_ = true
 
-[node name="Sun" type="Node2D" parent="ParallaxBackground3/ParallaxLayer"]
-position = Vector2(962, 0)
-script = ExtResource("2_kjm6f")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/ParallaxLayer/Sun"]
-position = Vector2(0, 600)
-scale = Vector2(5, 5)
-texture = ExtResource("15_v1m5b")
-
-[node name="PointLight2D" parent="ParallaxBackground3/ParallaxLayer/Sun" instance=ExtResource("16_1ptgp")]
-position = Vector2(0, 600)
-
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground3"]
 motion_scale = Vector2(0.5, 0.5)
 motion_mirroring = Vector2(1920, 0)
@@ -234,7 +194,6 @@ script = ExtResource("3_21pr6")
 gradient = ExtResource("4_6t5uq")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2(51, 39)
 scale = Vector2(30, 30)
 script = ExtResource("3_21pr6")
 gradient = ExtResource("4_6t5uq")
