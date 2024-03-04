@@ -1,21 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://ywyhxmenkfw"]
 
+[ext_resource type="Script" path="res://Scripts/mobilecontrolls.gd" id="1_p4tp6"]
 [ext_resource type="Texture2D" uid="uid://cfro4taixkxu6" path="res://Sprites/up.png" id="2_rg3jk"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="3_ifnkr"]
 
-[sub_resource type="GDScript" id="GDScript_qkajy"]
-script/source = "extends CanvasLayer
-
-# Called when the node enters the scene tree for the first time.
-func _process(delta):
-	if not Globals.use_mobile_buttons:
-		hide()
-	else:
-		show()
-"
-
 [node name="Mobilecontrolls" type="CanvasLayer"]
-script = SubResource("GDScript_qkajy")
+script = ExtResource("1_p4tp6")
 
 [node name="jump" type="TouchScreenButton" parent="."]
 position = Vector2(1589, 727)

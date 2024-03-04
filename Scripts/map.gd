@@ -56,7 +56,7 @@ func add_player(peer_id):
 	Network.connected_ids.append(peer_id)
 	Network.connection_count = Network.connected_ids.size() - 1
 	
-	var player = player_scene.instantiate()	
+	var player = player_scene.instantiate()
 	player.name = str(peer_id)
 	player.device_num = Network.connection_count
 
