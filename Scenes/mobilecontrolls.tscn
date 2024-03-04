@@ -22,6 +22,7 @@ position = Vector2(1589, 727)
 scale = Vector2(1.675, 1.745)
 texture_normal = ExtResource("2_rg3jk")
 action = "jump0"
+visibility_mode = 1
 
 [node name="Virtual Joystick" parent="." instance=ExtResource("3_ifnkr")]
 offset_left = 4.0
@@ -32,6 +33,8 @@ scale = Vector2(1.5, 1.5)
 pressed_color = Color(1, 1, 1, 1)
 deadzone_size = 100.0
 clampzone_size = 175.0
+joystick_mode = 1
+visibility_mode = 1
 action_left = "left0"
 action_right = "right0"
 action_up = ""
