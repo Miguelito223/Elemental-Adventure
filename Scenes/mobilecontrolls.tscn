@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ywyhxmenkfw"]
+[gd_scene load_steps=4 format=3 uid="uid://ywyhxmenkfw"]
 
 [ext_resource type="Texture2D" uid="uid://cfro4taixkxu6" path="res://Sprites/up.png" id="2_rg3jk"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="3_ifnkr"]
-[ext_resource type="Texture2D" uid="uid://b18sru4fovsis" path="res://Sprites/shoot.png" id="5_t4wdv"]
 
 [sub_resource type="GDScript" id="GDScript_qkajy"]
 script/source = "extends CanvasLayer
@@ -18,14 +17,8 @@ func _process(delta):
 [node name="Mobilecontrolls" type="CanvasLayer"]
 script = SubResource("GDScript_qkajy")
 
-[node name="shoot" type="TouchScreenButton" parent="."]
-position = Vector2(1318, 797)
-scale = Vector2(0.696835, 0.710785)
-texture_normal = ExtResource("5_t4wdv")
-action = "shoot0"
-
 [node name="jump" type="TouchScreenButton" parent="."]
-position = Vector2(1597, 743)
+position = Vector2(1589, 727)
 scale = Vector2(1.675, 1.745)
 texture_normal = ExtResource("2_rg3jk")
 action = "jump0"
