@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://ywyhxmenkfw"]
 
-[ext_resource type="Script" path="res://Scripts/mobilecontrolls.gd" id="1_p4tp6"]
+[ext_resource type="Script" path="res://Scripts/Mobilecontrolls.gd" id="1_u6svl"]
 [ext_resource type="Texture2D" uid="uid://cfro4taixkxu6" path="res://Sprites/up.png" id="2_rg3jk"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="3_ifnkr"]
 
 [node name="Mobilecontrolls" type="CanvasLayer"]
-script = ExtResource("1_p4tp6")
+script = ExtResource("1_u6svl")
 
 [node name="jump" type="TouchScreenButton" parent="."]
 position = Vector2(1589, 727)
