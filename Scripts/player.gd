@@ -95,14 +95,15 @@ func _enter_tree():
 
 func _input(event):
 	if Network.is_networking:
-		if event.is_action_pressed(ui_inputs.keys()[5]):
-			position.y += 1
-		
-		if event.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
-			shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
+		if get_parent().is_multiplayer_authority():
+			if event.is_action_pressed(ui_inputs.keys()[5]):
+				position.y += 1
+			
+			if event.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
+				shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
 
-		if event is InputEventScreenTouch and can_fire:
-			shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
+			if event is InputEventScreenTouch and can_fire:
+				shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
 	else:
 		if event.is_action_pressed(ui_inputs.keys()[5]):
 			position.y += 1
