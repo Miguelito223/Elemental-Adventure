@@ -59,6 +59,7 @@ offset_bottom = 971.0
 placeholder_text = "Message"
 
 [node name="player" parent="." instance=ExtResource("4_vl2uy")]
+position = Vector2(1936, 802)
 
 [connection signal="despawned" from="PlayerSpawner" to="." method="_on_player_spawner_despawned"]
 [connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]
