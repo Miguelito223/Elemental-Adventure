@@ -95,7 +95,7 @@ func _enter_tree():
 
 func _input(event):
 	if Network.is_networking:
-		if get_parent().is_multiplayer_authority():
+		if is_multiplayer_authority():
 			if event.is_action_pressed(ui_inputs.keys()[5]):
 				position.y += 1
 			
