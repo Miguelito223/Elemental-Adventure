@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://br25r5ymobg8n"]
+[gd_scene load_steps=10 format=3 uid="uid://br25r5ymobg8n"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_g7w7i"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_v6kvx"]
 [ext_resource type="Script" path="res://Scripts/tile_map.gd" id="3_0nlrc"]
-[ext_resource type="PackedScene" uid="uid://dwypr7om4wpeo" path="res://Scenes/player.tscn" id="4_vl2uy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jt4ho"]
 
@@ -57,9 +56,6 @@ offset_top = 940.0
 offset_right = 503.0
 offset_bottom = 971.0
 placeholder_text = "Message"
-
-[node name="player" parent="." instance=ExtResource("4_vl2uy")]
-position = Vector2(1936, 802)
 
 [connection signal="despawned" from="PlayerSpawner" to="." method="_on_player_spawner_despawned"]
 [connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]
