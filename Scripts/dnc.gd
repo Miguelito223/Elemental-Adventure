@@ -2,7 +2,7 @@ extends CanvasModulate
 
 var minutes_per_day = 1440
 var minutes_per_hour = 60
-var ingame_to_real_minute_duration = TAU / minutes_per_day
+var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
 
 @export var gradient:GradientTexture1D
 @export var ingame_speed = Globals.time_speed
