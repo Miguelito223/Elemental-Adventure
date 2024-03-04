@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/ColorRect.gd" id="1_jtntf"]
 [ext_resource type="Script" path="res://Scripts/environment.gd" id="1_ko5dq"]
+[ext_resource type="Script" path="res://Scripts/Sun.gd" id="2_kjm6f"]
 [ext_resource type="Texture2D" uid="uid://inyyvo2opv6x" path="res://daynightcycle-gradient-texture-sky.tres" id="2_nuhq7"]
-[ext_resource type="Script" path="res://Scenes/Sun.gd" id="2_vyfel"]
 [ext_resource type="Script" path="res://Scripts/dnc.gd" id="3_21pr6"]
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://daynightcycle-gradient-texture.tres" id="4_6t5uq"]
 [ext_resource type="Texture2D" uid="uid://db78ndiwskn6m" path="res://Sprites/background/MountainDuskGodot/MountainsLayers/far-clouds.png" id="4_a3dqc"]
@@ -30,22 +30,6 @@ polygon = PackedVector2Array(200, 200)
 
 [node name="environment" type="Node2D"]
 script = ExtResource("1_ko5dq")
-
-[node name="ParallaxBackground4" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground4"]
-scale = Vector2(10, 10)
-
-[node name="Sun" type="Node2D" parent="ParallaxBackground4/ParallaxLayer"]
-script = ExtResource("2_vyfel")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground4/ParallaxLayer/Sun"]
-position = Vector2(0, 300)
-scale = Vector2(5, 5)
-texture = ExtResource("15_v1m5b")
-
-[node name="PointLight2D" parent="ParallaxBackground4/ParallaxLayer/Sun" instance=ExtResource("16_1ptgp")]
-position = Vector2(0, 300)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
@@ -222,8 +206,18 @@ gradient = ExtResource("4_6t5uq")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_keq3x")
 
+[node name="Sun" type="Node2D" parent="."]
+script = ExtResource("2_kjm6f")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sun"]
+position = Vector2(0, 300)
+scale = Vector2(5, 5)
+texture = ExtResource("15_v1m5b")
+
+[node name="PointLight2D" parent="Sun" instance=ExtResource("16_1ptgp")]
+position = Vector2(0, 300)
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-scale = Vector2(1, 1)
 energy = 0.5
 range_layer_min = -1
 shadow_enabled = true

@@ -566,7 +566,6 @@ enabled = false
 script = ExtResource("14_vbfsm")
 
 [node name="environment" parent="Camera2D" instance=ExtResource("15_78bea")]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
