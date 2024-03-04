@@ -93,6 +93,26 @@ func _enter_tree():
 		set_multiplayer_authority(str(name).to_int())
 		setposspawn()
 
+func _input(event):
+	if Network.is_networking:
+		if event.is_action_pressed(ui_inputs.keys()[5]):
+			position.y += 1
+		
+		if event.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
+			shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
+
+		if event is InputEventScreenTouch and can_fire:
+			shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
+	else:
+		if event.is_action_pressed(ui_inputs.keys()[5]):
+			position.y += 1
+		
+		if event.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
+			shoot(Marker_Parent.rotation, Marker.global_position, 500)
+
+		if event is InputEventScreenTouch and can_fire:
+			shoot(Marker_Parent.rotation, Marker.global_position, 500)
+
 
 	
 func _process(_delta):	
@@ -104,13 +124,6 @@ func _process(_delta):
 				AnimatedSprite.scale.x = 1
 
 			Marker_Parent.look_at(get_global_mouse_position())
-
-			if Input.is_action_pressed(ui_inputs.keys()[5]):
-				position.y += 1
-			
-			if Input.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
-				shoot.rpc(Marker_Parent.rotation, Marker.global_position, 500)
-
 	else:
 		if velocity.x < 0:
 			AnimatedSprite.scale.x = -1
@@ -118,12 +131,6 @@ func _process(_delta):
 			AnimatedSprite.scale.x = 1
 
 		Marker_Parent.look_at(get_global_mouse_position())
-
-		if Input.is_action_pressed(ui_inputs.keys()[5]):
-			position.y += 1
-		
-		if Input.is_action_pressed(ui_inputs.keys()[3]) and can_fire:
-			shoot(Marker_Parent.rotation, Marker.global_position, 500)
 		
 	$Name.text = str(player_name)
 
