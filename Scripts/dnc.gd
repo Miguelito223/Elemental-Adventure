@@ -5,11 +5,11 @@ var minutes_per_hour = 60
 var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
 
 @export var gradient:GradientTexture1D
-@export var ingame_speed = Globals.time_speed
-@export var initial_hour = Globals.initial_time:
+@export var ingame_speed = 1
+@export var initial_hour =  12:
 	set(h):
-		initial_hour = h
-		Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
+		Globals.initial_time = h
+		Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour
 
 var past_minute = -1.0
 
@@ -33,17 +33,17 @@ func _recalculate_time():
 func _ready():
 	if Network.is_networking:
 		if get_tree().get_multiplayer().is_server():
-			Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
+			Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour
 			set_time_multiplayer.rpc(Globals.time)
 			_recalculate_time.rpc()
 	else:
-		Globals.time = ingame_to_real_minute_duration * initial_hour * minutes_per_hour
+		Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour
 		Data.load_file()
 
 func _process(delta):
 	if Network.is_networking:
 		if get_tree().get_multiplayer().is_server():
-			Globals.time += delta * ingame_to_real_minute_duration * ingame_speed  
+			Globals.time += delta * ingame_to_real_minute_duration *  Globals.time_speed  
 			set_time_multiplayer.rpc(Globals.time)
 			_recalculate_time.rpc()
 		
@@ -52,7 +52,7 @@ func _process(delta):
 		
 		
 	else:
-		Globals.time += delta * ingame_to_real_minute_duration * ingame_speed  
+		Globals.time += delta * ingame_to_real_minute_duration * Globals.time_speed  
 		var value = (sin(Globals.time - PI / 2.0) + 1.0) / 2.0
 		self.color = gradient.gradient.sample(value)
 		
