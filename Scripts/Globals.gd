@@ -10,6 +10,8 @@ var time = 0.0
 var num_players = 1
 var player_index = 0
 
+
+
 var player_name: Array = [
 	"Fire",
 	"Water",
@@ -47,8 +49,6 @@ var ball_color_dict: Dictionary = {
 }
 
 #player
-
-
 var last_position = null
 var max_deaths = 5
 var max_hearths = 5
@@ -138,10 +138,27 @@ func remove_duplicates(a):
 			if a[j] == a[i] && i != j:
 				a.remove_at(j)
 
+#settings
+var master_volume = 0 
+var fx_volume = 0
+var music_volume = 0
+var fullscreen = false
+var resolution = DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())
+var initial_time = 12
+var time_speed = 1.0
+var autosave = true
+var autosave_length = 5
+var autosaver_start_time = 0
+var Graphics = 0
+var use_mobile_buttons = OS.get_name() == "Android"
+var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux"
+var FPS = false
+var Vsync = false
+
 
 func _clear_inputs_player(player_index):
 
-	if not Globals.use_keyboard:
+	if not use_keyboard:
 		
 		var right_action: String
 		var right_action_event: InputEventJoypadMotion
@@ -356,7 +373,7 @@ func _clear_inputs_player(player_index):
 
 func _inputs_player(player_index):
 
-	if not Globals.use_keyboard:
+	if not use_keyboard:
 		
 		var right_action: String
 		var right_action_event: InputEventJoypadMotion
@@ -591,19 +608,3 @@ var level_int = 1
 var map = "map_1"
 var map_int = 1
 
-#settings
-var master_volume = 0 
-var fx_volume = 0
-var music_volume = 0
-var fullscreen = false
-var resolution = DisplayServer.screen_get_size(DisplayServer.window_get_current_screen())
-var initial_time = 12
-var time_speed = 1.0
-var autosave = true
-var autosave_length = 5
-var autosaver_start_time = 0
-var Graphics = 0
-var use_mobile_buttons = OS.get_name() == "Android"
-var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux"
-var FPS = false
-var Vsync = false
