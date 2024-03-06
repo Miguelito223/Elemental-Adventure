@@ -150,8 +150,8 @@ var autosave = true
 var autosave_length = 5
 var autosaver_start_time = 0
 var Graphics = 0
-var use_mobile_buttons = OS.get_name() == "Android"
-var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux"
+var use_mobile_buttons = OS.get_name() == "Android" or OS.get_name() == "iOS"
+var use_keyboard = OS.get_name() == "Windows" or OS.get_name() == "Linux" or OS.get_name() == "Web"
 var FPS = false
 var Vsync = false
 
