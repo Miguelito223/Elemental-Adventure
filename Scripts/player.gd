@@ -124,12 +124,16 @@ func _process(_delta):
 			elif velocity.x > 0:
 				AnimatedSprite.scale.x = 1
 
+			Marker_Parent.scale.x = AnimatedSprite.scale.x
+				
 			Marker_Parent.look_at(get_global_mouse_position())
 	else:
 		if velocity.x < 0:
 			AnimatedSprite.scale.x = -1
 		elif velocity.x > 0:
 			AnimatedSprite.scale.x = 1
+
+		Marker_Parent.scale.x = AnimatedSprite.scale.x
 
 		Marker_Parent.look_at(get_global_mouse_position())
 		
@@ -164,7 +168,6 @@ func _process(_delta):
 			canvas.show()
 		light.enabled = Globals.Graphics
 		light.shadow_enabled = Globals.Graphics
-		light.shadow_filter = Globals.Graphics
 		light.shadow_filter_smooth = Globals.Graphics
 
 		if Globals.Graphics == 0:
@@ -345,7 +348,7 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		fire.emitting = false
 		PointLight.enabled = false
 		PointLight.shadow_enabled = Globals.Graphics
-		
+
 		if Globals.Graphics == 0:
 			PointLight.shadow_filter = 0
 		elif Globals.Graphics == 2:
@@ -361,9 +364,6 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 				PointLight.shadow_filter = 1
 
 	bullet_lol.velocity = Vector2(bullet_speed * Marker_Parent.scale.x, 0).rotated(bullet_direction)
-
-		
-
 	can_fire = false
 	await get_tree().create_timer(0.5).timeout
 	can_fire = true
