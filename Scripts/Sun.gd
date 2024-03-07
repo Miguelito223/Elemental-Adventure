@@ -7,5 +7,5 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	self.rotation_degrees = 180 - (Globals.hour * 15)
+func _process(_delta):
+	self.rotation_degrees =  lerp(self.rotation_degrees, 180 - (Globals.hour * 15), 1.0 * _delta)
