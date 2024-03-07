@@ -327,12 +327,38 @@ func shoot( bullet_direction, bullet_pos, bullet_speed):
 		fire.emitting = true
 		PointLight.enabled = Globals.Graphics
 		PointLight.shadow_enabled = Globals.Graphics
-		PointLight.shadow_filter = Globals.Graphics
+
+		if Globals.Graphics == 0:
+			PointLight.shadow_filter = 0
+		elif Globals.Graphics == 2:
+			PointLight.shadow_filter = 1
+		elif Globals.Graphics == 3:
+			PointLight.shadow_filter = 2
+		else:
+			if Globals.Graphics > 3 :
+				PointLight.shadow_filter = 2
+			elif Globals.Graphics < 0:
+				PointLight.shadow_filter = 0
+			else:
+				PointLight.shadow_filter = 1
 	else:
 		fire.emitting = false
 		PointLight.enabled = false
 		PointLight.shadow_enabled = Globals.Graphics
-		PointLight.shadow_filter = Globals.Graphics
+		
+		if Globals.Graphics == 0:
+			PointLight.shadow_filter = 0
+		elif Globals.Graphics == 2:
+			PointLight.shadow_filter = 1
+		elif Globals.Graphics == 3:
+			PointLight.shadow_filter = 2
+		else:
+			if Globals.Graphics > 3 :
+				PointLight.shadow_filter = 2
+			elif Globals.Graphics < 0:
+				PointLight.shadow_filter = 0
+			else:
+				PointLight.shadow_filter = 1
 
 	bullet_lol.velocity = Vector2(bullet_speed * Marker_Parent.scale.x, 0).rotated(bullet_direction)
 
