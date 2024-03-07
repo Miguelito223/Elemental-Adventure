@@ -494,7 +494,10 @@ func in_water():
 			print(is_in_water)
 
 			if not player_name == "Water":
-				damage.rpc(Max_Hearths)
+				if Network.is_networking:
+					damage.rpc(Max_Hearths)
+				else:
+					damage(Max_Hearths)
 
 func out_water():
 	if $WaterDetector2D.get_overlapping_bodies().size() == 0:
@@ -509,7 +512,10 @@ func in_lava():
 		print(is_in_lava)
 
 		if not player_name == "Fire":
-			damage.rpc(Max_Hearths)
+			if Network.is_networking:
+				damage.rpc(Max_Hearths)
+			else:
+				damage(Max_Hearths)
 
 func out_lava():
 	if $LavaDetector2D.get_overlapping_bodies().size() == 0:

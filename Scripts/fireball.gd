@@ -24,7 +24,10 @@ func _on_body_entered(body):
 		
 	else: 
 		if body.is_in_group("player"):
-			body.damage.rpc(0.5)
+			if Network.is_networking:
+				body.damage.rpc(0.5)
+			else:
+				body.damage(0.5)
 
 		get_parent().add_child(explosion)
 		explosion.position = position
