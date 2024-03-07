@@ -123,8 +123,6 @@ func _process(_delta):
 				AnimatedSprite.scale.x = -1
 			elif velocity.x > 0:
 				AnimatedSprite.scale.x = 1
-
-			Marker_Parent.scale.x = AnimatedSprite.scale.x
 				
 			Marker_Parent.look_at(get_global_mouse_position())
 	else:
@@ -132,8 +130,6 @@ func _process(_delta):
 			AnimatedSprite.scale.x = -1
 		elif velocity.x > 0:
 			AnimatedSprite.scale.x = 1
-
-		Marker_Parent.scale.x = AnimatedSprite.scale.x
 
 		Marker_Parent.look_at(get_global_mouse_position())
 		
