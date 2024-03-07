@@ -46,6 +46,7 @@ gradient = ExtResource("2_nuhq7")
 metadata/_edit_use_anchors_ = true
 
 [node name="Sun" type="Node2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 4)
 script = ExtResource("4_owh1y")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer/Sun"]
