@@ -105,7 +105,6 @@ func simelball(bullet_direction, bullet_pos, bullet_speed):
 		
 		slime_ball.get_node("PointLight2D").enabled = false
 		slime_ball.get_node("PointLight2D").shadow_enabled = Globals.Graphics
-		slime_ball.get_node("PointLight2D").shadow_filter = Globals.Graphics
 		slime_ball.get_node("PointLight2D").shadow_filter_smooth = Globals.Graphics
 
 		if Globals.Graphics == 0:
