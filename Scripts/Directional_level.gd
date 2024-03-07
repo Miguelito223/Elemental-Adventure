@@ -13,5 +13,5 @@ func _process(_delta):
 	self.enabled = Globals.Graphics
 	self.shadow_enabled = Globals.Graphics
 	self.shadow_filter = Globals.Graphics
-	self.rotation_degrees = lerpf(self.rotation_degrees, 180 - (Globals.hour * 15), 1.0 * _delta)
+	self.rotation_degrees = lerpf(self.rotation_degrees, 180 - float(Globals.hour * 15), Globals.time_speed * _delta)
 
