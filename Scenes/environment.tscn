@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cmt0g43wqyx8c"]
+[gd_scene load_steps=20 format=3 uid="uid://cmt0g43wqyx8c"]
 
 [ext_resource type="Script" path="res://Scripts/ColorRect.gd" id="1_jtntf"]
 [ext_resource type="Script" path="res://Scripts/environment.gd" id="1_ko5dq"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/dnc.gd" id="3_21pr6"]
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://daynightcycle-gradient-texture.tres" id="4_6t5uq"]
 [ext_resource type="Texture2D" uid="uid://db78ndiwskn6m" path="res://Sprites/background/MountainDuskGodot/MountainsLayers/far-clouds.png" id="4_a3dqc"]
+[ext_resource type="Script" path="res://Scripts/Sun.gd" id="4_owh1y"]
+[ext_resource type="Texture2D" uid="uid://dgopfrj4aom1d" path="res://Sprites/fireball.png" id="5_0gkta"]
 [ext_resource type="Texture2D" uid="uid://bocwjx1jbojvl" path="res://Sprites/background/MountainDuskGodot/MountainsLayers/far-mountains.png" id="5_idy20"]
 [ext_resource type="Texture2D" uid="uid://b7lvw5aqqwoum" path="res://Sprites/background/MountainDuskGodot/MountainsLayers/mountains.png" id="6_3myyv"]
 [ext_resource type="Texture2D" uid="uid://dv2bieobm1dxm" path="res://Sprites/background/MountainDuskGodot/MountainsLayers/trees.png" id="7_ksccp"]
@@ -42,6 +44,15 @@ color = Color(0, 0.443137, 1, 1)
 script = ExtResource("1_jtntf")
 gradient = ExtResource("2_nuhq7")
 metadata/_edit_use_anchors_ = true
+
+[node name="Sun" type="Node2D" parent="ParallaxBackground/ParallaxLayer"]
+script = ExtResource("4_owh1y")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer/Sun"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(0, 600)
+scale = Vector2(5, 5)
+texture = ExtResource("5_0gkta")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.7, 0.7)
@@ -110,6 +121,15 @@ script = ExtResource("1_jtntf")
 gradient = ExtResource("2_nuhq7")
 metadata/_edit_use_anchors_ = true
 
+[node name="Sun" type="Node2D" parent="ParallaxBackground2/ParallaxLayer"]
+script = ExtResource("4_owh1y")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer/Sun"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(0, 600)
+scale = Vector2(5, 5)
+texture = ExtResource("5_0gkta")
+
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
 motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(1920, 0)
@@ -154,6 +174,15 @@ color = Color(0, 0.443137, 1, 1)
 script = ExtResource("1_jtntf")
 gradient = ExtResource("2_nuhq7")
 metadata/_edit_use_anchors_ = true
+
+[node name="Sun" type="Node2D" parent="ParallaxBackground3/ParallaxLayer"]
+script = ExtResource("4_owh1y")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/ParallaxLayer/Sun"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(0, 600)
+scale = Vector2(5, 5)
+texture = ExtResource("5_0gkta")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground3"]
 motion_scale = Vector2(0.5, 0.5)
