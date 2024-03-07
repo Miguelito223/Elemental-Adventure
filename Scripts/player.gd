@@ -166,6 +166,22 @@ func _process(_delta):
 		light.shadow_enabled = Globals.Graphics
 		light.shadow_filter = Globals.Graphics
 		light.shadow_filter_smooth = Globals.Graphics
+
+		if Globals.Graphics == 0:
+			light.shadow_filter = 0
+		elif Globals.Graphics == 2:
+			light.shadow_filter = 1
+		elif Globals.Graphics == 3:
+			light.shadow_filter = 2
+		else:
+			if Globals.Graphics > 3 :
+				light.shadow_filter = 2
+			elif Globals.Graphics < 0:
+				light.shadow_filter = 0
+			else:
+				light.shadow_filter = 1
+
+		
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("fire walk")
 		elif velocity.y < 0:
