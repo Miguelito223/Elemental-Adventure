@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/BOSS BATTLE! Ft Jex.mp3-00a54345f56d605d72178
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0.0
 beat_count=0
