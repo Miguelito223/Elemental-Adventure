@@ -12,7 +12,7 @@ func _process(_delta):
 	self.color = gradient.gradient.sample(value)
 	self.enabled = Globals.Graphics
 	self.shadow_enabled = Globals.Graphics
-	self.shadow_filter_smooth = Globals.Graphics
+	self.shadow_filter_smooth = 4 - Globals.Graphics
 	if Globals.Graphics == 0:
 		self.shadow_filter = SHADOW_FILTER_NONE
 	elif Globals.Graphics == 2:

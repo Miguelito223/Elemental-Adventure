@@ -164,7 +164,7 @@ func _process(_delta):
 			canvas.show()
 		light.enabled = Globals.Graphics
 		light.shadow_enabled = Globals.Graphics
-		light.shadow_filter_smooth = Globals.Graphics
+		light.shadow_filter_smooth = 4 - Globals.Graphics
 
 		if Globals.Graphics == 0:
 			light.shadow_filter = 0

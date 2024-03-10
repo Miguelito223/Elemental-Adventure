@@ -4,7 +4,7 @@ extends PointLight2D
 func _process(_delta):
 	self.enabled = Globals.Graphics
 	self.shadow_enabled = Globals.Graphics
-	self.shadow_filter_smooth = Globals.Graphics
+	self.shadow_filter_smooth = 4 - Globals.Graphics
 	if Globals.Graphics == 0:
 		self.shadow_filter = SHADOW_FILTER_NONE
 	elif Globals.Graphics == 2:
