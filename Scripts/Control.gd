@@ -12,10 +12,6 @@ var lisener: PacketPeerUDP
 
 var currentinfo = preload("res://Scenes/server_info.tscn")
 
-var lisenerport = Network.port + 1
-var broadcasterport = Network.port + 2
-var broadcasteripadress = "255.255.255.255"
-
 func _ready():
 	broadcasttimer = $"broadcast timer"
 	setup()
@@ -24,9 +20,9 @@ func _ready():
 func setup():
 	lisener = PacketPeerUDP.new()
 
-	var ok = lisener.bind(lisenerport)
+	var ok = lisener.bind(Globals.lisenerport)
 	if ok == OK:
-		print("all correct to port: " + str(lisenerport) + " :D")
+		print("all correct to port: " + str(Globals.lisenerport) + " :D")
 		$Panel/Label.text = "Bound to lisen port: true"
 	else:
 		print("failed to port D:")
@@ -64,11 +60,11 @@ func setupbroadcast(player_name):
 
 	broadcaster = PacketPeerUDP.new()
 	broadcaster.set_broadcast_enabled(true)
-	broadcaster.set_dest_address(broadcasteripadress, lisenerport)
+	broadcaster.set_dest_address(Globals.broadcasteripadress, Globals.lisenerport)
 
-	var ok = broadcaster.bind(broadcasterport)
+	var ok = broadcaster.bind(Globals.broadcasterport)
 	if ok == OK:
-		print("all correct to port: " + str(broadcasterport) + " :D")
+		print("all correct to port: " + str(Globals.broadcasterport) + " :D")
 	else:
 		print("failed to port D:")
 		
