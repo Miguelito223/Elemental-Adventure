@@ -1,8 +1,8 @@
 extends Node
 
 var port = 9999
-var lisenerport = port - 1
-var broadcasterport = port - 2
+var lisenerport = port + 1
+var broadcasterport = port + 2
 var ip = "127.0.0.1"
 var broadcasteripadress = "255.255.255.255"
 var username = "MichaxD"
