@@ -20,9 +20,9 @@ func _ready():
 func setup():
 	lisener = PacketPeerUDP.new()
 
-	var ok = lisener.bind(Network.lisenerport)
+	var ok = lisener.bind(Globals.lisenerport)
 	if ok == OK:
-		print("all correct to port: " + str(Network.lisenerport) + " :D")
+		print("all correct to port: " + str(Globals.lisenerport) + " :D")
 		$Panel/Label.text = "Bound to lisen port: true"
 	else:
 		print("failed to port D:")
@@ -60,11 +60,11 @@ func setupbroadcast(player_name):
 
 	broadcaster = PacketPeerUDP.new()
 	broadcaster.set_broadcast_enabled(true)
-	broadcaster.set_dest_address(Network.broadcasteripadress, Network.lisenerport)
+	broadcaster.set_dest_address(Globals.broadcasteripadress, Globals.lisenerport)
 
-	var ok = broadcaster.bind(Network.broadcasterport)
+	var ok = broadcaster.bind(Globals.broadcasterport)
 	if ok == OK:
-		print("all correct to port: " + str(Network.broadcasterport) + " :D")
+		print("all correct to port: " + str(broadcasterport) + " :D")
 	else:
 		print("failed to port D:")
 		
