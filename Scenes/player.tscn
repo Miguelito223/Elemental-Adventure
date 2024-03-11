@@ -556,19 +556,19 @@ shape = SubResource("CapsuleShape2D_dy66o")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_a1hh6")
-animation = &"fire fall"
-autoplay = "fire fall"
+animation = &"fire idle"
+autoplay = "fire idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
+
+[node name="Mobilecontrolls" parent="." instance=ExtResource("11_tb078")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_fjqwq")
 }
-
-[node name="Mobilecontrolls" parent="." instance=ExtResource("11_tb078")]
-visible = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_uy6bv")
