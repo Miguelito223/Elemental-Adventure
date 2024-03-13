@@ -91,11 +91,11 @@ func setlifes(value):
 	if hearth <= 0:
 		print("enemy dead")
 		rng.randomize()
-		var random_number = rng.randi_range(0,  10)
+		var random_number = rng.randi_range(0,  5)
 		var random_number2 = rng.randi_range(0,  1)
 		var table = ["energy", "hearth"]
 
-		if random_number == 10:
+		if random_number == 5:
 			var drop_type = table[random_number2] 
 			if Network.is_networking:
 				drop_item.rpc(drop_type, self.position)
