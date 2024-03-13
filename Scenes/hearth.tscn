@@ -1,10 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://betdnk2m31png"]
+[gd_scene load_steps=6 format=3 uid="uid://betdnk2m31png"]
 
 [ext_resource type="Script" path="res://Scripts/Hearth.gd" id="1_abea5"]
-[ext_resource type="Texture2D" uid="uid://df41m1kgskmh7" path="res://Sprites/hearth.png" id="2_16pkc"]
+[ext_resource type="Texture2D" uid="uid://chda8y1tj8hby" path="res://Sprites/hearth.png" id="2_16pkc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8cfbd"]
 radius = 7.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lbcd8"]
+properties/0/path = NodePath(".:collected")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:visible")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:freeze")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx1vc"]
 
@@ -16,6 +36,9 @@ script = ExtResource("1_abea5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8cfbd")
 disabled = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lbcd8")
 
 [node name="Area2D" type="Area2D" parent="."]
 
