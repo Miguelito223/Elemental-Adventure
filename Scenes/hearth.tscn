@@ -6,20 +6,20 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8cfbd"]
 radius = 7.0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lbcd8"]
-properties/0/path = NodePath(".:collected")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ulvnc"]
+properties/0/path = NodePath(".:visible")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath(".:scale")
+properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath(".:rotation")
+properties/3/path = NodePath(".:scale")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath(".:visible")
+properties/4/path = NodePath(".:collected")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 properties/5/path = NodePath(".:freeze")
@@ -38,7 +38,7 @@ shape = SubResource("CircleShape2D_8cfbd")
 disabled = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_lbcd8")
+replication_config = SubResource("SceneReplicationConfig_ulvnc")
 
 [node name="Area2D" type="Area2D" parent="."]
 
