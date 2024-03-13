@@ -76,10 +76,9 @@ func add_player(peer_id):
 	
 	add_child(player, true)
 	
-	if not get_tree().get_multiplayer().is_server():
-		tile_map.request_seeds(1)
-	else:
+	if get_tree().get_multiplayer().is_server():
 		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
+		
 
 
 func _on_player_spawner_spawned(node):
