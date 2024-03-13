@@ -42,6 +42,9 @@ var energys = preload("res://Scenes/energy.tscn")
 @export var gravity_swim = 0.25
 @export var velocity_swim = 80.0
 
+var random_number
+var random_number2
+
 var is_in_water = false
 var is_in_lava = false
 
@@ -73,6 +76,15 @@ func drop_energys(position):
 	get_parent().add_child(new_energy, true)
 	new_energy.position = position
 
+func generate_random_vars():
+	rng.randomize()
+	random_number = rng.randi_range(0,  5)
+	random_number2 = rng.randi_range(0,  1)
+
+@rpc("call_local", "any_peer")
+func set_random_vars(random_num, random_num2):
+	random_number = random_num
+	random_number2 = random_num2
 
 @rpc("call_local", "any_peer")
 func drop_item(item_type, position):
@@ -88,12 +100,13 @@ func setlifes(value):
 	hearth = clamp(value,0,Max_Hearth)
 	if hearth <= 0:
 		print("enemy dead")
-		rng.randomize()
-		var random_number = rng.randi_range(0,  10)
-		var random_number2 = rng.randi_range(0,  1)
 		var table = ["energy", "hearth"]
 		
-		if random_number == 10:
+		if Network.is_networking:
+			if get_tree().get_multiplayer().is_server():
+				set_random_vars.rpc(random_number, random_number2)
+
+		if random_number == 5:
 			var drop_type = table[random_number2] 
 			if Network.is_networking:
 				drop_item.rpc(drop_type, self.position)
