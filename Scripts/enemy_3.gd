@@ -65,19 +65,25 @@ func damage(ammount):
 				setlifes(hearth - ammount)
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
-@rpc("call_local", "any_peer")
-func drop_hearths():
+func drop_hearths(position):
 	var new_hearth = hearths.instantiate()
 	get_parent().add_child(new_hearth)
 	new_hearth.position = position
-	new_hearth.freeze = false
 
-@rpc("call_local", "any_peer")
-func drop_energys():
+func drop_energys(position):
 	var new_energy = energys.instantiate()
 	get_parent().add_child(new_energy)
 	new_energy.position = position
-	new_energy.freeze = false
+
+
+@rpc("call_local", "any_peer")
+func drop_item(item_type, position):
+	print("Dropping", item_type, "at:", position)
+	# Verificar el tipo de objeto a dejar caer y crear el objeto correspondiente
+	if item_type == "hearth":
+		drop_hearths(position)
+	elif item_type == "energy":
+		drop_energys(position)
 			
 @rpc("call_local", "any_peer")
 func setlifes(value):
@@ -85,18 +91,17 @@ func setlifes(value):
 	if hearth <= 0:
 		print("enemy dead")
 		rng.randomize()
-		var random_number = rng.randi_range(0,  5)
-		var random_number2 = rng.randi_range(0,  10)
-		if random_number == 5:
+		var random_number = rng.randi_range(0,  10)
+		var random_number2 = rng.randi_range(0,  1)
+		var table = ["energy", "hearth"]
+		
+		if random_number == 10:
+			var drop_type = table[random_number2] 
 			if Network.is_networking:
-				drop_energys.rpc()
+				drop_item.rpc(drop_type, self.position)
 			else:
-				drop_energys()
-		if random_number2 == 10:
-			if Network.is_networking:
-				drop_hearths.rpc()
-			else:
-				drop_hearths()
+				drop_item(drop_type, self.position)
+
 		
 		if player:
 			player.score += 3
