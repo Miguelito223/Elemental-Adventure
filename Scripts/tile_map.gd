@@ -47,19 +47,14 @@ func request_seeds(id):
 	receive_seeds.rpc_id(id, noise_seed, cave_noise_seed,rock_noise_seed)
 	
 	
-@rpc("call_local", "authority", "reliable")
+@rpc("call_local", "any_peer", "reliable")
 func receive_seeds(received_noise_seed, received_cave_noise_seed, received_rock_noise_seed):
 	print("recibiendo semillas...")
 	noise_seed = received_noise_seed
 	cave_noise_seed = received_cave_noise_seed
 	rock_noise_seed = received_rock_noise_seed
-	
-	if get_tree().get_multiplayer().is_server():
-		world_generation.rpc()
-	else:
-		world_generation()
+	world_generation()
 
-@rpc("call_local", "any_peer")
 func world_generation():
 	print("Generating world...")
 	
