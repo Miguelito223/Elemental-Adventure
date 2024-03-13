@@ -205,6 +205,8 @@ func _ready():
 			match key_value[0]:
 				"port":
 					Network.port = key_value[1].to_int()
+					Network.lisenerport = key_value[1].to_int() + 1
+					Network.broadcasterport = key_value[1].to_int() + 2
 
 		print("port:", Network.port)
 		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
@@ -522,6 +524,8 @@ func _on_ip_text_changed(new_text:String):
 
 func _on_port_text_changed(new_text:String):
 	Network.port = int(new_text)
+	Network.lisenerport =  int(new_text) + 1
+	Network.broadcasterport =  int(new_text) + 2
 	Data.save_file()
 
 func _on_name_port_text_changed(new_text:String):

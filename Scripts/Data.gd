@@ -113,6 +113,8 @@ func load_file():
 		Network.username = network.username
 		Network.ip = network.ip
 		Network.port = network.port
+		Network.lisenerport = network.port + 1
+		Network.broadcasterport = network.port + 2
 		
 		Signals.finish_load_data.emit()
 	
