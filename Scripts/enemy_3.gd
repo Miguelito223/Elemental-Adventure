@@ -65,14 +65,16 @@ func damage(ammount):
 				setlifes(hearth - ammount)
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
+
+			
 func drop_hearths(position):
 	var new_hearth = hearths.instantiate()
-	get_parent().add_child(new_hearth)
+	get_parent().add_child(new_hearth, true)
 	new_hearth.position = position
 
 func drop_energys(position):
 	var new_energy = energys.instantiate()
-	get_parent().add_child(new_energy)
+	get_parent().add_child(new_energy, true)
 	new_energy.position = position
 
 
@@ -120,7 +122,7 @@ func flip():
 func simelball(bullet_direction, bullet_pos, bullet_speed):
 	if can_fire:
 		var slime_ball = slimeballs.instantiate()
-		get_parent().add_child(slime_ball)
+		get_parent().add_child(slime_ball, true)
 		
 		slime_ball.get_node("PointLight2D").enabled = Globals.Graphics
 		slime_ball.get_node("PointLight2D").shadow_enabled = Globals.Graphics

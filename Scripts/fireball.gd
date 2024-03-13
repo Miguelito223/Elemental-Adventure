@@ -18,7 +18,7 @@ func _on_body_entered(body):
 		else:
 			body.damage(20)
 		
-		get_parent().add_child(explosion)
+		get_parent().add_child(explosion, true)
 		explosion.position = position
 		explosion.emitting = true
 		queue_free()
@@ -32,7 +32,7 @@ func _on_body_entered(body):
 			else:
 				body.damage(0.5)
 
-		get_parent().add_child(explosion)
+		get_parent().add_child(explosion, true)
 		explosion.position = position
 		explosion.emitting = true
 		queue_free()
