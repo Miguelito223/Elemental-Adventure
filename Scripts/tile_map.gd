@@ -79,7 +79,10 @@ func world_generation():
 			if y <= 0:
 				var rand_num = randi_range(0, width)
 				if rand_num == width:
-					enemys_generation(x, noise_height + y)
+					if get_tree().get_multiplayer().is_server():
+						enemys_generation.rpc(x, noise_height + y)
+					else:
+						enemys_generation.rpc_id(1, x, noise_height + y)
 
 		if not tile_arg.find(Vector2i(x, noise_height + 1)):
 			tile_arg.append(Vector2i(x, noise_height))
@@ -93,6 +96,7 @@ func world_generation():
 	BetterTerrain.set_cells(tile_map, 0,rock_arg, 1)
 	BetterTerrain.update_terrain_cells(tile_map, 0,rock_arg,true )
 
+@rpc("call_local", "any_peer")
 func enemys_generation(position_x, position_y):
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = Vector2(position_x, position_y)
