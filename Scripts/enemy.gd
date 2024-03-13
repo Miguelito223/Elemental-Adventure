@@ -58,18 +58,17 @@ func damage(ammount):
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
 
+@rpc("call_local", "any_peer")
 func drop_hearths():
 	var new_hearth = hearths.instantiate()
 	get_parent().add_child(new_hearth)
 	new_hearth.position = position
-	new_hearth.freeze = false
 
-	
+@rpc("call_local", "any_peer")
 func drop_energys():
 	var new_energy = energys.instantiate()
 	get_parent().add_child(new_energy)
 	new_energy.position = position
-	new_energy.freeze = false
 			
 
 func setlifes(value):
@@ -80,9 +79,15 @@ func setlifes(value):
 		var random_number = rng.randi_range(0,  5)
 		var random_number2 = rng.randi_range(0,  10)
 		if random_number == 5:
-			drop_energys()
+			if Network.is_networking:
+				drop_energys.rpc()
+			else:
+				drop_energys()
 		if random_number2 == 10:
-			drop_hearths()
+			if Network.is_networking:
+				drop_hearths.rpc()
+			else:	
+				drop_hearths()
 		
 		if player:
 			player.score += 3
