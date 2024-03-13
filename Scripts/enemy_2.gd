@@ -46,32 +46,38 @@ var is_in_water = false
 var is_in_lava = false
 
 func _ready():
-	setlifes(hearth)
-
+	if Network.is_networking:
+		setlifes.rpc(Max_Hearth)
+	else:
+		setlifes(Max_Hearth)
+@rpc("call_local", "any_peer")
 func damage(ammount):
 	if can_move == true:
 		can_move = false
 		if InvunerabilityTime.is_stopped():
 			Animation_sprite.stop()
 			InvunerabilityTime.start()
-			setlifes(hearth - ammount)
+			if Network.is_networking:
+				setlifes.rpc(hearth - ammount)
+			else:
+				setlifes(hearth - ammount)
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
-
+@rpc("call_local", "any_peer")
 func drop_hearths():
 	var new_hearth = hearths.instantiate()
 	get_parent().add_child(new_hearth)
 	new_hearth.position = position
 	new_hearth.freeze = false
 
-	
+@rpc("call_local", "any_peer")	
 func drop_energys():
 	var new_energy = energys.instantiate()
 	get_parent().add_child(new_energy)
 	new_energy.position = position
 	new_energy.freeze = false
 			
-
+@rpc("call_local", "any_peer")
 func setlifes(value):
 	hearth = clamp(value,0,Max_Hearth)
 	if hearth <= 0:
@@ -80,9 +86,15 @@ func setlifes(value):
 		var random_number = rng.randi_range(0,  5)
 		var random_number2 = rng.randi_range(0,  10)
 		if random_number == 5:
-			drop_energys()
+			if Network.is_networking:
+				drop_energys.rpc()
+			else:
+				drop_energys()
 		if random_number2 == 10:
-			drop_hearths()
+			if Network.is_networking:
+				drop_hearths.rpc()
+			else:
+				drop_hearths()
 		
 		if player:
 			player.score += 3
@@ -181,7 +193,10 @@ func _on_invunerability_timeout():
 
 func _on_detection_area_2_body_entered(body):
 	if body.is_in_group("player"):
-		body.damage(1)
+		if Network.is_networking:
+			body.damage.rpc(1)
+		else:
+			body.damage(1)
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
@@ -210,7 +225,10 @@ func out_lava():
 	pass
 
 func in_lava():
-	damage(Max_Hearth)
+	if Network.is_networking:
+		damage.rpc(Max_Hearth)
+	else:
+		damage(Max_Hearth)
 		
 func save_state():
 	return {
