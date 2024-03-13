@@ -56,6 +56,8 @@ func receive_seeds(received_noise_seed, received_cave_noise_seed, received_rock_
 	
 	if get_tree().get_multiplayer().is_server():
 		world_generation.rpc()
+	else:
+		world_generation()
 
 @rpc("call_local", "any_peer")
 func world_generation():
