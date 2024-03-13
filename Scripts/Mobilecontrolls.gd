@@ -1,9 +1,5 @@
 extends CanvasLayer
 
-@onready var left = $left
-@onready var right = $right
-@onready var jump = $jump
-@onready var shoot = $shoot
 @onready var ui_inputs = get_parent().ui_inputs
 
 
