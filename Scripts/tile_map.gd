@@ -76,6 +76,8 @@ func world_generation():
 				if rand_num == width:
 					if get_tree().get_multiplayer().is_server():
 						enemys_generation.rpc(x, noise_height + y)
+					else:
+						enemys_generation.rpc_id(1, x, noise_height + y)
 						
 
 		if not tile_arg.find(Vector2i(x, noise_height + 1)):

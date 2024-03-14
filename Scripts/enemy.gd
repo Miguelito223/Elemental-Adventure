@@ -106,25 +106,23 @@ func setlifes(value):
 				random_number = rng.randi_range(0,  5)
 				random_number2 = rng.randi_range(0,  1)
 				set_random_vars.rpc(random_number, random_number2)
+				
+				if random_number == 5:
+					var drop_type = table[random_number2] 
+					drop_item.rpc(drop_type, self.position)
 			else:
 				set_random_vars.rpc_id(1, random_number, random_number2)
+				if random_number == 5:
+					var drop_type = table[random_number2] 
+					drop_item.rpc_id(1, drop_type, self.position)		
 		else:
 			rng.randomize()
 			random_number = rng.randi_range(0,  5)
 			random_number2 = rng.randi_range(0,  1)
-
-
-		if random_number == 5:
-			var drop_type = table[random_number2] 
-			if Network.is_networking:
-				if get_tree().get_multiplayer().is_server():
-					drop_item.rpc(drop_type, self.position)
-				else:
-					drop_item.rpc_id(1, drop_type, self.position)
-			else:
+			if random_number == 5:
+				var drop_type = table[random_number2] 
 				drop_item(drop_type, self.position)
 
-		
 		if player:
 			player.score += 3
 

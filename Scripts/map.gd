@@ -78,6 +78,8 @@ func add_player(peer_id):
 	
 	if get_tree().get_multiplayer().is_server():
 		tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
+	else:
+		tile_map.receive_seeds.rpc_id(1, tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
 		
 
 
