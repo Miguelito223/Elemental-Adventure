@@ -54,13 +54,6 @@ func _ready():
 	else:
 		setlifes(Max_Hearth)
 
-	if Network.is_networking:
-		if get_tree().get_multiplayer().is_server():
-			generate_random_vars()
-
-	else:
-		generate_random_vars()
-
 @rpc("call_local", "any_peer")
 func damage(ammount):
 	if can_move == true:
@@ -85,10 +78,6 @@ func drop_energys(position):
 	get_parent().add_child(new_energy, true)
 	new_energy.position = position
 
-func generate_random_vars():
-	rng.randomize()
-	random_number = rng.randi_range(0,  5)
-	random_number2 = rng.randi_range(0,  1)
 
 @rpc("call_local", "any_peer")
 func set_random_vars(random_num, random_num2):
@@ -113,14 +102,25 @@ func setlifes(value):
 		
 		if Network.is_networking:
 			if get_tree().get_multiplayer().is_server():
+				rng.randomize()
+				random_number = rng.randi_range(0,  5)
+				random_number2 = rng.randi_range(0,  1)
 				set_random_vars.rpc(random_number, random_number2)
 			else:
 				set_random_vars.rpc_id(1, random_number, random_number2)
+		else:
+			rng.randomize()
+			random_number = rng.randi_range(0,  5)
+			random_number2 = rng.randi_range(0,  1)
+
 
 		if random_number == 5:
 			var drop_type = table[random_number2] 
 			if Network.is_networking:
-				drop_item.rpc(drop_type, self.position)
+				if get_tree().get_multiplayer().is_server():
+					drop_item.rpc(drop_type, self.position)
+				else:
+					drop_item.rpc_id(1, drop_type, self.position)
 			else:
 				drop_item(drop_type, self.position)
 
