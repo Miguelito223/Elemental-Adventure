@@ -57,6 +57,7 @@ func _ready():
 	if Network.is_networking:
 		if get_tree().get_multiplayer().is_server():
 			generate_random_vars()
+
 	else:
 		generate_random_vars()
 
@@ -113,6 +114,8 @@ func setlifes(value):
 		if Network.is_networking:
 			if get_tree().get_multiplayer().is_server():
 				set_random_vars.rpc(random_number, random_number2)
+			else:
+				set_random_vars.rpc_id(1, random_number, random_number2)
 
 		if random_number == 5:
 			var drop_type = table[random_number2] 
