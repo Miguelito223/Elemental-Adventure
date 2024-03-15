@@ -43,7 +43,6 @@ var energys = preload("res://Scenes/energy.tscn")
 @export var velocity_swim = 80.0
 
 var random_number
-var random_number2
 
 var is_in_water = false
 var is_in_lava = false
@@ -83,12 +82,10 @@ func drop_energys(position):
 func generate_random_vars():
 	rng.randomize()
 	random_number = rng.randi_range(0,  5)
-	random_number2 = rng.randi_range(0,  1)
 
 @rpc("call_local", "any_peer")
-func set_random_vars(random_num, random_num2):
+func set_random_vars(random_num):
 	random_number = random_num
-	random_number2 = random_num2
 
 
 @rpc("call_local", "any_peer")
@@ -109,16 +106,21 @@ func setlifes(value):
 		
 		if Network.is_networking:
 			if get_tree().get_multiplayer().is_server():
-				set_random_vars.rpc(random_number, random_number2)
-
-		if random_number == 5:
-			var drop_type = table[random_number2] 
-			if Network.is_networking:
+				rng.randomize()
+				random_number = rng.randi_range(0,  1)
+				set_random_vars.rpc(random_number)
+				var drop_type = table[random_number] 
 				drop_item.rpc(drop_type, self.position)
 			else:
-				drop_item(drop_type, self.position)
+				set_random_vars.rpc_id(1, random_number)
+				var drop_type = table[random_number] 
+				drop_item.rpc_id(1, drop_type, self.position)		
+		else:
+			rng.randomize()
+			random_number = rng.randi_range(0,  1)
+			var drop_type = table[random_number] 
+			drop_item(drop_type, self.position)
 
-		
 		if player:
 			player.score += 3
 

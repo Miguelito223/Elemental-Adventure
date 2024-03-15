@@ -176,39 +176,12 @@ position = Vector2(1270, -41)
 
 [node name="Enemigo" parent="." instance=ExtResource("7_32dsa")]
 position = Vector2(468, -48)
-Max_Hearth = null
-can_move = null
-speed = null
-max_speed = null
-max_speed_in_air = null
-max_speed_in_water = null
-max_speed_in_lava = null
-gravity_swim = null
-velocity_swim = null
 
 [node name="Enemigo2" parent="." instance=ExtResource("7_32dsa")]
 position = Vector2(1089, -153)
-Max_Hearth = null
-can_move = null
-speed = null
-max_speed = null
-max_speed_in_air = null
-max_speed_in_water = null
-max_speed_in_lava = null
-gravity_swim = null
-velocity_swim = null
 
 [node name="Enemigo3" parent="." instance=ExtResource("7_32dsa")]
 position = Vector2(1463, -138)
-Max_Hearth = null
-can_move = null
-speed = null
-max_speed = null
-max_speed_in_air = null
-max_speed_in_water = null
-max_speed_in_lava = null
-gravity_swim = null
-velocity_swim = null
 
 [node name="Hearth2" parent="." instance=ExtResource("8_mpvrg")]
 position = Vector2(589, -45)
