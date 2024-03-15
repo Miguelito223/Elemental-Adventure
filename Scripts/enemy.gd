@@ -42,28 +42,22 @@ var energys = preload("res://Scenes/energy.tscn")
 @export var gravity_swim = 0.25
 @export var velocity_swim = 80.0
 
-var random_number
+var random_number = 0
 
 var is_in_water = false
 var is_in_lava = false
 
 func _ready():
-	if Network.is_networking:
-		setlifes.rpc(Max_Hearth)
-	else:
-		setlifes(Max_Hearth)
+	setlifes(Max_Hearth)
 
-@rpc("call_local", "any_peer")
+
 func damage(ammount):
 	if can_move == true:
 		can_move = false
 		if InvunerabilityTime.is_stopped():
 			Animation_sprite.stop()
 			InvunerabilityTime.start()
-			if Network.is_networking:
-				setlifes.rpc(hearth - ammount)
-			else:
-				setlifes(hearth - ammount)
+			setlifes(hearth - ammount)
 			Animation_Effects.play("damage")
 			Animation_Effects.queue("flash")
 
@@ -92,7 +86,7 @@ func drop_item(item_type, position):
 	elif item_type == "energy":
 		drop_energys(position)
 			
-@rpc("call_local", "any_peer")
+
 func setlifes(value):
 	hearth = clamp(value,0,Max_Hearth)
 	if hearth <= 0:
@@ -249,10 +243,7 @@ func out_lava():
 	pass
 
 func in_lava():
-	if Network.is_networking:
-		damage.rpc(Max_Hearth)
-	else:
-		damage(Max_Hearth)
+	damage(Max_Hearth)
 		
 func save_state():
 	return {

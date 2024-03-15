@@ -13,10 +13,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
-		if Network.is_networking:
-			body.damage.rpc(20)
-		else:
-			body.damage(20)
+		body.damage(20)
 		
 		get_parent().add_child(explosion, true)
 		explosion.position = position
