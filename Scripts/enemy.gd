@@ -74,7 +74,6 @@ func drop_energys(position):
 
 @rpc("call_local", "any_peer")
 func set_random_vars(random_num):
-	rng.randomize()
 	random_number = random_num
 
 @rpc("call_local", "any_peer")
@@ -101,9 +100,9 @@ func setlifes(value):
 				var drop_type = table[random_number] 
 				drop_item.rpc(drop_type, self.position)
 			else:
-				set_random_vars.rpc_id(1, random_number)
+				set_random_vars.rpc(random_number)
 				var drop_type = table[random_number] 
-				drop_item.rpc_id(1, drop_type, self.position)		
+				drop_item.rpc(drop_type, self.position)		
 		else:
 			rng.randomize()
 			random_number = rng.randi_range(0,  1)
