@@ -214,6 +214,18 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath("Node2D:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath(".:Max_Hearth")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Node2D/Marker2D:position")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Node2D/Marker2D:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath(".:hearth")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
 [node name="enemy_2" type="CharacterBody2D" groups=["enemy", "persistent", "water"]]
 scale = Vector2(1.5, 1.5)

@@ -48,7 +48,7 @@ var is_in_water = false
 var is_in_lava = false
 
 func _ready():
-	setlifes(Max_Hearth)
+	setlifes(hearth )
 
 
 func damage(ammount):
