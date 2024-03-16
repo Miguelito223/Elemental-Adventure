@@ -50,6 +50,12 @@ var is_in_lava = false
 func _ready():
 	setlifes(hearth)
 
+	if Network.is_networking:
+		if get_tree().get_multiplayer().is_server():
+			rng.randomize()
+			random_number = rng.randi_range(0,  1)
+			set_random_vars.rpc(random_number)
+
 
 func damage(ammount):
 	if can_move == true:
@@ -97,16 +103,8 @@ func setlifes(value):
 		var table = ["energy", "hearth"]
 		
 		if Network.is_networking:
-			if get_tree().get_multiplayer().is_server():
-				rng.randomize()
-				random_number = rng.randi_range(0,  1)
-				set_random_vars.rpc(random_number)
-				var drop_type = table[random_number] 
-				drop_item.rpc(drop_type, self.position)
-			else:
-				set_random_vars.rpc(random_number)
-				var drop_type = table[random_number] 
-				drop_item.rpc(drop_type, self.position)		
+			var drop_type = table[random_number] 
+			drop_item.rpc(drop_type, self.position)		
 		else:
 			rng.randomize()
 			random_number = rng.randi_range(0,  1)
