@@ -119,6 +119,9 @@ properties/8/replication_mode = 1
 properties/9/path = NodePath(".:Max_Hearth")
 properties/9/spawn = true
 properties/9/replication_mode = 1
+properties/10/path = NodePath(".:can_move")
+properties/10/spawn = true
+properties/10/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_gf7xr"]
 length = 0.001
