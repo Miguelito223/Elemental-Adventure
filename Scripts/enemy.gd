@@ -84,7 +84,7 @@ func set_random_vars(random_num):
 
 @rpc("call_local", "any_peer")
 func drop_item(item_type, position):
-	print("Dropping", item_type, "at:", position)
+	print("Dropping ", item_type, " at: ", position)
 	# Verificar el tipo de objeto a dejar caer y crear el objeto correspondiente
 	if item_type == "hearth":
 		drop_hearths(position)
