@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://betdnk2m31png"]
+[gd_scene load_steps=6 format=3 uid="uid://betdnk2m31png"]
 
 [ext_resource type="Script" path="res://Scripts/Hearth.gd" id="1_abea5"]
 [ext_resource type="Texture2D" uid="uid://chda8y1tj8hby" path="res://Sprites/hearth.png" id="2_16pkc"]
@@ -7,6 +7,29 @@
 radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx1vc"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3nfkf"]
+properties/0/path = NodePath(".:freeze")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:scale")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:mass")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:visible")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:collected")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
 [node name="hearth" type="RigidBody2D" groups=["persistent"]]
 scale = Vector2(1.5, 1.5)
@@ -27,5 +50,8 @@ shape = SubResource("RectangleShape2D_lx1vc")
 position = Vector2(1.19209e-06, 1.5)
 scale = Vector2(0.015, 0.0145349)
 texture = ExtResource("2_16pkc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3nfkf")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
