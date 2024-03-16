@@ -91,7 +91,6 @@ func world_generation():
 	BetterTerrain.update_terrain_cells(tile_map, 0,rock_arg,true )
 
 
-@rpc("call_local", "any_peer")
 func enemys_generation(position_x, position_y):
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = Vector2(position_x, position_y)
