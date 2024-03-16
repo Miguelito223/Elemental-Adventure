@@ -255,7 +255,9 @@ func _on_back_pressed():
 		if get_parent().get_parent().is_multiplayer_authority():
 			hide()
 			get_tree().paused = false
-			get_tree().get_multiplayer().server_disconnected.emit()
+			Network.is_networking = false
+			Network.connected_ids.clear()
+			get_tree().get_multiplayer().multiplayer_peer.close()
 			
 	else:
 		hide()
