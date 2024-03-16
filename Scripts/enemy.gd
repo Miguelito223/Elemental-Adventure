@@ -42,7 +42,7 @@ var energys = preload("res://Scenes/energy.tscn")
 @export var gravity_swim = 0.25
 @export var velocity_swim = 80.0
 
-var random_number = 0
+var random_number
 
 var is_in_water = false
 var is_in_lava = false
@@ -80,6 +80,7 @@ func drop_energys(position):
 
 @rpc("call_local", "any_peer")
 func set_random_vars(random_num):
+	print("recibiendo valores...")
 	random_number = random_num
 
 @rpc("call_local", "any_peer")
@@ -98,7 +99,10 @@ func setlifes(value):
 		print("enemy dead")
 		var table = ["energy", "hearth"]
 		
-		if Network.is_networking:
+		if Network.is_networking:	
+			if get_tree().get_multiplayer().is_server():
+				set_random_vars.rpc(random_number)
+			if random_number == null: return 
 			var drop_type = table[random_number] 
 			drop_item.rpc(drop_type, self.position)		
 		else:

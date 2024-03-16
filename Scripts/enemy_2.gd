@@ -55,6 +55,7 @@ func _ready():
 			rng.randomize()
 			random_number = rng.randi_range(0,  1)
 			set_random_vars.rpc(random_number)
+			
 
 
 func damage(ammount):
@@ -103,6 +104,9 @@ func setlifes(value):
 		var table = ["energy", "hearth"]
 		
 		if Network.is_networking:
+			if get_tree().get_multiplayer().is_server():
+				set_random_vars.rpc(random_number)
+			if random_number == null: return 
 			var drop_type = table[random_number] 
 			drop_item.rpc(drop_type, self.position)		
 		else:
@@ -162,6 +166,7 @@ func simelball(bullet_direction, bullet_pos, bullet_speed):
 
 func _physics_process(delta):
 	update_hearths()
+
 
 	if can_move == true:
 		if not is_on_floor():

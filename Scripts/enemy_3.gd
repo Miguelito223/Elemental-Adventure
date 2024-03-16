@@ -103,6 +103,9 @@ func setlifes(value):
 		var table = ["energy", "hearth"]
 		
 		if Network.is_networking:
+			if get_tree().get_multiplayer().is_server():
+				set_random_vars.rpc(random_number)
+			if random_number == null: return 
 			var drop_type = table[random_number] 
 			drop_item.rpc(drop_type, self.position)		
 		else:
