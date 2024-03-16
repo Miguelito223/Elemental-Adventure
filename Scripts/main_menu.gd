@@ -486,10 +486,13 @@ func hostbyport(port):
 		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
 		if get_tree().get_multiplayer().is_server():
 			Network.is_networking = true
+			print("Adding UPNP...")
 			UPNP_setup()
+			print("Adding Broadcast...")
 			control.setupbroadcast(Network.username)
 			set_process(true)
 			self.hide()
+			print("Loading map...")
 			LoadScene.load_scene(null, Globals.map)
 	else:
 		push_error("Error creating server: " + str(error))
@@ -507,6 +510,7 @@ func joinbyip(ip, port):
 			set_process(true)
 			self.hide()
 			get_parent().get_node("CanvasLayer").show()
+			print("Loading map...")
 			LoadScene.load_scene(null, "res://Scenes/game.tscn")
 	else:
 		push_error("Error creating client: ", str(error))
