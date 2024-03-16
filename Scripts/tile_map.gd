@@ -74,7 +74,7 @@ func world_generation():
 			if y <= 0:
 				var rand_num = randi_range(0, width)
 				if rand_num == width:
-					enemys_generation.rpc(x, noise_height + y)
+					enemys_generation(x, noise_height + y)
 
 						
 
