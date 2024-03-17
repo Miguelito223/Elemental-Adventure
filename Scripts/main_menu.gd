@@ -237,6 +237,8 @@ func _ready():
 		print("port:", Network.port)
 		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
 		
+		await get_tree().create_timer(2).timeout
+
 		hostbyport(Network.port)
 
 	
