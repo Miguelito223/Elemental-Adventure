@@ -42,6 +42,7 @@ var energys = preload("res://Scenes/energy.tscn")
 @export var gravity_swim = 0.25
 @export var velocity_swim = 80.0
 
+
 var random_number
 
 var is_in_water = false

@@ -26,7 +26,6 @@ extends Control
 @onready var server_browser_box = $"Online Menu/Server Browser2"
 @onready var join_box = $"Online Menu/Join2"
 
-
 #volumen
 @onready var master_volume = $"Settings menu/Volumen/master volume"
 @onready var fx_volume = $"Settings menu/Volumen/Fx volume"
@@ -198,21 +197,6 @@ func _ready():
 	
 	create_action_remap_items()
 
-	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
-		var args = OS.get_cmdline_user_args()
-		for arg in args:
-			var key_value = arg.rsplit("=")
-			match key_value[0]:
-				"port":
-					Network.port = key_value[1].to_int()
-					Network.lisenerport = key_value[1].to_int() + 1
-					Network.broadcasterport = key_value[1].to_int() + 2
-
-		print("port:", Network.port)
-		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
-		
-		hostbyport(Network.port)
-
 	control.JoinGame.connect(joinbyip)
 	get_parent().JoinGame.connect(joinbyip)
 
@@ -239,6 +223,21 @@ func _ready():
 	autosave_length.text = str(Globals.autosave_length)
 	Username_join.text = str(Network.username)
 	Username_host.text = str(Network.username)
+
+	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
+		var args = OS.get_cmdline_user_args()
+		for arg in args:
+			var key_value = arg.rsplit("=")
+			match key_value[0]:
+				"port":
+					Network.port = key_value[1].to_int()
+					Network.lisenerport = key_value[1].to_int() + 1
+					Network.broadcasterport = key_value[1].to_int() + 2
+
+		print("port:", Network.port)
+		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
+		
+		hostbyport(Network.port)
 
 	
 func _on_play_pressed():
