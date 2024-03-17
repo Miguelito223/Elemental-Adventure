@@ -14,9 +14,9 @@ config/name="Elemental Adventure"
 run/main_scene="res://Scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.239216, 0, 0.396078, 1)
-boot_splash/image="res://Sprites/fuego.png"
+boot_splash/image="res://icon.png"
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 boot_splash/minimum_display_time=7
 
