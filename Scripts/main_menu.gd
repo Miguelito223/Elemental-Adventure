@@ -466,10 +466,11 @@ func _on_join2_pressed():
 
 
 func _process(_delta):
-	if self.visible == false:
-		$"Main menu music".stop()
-	else:
+	if self.visible == true:
+		await $"Main menu music".finished
 		$"Main menu music".play()
+	else:
+		$"Main menu music".stop()
 
 func _on_ip_text_changed(new_text:String):
 	Network.ip = new_text
