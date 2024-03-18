@@ -49,10 +49,6 @@ func hostbyport(port):
 
 func _ready():
 
-	get_parent().get_node("Game/Main Menu").control.JoinGame.connect(joinbyip)
-	get_parent().get_node("Game").JoinGame.connect(joinbyip)
-
-
 	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
 		var args = OS.get_cmdline_user_args()
 		for arg in args:
