@@ -19,7 +19,6 @@ func joinbyip(ip, port):
 		get_tree().get_multiplayer().multiplayer_peer = multiplayer_peer_websocker	
 		if not get_tree().get_multiplayer().is_server():
 			is_networking = true
-			set_process(true)
 			get_parent().get_node("Game/Main Menu").hide()
 			get_parent().get_node("Game/CanvasLayer").show()
 			print("Loading map...")
@@ -39,7 +38,6 @@ func hostbyport(port):
 			UPNP_setup()
 			print("Adding Broadcast...")
 			get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
-			set_process(true)
 			get_parent().get_node("Game/Main Menu").hide()
 			print("Loading map...")
 			LoadScene.load_scene(null, Globals.map)

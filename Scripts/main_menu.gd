@@ -172,7 +172,6 @@ func create_action_remap_items():
 
 
 func _ready():
-	set_process(false)
 	main_menu.show()
 	settings_menu.hide()
 	online_menu.hide()
