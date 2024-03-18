@@ -197,9 +197,6 @@ func _ready():
 	
 	create_action_remap_items()
 
-	control.JoinGame.connect(joinbyip)
-	get_parent().JoinGame.connect(joinbyip)
-
 	popup.hide()
 	popup2.hide()
 	
@@ -224,22 +221,7 @@ func _ready():
 	Username_join.text = str(Network.username)
 	Username_host.text = str(Network.username)
 
-	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
-		var args = OS.get_cmdline_user_args()
-		for arg in args:
-			var key_value = arg.rsplit("=")
-			match key_value[0]:
-				"port":
-					Network.port = key_value[1].to_int()
-					Network.lisenerport = key_value[1].to_int() + 1
-					Network.broadcasterport = key_value[1].to_int() + 2
-
-		print("port:", Network.port)
-		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
-		
-		await get_tree().create_timer(2).timeout
-
-		hostbyport(Network.port)
+	self.control.JoinGame.connect(Network.joinbyip)
 
 	
 func _on_play_pressed():
@@ -478,43 +460,10 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
-	hostbyport(Network.port)
-
-func hostbyport(port):
-	Network.multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
-	var error = Network.multiplayer_peer_websocker.create_server(port)
-	if error == OK:
-		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker
-		if get_tree().get_multiplayer().is_server():
-			Network.is_networking = true
-			print("Adding UPNP...")
-			UPNP_setup()
-			print("Adding Broadcast...")
-			control.setupbroadcast(Network.username)
-			set_process(true)
-			self.hide()
-			print("Loading map...")
-			LoadScene.load_scene(null, Globals.map)
-	else:
-		push_error("Error creating server: " + str(error))
+	Network.hostbyport(Network.port)
 
 func _on_join2_pressed():
-	joinbyip(Network.ip, Network.port)
-
-func joinbyip(ip, port):
-	Network.multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
-	var error = Network.multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
-	if error == OK:
-		get_tree().get_multiplayer().multiplayer_peer = Network.multiplayer_peer_websocker	
-		if not get_tree().get_multiplayer().is_server():
-			Network.is_networking = true
-			set_process(true)
-			self.hide()
-			get_parent().get_node("CanvasLayer").show()
-			print("Loading map...")
-			LoadScene.load_scene(null, "res://Scenes/game.tscn")
-	else:
-		push_error("Error creating client: ", str(error))
+	Network.joinbyip(Network.ip, Network.port)
 
 
 func _process(_delta):
@@ -537,27 +486,7 @@ func _on_name_port_text_changed(new_text:String):
 	Network.username = new_text
 	Data.save_file()
 
-func UPNP_setup():
-	var upnp = UPNP.new()
 
-	var discover_result = upnp.discover()
-	if discover_result != UPNP.UPNP_RESULT_SUCCESS:  
-		print("UPNP discover Failed")
-		return
-	
-	if upnp.get_gateway() and !upnp.get_gateway().is_valid_gateway():
-		print("UPNP invalid gateway")
-		return 
-
-	var map_result_udp = upnp.add_port_mapping(Network.port, Network.port, "", "UDP")
-	if map_result_udp != UPNP.UPNP_RESULT_SUCCESS:
-		print("UPNP port UDP mapping failed")
-		return
-
-	var map_result_tcp = upnp.add_port_mapping(Network.port, Network.port, "", "TCP")
-	if map_result_tcp != UPNP.UPNP_RESULT_SUCCESS:
-		print("UPNP port TCP mapping failed")
-		return
 
 
 func _on_server_browser_pressed():

@@ -27,6 +27,9 @@ func _ready():
 		map = get_node(Globals.map)
 	else:
 		level = get_node(Globals.level)
+
+
+	self.JoinGame.connect(Network.joinbyip)
 	
 	
 	if Globals.use_keyboard:
