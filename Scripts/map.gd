@@ -73,8 +73,9 @@ func add_player(peer_id):
 	Globals._inputs_player(player.device_num)
 	
 	add_child(player, true)
-	
-	tile_map.receive_seeds.rpc(tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
+
+	if get_tree().get_multiplayer().is_server():
+		tile_map.receive_seeds.rpc_id(peer_id, tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
 
 		
 
