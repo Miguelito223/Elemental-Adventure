@@ -16,7 +16,7 @@ func joinbyip(ip, port):
 	multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 	var error = multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
 	if error == OK:
-		multiplayer.multiplayer_peer = multiplayer_peer_websocker	
+		multiplayer.multiplayer_peer = multiplayer_peer_websocker
 		if not multiplayer.is_server():
 			is_networking = true
 			get_parent().get_node("Game/Main Menu").hide()
