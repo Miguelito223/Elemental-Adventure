@@ -13,11 +13,32 @@ var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
 
 var past_minute = -1.0
 
-@rpc("any_peer", "call_local")
-func set_time_multiplayer(time):
-	Globals.time = time
 
-@rpc("any_peer", "call_local")
+func _ready():
+	if Network.is_networking:
+		if multiplayer.is_server():
+			Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour
+			Data.load_file()
+	else:
+		Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour
+		Data.load_file()		
+
+func _process(delta):
+	if Network.is_networking:
+		if multiplayer.is_server():
+			Globals.time += delta * ingame_to_real_minute_duration * Globals.time_speed  
+			var value = (sin(Globals.time - PI / 2.0) + 1.0) / 2.0
+			self.color = gradient.gradient.sample(value)
+		
+			_recalculate_time()
+	else:
+		Globals.time += delta * ingame_to_real_minute_duration * Globals.time_speed  
+		var value = (sin(Globals.time - PI / 2.0) + 1.0) / 2.0
+		self.color = gradient.gradient.sample(value)
+
+		_recalculate_time()
+
+
 func _recalculate_time():
 	var total_minutes = int(Globals.time / ingame_to_real_minute_duration)
 	Globals.day = int(total_minutes / minutes_per_day)
@@ -29,34 +50,3 @@ func _recalculate_time():
 	if past_minute != Globals.minute:
 		past_minute = Globals.minute
 		Signals.time_tick.emit(Globals.day, Globals.hour, Globals.minute)
-
-func _ready():
-	if Network.is_networking:
-		if get_tree().get_multiplayer().is_server():
-			Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour
-			set_time_multiplayer.rpc(Globals.time)
-			_recalculate_time.rpc()
-	else:
-		Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour
-		Data.load_file()
-
-func _process(delta):
-	if Network.is_networking:
-		if get_tree().get_multiplayer().is_server():
-			Globals.time += delta * ingame_to_real_minute_duration *  Globals.time_speed  
-			set_time_multiplayer.rpc(Globals.time)
-			_recalculate_time.rpc()
-		
-		var value = (sin(Globals.time - PI / 2.0) + 1.0) / 2.0
-		self.color = gradient.gradient.sample(value)
-		
-		
-	else:
-		Globals.time += delta * ingame_to_real_minute_duration * Globals.time_speed  
-		var value = (sin(Globals.time - PI / 2.0) + 1.0) / 2.0
-		self.color = gradient.gradient.sample(value)
-		
-		_recalculate_time()
-
-
-		

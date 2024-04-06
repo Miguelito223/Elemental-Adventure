@@ -2,7 +2,7 @@ extends Node
 
 #time
 var minute = 00
-var day = 1
+var day = 0
 var hour = 12
 var time = 0.0
 

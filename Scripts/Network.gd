@@ -16,8 +16,8 @@ func joinbyip(ip, port):
 	multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 	var error = multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
 	if error == OK:
-		get_tree().get_multiplayer().multiplayer_peer = multiplayer_peer_websocker	
-		if not get_tree().get_multiplayer().is_server():
+		multiplayer.multiplayer_peer = multiplayer_peer_websocker	
+		if not multiplayer.is_server():
 			is_networking = true
 			get_parent().get_node("Game/Main Menu").hide()
 			get_parent().get_node("Game/CanvasLayer").show()
@@ -31,8 +31,8 @@ func hostbyport(port):
 	multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 	var error = multiplayer_peer_websocker.create_server(port)
 	if error == OK:
-		get_tree().get_multiplayer().multiplayer_peer = multiplayer_peer_websocker
-		if get_tree().get_multiplayer().is_server():
+		multiplayer.multiplayer_peer = multiplayer_peer_websocker
+		if multiplayer.is_server():
 			is_networking = true
 			print("Adding UPNP...")
 			UPNP_setup()
@@ -157,5 +157,36 @@ var deaths: Dictionary = {
 }
 
 @rpc("any_peer", "call_local")
-func change_global_var(global_var, value):
-	global_var = value
+func _sync_time(timer_value):
+	Globals.time = timer_value
+
+@rpc("any_peer", "call_local")
+func _sync_day(day_value):
+	Globals.day = day_value
+
+@rpc("any_peer", "call_local")
+func _sync_hour(hour_value):
+	Globals.hour = hour_value
+
+@rpc("any_peer", "call_local")
+func _sync_minute(minute_value):
+	Globals.minute = minute_value
+
+@rpc("any_peer", "call_local")
+func _add_player_list(player_id):
+	connected_ids.append(player_id)
+	connection_count = connected_ids.size() - 1
+
+@rpc("any_peer", "call_local")
+func _remove_player_list(player_id):
+	connected_ids.erase(player_id)
+	connection_count = connected_ids.size() - 1
+
+
+func _process(_delta):
+	if is_networking:
+		if multiplayer.is_server():
+			_sync_time.rpc(Globals.time)
+			_sync_day.rpc(Globals.day)
+			_sync_hour.rpc(Globals.hour)
+			_sync_minute.rpc(Globals.minute)

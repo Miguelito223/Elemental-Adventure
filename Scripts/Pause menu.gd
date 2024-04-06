@@ -257,7 +257,7 @@ func _on_back_pressed():
 			get_tree().paused = false
 			Network.is_networking = false
 			Network.connected_ids.clear()
-			get_tree().get_multiplayer().multiplayer_peer.close()
+			multiplayer.multiplayer_peer.close()
 			
 	else:
 		hide()

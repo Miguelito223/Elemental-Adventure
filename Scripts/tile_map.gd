@@ -32,7 +32,7 @@ func _ready():
 	if not Network.is_networking:
 		return
 		
-	if not get_tree().get_multiplayer().is_server():
+	if not multiplayer.is_server():
 		return
 	
 	generate_seeds()
@@ -71,7 +71,7 @@ func world_generation():
 			else:
 				tile_arg.append(Vector2(x, noise_height+y))
 			
-			if y <= 0 and get_tree().get_multiplayer().is_server():
+			if y <= 0 and multiplayer.is_server():
 				var rand_num = randi_range(0, width)
 				if rand_num == width:
 					enemys_generation(x, noise_height + y)

@@ -109,13 +109,13 @@ func _input(event):
 
 func _on_multiplayer_spawner_spawned(_node):
 	if Network.is_networking:
-		if not get_tree().get_multiplayer().is_server():
+		if not multiplayer.is_server():
 			get_node("CanvasLayer").hide()
 
 
 func _on_map_spawner_despawned(_node):
 	if Network.is_networking:
-		if not get_tree().get_multiplayer().is_server():
+		if not multiplayer.is_server():
 			get_node("CanvasLayer").show()
 
 
@@ -127,9 +127,9 @@ func _on_reconnect_pressed():
 
 func _on_back_to_main_menu_pressed():
 	if Network.is_networking:
-		if not get_tree().get_multiplayer().is_server():
+		if not multiplayer.is_server():
 			Network.is_networking = false
 			Network.connected_ids.clear()
-			get_tree().get_multiplayer().multiplayer_peer.close()
+			multiplayer.multiplayer_peer.close()
 			get_node("Main Menu").show()
 			get_node("CanvasLayer").hide()

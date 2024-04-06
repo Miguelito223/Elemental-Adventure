@@ -20,14 +20,15 @@ func _ready():
 		return
 	
 
-	get_tree().get_multiplayer().server_disconnected.connect(server_disconected)
-	get_tree().get_multiplayer().connected_to_server.connect(server_conected)
-	get_tree().get_multiplayer().connection_failed.connect(conected_fail)
-	get_tree().get_multiplayer().peer_connected.connect(add_player)
-	get_tree().get_multiplayer().peer_disconnected.connect(remove_player)
+	multiplayer.server_disconnected.connect(server_disconected)
+	multiplayer.connected_to_server.connect(server_conected)
+	multiplayer.connection_failed.connect(conected_fail)
+	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
 
-	if not OS.has_feature("dedicated_server") and get_tree().get_multiplayer().is_server():
-		add_player(1)	
+	if multiplayer.is_server():
+		if not OS.has_feature("dedicated_server"):
+			add_player(1)	
 		
 	Signals.level_loaded.emit()
 
@@ -50,9 +51,9 @@ func server_conected():
 
 func add_player(peer_id):
 	print("adding player id: " + str(peer_id))
-
-	Network.connected_ids.append(peer_id)
-	Network.connection_count = Network.connected_ids.size() - 1
+	
+	if multiplayer.is_server():
+		Network._add_player_list.rpc(peer_id)
 	
 	var player = player_scene.instantiate()
 	player.name = str(peer_id)
@@ -72,19 +73,16 @@ func add_player(peer_id):
 
 	Globals._inputs_player(player.device_num)
 	
-	add_child(player, true)
-
-	if get_tree().get_multiplayer().is_server():
+	if multiplayer.is_server():
 		tile_map.receive_seeds.rpc_id(peer_id, tile_map.noise_seed, tile_map.cave_noise_seed,tile_map.rock_noise_seed)
+
+	add_child(player, true)
 
 		
 
 
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
-
-	Network.connected_ids.append(node.name.to_int())
-	Network.connection_count = Network.connected_ids.size() - 1
 	
 	node.device_num = Network.connection_count
 	node.player_id = node.name.to_int()
@@ -103,8 +101,9 @@ func remove_player(peer_id):
 	print("removing player id: " + str(peer_id))
 	var player = get_node(str(peer_id))
 	if is_instance_valid(player):
-		Network.connected_ids.erase(player.name.to_int())
-		Network.connection_count = Network.connected_ids.size() - 1
+
+		if multiplayer.is_server():
+			Network._remove_player_list.rpc(peer_id)
 		player.queue_free()
 
 

@@ -51,7 +51,7 @@ func _ready():
 	setlifes(hearth)
 
 	if Network.is_networking:
-		if get_tree().get_multiplayer().is_server():
+		if multiplayer.is_server():
 			rng.randomize()
 			random_number = rng.randi_range(0,  1)
 			set_random_vars.rpc(random_number)
@@ -103,7 +103,7 @@ func setlifes(value):
 		var table = ["energy", "hearth"]
 		
 		if Network.is_networking:
-			if get_tree().get_multiplayer().is_server():
+			if multiplayer.is_server():
 				set_random_vars.rpc(random_number)
 
 				
