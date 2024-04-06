@@ -16,19 +16,16 @@ func _ready():
 			"p":get_parent().name,
 		}))
 
-	if not Network.is_networking:
-		return
-	
+	if Network.is_networking:
+		multiplayer.server_disconnected.connect(server_disconected)
+		multiplayer.connected_to_server.connect(server_conected)
+		multiplayer.connection_failed.connect(conected_fail)
+		multiplayer.peer_connected.connect(add_player)
+		multiplayer.peer_disconnected.connect(remove_player)
 
-	multiplayer.server_disconnected.connect(server_disconected)
-	multiplayer.connected_to_server.connect(server_conected)
-	multiplayer.connection_failed.connect(conected_fail)
-	multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(remove_player)
-
-	if multiplayer.is_server():
-		if not OS.has_feature("dedicated_server"):
-			add_player(1)	
+		if multiplayer.is_server():
+			if not OS.has_feature("dedicated_server"):
+				add_player(1)	
 		
 	Signals.level_loaded.emit()
 
@@ -48,6 +45,7 @@ func conected_fail():
 
 func server_conected():
 	print("Server Conected")
+	Network.is_networking = true
 
 func add_player(peer_id):
 	print("adding player id: " + str(peer_id))
@@ -98,12 +96,12 @@ func _on_player_spawner_spawned(node):
 
 
 func remove_player(peer_id):
-	print("removing player id: " + str(peer_id))
 	var player = get_node(str(peer_id))
 	if is_instance_valid(player):
-
+		print("removing player id: " + str(peer_id))
 		if multiplayer.is_server():
 			Network._remove_player_list.rpc(peer_id)
+
 		player.queue_free()
 
 

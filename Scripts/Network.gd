@@ -9,11 +9,10 @@ var username = "MichaxD"
 var connection_count = 0
 var connected_ids: Array = []
 var is_networking = false
-var multiplayer_peer_Enet
-var multiplayer_peer_websocker
+var multiplayer_peer_Enet = ENetMultiplayerPeer.new()
+var multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 
 func joinbyip(ip, port):
-	multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 	var error = multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
 	if error == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer_websocker
@@ -28,7 +27,6 @@ func joinbyip(ip, port):
 
 
 func hostbyport(port):
-	multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 	var error = multiplayer_peer_websocker.create_server(port)
 	if error == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer_websocker

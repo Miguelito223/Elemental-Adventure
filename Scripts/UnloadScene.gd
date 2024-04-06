@@ -61,10 +61,6 @@ func unload_scene(current_scene):
 	if current_scene != null:
 		current_scene.queue_free()
 
-	start_load()
-
-
-func start_load():
 	if GAME_SCENE.has(scene_path):
 		scene_path = GAME_SCENE[scene_path]
 	else:
@@ -87,4 +83,5 @@ func _process(_delta):
 		3:
 			emit_signal("progress_changed", 1.0)
 			emit_signal("unload_done")
+			set_process(false)
 

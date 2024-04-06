@@ -96,6 +96,11 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_2="Water"
 2d_physics/layer_3="Lava"
 
+[network]
+
+limits/tcp/connect_timeout_seconds=100
+limits/packet_peer_stream/max_buffer_po2=100
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

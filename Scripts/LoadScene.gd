@@ -64,10 +64,6 @@ func load_scene(current_scene, next_scene):
 	if current_scene != null:
 		current_scene.queue_free()
 
-	start_load()
-
-
-func start_load():
 	if GAME_SCENE.has(scene_path):
 		scene_path = GAME_SCENE[scene_path]
 	else:
@@ -82,8 +78,8 @@ func _process(_delta):
 	var load_status = ResourceLoader.load_threaded_get_status(scene_path, progress)
 	match load_status:
 		0,2:
-			set_process(false)
 			print("failed to load")
+			set_process(false)
 			return
 		1:
 			emit_signal("progress_changed", progress[0])
@@ -98,4 +94,5 @@ func _process(_delta):
 
 			emit_signal("progress_changed", 1.0)
 			emit_signal("load_done")
+			set_process(false)
 
