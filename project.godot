@@ -106,5 +106,4 @@ limits/packet_peer_stream/max_buffer_po2=100
 textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
-lights_and_shadows/use_physical_light_units=true
 environment/defaults/default_clear_color=Color(0.4, 0.4, 0.4, 1)

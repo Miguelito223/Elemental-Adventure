@@ -13,38 +13,65 @@ var multiplayer_peer_Enet = ENetMultiplayerPeer.new()
 var multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 
 func joinbyip(ip, port):
-	var error = multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
-	if error == OK:
-		multiplayer.multiplayer_peer = multiplayer_peer_websocker
-		if not multiplayer.is_server():
-			is_networking = true
-			get_parent().get_node("Game/Main Menu").hide()
-			get_parent().get_node("Game/CanvasLayer").show()
-			print("Loading map...")
-			LoadScene.load_scene(null, "res://Scenes/game.tscn")
+	if OS.get_name() == "Web":
+		var error = multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
+		if error == OK:
+			multiplayer.multiplayer_peer = multiplayer_peer_websocker
+			if not multiplayer.is_server():
+				is_networking = true
+				get_parent().get_node("Game/Main Menu").hide()
+				get_parent().get_node("Game/CanvasLayer").show()
+				print("Loading map...")
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")
+		else:
+			push_error("Error creating client: ", str(error))
 	else:
-		push_error("Error creating client: ", str(error))
+		var error = multiplayer_peer_Enet.create_client(ip, port)
+		if error == OK:
+			multiplayer.multiplayer_peer = multiplayer_peer_Enet
+			if not multiplayer.is_server():
+				is_networking = true
+				get_parent().get_node("Game/Main Menu").hide()
+				get_parent().get_node("Game/CanvasLayer").show()
+				print("Loading map...")
+				LoadScene.load_scene(null, "res://Scenes/game.tscn")
+		else:
+			push_error("Error creating client: ", str(error))	
 
 
 func hostbyport(port):
-	var error = multiplayer_peer_websocker.create_server(port)
-	if error == OK:
-		multiplayer.multiplayer_peer = multiplayer_peer_websocker
-		if multiplayer.is_server():
-			is_networking = true
-			print("Adding UPNP...")
-			UPNP_setup()
-			print("Adding Broadcast...")
-			get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
-			get_parent().get_node("Game/Main Menu").hide()
-			print("Loading map...")
-			LoadScene.load_scene(null, Globals.map)
+	if OS.get_name() == "Web":
+		var error = multiplayer_peer_websocker.create_server(port)
+		if error == OK:
+			multiplayer.multiplayer_peer = multiplayer_peer_websocker
+			if multiplayer.is_server():
+				is_networking = true
+				print("Adding UPNP...")
+				UPNP_setup()
+				print("Adding Broadcast...")
+				get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
+				get_parent().get_node("Game/Main Menu").hide()
+				print("Loading map...")
+				LoadScene.load_scene(null, Globals.map)
+		else:
+			push_error("Error creating server: " + str(error))
 	else:
-		push_error("Error creating server: " + str(error))
-
+		var error = multiplayer_peer_Enet.create_server(port)
+		if error == OK:
+			multiplayer.multiplayer_peer = multiplayer_peer_Enet
+			if multiplayer.is_server():
+				is_networking = true
+				print("Adding UPNP...")
+				UPNP_setup()
+				print("Adding Broadcast...")
+				get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
+				get_parent().get_node("Game/Main Menu").hide()
+				print("Loading map...")
+				LoadScene.load_scene(null, Globals.map)
+		else:
+			push_error("Error creating server: " + str(error))
 
 func _ready():
-
 	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
 		var args = OS.get_cmdline_user_args()
 		for arg in args:
