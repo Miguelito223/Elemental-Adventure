@@ -52,6 +52,14 @@ func add_player(peer_id):
 	
 	if multiplayer.is_server():
 		Network._add_player_list.rpc(peer_id)
+
+
+	if OS.get_name() == "Web":
+		Network.multiplayer_peer_websocker_peer = Network.multiplayer_peer_websocker.get_peer(peer_id)
+	else:
+		Network.multiplayer_peer_Enet_peer = Network.multiplayer_peer_Enet.get_peer(peer_id)
+		if Network.multiplayer_peer_Enet_peer != null:
+			Network.multiplayer_peer_Enet_peer.set_timeout(60000, 300000, 600000)
 	
 	var player = player_scene.instantiate()
 	player.name = str(peer_id)

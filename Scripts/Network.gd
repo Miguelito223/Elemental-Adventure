@@ -10,13 +10,18 @@ var connection_count = 0
 var connected_ids: Array = []
 var is_networking = false
 var multiplayer_peer_Enet = ENetMultiplayerPeer.new()
+var multiplayer_peer_Enet_host
+var multiplayer_peer_Enet_peers
+var multiplayer_peer_Enet_peer
 var multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
+var multiplayer_peer_websocker_peer
 
 func joinbyip(ip, port):
 	if OS.get_name() == "Web":
 		var error = multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
 		if error == OK:
 			multiplayer.multiplayer_peer = multiplayer_peer_websocker
+			multiplayer_peer_websocker.handshake_timeout = 60.0
 			if not multiplayer.is_server():
 				is_networking = true
 				get_parent().get_node("Game/Main Menu").hide()
@@ -29,6 +34,8 @@ func joinbyip(ip, port):
 		var error = multiplayer_peer_Enet.create_client(ip, port)
 		if error == OK:
 			multiplayer.multiplayer_peer = multiplayer_peer_Enet
+			multiplayer_peer_Enet_host = multiplayer_peer_Enet.host
+			multiplayer_peer_Enet_peers = multiplayer_peer_Enet.host.get_peers()
 			if not multiplayer.is_server():
 				is_networking = true
 				get_parent().get_node("Game/Main Menu").hide()
@@ -44,6 +51,7 @@ func hostbyport(port):
 		var error = multiplayer_peer_websocker.create_server(port)
 		if error == OK:
 			multiplayer.multiplayer_peer = multiplayer_peer_websocker
+			multiplayer_peer_websocker.handshake_timeout = 60.0
 			if multiplayer.is_server():
 				is_networking = true
 				print("Adding UPNP...")
@@ -59,6 +67,8 @@ func hostbyport(port):
 		var error = multiplayer_peer_Enet.create_server(port)
 		if error == OK:
 			multiplayer.multiplayer_peer = multiplayer_peer_Enet
+			multiplayer_peer_Enet_host = multiplayer_peer_Enet.host
+			multiplayer_peer_Enet_peers = multiplayer_peer_Enet.host.get_peers()
 			if multiplayer.is_server():
 				is_networking = true
 				print("Adding UPNP...")
