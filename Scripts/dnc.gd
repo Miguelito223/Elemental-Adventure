@@ -6,7 +6,7 @@ var ingame_to_real_minute_duration = (2 * PI) / minutes_per_day
 
 @export var gradient:GradientTexture1D
 @export var ingame_speed = 1
-@export var initial_hour =  12:
+@export var initial_hour = 12:
 	set(h):
 		Globals.initial_time = h
 		Globals.time = ingame_to_real_minute_duration * Globals.initial_time * minutes_per_hour

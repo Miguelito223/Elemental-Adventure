@@ -16,9 +16,9 @@ var multiplayer_peer_Enet_peer
 var multiplayer_peer_websocker = WebSocketMultiplayerPeer.new()
 var multiplayer_peer_websocker_peer
 
-func joinbyip(ip, port):
+func joinbyip(ip_value, port_value):
 	if OS.get_name() == "Web":
-		var error = multiplayer_peer_websocker.create_client("ws://" + ip + ":" + str(port))
+		var error = multiplayer_peer_websocker.create_client("ws://" + ip_value + ":" + str(port_value))
 		if error == OK:
 			multiplayer.multiplayer_peer = multiplayer_peer_websocker
 			multiplayer_peer_websocker.handshake_timeout = 60.0
@@ -46,9 +46,9 @@ func joinbyip(ip, port):
 			push_error("Error creating client: ", str(error))	
 
 
-func hostbyport(port):
+func hostbyport(port_value):
 	if OS.get_name() == "Web":
-		var error = multiplayer_peer_websocker.create_server(port)
+		var error = multiplayer_peer_websocker.create_server(port_value)
 		if error == OK:
 			multiplayer.multiplayer_peer = multiplayer_peer_websocker
 			multiplayer_peer_websocker.handshake_timeout = 60.0
@@ -64,7 +64,7 @@ func hostbyport(port):
 		else:
 			push_error("Error creating server: " + str(error))
 	else:
-		var error = multiplayer_peer_Enet.create_server(port)
+		var error = multiplayer_peer_Enet.create_server(port_value)
 		if error == OK:
 			multiplayer.multiplayer_peer = multiplayer_peer_Enet
 			multiplayer_peer_Enet_host = multiplayer_peer_Enet.host

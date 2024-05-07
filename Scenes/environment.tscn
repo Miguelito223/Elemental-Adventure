@@ -27,14 +27,6 @@ background_mode = 3
 background_color = Color(1, 1, 1, 1)
 background_canvas_max_layer = -1
 sky = SubResource("Sky_vkg8r")
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
-sdfgi_enabled = true
-glow_enabled = true
-fog_enabled = true
-volumetric_fog_enabled = true
-adjustment_enabled = true
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q64j4"]
 cull_mode = 1
@@ -92,6 +84,21 @@ properties/15/replication_mode = 1
 properties/16/path = NodePath("ParallaxBackground/CanvasModulate2:initial_hour")
 properties/16/spawn = true
 properties/16/replication_mode = 1
+properties/17/path = NodePath("DirectionalLight2D:position")
+properties/17/spawn = true
+properties/17/replication_mode = 1
+properties/18/path = NodePath("ParallaxBackground3/CanvasModulate2:color")
+properties/18/spawn = true
+properties/18/replication_mode = 1
+properties/19/path = NodePath("ParallaxBackground/CanvasModulate2:color")
+properties/19/spawn = true
+properties/19/replication_mode = 1
+properties/20/path = NodePath("CanvasModulate:color")
+properties/20/spawn = true
+properties/20/replication_mode = 1
+properties/21/path = NodePath("ParallaxBackground2/CanvasModulate2:color")
+properties/21/spawn = true
+properties/21/replication_mode = 1
 
 [node name="environment" type="Node2D"]
 script = ExtResource("1_ko5dq")
