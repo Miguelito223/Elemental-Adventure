@@ -6,8 +6,8 @@ var broadcasterport = port + 2
 var ip = "127.0.0.1"
 var broadcasteripadress = "255.255.255.255"
 var username = "MichaxD"
-var connection_count = 0
 var connected_ids: Array = []
+var connection_count = connected_ids.size()
 var is_networking = false
 var multiplayer_peer_Enet = ENetMultiplayerPeer.new()
 var multiplayer_peer_Enet_host
@@ -59,8 +59,8 @@ func hostbyport(port_value):
 				print("Adding Broadcast...")
 				get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
 				get_parent().get_node("Game/Main Menu").hide()
-				print("Loading map...")
-				LoadScene.load_scene(null, Globals.map)
+				print("Loading level...")
+				LoadScene.load_scene(null, Globals.level)
 		else:
 			push_error("Error creating server: " + str(error))
 	else:
@@ -76,8 +76,8 @@ func hostbyport(port_value):
 				print("Adding Broadcast...")
 				get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
 				get_parent().get_node("Game/Main Menu").hide()
-				print("Loading map...")
-				LoadScene.load_scene(null, Globals.map)
+				print("Loading level...")
+				LoadScene.load_scene(null, Globals.level)
 		else:
 			push_error("Error creating server: " + str(error))
 
@@ -210,12 +210,11 @@ func _sync_minute(minute_value):
 @rpc("any_peer", "call_local")
 func _add_player_list(player_id):
 	connected_ids.append(player_id)
-	connection_count = connected_ids.size() - 1
-
+	connection_count = connected_ids.size()
 @rpc("any_peer", "call_local")
 func _remove_player_list(player_id):
 	connected_ids.erase(player_id)
-	connection_count = connected_ids.size() - 1
+	connection_count = connected_ids.size()
 
 
 func _process(_delta):

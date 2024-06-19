@@ -423,35 +423,28 @@ func changelevel():
 		Data.save_file()
 	
 func setposspawn():
-	if Network.is_networking:
-		if last_position:
-			position = last_position
-		else:
-			last_position = get_parent().get_node("Marker2D").position
-			position = last_position
+	if last_position:
+		position = last_position
 	else:
-		if last_position:
+		if device_num == 0:
+			last_position = Vector2(-460,-45)
 			position = last_position
+			last_position = null
+		elif device_num == 1:
+			last_position = Vector2(-399,-45)
+			position = last_position
+			last_position = null
+		elif device_num == 2:
+			last_position = Vector2(-340,-45)
+			position = last_position
+			last_position = null
+		elif device_num == 3:
+			last_position = Vector2(-280,-45)
+			position = last_position
+			last_position = null
 		else:
-			if device_num == 0:
-				last_position = Vector2(-460,-45)
-				position = last_position
-				last_position = null
-			elif device_num == 1:
-				last_position = Vector2(-399,-45)
-				position = last_position
-				last_position = null
-			elif device_num == 2:
-				last_position = Vector2(-340,-45)
-				position = last_position
-				last_position = null
-			elif device_num == 3:
-				last_position = Vector2(-280,-45)
-				position = last_position
-				last_position = null
-			else:
-				print("no more of four players")
-				return	
+			print("no more of four players")
+			return	
 
 @rpc("any_peer", "call_local")
 func damage(ammount):

@@ -5,7 +5,6 @@ var DEBUGGING = true
 signal JoinGame(ip,port)
 
 var level
-var map
 
 func _ready():
 	if DEBUGGING:
@@ -23,10 +22,7 @@ func _ready():
 		Globals._inputs_player(i)
 
 	await Signals.level_loaded	
-	if Network.is_networking:
-		map = get_node(Globals.map)
-	else:
-		level = get_node(Globals.level)
+	level = get_node(Globals.level)
 
 
 	self.JoinGame.connect(Network.joinbyip)

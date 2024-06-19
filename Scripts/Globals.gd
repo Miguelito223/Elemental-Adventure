@@ -605,6 +605,3 @@ func _inputs_player(player_index):
 var level = "level_1"
 var level_int = 1
 
-var map = "map_1"
-var map_int = 1
-

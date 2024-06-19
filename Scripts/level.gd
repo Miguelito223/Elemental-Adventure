@@ -13,6 +13,8 @@ var margin = Vector2(100, 25)
 
 @onready var camera = $Camera
 @onready var screen_size = get_viewport_rect().size
+@onready var lineedit = $CanvasLayer/LineEdit
+@onready var textedit = $CanvasLayer/TextEdit
 
 var rng = RandomNumberGenerator.new()
 
@@ -24,19 +26,28 @@ func _ready():
 			"n":name,
 			"p":get_parent().name,
 		}))
-	
-	DataState.load_file_state()
 
-	for player in range(Globals.num_players):
-		if Globals.num_players > 4:
-			print("no more of four players")
-			return 
-			
-		add_player(player)
+	if Network.is_networking:
+		multiplayer.server_disconnected.connect(server_disconected)
+		multiplayer.connected_to_server.connect(server_conected)
+		multiplayer.connection_failed.connect(conected_fail)
+		multiplayer.peer_connected.connect(add_network_player)
+		multiplayer.peer_disconnected.connect(remove_network_player)
 
-	if Globals.num_players == 0:
-		for player in range(1):
+		if multiplayer.is_server():
+			if not OS.has_feature("dedicated_server"):
+				add_network_player(1)
+	else:
+		for player in range(Globals.num_players):
+			if Globals.num_players > 4:
+				print("no more of four players")
+				return 
+				
 			add_player(player)
+
+		if Globals.num_players == 0:
+			for player in range(1):
+				add_player(player)
 			
 
 	Signals.level_loaded.emit()
@@ -92,6 +103,23 @@ func remove_player(player_index):
 	if is_instance_valid(player):
 		player.queue_free()
 		
+func server_disconected():
+	print("Server Finish")
+	Network.is_networking = false
+	Network.connected_ids.clear()
+	UnloadScene.unload_scene(self)
+	get_parent().get_node("Main Menu").show()
+
+func conected_fail():
+	print("Fail to load")
+	Network.is_networking = false
+	Network.connected_ids.clear()
+	UnloadScene.unload_scene(self)
+	get_parent().get_node("Main Menu").show()
+
+func server_conected():
+	print("Server Conected")
+	Network.is_networking = true
 
 
 func add_player(player_index):
@@ -133,26 +161,113 @@ func add_player(player_index):
 	add_child(player)
 
 
+func add_network_player(peer_id):
+	print("adding player id: " + str(peer_id))
+	
+	if multiplayer.is_server():
+		Network._add_player_list.rpc(peer_id)
+
+
+	if OS.get_name() == "Web":
+		Network.multiplayer_peer_websocker_peer = Network.multiplayer_peer_websocker.get_peer(peer_id)
+	else:
+		Network.multiplayer_peer_Enet_peer = Network.multiplayer_peer_Enet.get_peer(peer_id)
+		if Network.multiplayer_peer_Enet_peer != null:
+			Network.multiplayer_peer_Enet_peer.set_timeout(60000, 300000, 600000)
+	
+	var player = player_scene.instantiate()
+	player.name = str(peer_id)
+	player.device_num = Network.connection_count - 1
+
+	player.player_id = player.name.to_int()
+
+	player.ball_color = Network.ball_color_dict[player.device_num]
+	player.player_color = Network.player_color_dict[player.device_num]
+
+	player.player_name = Network.username
+	player.energys = Network.energys[player.device_num]
+	player.score = Network.score[player.device_num]
+	player.Hearths = Network.hearths[player.device_num]
+	player.deaths = Network.deaths[player.device_num]
+
+	player.setposspawn()
+
+	Globals._inputs_player(player.device_num)
+
+	players.append(player)
+
+	add_child(player, true)
+
+func _on_player_spawner_spawned(node):
+	print("spawning player id: " + node.name)
+	
+	node.device_num = Network.connection_count
+	node.player_id = node.name.to_int()
+
+	node.ball_color = Network.ball_color_dict[node.device_num]
+	node.player_color = Network.player_color_dict[node.device_num]
+
+	node.player_name = Network.username
+	node.energys = Network.energys[node.device_num]
+	node.score = Network.score[node.device_num]
+	node.Hearths = Network.hearths[node.device_num]
+	node.deaths = Network.deaths[node.device_num]
+
+func _on_player_spawner_despawned(node:Node):
+	print("desspawning player id: " + node.name)
+
+func remove_network_player(peer_id):
+	var player = get_node(str(peer_id))
+	if is_instance_valid(player):
+		print("removing player id: " + str(peer_id))
+		if multiplayer.is_server():
+			Network._remove_player_list.rpc(peer_id)
+
+		player.queue_free()
+
 func _physics_process(_delta):
 	if Globals.autosave:
 		DataState.autosave_logic()
 
 func _on_victory_zone_body_entered(body):
 	if body.is_in_group("player"):
-		if body.device_num == 0:
+		if Network.is_networking:
 			if Globals.level_int == 31:
 				body.changelevel()
 				body.last_position = null
 				body.setposspawn()
 				DataState.remove_state_file()
-				LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
+				LoadScene.load_scene(null, "res://Scenes/Super victory screen.tscn")
 			else:
 				body.changelevel()
 				body.last_position = null
 				body.setposspawn()
 				DataState.remove_state_file()
-				LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
+				LoadScene.load_scene(null, "res://Scenes/victory_menu.tscn")		
 		else:
-			remove_player(body.device_num)
+			if body.device_num == 0:
+				if Globals.level_int == 31:
+					body.changelevel()
+					body.last_position = null
+					body.setposspawn()
+					DataState.remove_state_file()
+					LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
+				else:
+					body.changelevel()
+					body.last_position = null
+					body.setposspawn()
+					DataState.remove_state_file()
+					LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
+			else:
+				remove_player(body.device_num)
 
 
+@rpc("any_peer", "call_local")
+func msg_rcp(user, data):
+	textedit.text += str(user,  ":", data, "\n")
+	lineedit.text = ""
+	textedit.scroll_vertical = textedit.get_line_height()
+
+func _on_line_edit_gui_input(event:InputEvent):
+	if event.is_action_pressed("ui_accept"):
+		msg_rcp.rpc(Network.username, lineedit.text)

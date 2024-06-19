@@ -6,8 +6,8 @@
 [node name="Game" type="Node"]
 script = ExtResource("1_b64g1")
 
-[node name="MapSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scenes/map_1.tscn")
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/level_1.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 1
 
@@ -29,7 +29,7 @@ offset_bottom = 94.0
 theme = ExtResource("2_qo1i1")
 text = "Reconnect"
 
-[connection signal="despawned" from="MapSpawner" to="." method="_on_map_spawner_despawned"]
-[connection signal="spawned" from="MapSpawner" to="." method="_on_multiplayer_spawner_spawned"]
+[connection signal="despawned" from="LevelSpawner" to="." method="_on_map_spawner_despawned"]
+[connection signal="spawned" from="LevelSpawner" to="." method="_on_multiplayer_spawner_spawned"]
 [connection signal="pressed" from="CanvasLayer/Back to Main menu" to="." method="_on_back_to_main_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/Reconnect" to="." method="_on_reconnect_pressed"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_wkmp5"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="2_c6qx4"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="5_d66de"]
-[ext_resource type="AudioStream" uid="uid://deh208fn5805g" path="res://Sounds/Music/Level music.mp3" id="6_pvki8"]
+[ext_resource type="AudioStream" uid="uid://cuqj2r8nmgubb" path="res://Sounds/Music/Level music.mp3" id="6_pvki8"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="7_rp6qq"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="8_150vr"]
 [ext_resource type="PackedScene" uid="uid://betdnk2m31png" path="res://Scenes/hearth.tscn" id="8_rintd"]
@@ -167,4 +167,14 @@ position = Vector2(-215, -33)
 [node name="environment" parent="Camera" instance=ExtResource("2_c6qx4")]
 position = Vector2(215, 33)
 
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn")
+spawn_path = NodePath("..")
+
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
+[connection signal="despawned" from="PlayerSpawner" to="." method="_on_player_spawner_despawned"]
+[connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]

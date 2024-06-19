@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="4_j51ai"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="5_jqc4h"]
 [ext_resource type="PackedScene" uid="uid://da61af5kfk5ik" path="res://Scenes/enemy.tscn" id="6_2pixk"]
-[ext_resource type="AudioStream" uid="uid://deh208fn5805g" path="res://sounds/Music/Level music.mp3" id="7_cjefn"]
+[ext_resource type="AudioStream" uid="uid://cuqj2r8nmgubb" path="res://sounds/Music/Level music.mp3" id="7_cjefn"]
 [ext_resource type="PackedScene" uid="uid://r6nxo2uj0e0o" path="res://Scenes/plataform.tscn" id="8_5y225"]
 [ext_resource type="PackedScene" uid="uid://c4r7b2dhlrtfi" path="res://Scenes/checkpoint.tscn" id="8_el83p"]
 [ext_resource type="PackedScene" uid="uid://dydhta53ptgt1" path="res://Scenes/enemy_2.tscn" id="9_6pkbf"]
@@ -213,4 +213,14 @@ position = Vector2(51, 159)
 [node name="enemy_3" parent="." instance=ExtResource("9_6pkbf")]
 position = Vector2(677, 164)
 
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn")
+spawn_path = NodePath("..")
+
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
+[connection signal="despawned" from="PlayerSpawner" to="." method="_on_player_spawner_despawned"]
+[connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]
