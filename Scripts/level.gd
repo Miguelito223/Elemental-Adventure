@@ -27,7 +27,11 @@ func _ready():
 			"p":get_parent().name,
 		}))
 
+
 	if Network.is_networking:
+		lineedit.visible = true
+		textedit.visible = true
+
 		multiplayer.server_disconnected.connect(server_disconected)
 		multiplayer.connected_to_server.connect(server_conected)
 		multiplayer.connection_failed.connect(conected_fail)
@@ -38,6 +42,10 @@ func _ready():
 			if not OS.has_feature("dedicated_server"):
 				add_network_player(1)
 	else:
+
+		lineedit.visible = false
+		textedit.visible = false
+
 		for player in range(Globals.num_players):
 			if Globals.num_players > 4:
 				print("no more of four players")
