@@ -1,10 +1,12 @@
 extends Control
 
+var before_level 
 var player
 
 func _ready():
 	if Network.is_networking:
-		player = get_parent().get_node("level_" + str(Globals.level_int)).get_node(str(multiplayer.get_unique_id()))
+		before_level = get_parent().get_node("level_" + str(Globals.level_int))
+		player = before_level.get_node(str(multiplayer.get_unique_id()))
 	else:
 		get_tree().paused = true
 

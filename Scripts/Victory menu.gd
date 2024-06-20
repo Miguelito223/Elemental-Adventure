@@ -1,8 +1,13 @@
 extends Control
 
+var before_level
+
 func _ready():
-	if not Network.is_networking:
+	if Network.is_networking:
+		before_level = get_parent().get_node("level_" + str(Globals.level_int - 1))
+	else:
 		get_tree().paused = true
+	
 
 func _process(_delta):
 	$CanvasLayer/Label.text = "You Completed Level: \n level " + str(Globals.level_int - 1) + "!!!"
@@ -12,7 +17,7 @@ func _process(_delta):
 
 func _on_next_pressed():
 	if Network.is_networking:
-		UnloadScene.unload_scene(get_parent().get_node("level_" + str(Globals.level_int - 1)))
+		UnloadScene.unload_scene(before_level)
 		LoadScene.load_scene(self, Globals.level)
 	else:
 		get_tree().paused = false

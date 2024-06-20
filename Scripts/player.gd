@@ -402,25 +402,22 @@ func setlifes(value):
 func getenergy():
 	energys += 1
 	score += 3
-	if not Network.is_networking:
-		DataState.save_file_state()
-		Data.save_file()
+	DataState.save_file_state()
+	Data.save_file()
 	
 
 func getlife():
 	Hearths += 1
-	if not Network.is_networking:
-		DataState.save_file_state()
-		Data.save_file()
+	DataState.save_file_state()
+	Data.save_file()
 	
 
 func changelevel():
 	Globals.level_int += 1
 	Globals.level = "level_" + str(Globals.level_int)
 	save_state().parent = "/root/Game/" + Globals.level
-	if not Network.is_networking:
-		DataState.save_file_state()
-		Data.save_file()
+	DataState.save_file_state()
+	Data.save_file()
 	
 func setposspawn():
 	if last_position:
@@ -457,9 +454,8 @@ func damage(ammount):
 			score -= 3
 			if score < 0:
 				score = 0
-			if not Network.is_networking:
-				DataState.save_file_state()
-				Data.save_file()
+			DataState.save_file_state()
+			Data.save_file()
 	else:
 		if InvunerabilityTime.is_stopped() or is_in_water or is_in_lava:
 			InvunerabilityTime.start()
@@ -469,9 +465,8 @@ func damage(ammount):
 			score -= 3
 			if score < 0:
 				score = 0
-			if not Network.is_networking:
-				DataState.save_file_state()
-				Data.save_file()
+			DataState.save_file_state()
+			Data.save_file()
 
 		
 	
