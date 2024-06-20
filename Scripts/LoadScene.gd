@@ -91,7 +91,7 @@ func _process(_delta):
 				pass
 			else:
 				var new_scene = ResourceLoader.load_threaded_get(scene_path).instantiate()
-				get_tree().get_root().get_node("Game").add_child(new_scene)
+				get_tree().get_root().get_node("Game").add_child(new_scene, true)
 
 
 			emit_signal("progress_changed", 1.0)

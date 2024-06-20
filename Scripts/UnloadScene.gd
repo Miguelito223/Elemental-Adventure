@@ -12,6 +12,7 @@ var progress: Array = []
 
 var use_sub_theads: bool = false
 
+@rpc("call_local", "any_peer")
 func unload_scene(current_scene):
 	if current_scene != null:
 		scene_path = current_scene.scene_file_path

@@ -10,6 +10,13 @@ func _process(_delta):
 	
 
 func _on_back_pressed():
-	DataState.remove_state_file()
-	Data.remove_file()
-	get_tree().quit()
+	if Network.is_networking:
+		multiplayer.multiplayer_peer.close() 
+		DataState.remove_state_file()
+		Data.remove_file()
+		get_tree().quit()
+	else:
+		LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")
+		DataState.remove_state_file()
+		Data.remove_file()
+		get_tree().quit()

@@ -17,8 +17,9 @@ func _process(_delta):
 
 func _on_next_pressed():
 	if Network.is_networking:
-		UnloadScene.unload_scene(before_level)
-		LoadScene.load_scene(self, Globals.level)
+		if multiplayer.is_server():
+			UnloadScene.unload_scene.rpc(before_level)
+			LoadScene.load_scene.rpc(self, Globals.level)
 	else:
 		get_tree().paused = false
 		LoadScene.load_scene(self, Globals.level)
@@ -26,6 +27,6 @@ func _on_next_pressed():
 
 func _on_back_pressed():
 	if Network.is_networking:
-		multiplayer.server_disconnected.emit()	
+		multiplayer.multiplayer_peer.close()
 	else:
 		LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")

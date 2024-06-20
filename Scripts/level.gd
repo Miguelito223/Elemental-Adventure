@@ -169,12 +169,13 @@ func add_player(player_index):
 	add_child(player)
 
 @rpc("any_peer", "call_local")
-func add_players_list(player_node):
-	if player_node.is_class("EncodedObjectAsID"):
-		var player = instance_from_id(player_node.object_id)
-		players.append(player)
-	else:
-		players.append(player_node)
+func add_players_list(peer_id):
+	players.append(get_node(str(peer_id)))
+
+@rpc("any_peer", "call_local")
+func remove_player_list(peer_id):
+	players.erase(get_node(str(peer_id)))
+
 
 func add_network_player(peer_id):
 	print("adding player id: " + str(peer_id))
@@ -208,11 +209,11 @@ func add_network_player(peer_id):
 	player.setposspawn()
 
 	Globals._inputs_player(player.device_num)
-	
-	if multiplayer.is_server():
-		add_players_list.rpc(player)
 
 	add_child(player, true)
+
+	if multiplayer.is_server():
+		add_players_list.rpc(peer_id)
 
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
@@ -238,6 +239,7 @@ func remove_network_player(peer_id):
 		print("removing player id: " + str(peer_id))
 		if multiplayer.is_server():
 			Network._remove_player_list.rpc(peer_id)
+			remove_player_list.rpc(peer_id)
 
 		player.queue_free()
 

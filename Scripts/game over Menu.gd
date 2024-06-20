@@ -23,6 +23,6 @@ func _on_return_pressed():
 func _on_back_pressed():
 	if Network.is_networking:
 		if player.is_multiplayer_authority():
-			multiplayer.server_disconnected.emit()	
+			multiplayer.multiplayer_peer.close() 
 	else:
 		LoadScene.load_scene(self, "res://Scenes/main_menu.tscn")

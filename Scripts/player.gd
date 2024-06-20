@@ -67,11 +67,8 @@ func _ready():
 			"p":get_parent().name,
 			}))
 
-	if Network.is_networking:
-		syncronizer.set_multiplayer_authority(str(name).to_int())
 	
 	Globals.player[device_num] = self
-	
 	Pause_Menu.hide()
 	get_tree().paused = false
 	setlifes(Hearths)
@@ -481,7 +478,7 @@ func in_water():
 			is_in_water = true
 			print(is_in_water)
 
-			if not player_name == "Water":
+			if not device_num == 1:
 				if Network.is_networking:
 					damage.rpc(Max_Hearths)
 				else:
@@ -499,7 +496,7 @@ func in_lava():
 		is_in_lava = true
 		print(is_in_lava)
 
-		if not player_name == "Fire":
+		if not device_num == 0:
 			if Network.is_networking:
 				damage.rpc(Max_Hearths)
 			else:

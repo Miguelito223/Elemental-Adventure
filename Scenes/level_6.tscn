@@ -219,4 +219,6 @@ editable = false
 metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
+[connection signal="despawned" from="PlayerSpawner" to="." method="_on_player_spawner_despawned"]
+[connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]
 [connection signal="gui_input" from="CanvasLayer/LineEdit" to="." method="_on_line_edit_gui_input"]
