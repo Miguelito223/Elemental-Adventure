@@ -232,18 +232,19 @@ func _physics_process(_delta):
 func _on_victory_zone_body_entered(body):
 	if body.is_in_group("player"):
 		if Network.is_networking:
-			if Globals.level_int == 31:
-				body.changelevel()
-				body.last_position = null
-				body.setposspawn()
-				DataState.remove_state_file()
-				LoadScene.load_scene(null, "res://Scenes/Super victory screen.tscn")
-			else:
-				body.changelevel()
-				body.last_position = null
-				body.setposspawn()
-				DataState.remove_state_file()
-				LoadScene.load_scene(null, "res://Scenes/victory_menu.tscn")		
+			if body.is_multiplayer_authority():
+				if Globals.level_int == 31:
+					body.changelevel()
+					body.last_position = null
+					body.setposspawn()
+					DataState.remove_state_file()
+					LoadScene.load_scene(null, "res://Scenes/Super victory screen.tscn")
+				else:
+					body.changelevel()
+					body.last_position = null
+					body.setposspawn()
+					DataState.remove_state_file()
+					LoadScene.load_scene(null, "res://Scenes/victory_menu.tscn")		
 		else:
 			if body.device_num == 0:
 				if Globals.level_int == 31:
