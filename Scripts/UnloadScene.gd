@@ -46,4 +46,3 @@ func _process(_delta):
 			emit_signal("progress_changed", 1.0)
 			emit_signal("unload_done")
 			set_process(false)
-

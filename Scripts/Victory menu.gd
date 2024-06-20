@@ -1,12 +1,15 @@
 extends Control
 
-var player
+var before_level
+var player 
 
 func _ready():
-	if not Network.is_networking:
-		get_tree().paused = true
-	else:
+	if Network.is_networking:
+		before_level = get_parent().get_node("level_" + str(Globals.level_int - 1))
 		player = get_parent().get_node("level_" + str(Globals.level_int - 1)).get_node(str(multiplayer.get_unique_id()))
+	else:
+		get_tree().paused = true
+	
 
 func _process(_delta):
 	$CanvasLayer/Label.text = "You Completed Level: \n level " + str(Globals.level_int - 1) + "!!!"
@@ -17,7 +20,8 @@ func _process(_delta):
 func _on_next_pressed():
 	if Network.is_networking:
 		if player.is_multiplayer_authority():
-			UnloadScene.unload_scene(get_parent().get_node("level_" + str(Globals.level_int - 1)))
+			before_level.remove_network_player(player.name.to_int())
+			UnloadScene.unload_scene(before_level)
 			LoadScene.load_scene(self, Globals.level)
 	else:
 		get_tree().paused = false

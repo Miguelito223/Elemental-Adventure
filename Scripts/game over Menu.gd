@@ -1,13 +1,16 @@
 extends Control
 
-var player 
+var before_level 
+var player
 
 func _ready():
-	if not Network.is_networking:
-		get_tree().paused = true
+	if Network.is_networking:
+		before_level = get_parent().get_node("level_" + str(Globals.level_int - 1))
+		player = before_level.get_node(str(multiplayer.get_unique_id()))
 	else:
-		player = get_parent().get_node(Globals.level).get_node(str(multiplayer.get_unique_id()))
+		get_tree().paused = true
 
+		
 func _on_return_pressed():
 	if Network.is_networking:
 		if player.is_multiplayer_authority():
