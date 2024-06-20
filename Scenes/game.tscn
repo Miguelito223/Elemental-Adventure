@@ -9,7 +9,6 @@ script = ExtResource("1_b64g1")
 [node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/level_1.tscn", "res://Scenes/level_2.tscn", "res://Scenes/level_3.tscn", "res://Scenes/level_4.tscn", "res://Scenes/level_5.tscn", "res://Scenes/level_6.tscn", "res://Scenes/level_7.tscn", "res://Scenes/level_8.tscn", "res://Scenes/level_9.tscn", "res://Scenes/level_10.tscn", "res://Scenes/level_11.tscn", "res://Scenes/level_12.tscn", "res://Scenes/level_13.tscn", "res://Scenes/level_14.tscn", "res://Scenes/level_15.tscn", "res://Scenes/level_16.tscn", "res://Scenes/level_17.tscn", "res://Scenes/level_18.tscn", "res://Scenes/level_19.tscn", "res://Scenes/level_20.tscn", "res://Scenes/level_21.tscn", "res://Scenes/level_22.tscn", "res://Scenes/level_23.tscn", "res://Scenes/level_24.tscn", "res://Scenes/level_25.tscn", "res://Scenes/level_26.tscn", "res://Scenes/level_27.tscn", "res://Scenes/level_28.tscn", "res://Scenes/level_29.tscn", "res://Scenes/level_30.tscn", "res://Scenes/level_31.tscn")
 spawn_path = NodePath("..")
-spawn_limit = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
