@@ -50,7 +50,6 @@ func _ready():
 	load_scene(null, "res://Scenes/main_menu.tscn")
 
 
-@rpc("call_local", "any_peer")
 func load_scene(current_scene, next_scene):
 
 	if next_scene != null:
@@ -65,9 +64,6 @@ func load_scene(current_scene, next_scene):
 	await Signal(loading_screen_intance, "safe_to_load")
 
 	if current_scene != null:
-		if current_scene.is_class("EncodedObjectAsID"):
-			current_scene = instance_from_id(current_scene.get_object_id())
-
 		current_scene.queue_free()
 
 	if GAME_SCENE.has(scene_path):
