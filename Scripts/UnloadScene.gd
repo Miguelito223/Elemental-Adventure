@@ -15,6 +15,9 @@ var use_sub_theads: bool = false
 @rpc("call_local", "any_peer")
 func unload_scene(current_scene):
 	if current_scene != null:
+		if current_scene.is_class("EncodedObjectAsID"):
+			current_scene = instance_from_id(current_scene.get_object_id())
+			
 		scene_path = current_scene.scene_file_path
 		scene = current_scene
 
