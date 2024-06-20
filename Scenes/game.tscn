@@ -7,7 +7,7 @@
 script = ExtResource("1_b64g1")
 
 [node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scenes/level_1.tscn")
+_spawnable_scenes = PackedStringArray("res://Scenes/level_1.tscn", "res://Scenes/level_2.tscn", "res://Scenes/level_3.tscn", "res://Scenes/level_4.tscn", "res://Scenes/level_5.tscn", "res://Scenes/level_6.tscn", "res://Scenes/level_7.tscn", "res://Scenes/level_8.tscn", "res://Scenes/level_9.tscn", "res://Scenes/level_10.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 1
 

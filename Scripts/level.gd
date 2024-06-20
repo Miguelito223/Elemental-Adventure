@@ -237,12 +237,14 @@ func _on_victory_zone_body_entered(body):
 					body.changelevel()
 					body.last_position = null
 					body.setposspawn()
+					remove_network_player(body.name.to_int())
 					DataState.remove_state_file()
 					LoadScene.load_scene(null, "res://Scenes/Super victory screen.tscn")
 				else:
 					body.changelevel()
 					body.last_position = null
 					body.setposspawn()
+					remove_network_player(body.name.to_int())
 					DataState.remove_state_file()
 					LoadScene.load_scene(null, "res://Scenes/victory_menu.tscn")		
 		else:
