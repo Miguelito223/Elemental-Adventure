@@ -162,7 +162,11 @@ func add_player(player_index):
 
 @rpc("any_peer", "call_local")
 func add_players_list(player_node):
-	players.append(player_node)
+	if player_node.is_class("EncodedObjectAsID"):
+		var player = instance_from_id(player_node.object_id)
+		players.append(player)
+	else:
+		players.append(player_node)
 
 func add_network_player(peer_id):
 	print("adding player id: " + str(peer_id))
