@@ -160,13 +160,16 @@ func add_player(player_index):
 
 	add_child(player)
 
+@rpc("any_peer", "call_local")
+func add_players_list(player_node):
+	players.append(player_node)
 
 func add_network_player(peer_id):
 	print("adding player id: " + str(peer_id))
 	
 	if multiplayer.is_server():
 		Network._add_player_list.rpc(peer_id)
-
+	
 
 	if OS.get_name() == "Web":
 		Network.multiplayer_peer_websocker_peer = Network.multiplayer_peer_websocker.get_peer(peer_id)
@@ -193,8 +196,9 @@ func add_network_player(peer_id):
 	player.setposspawn()
 
 	Globals._inputs_player(player.device_num)
-
-	players.append(player)
+	
+	if multiplayer.is_server():
+		add_players_list.rpc(player)
 
 	add_child(player, true)
 
@@ -239,14 +243,14 @@ func _on_victory_zone_body_entered(body):
 					body.setposspawn()
 					remove_network_player(body.name.to_int())
 					DataState.remove_state_file()
-					LoadScene.load_scene(null, "res://Scenes/Super victory screen.tscn")
+					LoadScene.load_scene.rpc(null, "res://Scenes/Super victory screen.tscn")
 				else:
 					body.changelevel()
 					body.last_position = null
 					body.setposspawn()
 					remove_network_player(body.name.to_int())
 					DataState.remove_state_file()
-					LoadScene.load_scene(null, "res://Scenes/victory_menu.tscn")		
+					LoadScene.load_scene.rpc(null, "res://Scenes/victory_menu.tscn")		
 		else:
 			if body.device_num == 0:
 				if Globals.level_int == 31:

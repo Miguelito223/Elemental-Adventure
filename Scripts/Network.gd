@@ -208,6 +208,15 @@ func _sync_minute(minute_value):
 	Globals.minute = minute_value
 
 @rpc("any_peer", "call_local")
+func _sync_level(level_value):
+	Globals.level = level_value
+
+@rpc("any_peer", "call_local")
+func _sync_level_int(level_int_value):
+	Globals.level_int = level_int_value
+
+
+@rpc("any_peer", "call_local")
 func _add_player_list(player_id):
 	connected_ids.append(player_id)
 	connection_count = connected_ids.size()
@@ -224,3 +233,5 @@ func _process(_delta):
 			_sync_day.rpc(Globals.day)
 			_sync_hour.rpc(Globals.hour)
 			_sync_minute.rpc(Globals.minute)
+			_sync_level.rpc(Globals.level)
+			_sync_level_int.rpc(Globals.level_int)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_6vys6"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_rj163"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_ue22l"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://Sounds/Music/Level music.ogg" id="4_rdwvj"]
+[ext_resource type="AudioStream" uid="uid://dk7hhpr4vhlq8" path="res://Sounds/Music/Level music.ogg" id="4_rdwvj"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="6_m3nla"]
 [ext_resource type="PackedScene" uid="uid://dydhta53ptgt1" path="res://Scenes/enemy_2.tscn" id="7_qq4lh"]
 
@@ -206,5 +206,13 @@ position = Vector2(1017, -60)
 
 [node name="enemy_3" parent="." instance=ExtResource("7_qq4lh")]
 position = Vector2(303, 103)
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn")
+spawn_path = NodePath("..")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

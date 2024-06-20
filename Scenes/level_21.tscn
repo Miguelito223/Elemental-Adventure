@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_2r543"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_hvuuq"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_6c5ci"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://sounds/Music/Level music.ogg" id="4_3b7ex"]
+[ext_resource type="AudioStream" uid="uid://dk7hhpr4vhlq8" path="res://sounds/Music/Level music.ogg" id="4_3b7ex"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="5_kr2su"]
-[ext_resource type="AudioStream" uid="uid://qrc32him66dk" path="res://sounds/Music/BOSS BATTLE! Ft Jex.mp3" id="5_ybmux"]
+[ext_resource type="AudioStream" uid="uid://cd2p26tag5uq0" path="res://sounds/Music/BOSS BATTLE! Ft Jex.mp3" id="5_ybmux"]
 [ext_resource type="PackedScene" uid="uid://bdb2h8eq2yaq7" path="res://Scenes/enemy_boss_2.tscn" id="6_pnfi5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2kaei"]
@@ -130,5 +130,13 @@ scale = Vector2(95.7652, 13.1505)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Victory Zone"]
 position = Vector2(0.365477, -1.90105)
 shape = SubResource("RectangleShape2D_fpcck")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn", "res://Scenes/enemy_boss.tscn", "res://Scenes/enemy_boss_2.tscn", "res://Scenes/enemy_boss_3.tscn")
+spawn_path = NodePath("..")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

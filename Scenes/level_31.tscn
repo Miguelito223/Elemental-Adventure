@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_ey80f"]
 [ext_resource type="PackedScene" uid="uid://dnrrcfwirut5i" path="res://Scenes/tile_map.tscn" id="2_coobx"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_4d5hx"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://Sounds/Music/Level music.ogg" id="4_gh6hp"]
-[ext_resource type="AudioStream" uid="uid://qrc32him66dk" path="res://Sounds/Music/BOSS BATTLE! Ft Jex.mp3" id="5_mxeq2"]
+[ext_resource type="AudioStream" uid="uid://dk7hhpr4vhlq8" path="res://Sounds/Music/Level music.ogg" id="4_gh6hp"]
+[ext_resource type="AudioStream" uid="uid://cd2p26tag5uq0" path="res://Sounds/Music/BOSS BATTLE! Ft Jex.mp3" id="5_mxeq2"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="5_wos5l"]
 [ext_resource type="PackedScene" uid="uid://3op1fumloaxt" path="res://Scenes/enemy_boss_3.tscn" id="6_vd4py"]
 
@@ -127,5 +127,13 @@ shape = SubResource("RectangleShape2D_fpcck")
 
 [node name="enemy_boss_2" parent="." instance=ExtResource("6_vd4py")]
 position = Vector2(997, -172)
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn", "res://Scenes/enemy_boss.tscn", "res://Scenes/enemy_boss_2.tscn", "res://Scenes/enemy_boss_3.tscn")
+spawn_path = NodePath("..")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

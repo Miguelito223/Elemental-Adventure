@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dta6yivprfdbo" path="res://Scenes/point_light_2d.tscn" id="3_rnfsw"]
 [ext_resource type="PackedScene" uid="uid://tonkdrpt1uk3" path="res://Scenes/energy.tscn" id="3_yyrf0"]
 [ext_resource type="AudioStream" uid="uid://dc0t7e1f08mgx" path="res://sounds/volcano_idle.wav" id="4_4ev42"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://sounds/Music/Level music.ogg" id="4_wnfal"]
+[ext_resource type="AudioStream" uid="uid://dk7hhpr4vhlq8" path="res://sounds/Music/Level music.ogg" id="4_wnfal"]
 [ext_resource type="PackedScene" uid="uid://cmt0g43wqyx8c" path="res://Scenes/environment.tscn" id="5_eqjyj"]
 [ext_resource type="PackedScene" uid="uid://choeqgyk2lvq5" path="res://Scenes/plataform_2.tscn" id="7_2fsfj"]
 [ext_resource type="PackedScene" uid="uid://by7461i8vp65b" path="res://Scenes/enemy_3.tscn" id="7_hxedy"]
@@ -238,5 +238,13 @@ shape = SubResource("RectangleShape2D_fpcck")
 [node name="plataform_2" parent="." instance=ExtResource("7_2fsfj")]
 position = Vector2(27, -2)
 curve = SubResource("Curve2D_gq6ey")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn")
+spawn_path = NodePath("..")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
 
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]

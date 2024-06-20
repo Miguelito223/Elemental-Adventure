@@ -191,4 +191,12 @@ position = Vector2(573, 158)
 [node name="enemy_5" parent="." instance=ExtResource("7_c2nhx")]
 position = Vector2(963, 156)
 
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/enemy.tscn", "res://Scenes/enemy_2.tscn", "res://Scenes/enemy_3.tscn")
+spawn_path = NodePath("..")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
+
 [connection signal="body_entered" from="Victory Zone" to="." method="_on_victory_zone_body_entered"]
