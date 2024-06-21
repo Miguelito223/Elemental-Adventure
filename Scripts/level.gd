@@ -179,7 +179,7 @@ func add_players_list(peer_id):
 func remove_player_list(peer_id):
 	players.erase(get_node(str(peer_id)))
 
-
+@rpc("any_peer", "call_local")
 func add_network_player(peer_id):
 	print("adding player id: " + str(peer_id))
 	
@@ -236,6 +236,7 @@ func _on_player_spawner_spawned(node):
 func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
 
+@rpc("any_peer", "call_local")
 func remove_network_player(peer_id):
 	var player = get_node(str(peer_id))
 	if is_instance_valid(player):
@@ -258,12 +259,14 @@ func _on_victory_zone_body_entered(body):
 					body.changelevel()
 					body.last_position = null
 					body.setposspawn()
+					remove_network_player.rpc(body.name.to_int())
 					DataState.remove_state_file()
 					LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 				else:
 					body.changelevel()
 					body.last_position = null
 					body.setposspawn()
+					remove_network_player.rpc(body.name.to_int())
 					DataState.remove_state_file()
 					LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")	
 		else:
