@@ -38,10 +38,10 @@ func _ready():
 		multiplayer.peer_connected.connect(add_network_player)
 		multiplayer.peer_disconnected.connect(remove_network_player)
 
-		for peer in multiplayer.get_peers():
-			add_network_player(peer)
-
 		if multiplayer.is_server():
+			for id in multiplayer.get_peers():
+				add_network_player(id)
+
 			if not OS.has_feature("dedicated_server"):
 				add_network_player(1)
 	else:
