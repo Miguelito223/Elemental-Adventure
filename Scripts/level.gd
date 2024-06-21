@@ -38,6 +38,9 @@ func _ready():
 		multiplayer.peer_connected.connect(add_network_player)
 		multiplayer.peer_disconnected.connect(remove_network_player)
 
+		for peer in multiplayer.get_peers():
+			add_network_player(peer)
+
 		if multiplayer.is_server():
 			if not OS.has_feature("dedicated_server"):
 				add_network_player(1)
@@ -255,14 +258,12 @@ func _on_victory_zone_body_entered(body):
 					body.changelevel()
 					body.last_position = null
 					body.setposspawn()
-					remove_network_player(body.name.to_int())
 					DataState.remove_state_file()
 					LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 				else:
 					body.changelevel()
 					body.last_position = null
 					body.setposspawn()
-					remove_network_player(body.name.to_int())
 					DataState.remove_state_file()
 					LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")	
 		else:

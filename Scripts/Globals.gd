@@ -1,5 +1,9 @@
 extends Node
 
+#level
+var level = "level_1"
+var level_int = 1
+
 #time
 var minute = 00
 var day = 0
@@ -9,8 +13,6 @@ var time = 0.0
 #others
 var num_players = 1
 var player_index = 0
-
-
 
 var player_name: Array = [
 	"Fire",
@@ -600,8 +602,4 @@ func _inputs_player(player_index):
 		actions_items.append(down_action)
 		actions_items.append(jump_action)
 
-
-
-var level = "level_1"
-var level_int = 1
 

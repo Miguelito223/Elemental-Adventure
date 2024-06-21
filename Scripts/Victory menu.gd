@@ -14,10 +14,15 @@ func _process(_delta):
 	$CanvasLayer/VBoxContainer2/energys.text = "Energys Balls:" + str(Globals.energys[0] + Globals.energys[1] + Globals.energys[2] + Globals.energys[3] )
 	$CanvasLayer/VBoxContainer2/score.text = "Score:" + str(Globals.score[0] + Globals.score[1] + Globals.score[2] + Globals.score[3])
 
+@rpc("any_peer", "call_local")
+func unload_actual_scene():
+	UnloadScene.unload_scene(self)
+
 func _on_next_pressed():
 	if Network.is_networking:
 		if multiplayer.is_server():
-			LoadScene.load_scene(self, Globals.level)
+			unload_actual_scene.rpc()
+			LoadScene.load_scene(null, Globals.level)
 	else:
 		get_tree().paused = false
 		LoadScene.load_scene(self, Globals.level)

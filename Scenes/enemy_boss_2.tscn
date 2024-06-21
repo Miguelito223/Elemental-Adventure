@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdb2h8eq2yaq7"]
+[gd_scene load_steps=25 format=3 uid="uid://bdb2h8eq2yaq7"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_boss_2.gd" id="1_8o4vu"]
 [ext_resource type="Texture2D" uid="uid://b68ttwomdstg7" path="res://Sprites/enemigo3_attack.png" id="2_et47u"]
@@ -197,6 +197,59 @@ _data = {
 "rest": SubResource("Animation_h0bwp")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dntr4"]
+properties/0/path = NodePath(".:Max_Hearth")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:hearth")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:can_move")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:speed")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:max_speed")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:max_speed_in_air")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:max_speed_in_water")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:max_speed_in_lava")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath(".:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath(".:rotation")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath(".:scale")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("Node2D:position")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("Node2D/Marker2D:position")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+properties/13/path = NodePath("Node2D:rotation")
+properties/13/spawn = true
+properties/13/replication_mode = 1
+properties/14/path = NodePath("Node2D:scale")
+properties/14/spawn = true
+properties/14/replication_mode = 1
+properties/15/path = NodePath("Node2D/Marker2D:rotation")
+properties/15/spawn = true
+properties/15/replication_mode = 1
+properties/16/path = NodePath("Node2D/Marker2D:scale")
+properties/16/spawn = true
+properties/16/replication_mode = 1
+
 [node name="enemy_boss_2" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(9, 9)
 script = ExtResource("1_8o4vu")
@@ -274,6 +327,9 @@ max_value = 1000.0
 position = Vector2(7.33333, 2)
 color = Color(1, 0.701961, 0, 1)
 texture_scale = 0.26
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_dntr4")
 
 [connection signal="body_entered" from="detection_area3" to="." method="_on_detection_area_3_body_entered"]
 [connection signal="body_exited" from="detection_area3" to="." method="_on_detection_area_3_body_exited"]
