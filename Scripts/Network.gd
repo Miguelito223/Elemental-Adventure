@@ -7,7 +7,7 @@ var ip = "127.0.0.1"
 var broadcasteripadress = "255.255.255.255"
 var username = "MichaxD"
 var connected_ids: Array = []
-var connection_count = connected_ids.size()
+var connection_count = 0
 var is_networking = false
 var multiplayer_peer_Enet = ENetMultiplayerPeer.new()
 var multiplayer_peer_Enet_host
@@ -220,6 +220,8 @@ func _sync_level_int(level_int_value):
 func _add_player_list(player_id):
 	connected_ids.append(player_id)
 	connection_count = connected_ids.size()
+
+
 @rpc("any_peer", "call_local")
 func _remove_player_list(player_id):
 	connected_ids.erase(player_id)

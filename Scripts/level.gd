@@ -179,7 +179,6 @@ func add_players_list(peer_id):
 func remove_player_list(peer_id):
 	players.erase(get_node(str(peer_id)))
 
-@rpc("any_peer", "call_local")
 func add_network_player(peer_id):
 	print("adding player id: " + str(peer_id))
 	
@@ -236,7 +235,6 @@ func _on_player_spawner_spawned(node):
 func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
 
-@rpc("any_peer", "call_local")
 func remove_network_player(peer_id):
 	var player = get_node(str(peer_id))
 	if is_instance_valid(player):
@@ -251,24 +249,29 @@ func _physics_process(_delta):
 	if Globals.autosave:
 		DataState.autosave_logic()
 
+@rpc("any_peer", "call_local")
+func victory_rpc():
+	for id in Network.connected_ids:
+		print("connected ids array: " + str(id))
+		var body = get_node(str(id))
+		body.changelevel()
+		body.last_position = null
+		body.setposspawn()
+		remove_network_player(id)
+
+	if Globals.level_int == 31:
+		DataState.remove_state_file()
+		LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
+	else:
+		DataState.remove_state_file()
+		LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
+
+
 func _on_victory_zone_body_entered(body):
 	if body.is_in_group("player"):
 		if Network.is_networking:
 			if body.is_multiplayer_authority():
-				if Globals.level_int == 31:
-					body.changelevel()
-					body.last_position = null
-					body.setposspawn()
-					remove_network_player.rpc(body.name.to_int())
-					DataState.remove_state_file()
-					LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
-				else:
-					body.changelevel()
-					body.last_position = null
-					body.setposspawn()
-					remove_network_player.rpc(body.name.to_int())
-					DataState.remove_state_file()
-					LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")	
+				victory_rpc.rpc()
 		else:
 			if body.device_num == 0:
 				if Globals.level_int == 31:
