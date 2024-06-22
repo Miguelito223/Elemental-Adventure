@@ -236,13 +236,13 @@ func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
 
 func remove_network_player(peer_id):
+	print("removing player id: " + str(peer_id))
+	if multiplayer.is_server():
+		Network._remove_player_list.rpc(peer_id)
+		remove_player_list.rpc(peer_id)
+		
 	var player = get_node(str(peer_id))
 	if is_instance_valid(player):
-		print("removing player id: " + str(peer_id))
-		if multiplayer.is_server():
-			Network._remove_player_list.rpc(peer_id)
-			remove_player_list.rpc(peer_id)
-
 		player.queue_free()
 
 func _physics_process(_delta):
@@ -259,11 +259,12 @@ func victory_rpc():
 		body.setposspawn()
 		remove_network_player(id)
 
+	Network.connected_ids.clear()
+	DataState.remove_state_file()
+
 	if Globals.level_int == 31:
-		DataState.remove_state_file()
 		LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 	else:
-		DataState.remove_state_file()
 		LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 
 
@@ -274,17 +275,15 @@ func _on_victory_zone_body_entered(body):
 				victory_rpc.rpc()
 		else:
 			if body.device_num == 0:
+				body.changelevel()
+				body.last_position = null
+				body.setposspawn()
+
+				DataState.remove_state_file()
+
 				if Globals.level_int == 31:
-					body.changelevel()
-					body.last_position = null
-					body.setposspawn()
-					DataState.remove_state_file()
 					LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 				else:
-					body.changelevel()
-					body.last_position = null
-					body.setposspawn()
-					DataState.remove_state_file()
 					LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
 			else:
 				remove_player(body.device_num)

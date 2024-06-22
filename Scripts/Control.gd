@@ -35,8 +35,6 @@ func _process(_delta):
 		var bytes = lisener.get_packet()
 		var data = bytes.get_string_from_ascii()
 		var roominfo2 = JSON.parse_string(data)
-
-		print(serverip + ":" + str(serverport))
 		
 		for i in $Panel/VBoxContainer.get_children():
 			if i.name == roominfo2.name:
@@ -72,7 +70,6 @@ func setupbroadcast(player_name):
 	$"broadcast timer".start()
 
 func _on_broadcast_timer_timeout():
-	print("broadcaring game!")
 	roominfo.playercount = Network.connected_ids.size()
 	var data = JSON.stringify(roominfo)
 	var packet = data.to_ascii_buffer()
