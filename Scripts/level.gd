@@ -182,7 +182,6 @@ func add_network_player(peer_id):
 	
 	player.player_id = player.name.to_int()
 	player.name = str(peer_id)
-	player.device_num = clamp(Network.connection_count - 1, 0, 4)
 	player.setposspawn()
 
 	Globals._inputs_player(player.device_num)

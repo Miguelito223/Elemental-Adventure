@@ -21,26 +21,25 @@ func _ready():
 	for i in range(Globals.num_players):
 		Globals._inputs_player(i)
 
-	await Signals.level_loaded	
+	Signals.level_loaded.connect(_on_level_loaded)
+		
+
+func _on_level_loaded():
 	level = get_node(Globals.level)
 
-
 	self.JoinGame.connect(Network.joinbyip)
-	
-	
+
 	if Globals.use_keyboard:
 		Globals.num_players = 1
 	else:
 		Globals.num_players = Input.get_connected_joypads().size()
-	
 
 	var _ret
 	_ret = Input.connect("joy_connection_changed", _on_joy_connection_changed)
 	if _ret != 0:
 		print("Error {e} connecting `Input` signal `joy_connection_changed`.".format({"e": _ret}))
-		
 
-
+	print("Level Loaded")
 
 func _on_joy_connection_changed(device_id, connected):
 	if DEBUGGING:
@@ -58,7 +57,6 @@ func _on_joy_connection_changed(device_id, connected):
 			Globals.num_players = Input.get_connected_joypads().size()
 		
 		Globals.player_index = device_id
-
 		Globals._clear_inputs_player(device_id)
 		Globals._inputs_player(device_id)
 		

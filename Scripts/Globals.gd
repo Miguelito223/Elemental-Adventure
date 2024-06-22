@@ -2,6 +2,7 @@ extends Node
 
 #level
 var level = "level_1"
+var level_node = "level_1"
 var level_int = 1
 
 #time
