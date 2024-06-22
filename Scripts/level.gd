@@ -170,10 +170,6 @@ func remove_player_list(peer_id):
 
 func add_network_player(peer_id):
 	print("adding player id: " + str(peer_id))
-	
-	if multiplayer.is_server():
-		Network._add_player_list.rpc(peer_id)
-	
 
 	if OS.get_name() == "Web":
 		Network.multiplayer_peer_websocker_peer = Network.multiplayer_peer_websocker.get_peer(peer_id)
@@ -194,7 +190,9 @@ func add_network_player(peer_id):
 	add_child(player, true)
 
 	if multiplayer.is_server():
+		Network._add_player_list.rpc(peer_id)
 		add_players_list.rpc(peer_id)
+		
 
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
