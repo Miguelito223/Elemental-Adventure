@@ -578,6 +578,3 @@ func load_state(info):
 	deaths = info.Deaths
 	scale = Vector2(info.size_x, info.size_y)
 	position = Vector2(info.pos_x,info.pos_y)
-
-
-

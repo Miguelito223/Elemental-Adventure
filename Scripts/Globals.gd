@@ -601,5 +601,3 @@ func _inputs_player(player_index):
 		actions_items.append(pause_action)
 		actions_items.append(down_action)
 		actions_items.append(jump_action)
-
-
