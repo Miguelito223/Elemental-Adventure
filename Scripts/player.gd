@@ -67,6 +67,29 @@ func _ready():
 			"p":get_parent().name,
 			}))
 
+	if Network.is_networking:
+		if syncronizer.is_multiplayer_authority():
+			Max_Hearths = Network.max_hearths
+			last_position = Network.last_position
+			player_name = Network.username
+			Hearths = Network.hearths[device_num]
+			deaths = Network.deaths[device_num]
+			player_color = Globals.player_color_dict[device_num]
+			ball_color = Globals.ball_color_dict[device_num]  
+			energys = Network.energys[device_num]
+			score = Network.score[device_num]
+	else:
+		Max_Hearths = Globals.max_hearths
+		last_position = Globals.last_position
+		name = Globals.player_name[device_num]
+		ball_color = Globals.ball_color_dict[device_num]
+		player_color = Globals.player_color_dict[device_num]
+		player_name = Globals.player_name[device_num]  
+		Hearths = Globals.hearths[device_num]
+		deaths = Globals.deaths[device_num]
+		energys = Globals.energys[device_num]
+		score = Globals.score[device_num]	
+
 	
 	Globals.player[device_num] = self
 	Pause_Menu.hide()

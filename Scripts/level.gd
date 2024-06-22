@@ -39,11 +39,11 @@ func _ready():
 		multiplayer.peer_disconnected.connect(remove_network_player)
 
 		if multiplayer.is_server():
-			for id in multiplayer.get_peers():
-				add_network_player(id)
-
 			if not OS.has_feature("dedicated_server"):
 				add_network_player(1)
+			
+			for id in multiplayer.get_peers():
+				add_network_player(id)
 	else:
 
 		lineedit.visible = false
@@ -141,19 +141,8 @@ func add_player(player_index):
 
 	var player = players[-1]
 
-	player.setposspawn()
-
 	player.device_num = player_index
-
-	player.name = Globals.player_name[player_index]
-	player.ball_color = Globals.ball_color_dict[player_index]
-	player.player_color = Globals.player_color_dict[player_index]
-
-	player.player_name = Globals.player_name[player_index]
-	player.energys = Globals.energys[player_index]
-	player.score = Globals.score[player_index]
-	player.Hearths = Globals.hearths[player_index]
-	player.deaths = Globals.deaths[player_index]
+	player.setposspawn()
 
 	if DataState.node_data.is_empty():
 		print("node data is empy")
@@ -194,20 +183,10 @@ func add_network_player(peer_id):
 			Network.multiplayer_peer_Enet_peer.set_timeout(60000, 300000, 600000)
 	
 	var player = player_scene.instantiate()
+	
+	player.player_id = player.name.to_int()
 	player.name = str(peer_id)
 	player.device_num = Network.connection_count - 1
-
-	player.player_id = player.name.to_int()
-
-	player.ball_color = Network.ball_color_dict[player.device_num]
-	player.player_color = Network.player_color_dict[player.device_num]
-
-	player.player_name = Network.username
-	player.energys = Network.energys[player.device_num]
-	player.score = Network.score[player.device_num]
-	player.Hearths = Network.hearths[player.device_num]
-	player.deaths = Network.deaths[player.device_num]
-
 	player.setposspawn()
 
 	Globals._inputs_player(player.device_num)
@@ -219,18 +198,6 @@ func add_network_player(peer_id):
 
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
-	
-	node.device_num = Network.connection_count
-	node.player_id = node.name.to_int()
-
-	node.ball_color = Network.ball_color_dict[node.device_num]
-	node.player_color = Network.player_color_dict[node.device_num]
-
-	node.player_name = Network.username
-	node.energys = Network.energys[node.device_num]
-	node.score = Network.score[node.device_num]
-	node.Hearths = Network.hearths[node.device_num]
-	node.deaths = Network.deaths[node.device_num]
 
 func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
@@ -252,7 +219,6 @@ func _physics_process(_delta):
 @rpc("any_peer", "call_local")
 func victory_rpc():
 	for id in Network.connected_ids:
-		print("connected ids array: " + str(id))
 		var body = get_node(str(id))
 		body.changelevel()
 		body.last_position = null
