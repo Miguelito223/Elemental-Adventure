@@ -397,7 +397,6 @@ func setlifes(value):
 				if deaths == 1:
 					print("you dead, game over")
 					deaths = 0
-					last_position = null
 					setposspawn()
 					LoadScene.load_scene(null, "res://Scenes/game_over_menu.tscn")
 		else:
@@ -409,7 +408,6 @@ func setlifes(value):
 				if deaths >= Max_Hearths:
 					print("you dead, game over")
 					deaths = 0
-					last_position = null
 					setposspawn()
 					LoadScene.load_scene(get_parent(), "res://Scenes/game_over_menu.tscn")
 			else:
