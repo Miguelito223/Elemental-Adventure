@@ -169,6 +169,7 @@ func sync_all_players_list():
 	Network.connected_ids.clear()
 	for player in get_tree().get_nodes_in_group("player"):
 		Network.connected_ids.append(player.name.to_int())
+		Network.connection_count = Network.connected_ids.size()
 		players.append(player)
 
 

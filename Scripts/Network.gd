@@ -223,19 +223,6 @@ func _sync_level(level_value):
 func _sync_level_int(level_int_value):
 	Globals.level_int = level_int_value
 
-
-@rpc("any_peer", "call_local")
-func _add_player_list(player_id):
-	connected_ids.append(player_id)
-	connection_count = connected_ids.size()
-
-
-@rpc("any_peer", "call_local")
-func _remove_player_list(player_id):
-	connected_ids.erase(player_id)
-	connection_count = connected_ids.size()
-
-
 func _process(_delta):
 	if is_networking:
 		if multiplayer.is_server():
