@@ -197,6 +197,14 @@ func add_network_player(peer_id):
 	sync_all_players_list.rpc()
 		
 
+func remove_network_player(peer_id):
+	print("removing player id: " + str(peer_id))	
+	var player = get_node(str(peer_id))
+	if is_instance_valid(player):
+		player.queue_free()
+
+	sync_all_players_list.rpc()
+
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
 	node.player_id = node.name.to_int()
@@ -207,14 +215,6 @@ func _on_player_spawner_spawned(node):
 
 func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
-
-	sync_all_players_list.rpc()
-
-func remove_network_player(peer_id):
-	print("removing player id: " + str(peer_id))	
-	var player = get_node(str(peer_id))
-	if is_instance_valid(player):
-		player.queue_free()
 
 	sync_all_players_list.rpc()
 
