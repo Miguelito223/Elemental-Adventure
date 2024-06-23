@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=3 uid="uid://bobb12psnciuk"]
+
+[ext_resource type="Script" path="res://Scripts/chose_character.gd" id="1_mqkl6"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="1_r854h"]
+[ext_resource type="Texture2D" uid="uid://d3l2e26s0r3op" path="res://Sprites/Fire IDle.png" id="2_sqlja"]
+[ext_resource type="Texture2D" uid="uid://bhtn0asm5ij01" path="res://Sprites/water idle.png" id="3_8pxc4"]
+[ext_resource type="Texture2D" uid="uid://dn2uwttahe5bw" path="res://Sprites/air idle.png" id="4_nb3qt"]
+[ext_resource type="Texture2D" uid="uid://bff040cb4af36" path="res://Sprites/earth idle.png" id="5_1wjbd"]
+
+[node name="Chose_Character" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mqkl6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.190921, 0.000413058, 0.340971, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 72.0
+offset_top = 32.0
+offset_right = 376.0
+offset_bottom = 55.0
+scale = Vector2(6.02174, 5.27448)
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "Chose the character"
+
+[node name="fire" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 461.0
+offset_top = 627.0
+offset_right = 589.0
+offset_bottom = 753.0
+scale = Vector2(3, 2.728)
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/fire"]
+layout_mode = 2
+texture = ExtResource("2_sqlja")
+
+[node name="Label" type="Label" parent="CanvasLayer/fire"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "Fire"
+horizontal_alignment = 1
+
+[node name="Button_fire" type="Button" parent="CanvasLayer/fire"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "Press"
+
+[node name="water" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 1140.0
+offset_top = 643.0
+offset_right = 1268.0
+offset_bottom = 769.0
+scale = Vector2(3, 2.727)
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/water"]
+layout_mode = 2
+texture = ExtResource("3_8pxc4")
+
+[node name="Label" type="Label" parent="CanvasLayer/water"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "water
+"
+horizontal_alignment = 1
+
+[node name="Button_water" type="Button" parent="CanvasLayer/water"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "Press"
+
+[node name="air" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 450.0
+offset_top = 177.0
+offset_right = 578.0
+offset_bottom = 303.0
+scale = Vector2(3, 2.728)
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/air"]
+layout_mode = 2
+texture = ExtResource("4_nb3qt")
+
+[node name="Label" type="Label" parent="CanvasLayer/air"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "air
+"
+horizontal_alignment = 1
+
+[node name="Button_air" type="Button" parent="CanvasLayer/air"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "Press"
+
+[node name="earth" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 1144.0
+offset_top = 176.0
+offset_right = 1272.0
+offset_bottom = 302.0
+scale = Vector2(3, 2.728)
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/earth"]
+layout_mode = 2
+texture = ExtResource("5_1wjbd")
+
+[node name="Label" type="Label" parent="CanvasLayer/earth"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "earth"
+horizontal_alignment = 1
+
+[node name="Button_earth" type="Button" parent="CanvasLayer/earth"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_r854h")
+text = "Press"
+
+[connection signal="pressed" from="CanvasLayer/fire/Button_fire" to="." method="_on_button_fire_pressed"]
+[connection signal="pressed" from="CanvasLayer/water/Button_water" to="." method="_on_button_water_pressed"]
+[connection signal="pressed" from="CanvasLayer/air/Button_air" to="." method="_on_button_air_pressed"]
+[connection signal="pressed" from="CanvasLayer/earth/Button_earth" to="." method="_on_button_earth_pressed"]

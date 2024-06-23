@@ -9,6 +9,7 @@ var username = "MichaxD"
 var connected_ids: Array = []
 var connection_count = 0
 var is_networking = false
+var is_host = false
 var multiplayer_peer_Enet = ENetMultiplayerPeer.new()
 var multiplayer_peer_Enet_host
 var multiplayer_peer_Enet_peers
@@ -24,10 +25,11 @@ func joinbyip(ip_value, port_value):
 			multiplayer_peer_websocker.handshake_timeout = 60.0
 			if not multiplayer.is_server():
 				is_networking = true
+				is_host = false
 				get_parent().get_node("Game/Main Menu").hide()
 				get_parent().get_node("Game/CanvasLayer").show()
-				print("Loading map...")
-				LoadScene.load_scene(null, "res://Scenes/game.tscn")
+				print("Loading level...")
+				LoadScene.load_scene(get_parent().get_node("Game/Chose_Character"), "res://Scenes/game.tscn")
 		else:
 			push_error("Error creating client: ", str(error))
 	else:
@@ -38,10 +40,11 @@ func joinbyip(ip_value, port_value):
 			multiplayer_peer_Enet_peers = multiplayer_peer_Enet.host.get_peers()
 			if not multiplayer.is_server():
 				is_networking = true
+				is_host = false
 				get_parent().get_node("Game/Main Menu").hide()
 				get_parent().get_node("Game/CanvasLayer").show()
-				print("Loading map...")
-				LoadScene.load_scene(null, "res://Scenes/game.tscn")
+				print("Loading level...")
+				LoadScene.load_scene(get_parent().get_node("Game/Chose_Character"), "res://Scenes/game.tscn")
 		else:
 			push_error("Error creating client: ", str(error))	
 
@@ -54,13 +57,14 @@ func hostbyport(port_value):
 			multiplayer_peer_websocker.handshake_timeout = 60.0
 			if multiplayer.is_server():
 				is_networking = true
+				is_host = true
 				print("Adding UPNP...")
 				UPNP_setup()
 				print("Adding Broadcast...")
 				get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
 				get_parent().get_node("Game/Main Menu").hide()
 				print("Loading level...")
-				LoadScene.load_scene(null, Globals.level)
+				LoadScene.load_scene(get_parent().get_node("Game/Chose_Character"), Globals.level)
 		else:
 			push_error("Error creating server: " + str(error))
 	else:
@@ -71,13 +75,17 @@ func hostbyport(port_value):
 			multiplayer_peer_Enet_peers = multiplayer_peer_Enet.host.get_peers()
 			if multiplayer.is_server():
 				is_networking = true
+				is_host = true
 				print("Adding UPNP...")
 				UPNP_setup()
 				print("Adding Broadcast...")
+				
+
 				get_parent().get_node("Game/Main Menu").control.setupbroadcast(username)
 				get_parent().get_node("Game/Main Menu").hide()
+				
 				print("Loading level...")
-				LoadScene.load_scene(null, Globals.level)
+				LoadScene.load_scene(get_parent().get_node("Game/Chose_Character"), Globals.level)
 		else:
 			push_error("Error creating server: " + str(error))
 

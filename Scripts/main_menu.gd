@@ -459,10 +459,12 @@ func _on_back2_pressed():
 		online_menu.hide()
 
 func _on_create_pressed():
-	Network.hostbyport(Network.port)
+	Network.is_host = true
+	LoadScene.load_scene(null, "res://Scenes/chose_character.tscn")
 
 func _on_join2_pressed():
-	Network.joinbyip(Network.ip, Network.port)
+	Network.is_host = false
+	LoadScene.load_scene(null, "res://Scenes/chose_character.tscn")
 
 
 func _process(_delta):

@@ -123,6 +123,21 @@ properties/23/replication_mode = 1
 properties/24/path = NodePath("PathFollow2D:scale")
 properties/24/spawn = true
 properties/24/replication_mode = 1
+properties/25/path = NodePath("AnimatableBody2D:constant_linear_velocity")
+properties/25/spawn = true
+properties/25/replication_mode = 1
+properties/26/path = NodePath("AnimatableBody2D:constant_angular_velocity")
+properties/26/spawn = true
+properties/26/replication_mode = 1
+properties/27/path = NodePath("PathFollow2D/RemoteTransform2D:position")
+properties/27/spawn = true
+properties/27/replication_mode = 1
+properties/28/path = NodePath("PathFollow2D/RemoteTransform2D:rotation")
+properties/28/spawn = true
+properties/28/replication_mode = 1
+properties/29/path = NodePath("PathFollow2D/RemoteTransform2D:scale")
+properties/29/spawn = true
+properties/29/replication_mode = 1
 
 [node name="plataform" type="Path2D" groups=["persistent"]]
 script = ExtResource("1_a0my1")

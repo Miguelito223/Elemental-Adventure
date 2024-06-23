@@ -182,6 +182,7 @@ func add_network_player(peer_id):
 	
 	player.player_id = player.name.to_int()
 	player.name = str(peer_id)
+	player.device_num = Globals.player_index
 	player.setposspawn()
 
 	Globals._inputs_player(player.device_num)
@@ -195,6 +196,11 @@ func add_network_player(peer_id):
 
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
+	node.player_id = node.name.to_int()
+	node.device_num = Globals.player_index
+	node.setposspawn()
+
+	add_players_list(node.player_id)
 
 func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
