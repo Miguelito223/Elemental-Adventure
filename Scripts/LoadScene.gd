@@ -64,7 +64,8 @@ func load_scene(current_scene, next_scene):
 	await Signal(loading_screen_intance, "safe_to_load")
 
 	if current_scene != null:
-		current_scene.queue_free()
+		if is_instance_valid(current_scene):
+			current_scene.queue_free()
 
 	if GAME_SCENE.has(scene_path):
 		scene_path = GAME_SCENE[scene_path]

@@ -26,7 +26,8 @@ func unload_scene(current_scene):
 	await Signal(unloading_screen_scene, "safe_to_load")
 
 	if current_scene != null:
-		current_scene.queue_free()
+		if is_instance_valid(current_scene):
+			current_scene.queue_free()
 
 	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path, "", use_sub_theads)
 	if loader_next_scene == OK:
