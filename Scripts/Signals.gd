@@ -11,4 +11,4 @@ signal finish_set_vars
 signal finish_loading
 signal time_tick(day,hour,minute)
 signal stadistics(score,energys,hearths)
-
+signal JoinGame(ip, port)

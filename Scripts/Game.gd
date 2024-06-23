@@ -2,8 +2,6 @@ extends Node
 
 var DEBUGGING = true
 
-signal JoinGame(ip,port)
-
 var level
 
 func _ready():
@@ -22,12 +20,16 @@ func _ready():
 		Globals._inputs_player(i)
 
 	Signals.level_loaded.connect(_on_level_loaded)
-		
+	Signals.JoinGame.connect(_load_characters_selector)
+
+
+func _load_characters_selector(ip, port):
+	Network.ip = ip
+	Network.port = port
+	LoadScene.load_scene(null, "res://Scenes/chose_character.tscn")
 
 func _on_level_loaded():
 	level = get_node(Globals.level)
-
-	self.JoinGame.connect(Network.joinbyip)
 
 	if Globals.use_keyboard:
 		Globals.num_players = 1
@@ -116,7 +118,7 @@ func _on_map_spawner_despawned(_node):
 func _on_reconnect_pressed():
 	if Network.is_networking:
 		Network.connected_ids.clear()
-		JoinGame.emit(Network.ip, Network.port)
+		Signals.JoinGame.emit(Network.ip, Network.port)
 
 
 func _on_back_to_main_menu_pressed():

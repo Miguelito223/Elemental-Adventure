@@ -2,7 +2,6 @@ extends Node
 
 signal found_server
 signal server_removed
-signal JoinGame(ip, port)
 
 var broadcasttimer: Timer
 
@@ -49,7 +48,6 @@ func _process(_delta):
 		currentinfo2.get_node("ip").text = serverip
 		currentinfo2.get_node("port").text = str(serverport)
 		currentinfo2.get_node("count").text = str(roominfo2.playercount)
-		currentinfo2.JoinGame.connect(joinbyip)
 		$Panel/VBoxContainer.add_child(currentinfo2)
 	
 func setupbroadcast(player_name):
@@ -86,7 +84,3 @@ func cleanup():
 
 func _exit_tree():
 	cleanup()
-
-
-func joinbyip(ip, port):
-	JoinGame.emit(ip, port)

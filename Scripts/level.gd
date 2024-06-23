@@ -118,6 +118,7 @@ func server_disconected():
 	print("Server Finish")
 	Network.is_networking = false
 	Network.connected_ids.clear()
+	multiplayer.multiplayer_peer = null
 	UnloadScene.unload_scene(self)
 	get_parent().get_node("Main Menu").show()
 
@@ -125,6 +126,7 @@ func conected_fail():
 	print("Fail to load")
 	Network.is_networking = false
 	Network.connected_ids.clear()
+	multiplayer.multiplayer_peer = null
 	UnloadScene.unload_scene(self)
 	get_parent().get_node("Main Menu").show()
 
@@ -161,33 +163,12 @@ func add_player(player_index):
 	add_child(player)
 
 @rpc("any_peer", "call_local")
-func add_players_list(peer_id):
-	# Añadir nodo del jugador a la lista de jugadores
-	var player = get_node(str(peer_id))
-	if player != null:
-		players.append(player)
-		print("Player added to list: " + str(peer_id))
-	else:
-		print("Failed to add player: " + str(peer_id))
-
-@rpc("any_peer", "call_local")
-func remove_player_list(peer_id):
-	# Eliminar nodo del jugador de la lista de jugadores
-	var player = get_node(str(peer_id))
-	if player != null:
-		players.erase(player)
-		print("Player removed from list: " + str(peer_id))
-	else:
-		print("Failed to remove player: " + str(peer_id))
-
-
-@rpc("any_peer", "call_local")
 func sync_all_players_list():
 	# Actualizar la lista de jugadores en todos los clientes
 	players.clear()
 	Network.connected_ids.clear()
 	for player in get_tree().get_nodes_in_group("player"):
-		Network.connected_ids.append(player.player_id)
+		Network.connected_ids.append(player.name.to_int())
 		players.append(player)
 
 
@@ -211,10 +192,6 @@ func add_network_player(peer_id):
 	Globals._inputs_player(player.device_num)
 
 	add_child(player, true)
-
-	if multiplayer.is_server():
-		Network._add_player_list.rpc(peer_id)
-		add_players_list.rpc(peer_id)
 	
 	sync_all_players_list.rpc()
 		
@@ -224,22 +201,19 @@ func _on_player_spawner_spawned(node):
 	node.player_id = node.name.to_int()
 	node.device_num = Globals.player_index
 	node.setposspawn()
-	remove_player_list(node.player_id)
-	add_players_list(node.player_id)
+
+	sync_all_players_list.rpc()
 
 func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
-	remove_player_list(node.player_id)
+
+	sync_all_players_list.rpc()
 
 func remove_network_player(peer_id):
 	print("removing player id: " + str(peer_id))	
 	var player = get_node(str(peer_id))
 	if is_instance_valid(player):
 		player.queue_free()
-
-	if multiplayer.is_server():
-		Network._remove_player_list.rpc(peer_id)
-		remove_player_list.rpc(peer_id)
 
 	sync_all_players_list.rpc()
 
@@ -251,12 +225,12 @@ func _physics_process(_delta):
 func victory_rpc():
 	for id in Network.connected_ids:
 		var body = get_node(str(id))
-		body.changelevel()
-		body.last_position = null
-		body.setposspawn()
-		remove_network_player(id)
+		if is_instance_valid(body):
+			body.changelevel()
+			body.last_position = null
+			body.setposspawn()
+			remove_network_player(id)
 
-	Network.connected_ids.clear()
 	DataState.remove_state_file()
 
 	if Globals.level_int == 31:

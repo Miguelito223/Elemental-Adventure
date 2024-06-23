@@ -220,8 +220,6 @@ func _ready():
 	Username_join.text = str(Network.username)
 	Username_host.text = str(Network.username)
 
-	self.control.JoinGame.connect(Network.joinbyip)
-
 	
 func _on_play_pressed():
 	print(Globals.level)
