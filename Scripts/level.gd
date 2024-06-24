@@ -27,6 +27,7 @@ func _ready():
 			"p":get_parent().name,
 		}))
 
+	Globals.level_node = self
 
 	if Network.is_networking:
 		lineedit.visible = true

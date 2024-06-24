@@ -2,8 +2,6 @@ extends Node
 
 var DEBUGGING = true
 
-var level
-
 func _ready():
 	if DEBUGGING:
 		print("Running {n}._ready()... connected joypads: {j}".format({
@@ -29,7 +27,6 @@ func _load_characters_selector(ip, port):
 	LoadScene.load_scene(null, "res://Scenes/chose_character.tscn")
 
 func _on_level_loaded():
-	level = get_node(Globals.level)
 
 	if Globals.use_keyboard:
 		Globals.num_players = 1
@@ -50,56 +47,68 @@ func _on_joy_connection_changed(device_id, connected):
 			print("Connected device {d}.".format({"d":device_id}))
 		else:
 			print("Disconnected device {d}.".format({"d":device_id}))
-	if connected:
-		Globals.use_keyboard = false
-		
-		if Globals.use_keyboard:
-			Globals.num_players = 1
+	
+	if not Network.is_networking:	
+		if connected:
+			Globals.use_keyboard = false
+			
+			if Globals.use_keyboard:
+				Globals.num_players = 1
+			else:
+				Globals.num_players = Input.get_connected_joypads().size()
+			
+			Globals.player_index = device_id
+			Globals._clear_inputs_player(device_id)
+			Globals._inputs_player(device_id)
+			
+
+			if Globals.level_node == null: 
+				return
+
+			Globals.level_node.add_player(device_id)
+			print("Added player index {d} to the world.".format({"d":device_id}))
 		else:
-			Globals.num_players = Input.get_connected_joypads().size()
-		
-		Globals.player_index = device_id
-		Globals._clear_inputs_player(device_id)
-		Globals._inputs_player(device_id)
-		
+			Globals.use_keyboard = true
 
-		if level == null: 
-			return
+			if Globals.use_keyboard:
+				Globals.num_players = 1
+			else:
+				Globals.num_players = Input.get_connected_joypads().size()
 
-		level.add_player(device_id)
-		print("Added player index {d} to the world.".format({"d":device_id}))
+			Globals.player_index = device_id
+			Globals._clear_inputs_player(device_id)
+
+			if Globals.level_node == null: 
+				return
+
+			Globals.level_node.remove_player(device_id)
+			print("Removed player index {d} from the world.".format({"d": device_id}))
+
 	else:
-		Globals.use_keyboard = true
-
-		if Globals.use_keyboard:
-			Globals.num_players = 1
+		if connected:
+			Globals.use_keyboard = false
+			Globals._clear_inputs_player(device_id)
+			Globals._inputs_player(device_id)
 		else:
-			Globals.num_players = Input.get_connected_joypads().size()
-
-		Globals.player_index = device_id
-		Globals._clear_inputs_player(device_id)
-
-		if level == null: 
-			return
-
-		level.remove_player(device_id)
-		print("Removed player index {d} from the world.".format({"d": device_id}))
+			Globals.use_keyboard = true
+			Globals._clear_inputs_player(device_id)
 
 func _input(event):
-	if event is InputEventJoypadButton:
-		if event.button_index == JOY_BUTTON_A:
-			if event.is_pressed():
-				if not Globals.use_keyboard:
-					Globals.num_players = Input.get_connected_joypads().size()
-					Globals.player_index = event.device
-					Globals._clear_inputs_player(event.device)
-					Globals._inputs_player(event.device)
+	if not Network.is_networking:	
+		if event is InputEventJoypadButton:
+			if event.button_index == JOY_BUTTON_A:
+				if event.is_pressed():
+					if not Globals.use_keyboard:
+						Globals.num_players = Input.get_connected_joypads().size()
+						Globals.player_index = event.device
+						Globals._clear_inputs_player(event.device)
+						Globals._inputs_player(event.device)
 
-		
-					if level == null: 
-						return 
-						
-					level.add_player(event.device)
+			
+						if Globals.level_node == null: 
+							return 
+							
+						Globals.level_node.add_player(event.device)
 
 
 
