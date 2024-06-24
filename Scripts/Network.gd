@@ -5,7 +5,7 @@ var lisenerport = port + 1
 var broadcasterport = port + 2
 var ip = "127.0.0.1"
 var broadcasteripadress = "255.255.255.255"
-var username = "MichaxD"
+var username = "Player"
 var connected_ids: Array = []
 var connection_count = 0
 var is_networking = false
@@ -29,7 +29,7 @@ func joinbyip(ip_value, port_value):
 				get_parent().get_node("Game/Main Menu").hide()
 				get_parent().get_node("Game/CanvasLayer").show()
 				print("Loading level...")
-				LoadScene.load_scene(get_parent().get_node("Game/Chose_Character"), "res://Scenes/game.tscn")
+				UnloadScene.unload_scene(get_parent().get_node("Game/Chose_Character"))
 		else:
 			push_error("Error creating client: ", str(error))
 	else:
@@ -44,7 +44,7 @@ func joinbyip(ip_value, port_value):
 				get_parent().get_node("Game/Main Menu").hide()
 				get_parent().get_node("Game/CanvasLayer").show()
 				print("Loading level...")
-				LoadScene.load_scene(get_parent().get_node("Game/Chose_Character"), "res://Scenes/game.tscn")
+				UnloadScene.unload_scene(get_parent().get_node("Game/Chose_Character"))
 		else:
 			push_error("Error creating client: ", str(error))	
 
