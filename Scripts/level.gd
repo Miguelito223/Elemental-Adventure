@@ -211,8 +211,7 @@ func remove_network_player(peer_id):
 		sync_all_players_list.rpc()
 	else:
 		print("Player node not found or already freed: " + str(peer_id))
-	
-	
+		sync_all_players_list.rpc()
 
 	
 
