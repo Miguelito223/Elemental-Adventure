@@ -206,11 +206,16 @@ func remove_network_player(peer_id):
 
 	sync_all_players_list.rpc()
 
+	if multiplayer.is_server():
+		sync_all_players_list()
+
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
+	sync_all_players_list.rpc()
 
 func _on_player_spawner_despawned(node:Node):
 	print("desspawning player id: " + node.name)
+	sync_all_players_list.rpc()
 
 func _physics_process(_delta):
 	if Globals.autosave:
