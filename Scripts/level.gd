@@ -166,12 +166,16 @@ func add_player(player_index):
 @rpc("any_peer", "call_local")
 func sync_all_players_list():
 	# Actualizar la lista de jugadores en todos los clientes
-	players.clear()
+	print("Syncring player list")
 	Network.connected_ids.clear()
+	players.clear()
+	
 	for player in get_tree().get_nodes_in_group("player"):
 		Network.connected_ids.append(player.name.to_int())
-		Network.connection_count = Network.connected_ids.size()
-		players.append(player)
+
+	Network.connection_count = Network.connected_ids.size()
+	players = get_tree().get_nodes_in_group("player")
+	
 
 
 func add_network_player(peer_id):
@@ -200,10 +204,14 @@ func add_network_player(peer_id):
 
 func remove_network_player(peer_id):
 	print("removing player id: " + str(peer_id))	
-	var player = get_node(str(peer_id))
-	if is_instance_valid(player):
+	var player = get_node_or_null(str(peer_id))
+	if player and is_instance_valid(player):
 		player.queue_free()
-
+	else:
+		print("Player node not found or already freed: " + str(peer_id))
+	
+	await player.tree_exited
+	
 	sync_all_players_list.rpc()
 
 func _on_player_spawner_spawned(node):
