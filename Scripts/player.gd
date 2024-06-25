@@ -80,8 +80,8 @@ func _ready():
 			player_name = Network.username
 			Hearths = Network.hearths[device_num]
 			deaths = Network.deaths[device_num]
-			player_color = Globals.player_color_dict[device_num]
-			ball_color = Globals.ball_color_dict[device_num]  
+			player_color = Network.player_color_dict[device_num]
+			ball_color = Network.ball_color_dict[device_num]  
 			energys = Network.energys[device_num]
 			score = Network.score[device_num]
 	else:
