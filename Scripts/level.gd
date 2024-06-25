@@ -235,7 +235,7 @@ func victory_rpc():
 
 	DataState.remove_state_file()
 
-	if Globals.level_int == 31:
+	if (Globals.level_int - 1) == 31:
 		LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 	else:
 		LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
@@ -254,7 +254,7 @@ func _on_victory_zone_body_entered(body):
 
 				DataState.remove_state_file()
 
-				if Globals.level_int == 31:
+				if (Globals.level_int - 1) == 31:
 					LoadScene.load_scene(self, "res://Scenes/Super victory screen.tscn")
 				else:
 					LoadScene.load_scene(self, "res://Scenes/victory_menu.tscn")
