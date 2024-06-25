@@ -207,12 +207,14 @@ func remove_network_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
 	if player and is_instance_valid(player):
 		player.queue_free()
+		await player.tree_exited
+		sync_all_players_list.rpc()
 	else:
 		print("Player node not found or already freed: " + str(peer_id))
 	
-	await player.tree_exited
 	
-	sync_all_players_list.rpc()
+
+	
 
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
