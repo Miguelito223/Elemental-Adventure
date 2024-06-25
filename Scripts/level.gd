@@ -186,8 +186,8 @@ func add_network_player(peer_id):
 	
 	var player = player_scene.instantiate()
 	
-	player.player_id = player.name.to_int()
 	player.name = str(peer_id)
+	player.player_id = player.name.to_int()
 	player.device_num = Globals.player_index
 	player.setposspawn()
 
@@ -208,10 +208,6 @@ func remove_network_player(peer_id):
 
 func _on_player_spawner_spawned(node):
 	print("spawning player id: " + node.name)
-	node.player_id = node.name.to_int()
-	node.device_num = Globals.player_index
-	node.setposspawn()
-
 	sync_all_players_list.rpc()
 
 func _on_player_spawner_despawned(node:Node):
