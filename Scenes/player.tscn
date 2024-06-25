@@ -253,9 +253,6 @@ sprite_frames = ExtResource("2_svkx8")
 animation = &"fire idle"
 autoplay = "fire idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
-
 [node name="Mobilecontrolls" parent="." instance=ExtResource("11_tb078")]
 visible = false
 

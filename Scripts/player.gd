@@ -67,6 +67,12 @@ func _ready():
 			"p":get_parent().name,
 			}))
 
+
+	Globals.player[device_num] = self
+	Pause_Menu.hide()
+	get_tree().paused = false
+	setlifes(Hearths)
+
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
 			Max_Hearths = Network.max_hearths
@@ -91,17 +97,6 @@ func _ready():
 		score = Globals.score[device_num]	
 
 	
-	Globals.player[device_num] = self
-	Pause_Menu.hide()
-	get_tree().paused = false
-	setlifes(Hearths)
-
-
-	if Network.is_networking:
-		$Camera2D.enabled = syncronizer.is_multiplayer_authority()
-	else:
-		$Camera2D.enabled = false
-
 
 
 	Signals.player_ready.emit()
