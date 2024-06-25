@@ -117,17 +117,19 @@ func remove_player(player_index):
 		
 func server_disconected():
 	print("Server Finish")
+	Network.multiplayer_peer_Enet_host.destroy()
+	multiplayer.multiplayer_peer = null
 	Network.is_networking = false
 	Network.connected_ids.clear()
-	multiplayer.multiplayer_peer = null
 	UnloadScene.unload_scene(self)
 	get_parent().get_node("Main Menu").show()
 
 func conected_fail():
 	print("Fail to load")
+	Network.multiplayer_peer_Enet_host.destroy()
+	multiplayer.multiplayer_peer = null
 	Network.is_networking = false
 	Network.connected_ids.clear()
-	multiplayer.multiplayer_peer = null
 	UnloadScene.unload_scene(self)
 	get_parent().get_node("Main Menu").show()
 
