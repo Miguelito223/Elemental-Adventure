@@ -1,53 +1,49 @@
 [gd_scene load_steps=5 format=3 uid="uid://y6bboatewubh"]
 
+[ext_resource type="Theme" uid="uid://cf6o5io44h03f" path="res://Elemental Adventure theme.tres" id="1_4wsq5"]
 [ext_resource type="Script" path="res://Scripts/Pause menu.gd" id="1_77nxw"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_8qk3t"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="3_8hatb"]
-[ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="4_p5q2r"]
 
-[node name="Pause menu" type="Control"]
+[node name="Pause menu" type="CanvasLayer"]
 process_mode = 3
-layout_mode = 3
+layer = 2
+script = ExtResource("1_77nxw")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_77nxw")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-process_mode = 3
-layout_mode = 0
-offset_left = -1004.0
-offset_top = -257.0
-offset_right = 909.0
-offset_bottom = 831.0
-scale = Vector2(2.08, 1.44)
+theme = ExtResource("1_4wsq5")
 color = Color(0.211765, 0, 0.411765, 0.509804)
 
-[node name="tittle" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Credits" type="Label" parent="tittle"]
+[node name="Credits" type="Label" parent="."]
 process_mode = 3
-layout_mode = 0
-offset_left = 8.0
-offset_top = 1057.0
-offset_right = 464.0
-offset_bottom = 1084.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_right = 456.0
+grow_vertical = 0
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 theme_override_font_sizes/font_size = 24
 text = "make by Michael2911"
 
-[node name="Title" type="Label" parent="tittle"]
+[node name="Title" type="Label" parent="."]
 process_mode = 3
-layout_mode = 0
-offset_left = 336.0
-offset_top = -2.0
-offset_right = 1506.0
-offset_bottom = 138.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -585.0
+offset_right = 585.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 theme_override_font_sizes/font_size = 100
 text = "Pause"
@@ -56,17 +52,23 @@ vertical_alignment = 1
 
 [node name="Pause menu" type="VBoxContainer" parent="."]
 process_mode = 3
-visible = false
-layout_mode = 0
-offset_left = 376.0
-offset_top = 174.0
-offset_right = 735.0
-offset_bottom = 310.0
-scale = Vector2(3, 3)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -153.0
+offset_right = 304.0
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4wsq5")
 
 [node name="return" type="Button" parent="Pause menu"]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Return"
 script = ExtResource("3_8hatb")
@@ -74,18 +76,21 @@ script = ExtResource("3_8hatb")
 [node name="settings" type="Button" parent="Pause menu"]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Settings"
 
 [node name="reset player" type="Button" parent="Pause menu"]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Reset player"
 
 [node name="save" type="Button" parent="Pause menu"]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Save
 "
@@ -93,20 +98,24 @@ text = "Save
 [node name="back" type="Button" parent="Pause menu"]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Back"
 
 [node name="Settings menu" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 4
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 226.0
-offset_top = -344.0
-offset_right = 726.0
-offset_bottom = -176.0
+offset_left = -950.0
+offset_top = -85.0
+offset_right = 950.0
+offset_bottom = 85.0
+grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2.805, 3)
+theme = ExtResource("1_4wsq5")
 theme_override_constants/separation = 0
 alignment = 1
 
@@ -115,6 +124,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_4wsq5")
 
 [node name="fullscreen tongle" type="CheckButton" parent="Settings menu/Graphics"]
 layout_mode = 2
@@ -159,6 +169,7 @@ text = "vsycs"
 [node name="Volumen" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 
 [node name="master label" type="Label" parent="Settings menu/Volumen"]
 layout_mode = 2
@@ -199,6 +210,7 @@ max_value = 0.0
 [node name="Autosave" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 
 [node name="Autosave" type="CheckButton" parent="Settings menu/Autosave"]
 layout_mode = 2
@@ -218,6 +230,7 @@ text = "5"
 [node name="time" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 
 [node name="initial time" type="Label" parent="Settings menu/time"]
 layout_mode = 2
@@ -242,6 +255,7 @@ text = "1.0"
 [node name="Inputs" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 
 [node name="Input_set label2" type="Label" parent="Settings menu/Inputs"]
 layout_mode = 2
@@ -264,60 +278,69 @@ text = "Input Remapping:"
 
 [node name="GridContainer" type="GridContainer" parent="Settings menu/Inputs"]
 layout_mode = 2
-theme = ExtResource("4_p5q2r")
 columns = 2
 
 [node name="Multiplayer" type="VBoxContainer" parent="Settings menu"]
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 
 [node name="Players Num" type="Label" parent="Settings menu/Multiplayer"]
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Players num: (only work with keyboard)"
 
 [node name="player Num text" type="LineEdit" parent="Settings menu/Multiplayer"]
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "0"
 
 [node name="graphics button" type="Button" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Graphics"
 
 [node name="inputs button" type="Button" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "inputs"
 
 [node name="time button" type="Button" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "time"
 
 [node name="volumen button" type="Button" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "volumen"
 
 [node name="multiplayer button" type="Button" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "multiplayer"
 
 [node name="autosave button" type="Button" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "autosave"
 
 [node name="back" type="Button" parent="Settings menu"]
 layout_mode = 2
+theme = ExtResource("1_4wsq5")
 theme_override_fonts/font = ExtResource("2_8qk3t")
 text = "Back"
 

@@ -1,120 +1,154 @@
 [gd_scene load_steps=8 format=3 uid="uid://bq8c11xjf1nct"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_2vk4l"]
-[ext_resource type="Texture2D" uid="uid://cbvya6vhmaigo" path="res://Sprites/fuego.png" id="2_44f6u"]
+[ext_resource type="Theme" uid="uid://cf6o5io44h03f" path="res://Elemental Adventure theme.tres" id="1_f10x6"]
+[ext_resource type="Texture2D" uid="uid://bkgcaxfl6au5c" path="res://Foregound.png" id="2_h1r40"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="3_his25"]
 [ext_resource type="AudioStream" uid="uid://dsi8jiqv1o424" path="res://sounds/Music/main menu music.mp3" id="4_07aup"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="4_236ea"]
 [ext_resource type="Script" path="res://Scripts/Control.gd" id="5_gdsp0"]
-[ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="5_tq5s4"]
 
-[node name="Main Menu" type="Control"]
-layout_mode = 3
+[node name="Main Menu" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_2vk4l")
+
+[node name="fondo" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2vk4l")
-
-[node name="fondo" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -707.0
-offset_top = -585.0
-offset_right = -570.0
-offset_bottom = -449.0
-scale = Vector2(28.68, 16)
+theme = ExtResource("1_f10x6")
 color = Color(0.137255, 0, 0.247059, 1)
 
-[node name="Tittle_Credits" type="Control" parent="."]
-layout_mode = 2
-anchors_preset = 0
-offset_left = 450.0
-offset_top = 162.0
-offset_right = 634.0
-offset_bottom = 162.0
+[node name="Title" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.497917
+anchor_top = 0.0925926
+anchor_right = 0.497917
+anchor_bottom = 0.0925926
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme = ExtResource("1_f10x6")
+metadata/_edit_use_anchors_ = true
 
-[node name="logo" type="Sprite2D" parent="Tittle_Credits"]
-position = Vector2(1284, -85.9126)
-scale = Vector2(-0.334293, 0.329613)
-texture = ExtResource("2_44f6u")
+[node name="TextureRect" type="TextureRect" parent="Title"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 504.0
+offset_top = -76.0
+offset_right = 938.0
+offset_bottom = 356.0
+grow_horizontal = 0
+scale = Vector2(0.424043, 0.419502)
+theme = ExtResource("1_f10x6")
+texture = ExtResource("2_h1r40")
 
-[node name="Tittle" type="Label" parent="Tittle_Credits"]
+[node name="Tittle" type="Label" parent="Title"]
 texture_filter = 1
-layout_mode = 0
-offset_left = -227.0
-offset_top = -123.913
-offset_right = 1293.0
-offset_bottom = -43.9126
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -714.0
+offset_top = -4.0
+offset_right = 806.0
+offset_bottom = 76.0004
+grow_horizontal = 2
 scale = Vector2(0.941, 1)
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 70
 text = "Elemental Adventure"
 
-[node name="Credits" type="Label" parent="Tittle_Credits"]
-layout_mode = 2
-offset_left = -449.0
-offset_top = 896.0
-offset_right = 6.99997
-offset_bottom = 920.0
+[node name="Credits" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 570.0
+grow_vertical = 0
 scale = Vector2(0.811, 1)
-theme_override_fonts/font = ExtResource("3_his25")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("1_f10x6")
+theme_override_font_sizes/font_size = 30
 text = "make by Michael2911"
 
 [node name="main menu" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 561.0
-offset_top = 425.0
-offset_right = 889.0
-offset_bottom = 533.0
-scale = Vector2(2.478, 3)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.0
+offset_top = -153.0
+offset_right = 279.0
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_f10x6")
 alignment = 1
 
 [node name="Play" type="Button" parent="main menu"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "play"
 script = ExtResource("4_236ea")
 
 [node name="Online" type="Button" parent="main menu"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Multiplayer"
 
 [node name="option" type="Button" parent="main menu"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Options"
 
 [node name="delete data" type="Button" parent="main menu"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Delete data
 "
 
 [node name="exit" type="Button" parent="main menu"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Exit"
 
 [node name="Online Menu" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 316.0
-offset_top = 139.0
-offset_right = 924.0
-offset_bottom = 439.0
-scale = Vector2(2.048, 3)
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -150.0
+offset_right = 304.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_f10x6")
 theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Host2" type="VBoxContainer" parent="Online Menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="name text" type="Label" parent="Online Menu/Host2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "name"
 horizontal_alignment = 1
@@ -122,10 +156,12 @@ vertical_alignment = 1
 
 [node name="name port" type="LineEdit" parent="Online Menu/Host2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 placeholder_text = "MichaxD"
 
 [node name="port text" type="Label" parent="Online Menu/Host2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "port"
 horizontal_alignment = 1
@@ -133,19 +169,23 @@ vertical_alignment = 1
 
 [node name="port" type="LineEdit" parent="Online Menu/Host2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 placeholder_text = "9999"
 
 [node name="create" type="Button" parent="Online Menu/Host2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Create"
 
 [node name="Join2" type="VBoxContainer" parent="Online Menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="name text" type="Label" parent="Online Menu/Join2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "name"
 horizontal_alignment = 1
@@ -153,10 +193,12 @@ vertical_alignment = 1
 
 [node name="name port" type="LineEdit" parent="Online Menu/Join2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 placeholder_text = "MichaxD"
 
 [node name="port text" type="Label" parent="Online Menu/Join2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "port"
 horizontal_alignment = 1
@@ -164,10 +206,12 @@ vertical_alignment = 1
 
 [node name="port" type="LineEdit" parent="Online Menu/Join2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 placeholder_text = "9999"
 
 [node name="ip text" type="Label" parent="Online Menu/Join2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "ip"
 horizontal_alignment = 1
@@ -175,18 +219,23 @@ vertical_alignment = 1
 
 [node name="ip" type="LineEdit" parent="Online Menu/Join2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 placeholder_text = "127.0.0.1"
 
 [node name="join" type="Button" parent="Online Menu/Join2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
 
 [node name="Server Browser2" type="VBoxContainer" parent="Online Menu"]
+visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="Control" type="Control" parent="Online Menu/Server Browser2"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 script = ExtResource("5_gdsp0")
 
 [node name="broadcast timer" type="Timer" parent="Online Menu/Server Browser2/Control"]
@@ -198,6 +247,9 @@ offset_left = -134.766
 offset_top = -151.667
 offset_right = 738.234
 offset_bottom = 151.333
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_f10x6")
 
 [node name="ServerInfo" type="HBoxContainer" parent="Online Menu/Server Browser2/Control/Panel"]
 layout_mode = 0
@@ -205,27 +257,31 @@ offset_left = 20.9961
 offset_top = -3.33333
 offset_right = 448.996
 offset_bottom = 36.6667
-scale = Vector2(1.96671, 1.4687)
+theme = ExtResource("1_f10x6")
 alignment = 1
 
 [node name="Name" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
 layout_mode = 2
-theme = ExtResource("5_tq5s4")
+theme = ExtResource("1_f10x6")
+theme_override_font_sizes/font_size = 45
 text = "Name,"
 
 [node name="count" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
 layout_mode = 2
-theme = ExtResource("5_tq5s4")
+theme = ExtResource("1_f10x6")
+theme_override_font_sizes/font_size = 45
 text = "Count,"
 
 [node name="ip" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
 layout_mode = 2
-theme = ExtResource("5_tq5s4")
+theme = ExtResource("1_f10x6")
+theme_override_font_sizes/font_size = 45
 text = "ip,"
 
 [node name="port" type="Label" parent="Online Menu/Server Browser2/Control/Panel/ServerInfo"]
 layout_mode = 2
-theme = ExtResource("5_tq5s4")
+theme = ExtResource("1_f10x6")
+theme_override_font_sizes/font_size = 45
 text = "port"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Online Menu/Server Browser2/Control/Panel"]
@@ -234,6 +290,7 @@ offset_left = 114.258
 offset_top = 56.6667
 offset_right = 730.258
 offset_bottom = 96.6667
+theme = ExtResource("1_f10x6")
 
 [node name="Label" type="Label" parent="Online Menu/Server Browser2/Control/Panel"]
 layout_mode = 0
@@ -241,90 +298,94 @@ offset_left = 17.5781
 offset_top = 271.333
 offset_right = 57.5781
 offset_bottom = 294.333
-theme = ExtResource("5_tq5s4")
+theme = ExtResource("1_f10x6")
+theme_override_font_sizes/font_size = 30
 text = "Bound to lisen port: "
 
 [node name="host" type="Button" parent="Online Menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Host"
 
 [node name="join" type="Button" parent="Online Menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Join"
 
 [node name="server browser" type="Button" parent="Online Menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Server browser local"
 
 [node name="back" type="Button" parent="Online Menu"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
+theme_override_font_sizes/font_size = 50
 text = "Back"
 
 [node name="Settings menu" type="VBoxContainer" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 316.0
-offset_top = 139.0
-offset_right = 924.0
-offset_bottom = 439.0
-scale = Vector2(2.048, 3)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -174.0
+offset_right = 304.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_f10x6")
 theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Graphics" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="fullscreen tongle" type="CheckButton" parent="Settings menu/Graphics"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
 action_mode = 0
 text = "Full Screen"
 
 [node name="Resolution laber" type="Label" parent="Settings menu/Graphics"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
 text = "Resolution"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="resolution" type="OptionButton" parent="Settings menu/Graphics"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
 
 [node name="graphics label2" type="Label" parent="Settings menu/Graphics"]
 process_mode = 3
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
 text = "graphics"
 
 [node name="graphics" type="OptionButton" parent="Settings menu/Graphics"]
 process_mode = 3
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
 
 [node name="FPS" type="CheckButton" parent="Settings menu/Graphics"]
 process_mode = 3
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
 text = "FPS"
 
 [node name="vsycs" type="CheckButton" parent="Settings menu/Graphics"]
 process_mode = 3
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_his25")
 text = "vsycs"
 
 [node name="Volumen" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="master label" type="Label" parent="Settings menu/Volumen"]
 layout_mode = 2
@@ -365,6 +426,7 @@ max_value = 0.0
 [node name="Autosave" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="Autosave" type="CheckButton" parent="Settings menu/Autosave"]
 layout_mode = 2
@@ -384,6 +446,7 @@ text = "5"
 [node name="time" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="initial time" type="Label" parent="Settings menu/time"]
 layout_mode = 2
@@ -408,6 +471,7 @@ text = "1.0"
 [node name="Inputs" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="Input_set label2" type="Label" parent="Settings menu/Inputs"]
 layout_mode = 2
@@ -430,12 +494,12 @@ text = "Input Remapping:"
 
 [node name="GridContainer" type="GridContainer" parent="Settings menu/Inputs"]
 layout_mode = 2
-theme = ExtResource("5_tq5s4")
 columns = 2
 
 [node name="Multiplayer" type="VBoxContainer" parent="Settings menu"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 
 [node name="Players Num" type="Label" parent="Settings menu/Multiplayer"]
 layout_mode = 2
@@ -448,43 +512,44 @@ theme_override_fonts/font = ExtResource("3_his25")
 text = "0"
 
 [node name="graphics button" type="Button" parent="Settings menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Graphics"
 
 [node name="inputs button" type="Button" parent="Settings menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "inputs"
 
 [node name="time button" type="Button" parent="Settings menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "time"
 
 [node name="volumen button" type="Button" parent="Settings menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "volumen"
 
 [node name="multiplayer button" type="Button" parent="Settings menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "multiplayer"
 
 [node name="autosave button" type="Button" parent="Settings menu"]
-visible = false
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "autosave"
 
 [node name="back" type="Button" parent="Settings menu"]
 layout_mode = 2
+theme = ExtResource("1_f10x6")
 theme_override_fonts/font = ExtResource("3_his25")
 text = "Back"
 

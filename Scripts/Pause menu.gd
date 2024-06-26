@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 @onready var pause_menu = $"Pause menu"
 @onready var settings_menu = $"Settings menu"

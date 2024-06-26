@@ -1,135 +1,162 @@
 [gd_scene load_steps=7 format=3 uid="uid://bobb12psnciuk"]
 
 [ext_resource type="Script" path="res://Scripts/chose_character.gd" id="1_mqkl6"]
-[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="1_r854h"]
+[ext_resource type="Theme" uid="uid://cf6o5io44h03f" path="res://Elemental Adventure theme.tres" id="1_si5xw"]
 [ext_resource type="Texture2D" uid="uid://d3l2e26s0r3op" path="res://Sprites/Fire IDle.png" id="2_sqlja"]
 [ext_resource type="Texture2D" uid="uid://bhtn0asm5ij01" path="res://Sprites/water idle.png" id="3_8pxc4"]
 [ext_resource type="Texture2D" uid="uid://dn2uwttahe5bw" path="res://Sprites/air idle.png" id="4_nb3qt"]
 [ext_resource type="Texture2D" uid="uid://bff040cb4af36" path="res://Sprites/earth idle.png" id="5_1wjbd"]
 
-[node name="Chose_Character" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Chose_Character" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_mqkl6")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_si5xw")
 color = Color(0.190921, 0.000413058, 0.340971, 1)
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 72.0
-offset_top = 32.0
-offset_right = 376.0
-offset_bottom = 55.0
-scale = Vector2(6.02174, 5.27448)
-theme_override_fonts/font = ExtResource("1_r854h")
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -950.0
+offset_top = -456.0
+offset_right = 950.0
+offset_bottom = -356.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_si5xw")
+theme_override_font_sizes/font_size = 100
 text = "Chose the character"
 
-[node name="fire" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 461.0
-offset_top = 627.0
-offset_right = 589.0
-offset_bottom = 753.0
-scale = Vector2(3, 2.728)
+[node name="fire" type="VBoxContainer" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -122.5
+offset_right = 258.0
+offset_bottom = 122.5
+grow_vertical = 2
+theme = ExtResource("1_si5xw")
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/fire"]
+[node name="TextureRect" type="TextureRect" parent="fire"]
 layout_mode = 2
 texture = ExtResource("2_sqlja")
+expand_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/fire"]
+[node name="Label" type="Label" parent="fire"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "Fire"
 horizontal_alignment = 1
 
-[node name="Button_fire" type="Button" parent="CanvasLayer/fire"]
+[node name="Button_fire" type="Button" parent="fire"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "Press"
 
-[node name="water" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1140.0
-offset_top = 643.0
-offset_right = 1268.0
-offset_bottom = 769.0
-scale = Vector2(3, 2.727)
+[node name="water" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -122.5
+offset_right = 129.0
+offset_bottom = 122.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_si5xw")
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/water"]
+[node name="TextureRect" type="TextureRect" parent="water"]
 layout_mode = 2
 texture = ExtResource("3_8pxc4")
+expand_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/water"]
+[node name="Label" type="Label" parent="water"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "water
 "
 horizontal_alignment = 1
 
-[node name="Button_water" type="Button" parent="CanvasLayer/water"]
+[node name="Button_water" type="Button" parent="water"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "Press"
 
-[node name="air" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 450.0
-offset_top = 177.0
-offset_right = 578.0
-offset_bottom = 303.0
-scale = Vector2(3, 2.728)
+[node name="air" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_top = -245.0
+offset_right = 129.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_si5xw")
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/air"]
+[node name="TextureRect" type="TextureRect" parent="air"]
 layout_mode = 2
 texture = ExtResource("4_nb3qt")
+expand_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/air"]
+[node name="Label" type="Label" parent="air"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "air
 "
 horizontal_alignment = 1
 
-[node name="Button_air" type="Button" parent="CanvasLayer/air"]
+[node name="Button_air" type="Button" parent="air"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "Press"
 
-[node name="earth" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1144.0
-offset_top = 176.0
-offset_right = 1272.0
-offset_bottom = 302.0
-scale = Vector2(3, 2.728)
+[node name="earth" type="VBoxContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -122.5
+offset_bottom = 122.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_si5xw")
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/earth"]
+[node name="TextureRect" type="TextureRect" parent="earth"]
 layout_mode = 2
 texture = ExtResource("5_1wjbd")
+expand_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/earth"]
+[node name="Label" type="Label" parent="earth"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "earth"
 horizontal_alignment = 1
 
-[node name="Button_earth" type="Button" parent="CanvasLayer/earth"]
+[node name="Button_earth" type="Button" parent="earth"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_r854h")
+theme_override_font_sizes/font_size = 50
 text = "Press"
 
-[connection signal="pressed" from="CanvasLayer/fire/Button_fire" to="." method="_on_button_fire_pressed"]
-[connection signal="pressed" from="CanvasLayer/water/Button_water" to="." method="_on_button_water_pressed"]
-[connection signal="pressed" from="CanvasLayer/air/Button_air" to="." method="_on_button_air_pressed"]
-[connection signal="pressed" from="CanvasLayer/earth/Button_earth" to="." method="_on_button_earth_pressed"]
+[connection signal="pressed" from="fire/Button_fire" to="." method="_on_button_fire_pressed"]
+[connection signal="pressed" from="water/Button_water" to="." method="_on_button_water_pressed"]
+[connection signal="pressed" from="air/Button_air" to="." method="_on_button_air_pressed"]
+[connection signal="pressed" from="earth/Button_earth" to="." method="_on_button_earth_pressed"]

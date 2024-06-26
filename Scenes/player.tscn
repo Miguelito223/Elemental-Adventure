@@ -264,17 +264,17 @@ libraries = {
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_uy6bv")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Hud" type="CanvasLayer" parent="."]
 script = ExtResource("15_jtxs5")
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Panel" type="Panel" parent="Hud"]
 offset_top = 2.0
 offset_right = 325.0
 offset_bottom = 75.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
 metadata/_edit_group_ = true
 
-[node name="Hearths" type="TextureRect" parent="CanvasLayer/Panel"]
+[node name="Hearths" type="TextureRect" parent="Hud/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -290,14 +290,14 @@ texture = ExtResource("5_uo812")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Panel2" type="Panel" parent="CanvasLayer"]
+[node name="Panel2" type="Panel" parent="Hud"]
 offset_top = 67.0
 offset_right = 238.0
 offset_bottom = 140.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
 metadata/_edit_group_ = true
 
-[node name="Label2" type="Label" parent="CanvasLayer/Panel2"]
+[node name="Label2" type="Label" parent="Hud/Panel2"]
 layout_mode = 0
 offset_left = 79.0
 offset_top = 4.0
@@ -309,7 +309,7 @@ text = ":0
 "
 vertical_alignment = 1
 
-[node name="coin" type="AnimatedSprite2D" parent="CanvasLayer/Panel2/Label2"]
+[node name="coin" type="AnimatedSprite2D" parent="Hud/Panel2/Label2"]
 texture_filter = 1
 position = Vector2(-14.5009, 11.6893)
 scale = Vector2(0.83282, 0.730583)
@@ -317,7 +317,7 @@ sprite_frames = SubResource("SpriteFrames_an653")
 animation = &"Coin"
 autoplay = "Coin"
 
-[node name="Panel3" type="Panel" parent="CanvasLayer"]
+[node name="Panel3" type="Panel" parent="Hud"]
 offset_top = 213.0
 offset_right = 238.0
 offset_bottom = 286.0
@@ -325,7 +325,7 @@ scale = Vector2(1.01075, 1.02941)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
 metadata/_edit_group_ = true
 
-[node name="Label3" type="Label" parent="CanvasLayer/Panel3"]
+[node name="Label3" type="Label" parent="Hud/Panel3"]
 layout_mode = 0
 offset_left = 18.7979
 offset_top = 6.80003
@@ -337,7 +337,7 @@ text = "12:00
 "
 vertical_alignment = 1
 
-[node name="Panel4" type="Panel" parent="CanvasLayer"]
+[node name="Panel4" type="Panel" parent="Hud"]
 offset_top = 139.0
 offset_right = 337.0
 offset_bottom = 212.0
@@ -345,7 +345,7 @@ scale = Vector2(1.01075, 1.02941)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
 metadata/_edit_group_ = true
 
-[node name="Label4" type="Label" parent="CanvasLayer/Panel4"]
+[node name="Label4" type="Label" parent="Hud/Panel4"]
 layout_mode = 0
 offset_left = 18.7979
 offset_top = 6.80002
@@ -357,7 +357,7 @@ text = "score:0
 "
 vertical_alignment = 1
 
-[node name="Panel5" type="Panel" parent="CanvasLayer"]
+[node name="Panel5" type="Panel" parent="Hud"]
 offset_left = 325.0
 offset_top = 2.0
 offset_right = 492.0
@@ -365,7 +365,7 @@ offset_bottom = 75.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
 metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel5"]
+[node name="Label" type="Label" parent="Hud/Panel5"]
 layout_mode = 0
 offset_left = 76.0
 offset_top = 20.0
@@ -375,7 +375,7 @@ theme_override_fonts/font = ExtResource("6_nj16g")
 theme_override_font_sizes/font_size = 35
 text = ":0"
 
-[node name="Deaths" type="TextureRect" parent="CanvasLayer/Panel5/Label"]
+[node name="Deaths" type="TextureRect" parent="Hud/Panel5/Label"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -390,7 +390,7 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("19_ftjg4")
 expand_mode = 1
 
-[node name="FPS" type="Label" parent="CanvasLayer"]
+[node name="FPS" type="Label" parent="Hud"]
 offset_left = 5.0
 offset_top = 295.0
 offset_right = 45.0
@@ -399,7 +399,16 @@ theme_override_fonts/font = ExtResource("6_nj16g")
 theme_override_font_sizes/font_size = 34
 text = "FPS: "
 
-[node name="pause" type="Button" parent="CanvasLayer"]
+[node name="Credits" type="Label" parent="Hud"]
+offset_left = 8.0
+offset_top = 1057.0
+offset_right = 416.0
+offset_bottom = 1084.0
+theme_override_fonts/font = ExtResource("6_nj16g")
+theme_override_font_sizes/font_size = 24
+text = "make by Michael2911"
+
+[node name="pause" type="Button" parent="Hud"]
 texture_filter = 1
 offset_left = 1587.0
 offset_top = -1.0
@@ -409,17 +418,7 @@ scale = Vector2(3.7841, 2.90174)
 theme_override_fonts/font = ExtResource("6_nj16g")
 text = "Pause"
 
-[node name="Pause menu" parent="CanvasLayer" instance=ExtResource("9_aviom")]
-visible = false
-
-[node name="Credits" type="Label" parent="CanvasLayer"]
-offset_left = 8.0
-offset_top = 1057.0
-offset_right = 416.0
-offset_bottom = 1084.0
-theme_override_fonts/font = ExtResource("6_nj16g")
-theme_override_font_sizes/font_size = 24
-text = "make by Michael2911"
+[node name="Pause menu" parent="." instance=ExtResource("9_aviom")]
 
 [node name="Name" type="Label" parent="."]
 offset_left = -27.5
@@ -474,7 +473,7 @@ shape = SubResource("RectangleShape2D_g0xrs")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="pressed" from="CanvasLayer/pause" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Hud/pause" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="Invunerability" to="." method="_on_invunerability_timeout"]
 [connection signal="body_entered" from="WaterDetector2D" to="." method="_on_water_detector_2d_body_entered"]
 [connection signal="body_exited" from="WaterDetector2D" to="." method="_on_water_detector_2d_body_exited"]

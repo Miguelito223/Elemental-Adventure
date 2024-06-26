@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 @onready var level = get_parent()
 @onready var player = get_parent().get_node(str(multiplayer.get_unique_id()))

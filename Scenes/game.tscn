@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://2t5xqdooqkml"]
+[gd_scene load_steps=4 format=3 uid="uid://2t5xqdooqkml"]
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_b64g1"]
-[ext_resource type="Theme" uid="uid://b3rdpkoms18pg" path="res://remapbutton theme.tres" id="2_qo1i1"]
+[ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_gq87x"]
+
+[sub_resource type="Theme" id="Theme_fexxx"]
+Button/fonts/font = ExtResource("2_gq87x")
+Label/fonts/font = ExtResource("2_gq87x")
 
 [node name="Game" type="Node"]
 script = ExtResource("1_b64g1")
@@ -17,7 +21,7 @@ visible = false
 offset_left = 1640.0
 offset_right = 1920.0
 offset_bottom = 49.0
-theme = ExtResource("2_qo1i1")
+theme = SubResource("Theme_fexxx")
 text = "Back To main Menu"
 
 [node name="Reconnect" type="Button" parent="CanvasLayer"]
@@ -25,7 +29,7 @@ offset_left = 1640.0
 offset_top = 45.0
 offset_right = 1920.0
 offset_bottom = 94.0
-theme = ExtResource("2_qo1i1")
+theme = SubResource("Theme_fexxx")
 text = "Reconnect"
 
 [connection signal="despawned" from="LevelSpawner" to="." method="_on_map_spawner_despawned"]

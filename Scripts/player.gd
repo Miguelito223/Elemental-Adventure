@@ -17,10 +17,10 @@ var can_fire = true
 @onready var Animation_Effects = $AnimationPlayer
 @onready var Marker = $Node2D/Marker2D
 @onready var Marker_Parent = $Node2D
-@onready var Pause_Menu = $"CanvasLayer/Pause menu"
+@onready var Pause_Menu = $"Pause menu"
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var light = $PointLight2D
-@onready var canvas = $CanvasLayer
+@onready var Hud = $Hud
 @onready var MobileButtons = $Mobilecontrolls
 @onready var syncronizer = $MultiplayerSynchronizer
 var max_speed = 300.0
@@ -170,13 +170,13 @@ func _process(_delta):
 	
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
-			canvas.show()
+			Hud.show()
 		else:
-			canvas.hide()
+			Hud.hide()
 
 	if device_num == 0:
 		if not Network.is_networking:
-			canvas.show()
+			Hud.show()
 		light.enabled = Globals.Graphics
 		light.shadow_enabled = Globals.Graphics
 		light.shadow_filter_smooth = 4 - Globals.Graphics
@@ -206,7 +206,7 @@ func _process(_delta):
 			AnimatedSprite.play("fire idle")
 	elif device_num == 1:
 		if not Network.is_networking:
-			canvas.hide()
+			Hud.hide()
 		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("water walk")
@@ -218,7 +218,7 @@ func _process(_delta):
 			AnimatedSprite.play("water idle")
 	elif device_num == 2:
 		if not Network.is_networking:
-			canvas.hide()
+			Hud.hide()
 		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("air walk")
@@ -230,7 +230,7 @@ func _process(_delta):
 			AnimatedSprite.play("air idle")
 	elif device_num == 3:
 		if not Network.is_networking:
-			canvas.hide()
+			Hud.hide()
 		light.enabled = false
 		if velocity.x > 0 or velocity.x < 0:
 			AnimatedSprite.play("earth walk")
@@ -242,7 +242,7 @@ func _process(_delta):
 			AnimatedSprite.play("earth idle")
 	else:
 		if not Network.is_networking:
-			canvas.hide()
+			Hud.hide()
 		light.enabled = true
 		modulate = str_to_var("Color" + str(player_color))
 		if velocity.x > 0 or velocity.x < 0:
