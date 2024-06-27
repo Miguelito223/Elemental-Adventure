@@ -18,15 +18,13 @@ stream = ExtResource("4_dqktq")
 autoplay = true
 bus = &"FX"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-process_mode = 3
+[node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_chnvv")
-color = Color(0.211765, 0, 0.411765, 1)
 
 [node name="Label" type="Label" parent="."]
 process_mode = 3

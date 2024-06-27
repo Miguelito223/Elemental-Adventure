@@ -357,7 +357,12 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yy2o7"]
-bg_color = Color(0.26212, 0.00027011, 0.346016, 1)
+bg_color = Color(0.677271, 0.0020161, 0.870997, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tu8ty"]
 content_margin_left = 2.0

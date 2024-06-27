@@ -339,7 +339,7 @@ vertical_alignment = 1
 
 [node name="Panel4" type="Panel" parent="Hud"]
 offset_top = 139.0
-offset_right = 337.0
+offset_right = 411.0
 offset_bottom = 212.0
 scale = Vector2(1.01075, 1.02941)
 theme = ExtResource("5_ns770")

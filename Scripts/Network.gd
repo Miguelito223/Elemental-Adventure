@@ -27,7 +27,7 @@ func joinbyip(ip_value, port_value):
 				is_networking = true
 				is_host = false
 				get_parent().get_node("Game/Main Menu").hide()
-				get_parent().get_node("Game/CanvasLayer").show()
+				get_parent().get_node("Game/Game_Controls").show()
 				print("Loading level...")
 				UnloadScene.unload_scene(get_parent().get_node("Game/Chose_Character"))
 		else:
@@ -42,7 +42,7 @@ func joinbyip(ip_value, port_value):
 				is_networking = true
 				is_host = false
 				get_parent().get_node("Game/Main Menu").hide()
-				get_parent().get_node("Game/CanvasLayer").show()
+				get_parent().get_node("Game/Game_Controls").show()
 				print("Loading level...")
 				UnloadScene.unload_scene(get_parent().get_node("Game/Chose_Character"))
 		else:
