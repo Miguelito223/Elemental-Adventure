@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://2t5xqdooqkml"]
+[gd_scene load_steps=5 format=3 uid="uid://2t5xqdooqkml"]
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_b64g1"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="2_gq87x"]
+[ext_resource type="Theme" uid="uid://cf6o5io44h03f" path="res://Elemental Adventure theme.tres" id="3_up7vo"]
 
 [sub_resource type="Theme" id="Theme_fexxx"]
 Button/fonts/font = ExtResource("2_gq87x")
@@ -14,17 +15,17 @@ script = ExtResource("1_b64g1")
 _spawnable_scenes = PackedStringArray("res://Scenes/level_1.tscn", "res://Scenes/level_2.tscn", "res://Scenes/level_3.tscn", "res://Scenes/level_4.tscn", "res://Scenes/level_5.tscn", "res://Scenes/level_6.tscn", "res://Scenes/level_7.tscn", "res://Scenes/level_8.tscn", "res://Scenes/level_9.tscn", "res://Scenes/level_10.tscn", "res://Scenes/level_11.tscn", "res://Scenes/level_12.tscn", "res://Scenes/level_13.tscn", "res://Scenes/level_14.tscn", "res://Scenes/level_15.tscn", "res://Scenes/level_16.tscn", "res://Scenes/level_17.tscn", "res://Scenes/level_18.tscn", "res://Scenes/level_19.tscn", "res://Scenes/level_20.tscn", "res://Scenes/level_21.tscn", "res://Scenes/level_22.tscn", "res://Scenes/level_23.tscn", "res://Scenes/level_24.tscn", "res://Scenes/level_25.tscn", "res://Scenes/level_26.tscn", "res://Scenes/level_27.tscn", "res://Scenes/level_28.tscn", "res://Scenes/level_29.tscn", "res://Scenes/level_30.tscn", "res://Scenes/level_31.tscn")
 spawn_path = NodePath("..")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Game_Controls" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Back to Main menu" type="Button" parent="CanvasLayer"]
+[node name="Back to Main menu" type="Button" parent="Game_Controls"]
 offset_left = 1640.0
 offset_right = 1920.0
 offset_bottom = 49.0
 theme = SubResource("Theme_fexxx")
 text = "Back To main Menu"
 
-[node name="Reconnect" type="Button" parent="CanvasLayer"]
+[node name="Reconnect" type="Button" parent="Game_Controls"]
 offset_left = 1640.0
 offset_top = 45.0
 offset_right = 1920.0
@@ -32,7 +33,29 @@ offset_bottom = 94.0
 theme = SubResource("Theme_fexxx")
 text = "Reconnect"
 
+[node name="Chat" type="CanvasLayer" parent="."]
+
+[node name="LineEdit" type="LineEdit" parent="Chat"]
+offset_left = 4.0
+offset_top = 907.0
+offset_right = 283.0
+offset_bottom = 938.0
+theme = ExtResource("3_up7vo")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "Message"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit" type="TextEdit" parent="Chat"]
+offset_left = 6.0
+offset_top = 687.0
+offset_right = 281.0
+offset_bottom = 903.0
+theme = ExtResource("3_up7vo")
+editable = false
+metadata/_edit_use_anchors_ = true
+
 [connection signal="despawned" from="LevelSpawner" to="." method="_on_map_spawner_despawned"]
 [connection signal="spawned" from="LevelSpawner" to="." method="_on_multiplayer_spawner_spawned"]
-[connection signal="pressed" from="CanvasLayer/Back to Main menu" to="." method="_on_back_to_main_menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/Reconnect" to="." method="_on_reconnect_pressed"]
+[connection signal="pressed" from="Game_Controls/Back to Main menu" to="." method="_on_back_to_main_menu_pressed"]
+[connection signal="pressed" from="Game_Controls/Reconnect" to="." method="_on_reconnect_pressed"]
+[connection signal="gui_input" from="Chat/LineEdit" to="." method="_on_line_edit_gui_input"]

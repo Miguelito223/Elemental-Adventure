@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_peqvs"]
 [ext_resource type="SpriteFrames" uid="uid://cswkaimcwce0g" path="res://player.tres" id="2_svkx8"]
+[ext_resource type="Theme" uid="uid://cf6o5io44h03f" path="res://Elemental Adventure theme.tres" id="5_ns770"]
 [ext_resource type="Texture2D" uid="uid://chda8y1tj8hby" path="res://Sprites/hearth.png" id="5_uo812"]
 [ext_resource type="FontFile" uid="uid://dsgyxibyhxj10" path="res://PressStart2P.ttf" id="6_nj16g"]
 [ext_resource type="PackedScene" uid="uid://y6bboatewubh" path="res://Scenes/pause_menu.tscn" id="9_aviom"]
@@ -188,12 +189,6 @@ properties/19/path = NodePath(".:player_id")
 properties/19/spawn = true
 properties/19/replication_mode = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs5ch"]
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ogjv1"]
 atlas = ExtResource("18_6b2vi")
 region = Rect2(0, 0, 64, 64)
@@ -271,7 +266,7 @@ script = ExtResource("15_jtxs5")
 offset_top = 2.0
 offset_right = 325.0
 offset_bottom = 75.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
+theme = ExtResource("5_ns770")
 metadata/_edit_group_ = true
 
 [node name="Hearths" type="TextureRect" parent="Hud/Panel"]
@@ -286,6 +281,7 @@ offset_bottom = 938.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.05, 0.05)
+theme = ExtResource("5_ns770")
 texture = ExtResource("5_uo812")
 expand_mode = 1
 stretch_mode = 1
@@ -294,17 +290,19 @@ stretch_mode = 1
 offset_top = 67.0
 offset_right = 238.0
 offset_bottom = 140.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
+theme = ExtResource("5_ns770")
 metadata/_edit_group_ = true
 
 [node name="Label2" type="Label" parent="Hud/Panel2"]
 layout_mode = 0
-offset_left = 79.0
-offset_top = 4.0
-offset_right = 151.0
-offset_bottom = 30.0
+offset_left = 103.0
+offset_top = 9.0
+offset_right = 175.0
+offset_bottom = 35.0
 scale = Vector2(2.55157, 2.73754)
+theme = ExtResource("5_ns770")
 theme_override_fonts/font = ExtResource("6_nj16g")
+theme_override_font_sizes/font_size = 18
 text = ":0
 "
 vertical_alignment = 1
@@ -322,17 +320,19 @@ offset_top = 213.0
 offset_right = 238.0
 offset_bottom = 286.0
 scale = Vector2(1.01075, 1.02941)
-theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
+theme = ExtResource("5_ns770")
 metadata/_edit_group_ = true
 
 [node name="Label3" type="Label" parent="Hud/Panel3"]
 layout_mode = 0
-offset_left = 18.7979
-offset_top = 6.80003
-offset_right = 98.7979
-offset_bottom = 32.8
+offset_left = 2.96809
+offset_top = 7.77145
+offset_right = 92.9681
+offset_bottom = 33.7714
 scale = Vector2(2.55157, 2.73754)
+theme = ExtResource("5_ns770")
 theme_override_fonts/font = ExtResource("6_nj16g")
+theme_override_font_sizes/font_size = 18
 text = "12:00
 "
 vertical_alignment = 1
@@ -342,7 +342,7 @@ offset_top = 139.0
 offset_right = 337.0
 offset_bottom = 212.0
 scale = Vector2(1.01075, 1.02941)
-theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
+theme = ExtResource("5_ns770")
 metadata/_edit_group_ = true
 
 [node name="Label4" type="Label" parent="Hud/Panel4"]
@@ -352,7 +352,9 @@ offset_top = 6.80002
 offset_right = 130.798
 offset_bottom = 32.8
 scale = Vector2(2.55157, 2.73754)
+theme = ExtResource("5_ns770")
 theme_override_fonts/font = ExtResource("6_nj16g")
+theme_override_font_sizes/font_size = 18
 text = "score:0
 "
 vertical_alignment = 1
@@ -362,7 +364,7 @@ offset_left = 325.0
 offset_top = 2.0
 offset_right = 492.0
 offset_bottom = 75.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_bs5ch")
+theme = ExtResource("5_ns770")
 metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Hud/Panel5"]
@@ -371,6 +373,7 @@ offset_left = 76.0
 offset_top = 20.0
 offset_right = 181.0
 offset_bottom = 58.0
+theme = ExtResource("5_ns770")
 theme_override_fonts/font = ExtResource("6_nj16g")
 theme_override_font_sizes/font_size = 35
 text = ":0"
@@ -387,6 +390,7 @@ offset_bottom = 1007.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.05, 0.05)
+theme = ExtResource("5_ns770")
 texture = ExtResource("19_ftjg4")
 expand_mode = 1
 
@@ -395,6 +399,7 @@ offset_left = 5.0
 offset_top = 295.0
 offset_right = 45.0
 offset_bottom = 318.0
+theme = ExtResource("5_ns770")
 theme_override_fonts/font = ExtResource("6_nj16g")
 theme_override_font_sizes/font_size = 34
 text = "FPS: "
@@ -404,7 +409,7 @@ offset_left = 8.0
 offset_top = 1057.0
 offset_right = 416.0
 offset_bottom = 1084.0
-theme_override_fonts/font = ExtResource("6_nj16g")
+theme = ExtResource("5_ns770")
 theme_override_font_sizes/font_size = 24
 text = "make by Michael2911"
 
@@ -415,10 +420,12 @@ offset_top = -1.0
 offset_right = 1675.0
 offset_bottom = 24.0
 scale = Vector2(3.7841, 2.90174)
-theme_override_fonts/font = ExtResource("6_nj16g")
+theme = ExtResource("5_ns770")
+theme_override_font_sizes/font_size = 10
 text = "Pause"
 
 [node name="Pause menu" parent="." instance=ExtResource("9_aviom")]
+visible = false
 
 [node name="Name" type="Label" parent="."]
 offset_left = -27.5

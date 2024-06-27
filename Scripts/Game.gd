@@ -1,6 +1,8 @@
 extends Node
 
 var DEBUGGING = true
+@onready var lineedit = $Chat/LineEdit
+@onready var textedit = $Chat/TextEdit
 
 func _ready():
 	if DEBUGGING:
@@ -32,6 +34,13 @@ func _on_level_loaded():
 		Globals.num_players = 1
 	else:
 		Globals.num_players = Input.get_connected_joypads().size()
+
+	if Network.is_networking:
+		lineedit.visible = true
+		textedit.visible = true
+	else:
+		lineedit.visible = false
+		textedit.visible = false	
 
 	var _ret
 	_ret = Input.connect("joy_connection_changed", _on_joy_connection_changed)
@@ -115,13 +124,13 @@ func _input(event):
 func _on_multiplayer_spawner_spawned(_node):
 	if Network.is_networking:
 		if not multiplayer.is_server():
-			get_node("CanvasLayer").hide()
+			$Game_Controls.hide()
 
 
 func _on_map_spawner_despawned(_node):
 	if Network.is_networking:
 		if not multiplayer.is_server():
-			get_node("CanvasLayer").show()
+			$Game_Controls.show()
 
 
 func _on_reconnect_pressed():
@@ -136,5 +145,15 @@ func _on_back_to_main_menu_pressed():
 			Network.is_networking = false
 			Network.connected_ids.clear()
 			multiplayer.multiplayer_peer.close()
-			get_node("Main Menu").show()
-			get_node("CanvasLayer").hide()
+			$"Main Menu".show()
+			$Game_Controls.hide()
+
+@rpc("any_peer", "call_local")
+func msg_rcp(user, data):
+	textedit.text += str(user,  ":", data, "\n")
+	lineedit.text = ""
+	textedit.scroll_vertical = textedit.get_line_height()
+
+func _on_line_edit_gui_input(event:InputEvent):
+	if event.is_action_pressed("ui_accept"):
+		msg_rcp.rpc(Network.username, lineedit.text)

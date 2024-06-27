@@ -13,8 +13,6 @@ var margin = Vector2(100, 25)
 
 @onready var camera = $Camera
 @onready var screen_size = get_viewport_rect().size
-@onready var lineedit = $CanvasLayer/LineEdit
-@onready var textedit = $CanvasLayer/TextEdit
 
 var rng = RandomNumberGenerator.new()
 
@@ -30,9 +28,6 @@ func _ready():
 	Globals.level_node = self
 
 	if Network.is_networking:
-		lineedit.visible = true
-		textedit.visible = true
-
 		multiplayer.server_disconnected.connect(server_disconected)
 		multiplayer.connected_to_server.connect(server_conected)
 		multiplayer.connection_failed.connect(conected_fail)
@@ -46,10 +41,6 @@ func _ready():
 			for id in multiplayer.get_peers():
 				add_network_player(id)
 	else:
-
-		lineedit.visible = false
-		textedit.visible = false
-
 		for player in range(Globals.num_players):
 			if Globals.num_players > 4:
 				print("no more of four players")
@@ -271,12 +262,4 @@ func _on_victory_zone_body_entered(body):
 				remove_player(body.device_num)
 
 
-@rpc("any_peer", "call_local")
-func msg_rcp(user, data):
-	textedit.text += str(user,  ":", data, "\n")
-	lineedit.text = ""
-	textedit.scroll_vertical = textedit.get_line_height()
 
-func _on_line_edit_gui_input(event:InputEvent):
-	if event.is_action_pressed("ui_accept"):
-		msg_rcp.rpc(Network.username, lineedit.text)

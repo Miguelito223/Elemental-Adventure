@@ -12,14 +12,13 @@
 layer = 2
 script = ExtResource("1_2vk4l")
 
-[node name="fondo" type="ColorRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_f10x6")
-color = Color(0.137255, 0, 0.247059, 1)
 
 [node name="Title" type="Control" parent="."]
 layout_mode = 3
@@ -556,12 +555,16 @@ text = "Back"
 [node name="Exit Dialog" type="ConfirmationDialog" parent="."]
 title = "Are you sure"
 initial_position = 1
+size = Vector2i(1050, 200)
+theme = ExtResource("1_f10x6")
 ok_button_text = "Yes"
 cancel_button_text = "No"
 
 [node name="Remove data Dialog" type="ConfirmationDialog" parent="."]
 title = "Are you sure"
 initial_position = 1
+size = Vector2i(1050, 200)
+theme = ExtResource("1_f10x6")
 ok_button_text = "Yes"
 dialog_text = "You can lost the data"
 cancel_button_text = "No"
