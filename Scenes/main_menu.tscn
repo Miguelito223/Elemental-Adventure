@@ -553,20 +553,20 @@ theme_override_fonts/font = ExtResource("3_his25")
 text = "Back"
 
 [node name="Exit Dialog" type="ConfirmationDialog" parent="."]
-title = "Are you sure"
 initial_position = 1
 size = Vector2i(1050, 200)
 theme = ExtResource("1_f10x6")
 ok_button_text = "Yes"
+dialog_text = "Are you sure?"
 cancel_button_text = "No"
 
 [node name="Remove data Dialog" type="ConfirmationDialog" parent="."]
-title = "Are you sure"
 initial_position = 1
-size = Vector2i(1050, 200)
+size = Vector2i(1816, 200)
+visible = true
 theme = ExtResource("1_f10x6")
 ok_button_text = "Yes"
-dialog_text = "You can lost the data"
+dialog_text = "Are you sure?, You can lost the data"
 cancel_button_text = "No"
 
 [node name="Main menu music" type="AudioStreamPlayer" parent="."]
