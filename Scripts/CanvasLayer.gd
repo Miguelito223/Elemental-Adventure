@@ -12,6 +12,6 @@ func update_label():
 	$Panel3/Label3.text = str(Globals.hour)  + ":" + str(Globals.minute)
 	$Panel4/Label4.text =   "Score:" + str(player.score)
 	$Panel5/Label.text =   ":" + str(player.deaths)
-	$FPS.text =   "FPS:" + str(Engine.get_frames_per_second())  
-	$FPS.visible =   Globals.FPS
+	$FPS.text = "FPS:" + str(Engine.get_frames_per_second())  
+	$FPS.visible = Globals.FPS
 
