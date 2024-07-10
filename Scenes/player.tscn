@@ -188,6 +188,81 @@ properties/18/replication_mode = 1
 properties/19/path = NodePath(".:player_id")
 properties/19/spawn = true
 properties/19/replication_mode = 1
+properties/20/path = NodePath(".:scale")
+properties/20/spawn = true
+properties/20/replication_mode = 1
+properties/21/path = NodePath(".:can_fire")
+properties/21/spawn = true
+properties/21/replication_mode = 1
+properties/22/path = NodePath("AnimatedSprite2D:animation")
+properties/22/spawn = true
+properties/22/replication_mode = 1
+properties/23/path = NodePath("AnimatedSprite2D:frame")
+properties/23/spawn = true
+properties/23/replication_mode = 1
+properties/24/path = NodePath("AnimatedSprite2D:speed_scale")
+properties/24/spawn = true
+properties/24/replication_mode = 1
+properties/25/path = NodePath("AnimatedSprite2D:flip_h")
+properties/25/spawn = true
+properties/25/replication_mode = 1
+properties/26/path = NodePath("AnimatedSprite2D:flip_v")
+properties/26/spawn = true
+properties/26/replication_mode = 1
+properties/27/path = NodePath("Name:text")
+properties/27/spawn = true
+properties/27/replication_mode = 1
+properties/28/path = NodePath("Name:position")
+properties/28/spawn = true
+properties/28/replication_mode = 1
+properties/29/path = NodePath("Name:scale")
+properties/29/spawn = true
+properties/29/replication_mode = 1
+properties/30/path = NodePath("Pasos:playing")
+properties/30/spawn = true
+properties/30/replication_mode = 1
+properties/31/path = NodePath("Name:rotation")
+properties/31/spawn = true
+properties/31/replication_mode = 1
+properties/32/path = NodePath(".:skew")
+properties/32/spawn = true
+properties/32/replication_mode = 1
+properties/33/path = NodePath(".:motion_mode")
+properties/33/spawn = true
+properties/33/replication_mode = 1
+properties/34/path = NodePath(".:up_direction")
+properties/34/spawn = true
+properties/34/replication_mode = 1
+properties/35/path = NodePath(".:slide_on_ceiling")
+properties/35/spawn = true
+properties/35/replication_mode = 1
+properties/36/path = NodePath(".:floor_stop_on_slope")
+properties/36/spawn = true
+properties/36/replication_mode = 1
+properties/37/path = NodePath(".:floor_constant_speed")
+properties/37/spawn = true
+properties/37/replication_mode = 1
+properties/38/path = NodePath(".:floor_block_on_wall")
+properties/38/spawn = true
+properties/38/replication_mode = 1
+properties/39/path = NodePath(".:floor_max_angle")
+properties/39/spawn = true
+properties/39/replication_mode = 1
+properties/40/path = NodePath(".:floor_snap_length")
+properties/40/spawn = true
+properties/40/replication_mode = 1
+properties/41/path = NodePath(".:platform_on_leave")
+properties/41/spawn = true
+properties/41/replication_mode = 1
+properties/42/path = NodePath(".:platform_floor_layers")
+properties/42/spawn = true
+properties/42/replication_mode = 1
+properties/43/path = NodePath(".:platform_wall_layers")
+properties/43/spawn = true
+properties/43/replication_mode = 1
+properties/44/path = NodePath(".:safe_margin")
+properties/44/spawn = true
+properties/44/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ogjv1"]
 atlas = ExtResource("18_6b2vi")
@@ -248,9 +323,6 @@ sprite_frames = ExtResource("2_svkx8")
 animation = &"fire idle"
 autoplay = "fire idle"
 
-[node name="Mobilecontrolls" parent="." instance=ExtResource("11_tb078")]
-visible = false
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_fjqwq")
@@ -258,6 +330,9 @@ libraries = {
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_uy6bv")
+
+[node name="Mobilecontrolls" parent="." instance=ExtResource("11_tb078")]
+visible = false
 
 [node name="Hud" type="CanvasLayer" parent="."]
 script = ExtResource("15_jtxs5")
@@ -476,8 +551,6 @@ collision_mask = 4
 position = Vector2(2.5, 9.99999)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_g0xrs")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Hud/pause" to="." method="_on_exit_pressed"]
