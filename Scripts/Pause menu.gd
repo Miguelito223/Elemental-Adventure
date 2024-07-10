@@ -193,12 +193,12 @@ func _process(_delta):
 
 func _input(event):
 	if Network.is_networking:
-		if get_parent().get_parent().is_multiplayer_authority():
+		if get_parent().is_multiplayer_authority():
 			if event.is_action_pressed("pause0"):
 				visible = !visible
 				get_tree().paused = !get_tree().paused
 	else:
-		if get_parent().get_parent().device_num == 0:
+		if get_parent().device_num == 0:
 			if event.is_action_pressed("pause0"):
 				visible = !visible
 				get_tree().paused = !get_tree().paused

@@ -134,19 +134,31 @@ func _input(event):
 func _process(_delta):	
 	if Network.is_networking:
 		if syncronizer.is_multiplayer_authority():
-			if velocity.x < 0:
-				AnimatedSprite.scale.x = -1
-			elif velocity.x > 0:
-				AnimatedSprite.scale.x = 1
+			if Globals.use_keyboard:
+				if velocity.x < 0:
+					AnimatedSprite.flip_h = true
+				else:
+					AnimatedSprite.flip_h = false
 				
-			Marker_Parent.look_at(get_global_mouse_position())
+				Marker_Parent.look_at(get_global_mouse_position())
+			else:
+				if velocity.x < 0:
+					scale.x = -1
+				else:
+					scale.x = 1
 	else:
-		if velocity.x < 0:
-			AnimatedSprite.scale.x = -1
-		elif velocity.x > 0:
-			AnimatedSprite.scale.x = 1
+		if Globals.use_keyboard:
+			if velocity.x < 0:
+				AnimatedSprite.flip_h = true
+			else:
+				AnimatedSprite.flip_h = false
 
-		Marker_Parent.look_at(get_global_mouse_position())
+			Marker_Parent.look_at(get_global_mouse_position())
+		else:
+			if velocity.x < 0:
+				scale.x = -1
+			else:
+				scale.x = 1
 		
 	$Name.text = str(player_name)
 
