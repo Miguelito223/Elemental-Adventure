@@ -139,7 +139,6 @@ func _process(_delta):
 			else:
 				AnimatedSprite.scale.x = 1
 
-				
 			if Globals.use_keyboard:
 				Marker_Parent.look_at(get_global_mouse_position())
 			else:
