@@ -252,7 +252,7 @@ func _on_return_pressed():
 
 func _on_back_pressed():
 	if Network.is_networking:
-		if get_parent().get_parent().is_multiplayer_authority():
+		if get_parent().is_multiplayer_authority():
 			hide()
 			get_tree().paused = false
 			Network.is_networking = false
@@ -264,7 +264,7 @@ func _on_back_pressed():
 		get_tree().paused = false
 		DataState.save_file_state()
 		Data.save_file()
-		LoadScene.load_scene(get_parent().get_parent().get_parent(), "res://Scenes/main_menu.tscn")
+		LoadScene.load_scene(get_parent().get_parent(), "res://Scenes/main_menu.tscn")
 
 
 func _on_button_pressed():
@@ -286,7 +286,7 @@ func _on_resolution_item_selected(index:int):
 func _on_reset_player_pressed():
 	hide()
 	get_tree().paused = false
-	get_parent().get_parent().setposspawn()
+	get_parent().setposspawn()
 
 
 

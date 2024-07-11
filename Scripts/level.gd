@@ -27,6 +27,8 @@ func _ready():
 
 	Globals.level_node = self
 
+	DataState.load_file_state()
+
 	if Network.is_networking:
 		multiplayer.server_disconnected.connect(server_disconected)
 		multiplayer.connected_to_server.connect(server_conected)
@@ -51,7 +53,6 @@ func _ready():
 		if Globals.num_players == 0:
 			for player in range(1):
 				add_player(player)
-			
 
 	Signals.level_loaded.emit()
 
